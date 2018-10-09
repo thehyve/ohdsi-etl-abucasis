@@ -10,16 +10,16 @@
   pip3 install sqlalchemy
   pip3 install psycopg2
   ```
-- OMOP vocabularies (www.athena.ohdsi.org)
-  - OMOP generated
+- OMOP vocabularies (http://athena.ohdsi.org/vocabulary/list)
+  - OMOP generated (Gender, Race, Type Concepts, etc)
   - RxNorm
   - SNOMED
   - LOINC
   - ATC
   - ICD10
-  - ICD10PROC
+  - ICD10Proc
   - ICD9CM
-  - ICD9PROC 
+  - ICD9PCS
   
 
 ## Run ETL

@@ -35,6 +35,7 @@ Authors:  Patrick Ryan, Christian Reich, Clair Blacketer
 *************************/
 
 
+
 /************************
 
 Standardized vocabulary
@@ -43,7 +44,7 @@ Standardized vocabulary
 
 
 --HINT DISTRIBUTE ON RANDOM
-CREATE TABLE attribute_definition (
+CREATE TABLE cdm5.attribute_definition (
   attribute_definition_id		  INTEGER			  NOT NULL,
   attribute_name				      VARCHAR(255)	NOT NULL,
   attribute_description			  TEXT	NULL,
@@ -61,7 +62,7 @@ Standardized meta-data
 
 
 --HINT DISTRIBUTE ON RANDOM
-CREATE TABLE cdm_source
+CREATE TABLE cdm5.cdm_source
 (
   cdm_source_name					VARCHAR(255)	NOT NULL ,
   cdm_source_abbreviation			VARCHAR(25)		NULL ,
@@ -78,7 +79,7 @@ CREATE TABLE cdm_source
 
 
 --HINT DISTRIBUTE ON RANDOM
-CREATE TABLE metadata
+CREATE TABLE cdm5.metadata
 (
   metadata_concept_id       INTEGER       	NOT NULL ,
   metadata_type_concept_id  INTEGER       	NOT NULL ,
@@ -90,7 +91,7 @@ CREATE TABLE metadata
 )
 ;
 
-INSERT INTO metadata (metadata_concept_id, metadata_type_concept_id, name, value_as_string, value_as_concept_id, metadata_date, metadata_datetime)
+INSERT INTO cdm5.metadata (metadata_concept_id, metadata_type_concept_id, name, value_as_string, value_as_concept_id, metadata_date, metadata_datetime)
 VALUES (0, 0, 'CDM Version', '6.0', 0, NULL, NULL)
 ;
 
@@ -103,7 +104,7 @@ Standardized clinical data
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE person
+CREATE TABLE cdm5.person
 (
   person_id						BIGINT	  	NOT NULL , 
   gender_concept_id				INTEGER	  	NOT NULL ,
@@ -129,7 +130,7 @@ CREATE TABLE person
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE observation_period
+CREATE TABLE cdm5.observation_period
 (
   observation_period_id				BIGINT		NOT NULL ,
   person_id							BIGINT		NOT NULL ,
@@ -141,7 +142,7 @@ CREATE TABLE observation_period
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE specimen
+CREATE TABLE cdm5.specimen
 (
   specimen_id					BIGINT			NOT NULL ,
   person_id						BIGINT			NOT NULL ,
@@ -163,7 +164,7 @@ CREATE TABLE specimen
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE visit_occurrence
+CREATE TABLE cdm5.visit_occurrence
 (
   visit_occurrence_id			BIGINT			NOT NULL ,
   person_id						BIGINT			NOT NULL ,
@@ -187,7 +188,7 @@ CREATE TABLE visit_occurrence
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE visit_detail
+CREATE TABLE cdm5.visit_detail
 (
   visit_detail_id                    BIGINT      NOT NULL ,
   person_id                          BIGINT      NOT NULL ,
@@ -213,7 +214,7 @@ CREATE TABLE visit_detail
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE procedure_occurrence
+CREATE TABLE cdm5.procedure_occurrence
 (
   procedure_occurrence_id		BIGINT			NOT NULL ,
   person_id						BIGINT			NOT NULL ,
@@ -234,7 +235,7 @@ CREATE TABLE procedure_occurrence
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE drug_exposure
+CREATE TABLE cdm5.drug_exposure
 (
   drug_exposure_id				BIGINT			 	NOT NULL ,
   person_id						BIGINT			 	NOT NULL ,
@@ -264,7 +265,7 @@ CREATE TABLE drug_exposure
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE device_exposure
+CREATE TABLE cdm5.device_exposure
 (
   device_exposure_id			    BIGINT		  	NOT NULL ,
   person_id						    BIGINT			NOT NULL ,
@@ -286,7 +287,7 @@ CREATE TABLE device_exposure
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE condition_occurrence
+CREATE TABLE cdm5.condition_occurrence
 (
   condition_occurrence_id		BIGINT			NOT NULL ,
   person_id						BIGINT			NOT NULL ,
@@ -309,7 +310,7 @@ CREATE TABLE condition_occurrence
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE measurement
+CREATE TABLE cdm5.measurement
 (
   measurement_id				BIGINT			NOT NULL ,
   person_id						BIGINT			NOT NULL ,
@@ -336,7 +337,7 @@ CREATE TABLE measurement
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE note
+CREATE TABLE cdm5.note
 (
   note_id						BIGINT			NOT NULL ,
   person_id						BIGINT			NOT NULL ,
@@ -359,7 +360,7 @@ CREATE TABLE note
 
 
 --HINT DISTRIBUTE ON RANDOM
-CREATE TABLE note_nlp
+CREATE TABLE cdm5.note_nlp
 (
   note_nlp_id					BIGINT			NOT NULL ,
   note_id						BIGINT			NOT NULL ,
@@ -380,7 +381,7 @@ CREATE TABLE note_nlp
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE observation
+CREATE TABLE cdm5.observation
 (
   observation_id					BIGINT			NOT NULL ,
   person_id						    BIGINT			NOT NULL ,
@@ -408,7 +409,7 @@ CREATE TABLE observation
 
 
 --HINT DISTRIBUTE ON KEY(person_id)
-CREATE TABLE survey_conduct 
+CREATE TABLE cdm5.survey_conduct 
 (
   survey_conduct_id					BIGINT			NOT NULL ,
   person_id						    BIGINT			NOT NULL ,
@@ -440,7 +441,7 @@ CREATE TABLE survey_conduct
 
 
 --HINT DISTRIBUTE ON RANDOM
-CREATE TABLE fact_relationship
+CREATE TABLE cdm5.fact_relationship
 (
   domain_concept_id_1		INTEGER			NOT NULL ,
   fact_id_1					BIGINT			NOT NULL ,
@@ -460,7 +461,7 @@ Standardized health system data
 
 
 --HINT DISTRIBUTE ON RANDOM
-CREATE TABLE location
+CREATE TABLE cdm5.location
 (
   location_id			BIGINT			NOT NULL ,
   address_1				VARCHAR(50)		NULL ,
@@ -478,7 +479,7 @@ CREATE TABLE location
 
 
 --HINT DISTRIBUTE ON RANDOM
-CREATE TABLE location_history --Table added
+CREATE TABLE cdm5.location_history --Table added
 (
   location_history_id           BIGINT      NOT NULL ,
   location_id			        BIGINT		NOT NULL ,
@@ -492,7 +493,7 @@ CREATE TABLE location_history --Table added
 
 
 --HINT DISTRIBUTE ON RANDOM
-CREATE TABLE care_site
+CREATE TABLE cdm5.care_site
 (
   care_site_id					BIGINT			NOT NULL ,
   care_site_name				VARCHAR(255)	NULL ,
@@ -505,7 +506,7 @@ CREATE TABLE care_site
 
 
 --HINT DISTRIBUTE ON RANDOM
-CREATE TABLE provider
+CREATE TABLE cdm5.provider
 (
   provider_id					BIGINT			NOT NULL ,
   provider_name					VARCHAR(255)	NULL ,
@@ -532,7 +533,7 @@ Standardized health economics
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE payer_plan_period
+CREATE TABLE cdm5.payer_plan_period
 (
   payer_plan_period_id			BIGINT			NOT NULL ,
   person_id						BIGINT			NOT NULL ,
@@ -560,7 +561,7 @@ CREATE TABLE payer_plan_period
 
 
 --HINT DISTRIBUTE ON KEY(person_id)
-CREATE TABLE cost
+CREATE TABLE cdm5.cost
 (
   cost_id						BIGINT		NOT NULL ,
   person_id						BIGINT		NOT NULL,
@@ -592,7 +593,7 @@ Standardized derived elements
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE drug_era
+CREATE TABLE cdm5.drug_era
 (
   drug_era_id				BIGINT		NOT NULL ,
   person_id					BIGINT		NOT NULL ,
@@ -606,7 +607,7 @@ CREATE TABLE drug_era
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE dose_era
+CREATE TABLE cdm5.dose_era
 (
   dose_era_id				BIGINT			NOT NULL ,
   person_id					BIGINT			NOT NULL ,
@@ -620,7 +621,7 @@ CREATE TABLE dose_era
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE condition_era
+CREATE TABLE cdm5.condition_era
 (
   condition_era_id					BIGINT			NOT NULL ,
   person_id							BIGINT			NOT NULL ,

@@ -1,0 +1,11 @@
+source_code,source_concept_id,source_vocabulary_id,source_code_description,target_concept_id,target_vocabulary_id,valid_start_date,valid_end_date,invalid_reason
+aconadve,0,ABUCASIS_NUM_EVENTS,Number of adverse reactions from drugs,46270829,SNOMED,1970-01-01,2099-12-31,
+alergias,0,ABUCASIS_NUM_EVENTS,Number of allergic reactions to drugs,4166257,SNOMED,1970-01-01,2099-12-31,
+cex,0,ABUCASIS_NUM_EVENTS,Number of visits to a specialist doctor in the hospital,706325,SNOMED,1970-01-01,2099-12-31,
+consultas_atp,0,ABUCASIS_NUM_EVENTS,Number of visits to primary care,762266,SNOMED,1970-01-01,2099-12-31,
+contraind,0,ABUCASIS_NUM_EVENTS,Number of contraindications to drugs Relative (still benefit) or absolute (no benefit),4266013,SNOMED,1970-01-01,2099-12-31,
+cie_atc,0,ABUCASIS_NUM_EVENTS,Number of drugs/active ingredients a person is taking in a month,35624293,SNOMED,1970-01-01,2099-12-31,
+duplicid,0,ABUCASIS_NUM_EVENTS,"Number of drugs from the same group that are doing the same, or should not be together",763050,SNOMED,1970-01-01,2099-12-31,
+urgencias,0,ABUCASIS_NUM_EVENTS,Number of visits to emergency room,4176269,SNOMED,1970-01-01,2099-12-31,
+interacc,0,ABUCASIS_NUM_EVENTS,Number of interactions between drugs,4196500,SNOMED,1970-01-01,2099-12-31,
+estancia_uci,0,ABUCASIS_NUM_EVENTS,Number of days of stay in Critical Care unit during stay in hospital,4148981,SNOMED,1970-01-01,2099-12-31,

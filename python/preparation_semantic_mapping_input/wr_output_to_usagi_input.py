@@ -109,7 +109,7 @@ def translate_values(values_list, col_name, mapping_tables_dir, col_code = 0, in
 
 
 
-def csv_file_from_sheet(sheet_df, sheet_name, translate_descriptions = True):
+def csv_file_from_sheet(sheet_df, sheet_name, translate_descriptions = False):
     """
     Splits a WR sheet from a specific file in multiple csv files for each column
     """

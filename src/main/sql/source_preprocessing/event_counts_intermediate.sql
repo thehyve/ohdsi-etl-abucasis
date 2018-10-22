@@ -36,14 +36,6 @@ WITH num_events_with_ano_mes (numsipcod, ano_mes, num_events, source_name) AS (
     'duplicid'
   FROM public.tb_duplicid
 
-  UNION ALL
-
-  SELECT
-    numsipcod,
-    ano_mes,
-    num_interacciones,
-    'interacc'
-  FROM public.tb_interacc -- also has a severity ('gravedad_interaccion') column
 ), num_event_records AS (
   SELECT
     numsipcod,

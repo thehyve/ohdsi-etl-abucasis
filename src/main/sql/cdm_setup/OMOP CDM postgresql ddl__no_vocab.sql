@@ -106,7 +106,7 @@ Standardized clinical data
 --HINT DISTRIBUTE_ON_KEY(person_id)
 CREATE TABLE cdm5.person
 (
-  person_id						BIGINT	  	NOT NULL , 
+  person_id						BIGSERIAL	  	NOT NULL ,
   gender_concept_id				INTEGER	  	NOT NULL ,
   year_of_birth					INTEGER	  	NOT NULL ,
   month_of_birth				INTEGER	  	NULL,
@@ -132,7 +132,7 @@ CREATE TABLE cdm5.person
 --HINT DISTRIBUTE_ON_KEY(person_id)
 CREATE TABLE cdm5.observation_period
 (
-  observation_period_id				BIGINT		NOT NULL ,
+  observation_period_id				BIGSERIAL		NOT NULL ,
   person_id							BIGINT		NOT NULL ,
   observation_period_start_date		DATE		NOT NULL ,
   observation_period_end_date		DATE		NOT NULL ,
@@ -144,7 +144,7 @@ CREATE TABLE cdm5.observation_period
 --HINT DISTRIBUTE_ON_KEY(person_id)
 CREATE TABLE cdm5.specimen
 (
-  specimen_id					BIGINT			NOT NULL ,
+  specimen_id					BIGSERIAL			NOT NULL ,
   person_id						BIGINT			NOT NULL ,
   specimen_concept_id			INTEGER			NOT NULL ,
   specimen_type_concept_id		INTEGER			NOT NULL ,
@@ -166,7 +166,7 @@ CREATE TABLE cdm5.specimen
 --HINT DISTRIBUTE_ON_KEY(person_id)
 CREATE TABLE cdm5.visit_occurrence
 (
-  visit_occurrence_id			BIGINT			NOT NULL ,
+  visit_occurrence_id			BIGSERIAL			NOT NULL ,
   person_id						BIGINT			NOT NULL ,
   visit_concept_id				INTEGER			NOT NULL ,
   visit_start_date				DATE			NULL ,
@@ -190,7 +190,7 @@ CREATE TABLE cdm5.visit_occurrence
 --HINT DISTRIBUTE_ON_KEY(person_id)
 CREATE TABLE cdm5.visit_detail
 (
-  visit_detail_id                    BIGINT      NOT NULL ,
+  visit_detail_id                    BIGSERIAL      NOT NULL ,
   person_id                          BIGINT      NOT NULL ,
   visit_detail_concept_id            INTEGER     NOT NULL ,
   visit_detail_start_date            DATE        NULL ,
@@ -216,7 +216,7 @@ CREATE TABLE cdm5.visit_detail
 --HINT DISTRIBUTE_ON_KEY(person_id)
 CREATE TABLE cdm5.procedure_occurrence
 (
-  procedure_occurrence_id		BIGINT			NOT NULL ,
+  procedure_occurrence_id		BIGSERIAL			NOT NULL ,
   person_id						BIGINT			NOT NULL ,
   procedure_concept_id			INTEGER			NOT NULL ,
   procedure_date				DATE			NULL ,
@@ -237,7 +237,7 @@ CREATE TABLE cdm5.procedure_occurrence
 --HINT DISTRIBUTE_ON_KEY(person_id)
 CREATE TABLE cdm5.drug_exposure
 (
-  drug_exposure_id				BIGINT			 	NOT NULL ,
+  drug_exposure_id				BIGSERIAL			 	NOT NULL ,
   person_id						BIGINT			 	NOT NULL ,
   drug_concept_id				INTEGER			  	NOT NULL ,
   drug_exposure_start_date		DATE			    NULL ,
@@ -267,7 +267,7 @@ CREATE TABLE cdm5.drug_exposure
 --HINT DISTRIBUTE_ON_KEY(person_id)
 CREATE TABLE cdm5.device_exposure
 (
-  device_exposure_id			    BIGINT		  	NOT NULL ,
+  device_exposure_id			    BIGSERIAL		  	NOT NULL ,
   person_id						    BIGINT			NOT NULL ,
   device_concept_id			        INTEGER			NOT NULL ,
   device_exposure_start_date	    DATE			NULL ,
@@ -289,7 +289,7 @@ CREATE TABLE cdm5.device_exposure
 --HINT DISTRIBUTE_ON_KEY(person_id)
 CREATE TABLE cdm5.condition_occurrence
 (
-  condition_occurrence_id		BIGINT			NOT NULL ,
+  condition_occurrence_id		BIGSERIAL			NOT NULL ,
   person_id						BIGINT			NOT NULL ,
   condition_concept_id			INTEGER			NOT NULL ,
   condition_start_date			DATE			NULL ,
@@ -312,7 +312,7 @@ CREATE TABLE cdm5.condition_occurrence
 --HINT DISTRIBUTE_ON_KEY(person_id)
 CREATE TABLE cdm5.measurement
 (
-  measurement_id				BIGINT			NOT NULL ,
+  measurement_id				BIGSERIAL			NOT NULL ,
   person_id						BIGINT			NOT NULL ,
   measurement_concept_id		INTEGER			NOT NULL ,
   measurement_date				DATE			NULL ,
@@ -339,7 +339,7 @@ CREATE TABLE cdm5.measurement
 --HINT DISTRIBUTE_ON_KEY(person_id)
 CREATE TABLE cdm5.note
 (
-  note_id						BIGINT			NOT NULL ,
+  note_id						BIGSERIAL			NOT NULL ,
   person_id						BIGINT			NOT NULL ,
   note_event_id         		BIGINT      	NULL , 
   note_event_field_concept_id	INTEGER 		NOT NULL , 
@@ -362,7 +362,7 @@ CREATE TABLE cdm5.note
 --HINT DISTRIBUTE ON RANDOM
 CREATE TABLE cdm5.note_nlp
 (
-  note_nlp_id					BIGINT			NOT NULL ,
+  note_nlp_id					BIGSERIAL			NOT NULL ,
   note_id						BIGINT			NOT NULL ,
   section_concept_id			INTEGER			NOT NULL ,
   snippet						VARCHAR(250)	NULL ,
@@ -383,7 +383,7 @@ CREATE TABLE cdm5.note_nlp
 --HINT DISTRIBUTE_ON_KEY(person_id)
 CREATE TABLE cdm5.observation
 (
-  observation_id					BIGINT			NOT NULL ,
+  observation_id					BIGSERIAL			NOT NULL ,
   person_id						    BIGINT			NOT NULL ,
   observation_concept_id			INTEGER			NOT NULL ,
   observation_date				    DATE			NULL ,
@@ -411,7 +411,7 @@ CREATE TABLE cdm5.observation
 --HINT DISTRIBUTE ON KEY(person_id)
 CREATE TABLE cdm5.survey_conduct 
 (
-  survey_conduct_id					BIGINT			NOT NULL ,
+  survey_conduct_id					BIGSERIAL			NOT NULL ,
   person_id						    BIGINT			NOT NULL ,
   survey_concept_id			  		INTEGER			NOT NULL ,
   survey_start_date				    DATE			NULL ,
@@ -463,7 +463,7 @@ Standardized health system data
 --HINT DISTRIBUTE ON RANDOM
 CREATE TABLE cdm5.location
 (
-  location_id			BIGINT			NOT NULL ,
+  location_id			BIGSERIAL			NOT NULL ,
   address_1				VARCHAR(50)		NULL ,
   address_2				VARCHAR(50)		NULL ,
   city					VARCHAR(50)		NULL ,
@@ -481,7 +481,7 @@ CREATE TABLE cdm5.location
 --HINT DISTRIBUTE ON RANDOM
 CREATE TABLE cdm5.location_history --Table added
 (
-  location_history_id           BIGINT      NOT NULL ,
+  location_history_id           BIGSERIAL      NOT NULL ,
   location_id			        BIGINT		NOT NULL ,
   relationship_type_concept_id	INTEGER		NOT NULL , 
   domain_id				        VARCHAR(50)	NOT NULL ,
@@ -535,7 +535,7 @@ Standardized health economics
 --HINT DISTRIBUTE_ON_KEY(person_id)
 CREATE TABLE cdm5.payer_plan_period
 (
-  payer_plan_period_id			BIGINT			NOT NULL ,
+  payer_plan_period_id			BIGSERIAL			NOT NULL ,
   person_id						BIGINT			NOT NULL ,
   contract_person_id            BIGINT        	NULL ,
   payer_plan_period_start_date  DATE			NOT NULL ,
@@ -563,7 +563,7 @@ CREATE TABLE cdm5.payer_plan_period
 --HINT DISTRIBUTE ON KEY(person_id)
 CREATE TABLE cdm5.cost
 (
-  cost_id						BIGINT		NOT NULL ,
+  cost_id						BIGSERIAL		NOT NULL ,
   person_id						BIGINT		NOT NULL,
   cost_event_id					BIGINT      NOT NULL ,
   cost_event_field_concept_id	INTEGER		NOT NULL , 
@@ -595,7 +595,7 @@ Standardized derived elements
 --HINT DISTRIBUTE_ON_KEY(person_id)
 CREATE TABLE cdm5.drug_era
 (
-  drug_era_id				BIGINT		NOT NULL ,
+  drug_era_id				BIGSERIAL		NOT NULL ,
   person_id					BIGINT		NOT NULL ,
   drug_concept_id			INTEGER		NOT NULL ,
   drug_era_start_datetime	TIMESTAMP		NOT NULL ,
@@ -609,7 +609,7 @@ CREATE TABLE cdm5.drug_era
 --HINT DISTRIBUTE_ON_KEY(person_id)
 CREATE TABLE cdm5.dose_era
 (
-  dose_era_id				BIGINT			NOT NULL ,
+  dose_era_id				BIGSERIAL			NOT NULL ,
   person_id					BIGINT			NOT NULL ,
   drug_concept_id			INTEGER			NOT NULL ,
   unit_concept_id			INTEGER			NOT NULL ,
@@ -623,7 +623,7 @@ CREATE TABLE cdm5.dose_era
 --HINT DISTRIBUTE_ON_KEY(person_id)
 CREATE TABLE cdm5.condition_era
 (
-  condition_era_id					BIGINT			NOT NULL ,
+  condition_era_id					BIGSERIAL			NOT NULL ,
   person_id							BIGINT			NOT NULL ,
   condition_concept_id				INTEGER			NOT NULL ,
   condition_era_start_datetime		TIMESTAMP		NOT NULL ,

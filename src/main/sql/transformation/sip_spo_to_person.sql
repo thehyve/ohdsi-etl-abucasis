@@ -61,5 +61,6 @@ INSERT INTO cdm5.person
     ON tb_sip_spo.numsipcod = tb_sip_spo_resto_2015.numsipcod
     LEFT JOIN cdm5.care_site
     ON care_site.care_site_source_value = tb_sip_spo_resto_2015.cod_centro_asignacion
+    WHERE tb_sip_spo.fecha_def > TO_DATE('2012-01-01', 'YYYY-MM-DD') AND tb_sip_spo.fecha_baja_sip > TO_DATE('2012-01-01', 'YYYY-MM-DD')
 
 ;

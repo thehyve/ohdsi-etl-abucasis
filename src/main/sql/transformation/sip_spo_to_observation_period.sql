@@ -3,32 +3,35 @@ Sociodemographic data I
 */
 INSERT INTO observation_period
 (
-	observation_period_id,
 	person_id,
 	observation_period_start_date, -- Date of entry into study 01-01-2012 Or date of birth (whichever is last); everyone is older than 18, should not happen.
 	observation_period_end_date,
-	observation_period_end_date, -- [!#WARNING!#] THIS TARGET FIELD WAS ALREADY USED
 	period_type_concept_id
 )
 SELECT
- -- [!WARNING!] no source column found. See possible comment at the INSERT INTO
-	NULL	AS	observation_period_id,
+  person.person_id                                  	      AS	person_id,
 
- -- [VALUE   COMMENT] Alphanumerical 
-	tb_sip_spo.numsipcod	AS	person_id,
+  -- Date of entry into study OR birthday (whichever is last)
+  CASE
+  WHEN tb_sip_spo.fecha_nac > CONVERT(DATE,('2012-01-01'))
+    THEN tb_sip_spo.fecha_nac -- Not Severe
+  WHEN tb_sip_spo.fecha_nac < CONVERT(DATE,('2012-01-01'))
+    THEN CONVERT(DATE,('2012-01-01'))
+  END                                                     AS observation_period_start_date,
 
- -- [VALUE   COMMENT] If 01-01, it is a proxy for birth year. 
-	tb_sip_spo.fecha_nac	AS	observation_period_start_date,
 
- -- [VALUE   COMMENT] Death not always captured. Sometimes in baja_sip with cause_baja death. 
- -- [MAPPING   LOGIC] Earliest of dates def and baja_sip 
-	tb_sip_spo.fecha_def	AS	observation_period_end_date,
+ -- Earliest of fecha_def and fecha_baja_sip
+ -- If both dates are empty default value is 31-12-2016 (end date study)
+	CASE
+	WHEN tb_sip_spo.fecha_baja_sip IS NULL AND tb_sip_spo.fecha_def IS NULL THEN CONVERT(DATE,('2016-12-31'))
+	WHEN tb_sip_spo.fecha_baja_sip < tb_sip_spo.fecha_def THEN tb_sip_spo.fecha_baja_sip
+	WHEN tb_sip_spo.fecha_baja_sip < tb_sip_spo.fecha_def THEN tb_sip_spo.fecha_def
+  END                                                     AS	observation_period_end_date,
 
- -- [VALUE   COMMENT] Suspended date. Should be death or moved, but only death date captured. 
-	tb_sip_spo.fecha_baja_sip	AS	observation_period_end_date,
+ -- Period covering healthcare encounters
+	'44814724'	                                            AS	period_type_concept_id
 
- -- [!WARNING!] no source column found. See possible comment at the INSERT INTO
-	NULL	AS	period_type_concept_id
-
-FROM tb_sip_spo
+FROM public.tb_sip_spo
+  LEFT JOIN cdm5.person
+    ON tb_sip_spo.numsipcod = person.person_source_value
 ;

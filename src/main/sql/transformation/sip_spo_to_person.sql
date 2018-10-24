@@ -1,9 +1,6 @@
 /*
 Sociodemographic data I
 */
-
-TRUNCATE cdm5.person;
-
 INSERT INTO cdm5.person (person_source_value,
                          gender_concept_id,
                          gender_source_value,

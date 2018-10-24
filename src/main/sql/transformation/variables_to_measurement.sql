@@ -1,76 +1,36 @@
 /*
 Patient variables (BMI, Abdominal perimeter, etc)
 */
-INSERT INTO measurement
+INSERT INTO cdm5.measurement
 (
 	measurement_id,
 	person_id,
 	value_as_number,
 	measurement_concept_id,
+	measurement_source_concept_id,
 	measurement_source_value,
 	measurement_date,
 	unit_concept_id,
 	unit_source_value,
 	measurement_time,
 	measurement_type_concept_id,
-	operator_concept_id,
-	value_as_concept_id,
-	range_low,
-	range_high,
-	provider_id,
-	visit_occurrence_id,
-	measurement_source_concept_id,
-	value_source_value
 )
+;
 SELECT
- -- [!WARNING!] no source column found. See possible comment at the INSERT INTO
-	NULL	AS	measurement_id,
-
-	tb_variables.numsipcod	AS	person_id,
-
-	tb_variables.valor_registrado	AS	value_as_number,
-
- -- [VALUE   COMMENT] Tba table 
-	tb_variables.cod_variable_clinic	AS	measurement_concept_id,
-
- -- [VALUE   COMMENT] Tba table 
-	tb_variables.cod_variable_clinic	AS	measurement_source_value,
-
-	tb_variables.fecha_registro	AS	measurement_date,
-
-	tb_variables.cod_ud_medida	AS	unit_concept_id,
-
-	tb_variables.cod_ud_medida	AS	unit_source_value,
-
- -- [!WARNING!] no source column found. See possible comment at the INSERT INTO
-	NULL	AS	measurement_time,
-
- -- [!WARNING!] no source column found. See possible comment at the INSERT INTO
-	NULL	AS	measurement_type_concept_id,
-
- -- [!WARNING!] no source column found. See possible comment at the INSERT INTO
-	NULL	AS	operator_concept_id,
-
- -- [!WARNING!] no source column found. See possible comment at the INSERT INTO
-	NULL	AS	value_as_concept_id,
-
- -- [!WARNING!] no source column found. See possible comment at the INSERT INTO
-	NULL	AS	range_low,
-
- -- [!WARNING!] no source column found. See possible comment at the INSERT INTO
-	NULL	AS	range_high,
-
- -- [!WARNING!] no source column found. See possible comment at the INSERT INTO
-	NULL	AS	provider_id,
-
- -- [!WARNING!] no source column found. See possible comment at the INSERT INTO
-	NULL	AS	visit_occurrence_id,
-
- -- [!WARNING!] no source column found. See possible comment at the INSERT INTO
-	NULL	AS	measurement_source_concept_id,
-
- -- [!WARNING!] no source column found. See possible comment at the INSERT INTO
-	NULL	AS	value_source_value
-
-FROM tb_variables
+ 	NULL	AS	measurement_id,
+	person.person_id AS person_id,
+	valor_registrado AS value_as_number,
+	cod_variable_clinic	AS measurement_concept_id,
+	cod_variable_clinic AS measurement_source_concept_id,
+	cod_variable_clinic	AS measurement_source_value,
+	fecha_registro AS measurement_date,
+  fecha_registro :: TIMESTAMP AS measurement_datetime,
+	cod_ud_medida AS unit_concept_id,
+	cod_ud_medida	AS	unit_source_value,
+	44818701 AS measurement_type_concept_id
+FROM public.tb_variables
+  LEFT JOIN cdm5.person ON numsipcod = person.person_source_value
+  --TODO: link to concept_id table on cod_variable_clinic
+  --TODO: link to source_conept_mapping on cod_ud_medida
+WHERE cod_variable_clinic not like '-1'
 ;

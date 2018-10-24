@@ -1,55 +1,51 @@
 /*
-Hospitalization table (Derived table from Hospitalization
-Only with Procedures)
+Hospitalization table with only procedures
+Derived table from all hospitalizations (tb_ante_cmbd)
 */
-INSERT INTO procedure_occurrence
+INSERT INTO cdm5.procedure_occurrence
 (
-	procedure_occurrence_id,
-	person_id,
-	procedure_concept_id,
-	procedure_date,
-	procedure_type_concept_id,
-	modifier_concept_id,
-	quantity,
-	provider_id,
-	visit_occurrence_id,
-	procedure_source_value,
-	procedure_source_concept_id,
-	qualifier_source_value
+  person_id,
+  procedure_concept_id,
+  procedure_source_concept_id,
+  procedure_source_value,
+  procedure_date,
+  procedure_datetime,
+  procedure_type_concept_id,
+  modifier_concept_id,
+  visit_occurrence_id
 )
-SELECT
- -- [!WARNING!] no source column found. See possible comment at the INSERT INTO
-	NULL	AS	procedure_occurrence_id,
+  SELECT
+    person.person_id                        AS person_id,
 
-	tb_proc_cmbd.numsipcod	AS	person_id,
+    coalesce(code_map.concept_id_2, 0)      AS procedure_concept_id,
 
-	tb_proc_cmbd.cie9p	AS	procedure_concept_id,
+    coalesce(icd9proc.concept_id, 0)        AS procedure_source_concept_id,
 
-	tb_proc_cmbd.fecha_ingreso	AS	procedure_date,
+    tb_proc_cmbd.cie9p                      AS procedure_source_value,
 
- -- [MAPPING   LOGIC] 1 - primary procedure other - EHR procedure 
-	tb_proc_cmbd.orden	AS	procedure_type_concept_id,
+    tb_proc_cmbd.fecha_ingreso              AS procedure_date,
 
- -- [!WARNING!] no source column found. See possible comment at the INSERT INTO
-	NULL	AS	modifier_concept_id,
+    tb_proc_cmbd.fecha_ingreso :: TIMESTAMP AS procedure_datetime,
 
- -- [!WARNING!] no source column found. See possible comment at the INSERT INTO
-	NULL	AS	quantity,
+    CASE WHEN tb_proc_cmbd.orden = 1
+      -- primary procedure
+      THEN 44786630
+      -- secondary procedure
+      ELSE 44786631
+    END                                     AS procedure_type_concept_id,
 
- -- [!WARNING!] no source column found. See possible comment at the INSERT INTO
-	NULL	AS	provider_id,
+    -- Required field, no modifier in source data
+    0                                       AS modifier_concept_id,
 
- -- [!WARNING!] no source column found. See possible comment at the INSERT INTO
-	NULL	AS	visit_occurrence_id,
+    -- TODO: Map tipo_actividad, fecha_ingreso and numsipcod to visit_ocurrence_id
+    NULL                                    AS visit_occurrence_id
 
- -- [!WARNING!] no source column found. See possible comment at the INSERT INTO
-	NULL	AS	procedure_source_value,
-
- -- [!WARNING!] no source column found. See possible comment at the INSERT INTO
-	NULL	AS	procedure_source_concept_id,
-
- -- [!WARNING!] no source column found. See possible comment at the INSERT INTO
-	NULL	AS	qualifier_source_value
-
-FROM tb_proc_cmbd
+  FROM public.tb_proc_cmbd
+    JOIN cdm5.person
+      ON person.person_source_value = tb_proc_cmbd.numsipcod
+    LEFT JOIN cdm5.concept AS icd9proc
+      ON icd9proc.concept_code = tb_proc_cmbd.cie9p AND icd9proc.vocabulary_id = 'ICD9Proc'
+    LEFT JOIN cdm5.concept_relationship AS code_map
+      ON code_map.concept_id_1 = icd9proc.concept_id
+         AND code_map.relationship_id = 'Maps to'
 ;

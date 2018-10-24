@@ -1,2 +1,3 @@
 vocabulary_id,vocabulary_name,vocabulary_reference,vocabulary_version,vocabulary_concept_id
 ABUCASIS_NUM_EVENTS,Table name to concept mapping for tables with number of events,,,0
+ABUCASIS_MODALIDAD,Socio-economic codes,,,0

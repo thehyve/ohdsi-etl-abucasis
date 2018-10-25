@@ -26,8 +26,8 @@ SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_ocurrence_
 
     -- Assumption: 1 day visits
     --TODO visits last 0 minutes? (timestamp format)
-       tb_morbilid.fecha_inicio                             AS visit_start_datetime,
-       tb_morbilid.fecha_inicio                             AS visit_end_datetime,
+       (cast(tb_morbilid.fecha_inicio as text) || ' 00:00:00'):: timestamp             AS visit_start_datetime,
+       (cast(tb_morbilid.fecha_inicio as text) || ' 00:00:00'):: timestamp             AS visit_end_datetime,
 
       --TODO check this assumption:
       0                                                     AS admitted_from_concept_id,

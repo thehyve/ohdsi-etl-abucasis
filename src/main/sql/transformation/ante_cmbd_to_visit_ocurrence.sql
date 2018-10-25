@@ -24,11 +24,14 @@ SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_ocurrence_
     -- Visit derived from EHR encounter record
        32035                                              AS visit_type_concept_id,
        0                                                     AS visit_source_concept_id,
-       tb_ante_cmbd.fecha_ingreso                            AS visit_start_datetime,
+       (cast(tb_ante_cmbd.fecha_ingreso as text) || ' 00:00:00'):: timestamp   AS visit_start_datetime,
        CASE
-         WHEN tb_ante_cmbd.fecha_alta IS NOT NULL THEN fecha_alta
-         WHEN tb_ante_cmbd.fecha_alta IS NULL THEN TO_DATE('2016-12-31', 'YYYY-MM-DD')
+         WHEN tb_ante_cmbd.fecha_alta IS NOT NULL
+                 THEN (cast(fecha_alta as text) || ' 00:00:00'):: timestamp
+         WHEN tb_ante_cmbd.fecha_alta IS NULL
+                 THEN (cast(TO_DATE('2016-12-31', 'YYYY-MM-DD') as text) || ' 00:00:00'):: timestamp
            END                                               AS visit_end_datetime,
+
     -- Circumstance of admission
        CASE tb_ante_cmbd.cir_ingreso
            -- From emergency department

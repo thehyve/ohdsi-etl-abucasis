@@ -38,28 +38,27 @@ __version__ = '0.1.0'
               help='Source schema containing the source tables (native)')
 @click.option('--debug', default=False, metavar='<debug_mode>', is_flag=True,
               help='In debug mode, the table constraints are applied before loading')
-@click.option('--run_inserts', default=False, metavar='<run_inserts>', is_flag=True,
-              help='If set, it will execute the queries with insert into public schema')
 @click.option('--skipvocab', default=False, metavar='<skip_vocab>', is_flag=True,
               help='When provided, the loading and pre-processing '
                    'of source to target vocabularies is skipped')
-@click.option('--logger', '-l', default=None, metavar='<file_name>',
+@click.option('--logfile', '-l', default=None, metavar='<file_name>',
               help='Filename of the file where the log will be written (logs/log_<timestamp>.txt)')
-def main(database, username, password, hostname, port, source, debug, run_inserts, skipvocab, logger):
+def main(database, username, password, hostname, port, source, debug, skipvocab, logfile):
     if not os.path.exists('./logs'):
         os.makedirs('./logs')
 
-    if not logger:
-        logger = os.path.join('./logs', '{}_{}.txt'.format(__version__, time.strftime('%Y-%m-%dT%H%M%S')))
+    if not logfile:
+        logfile = os.path.join('./logs', '{}_{}.txt'.format(__version__, time.strftime('%Y-%m-%dT%H%M%S')))
 
     # Connect to database
     eng = create_engine('postgresql://%s:%s@%s:%s/%s' % (username, password, hostname, port, database))
 
-    with eng.connect() as connection, open(logger, 'w') as f_log:
+    with eng.connect() as connection, open(logfile, 'w') as f_log:
         etl = AbucasisWrapper(connection, source, debug, skipvocab)
         etl.set_log_file(f_log)
         etl.log("ETL version " + __version__)
         etl.run()
+
 
 if __name__ == "__main__":
     sys.exit(main())

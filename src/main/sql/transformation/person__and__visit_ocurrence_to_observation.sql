@@ -25,5 +25,5 @@ SELECT visit_occurrence.person_id          AS person_id,
 FROM cdm5.visit_occurrence
     JOIN cdm5.person ON visit_occurrence.person_id = person.person_id
     -- Patient could die during hospitalization or not during hospitalization
-    WHERE (visit_occurrence.discharge_to_concept_id = 4216643 AND person.death_datetime IS NOT NULL)
+    WHERE (visit_occurrence.discharge_to_concept_id = 4216643 OR person.death_datetime IS NOT NULL)
 ;

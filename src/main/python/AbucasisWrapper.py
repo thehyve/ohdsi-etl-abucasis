@@ -84,17 +84,24 @@ class AbucasisWrapper(EtlWrapper):
         self.execute_sql_file('transformation/sip_spo_to_observation_period.sql')
 
         # visit
+        self.execute_sql_file('transformation/ante_cmbd_to_visit_ocurrence.sql')
+        self.execute_sql_file('transformation/morbilid_to_visit_ocurrence.sql')
+
+
+
 
         self.execute_sql_file('transformation/proc_cmbd_to_procedure_occurrence.sql')
 
         self.execute_sql_file('transformation/rele_to_drug_exposure.sql')
 
+        # Observation
         self.execute_sql_file('transformation/event_counts_to_observation.sql')
         self.execute_sql_file('transformation/interacc_to_observation.sql')
         self.execute_sql_file('transformation/estancia_uci_to_observation.sql')
         self.execute_sql_file('transformation/contraind_to_observation.sql')
         self.execute_sql_file('transformation/modalidad_to_observation.sql')
         self.execute_sql_file('transformation/nacionalidad_to_observation.sql')
+        self.execute_sql_file('transformation/person__and__visit_ocurrence_to_observation.sql')
 
     def log_source_counts(self):
         self.log_to_file('{:-^100}'.format(' Source Counts '))

@@ -27,11 +27,12 @@ class EtlWrapper(object):
     """
     ROW_COUNT_FORMAT = '{:<30.30} {:>10}'
 
-    def __init__(self, connection, source_schema, debug, skip_vocab):
+    def __init__(self, connection, source_schema, debug, skip_vocab, sql_dir):
         self.connection = connection
         self.source_schema = source_schema
         self.debug = debug
         self.do_skip_vocabulary = skip_vocab
+        self.sql_dir = sql_dir
 
         self.n_queries_executed = 0
         self.n_queries_failed = 0
@@ -90,9 +91,10 @@ class EtlWrapper(object):
         self.log("Queries failed: %d" % self.n_queries_failed)
         self.log("Rows inserted: {:,}".format(self.total_rows_inserted))
 
-    def execute_sql_file(self, filename, verbose=False):
+    def execute_sql_file(self, filename, verbose=True):
         # Open and read the file as a single buffer
-        with open(filename, 'r') as f:
+        file_path = os.path.join(self.sql_dir, filename)
+        with open(file_path, 'r') as f:
             query = f.read().strip()
 
         if verbose:
@@ -100,7 +102,7 @@ class EtlWrapper(object):
 
         return self.execute_sql_query(query, verbose)
 
-    def execute_sql_query(self, query, verbose=False):
+    def execute_sql_query(self, query, verbose=True):
         # Prepare parameterized sql
         query = query.replace('@absPath', self.cwd)
         query = query.replace("@source_schema", self.source_schema)

@@ -29,4 +29,4 @@ SELECT person.person_id AS person_id,
        '44814724'       AS period_type_concept_id
 
 FROM public.tb_sip_spo
-       LEFT JOIN cdm5.person ON tb_sip_spo.numsipcod = person.person_source_value;
+       INNER JOIN cdm5.person ON tb_sip_spo.numsipcod = person.person_source_value;

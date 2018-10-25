@@ -53,26 +53,34 @@ INSERT INTO cdm5.observation
   observation_datetime,
   observation_type_concept_id,
   value_as_number,
-  unit_concept_id
+  unit_concept_id,
+  obs_event_field_concept_id
 )
-  SELECT person.person_id                                     AS person_id,
-         coalesce(source_to_concept_map.target_concept_id, 0) AS observation_concept_id,
-         event_counts.source_name                             AS observation_source_value,
+  SELECT
+    person.person_id                                     AS person_id,
+
+    coalesce(source_to_concept_map.target_concept_id, 0) AS observation_concept_id,
+
+    event_counts.source_name                             AS observation_source_value,
+
     -- TODO: create custom 2B+ source concept
-         0                                                    AS observation_source_concept_id,
+    0                                                    AS observation_source_concept_id,
 
-         event_counts.date                                    AS observation_date,
+    event_counts.date                                    AS observation_date,
 
-         event_counts.date :: TIMESTAMP                       AS observation_datetime,
+    event_counts.date :: TIMESTAMP                       AS observation_datetime,
 
     -- Observation recorded from EHR
-         38000280                                             AS observation_type_concept_id,
+    38000280                                             AS observation_type_concept_id,
 
     -- Number of adverse events
-         event_counts.num_events                              AS value_as_number,
+    event_counts.num_events                              AS value_as_number,
 
     -- times
-         8524                                                 AS unit_concept_id
+    8524                                                 AS unit_concept_id,
+
+    -- No event
+    0                                                    AS obs_event_field_concept_id
 
   FROM event_counts
     JOIN cdm5.person

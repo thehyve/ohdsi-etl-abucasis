@@ -1,9 +1,6 @@
 /*
 Sociodemographic data I
 */
-
-TRUNCATE cdm5.person;
-
 INSERT INTO cdm5.person (person_source_value,
                          gender_concept_id,
                          gender_source_value,
@@ -38,9 +35,9 @@ SELECT tb_sip_spo.numsipcod                     AS person_source_value,
        0                                        AS ethnicity_concept_id,
        CASE
          WHEN tb_sip_spo.fecha_def IS NULL AND tb_sip_spo.fecha_baja_sip IS NOT NULL
-                 THEN tb_sip_spo.fecha_def
+                 THEN (cast(tb_sip_spo.fecha_def as text) || ' 00:00:00'):: timestamp
          WHEN tb_sip_spo.fecha_def IS NOT NULL AND tb_sip_spo.fecha_baja_sip IS NULL
-                 THEN tb_sip_spo.fecha_baja_sip
+                 THEN (cast(tb_sip_spo.fecha_baja_sip as text) || ' 00:00:00'):: timestamp
          ELSE NULL END                          AS death_datetime,
        care_site.care_site_id                   AS care_site_id
 
@@ -49,8 +46,8 @@ FROM public.tb_sip_spo
        LEFT JOIN public.tb_sip_spo_resto_2015 ON tb_sip_spo.numsipcod = tb_sip_spo_resto_2015.numsipcod
        LEFT JOIN cdm5.care_site ON tb_sip_spo_resto_2015.cod_centro_asignacion = care_site.care_site_source_value
 -- General rule: exclude patients with death or suspension date before2012
-WHERE tb_sip_spo.fecha_def >= TO_DATE('2012-01-01', 'YYYY-MM-DD')
-  OR tb_sip_spo.fecha_baja_sip >= TO_DATE('2012-01-01', 'YYYY-MM-DD')
-   OR (tb_sip_spo.fecha_def IS NULL AND tb_sip_spo.fecha_baja_sip IS NULL)
+  WHERE tb_sip_spo.fecha_def >= TO_DATE('2012-01-01', 'YYYY-MM-DD')
+    OR tb_sip_spo.fecha_baja_sip >= TO_DATE('2012-01-01', 'YYYY-MM-DD')
+     OR (tb_sip_spo.fecha_def IS NULL AND tb_sip_spo.fecha_baja_sip IS NULL)
 
 ;

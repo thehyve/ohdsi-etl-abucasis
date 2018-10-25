@@ -88,4 +88,4 @@ FROM public.tb_ante_cmbd
          ON (tb_ante_cmbd.numsipcod = intermediate_table_visit_ocurrence.numsipcod
                AND
              tb_ante_cmbd.fecha_ingreso = intermediate_table_visit_ocurrence.date) -- We only want visits from "valid" persons from person table
-       RIGHT JOIN cdm5.person ON intermediate_table_visit_ocurrence.numsipcod = person.person_source_value;
+       INNER JOIN cdm5.person ON intermediate_table_visit_ocurrence.numsipcod = person.person_source_value;

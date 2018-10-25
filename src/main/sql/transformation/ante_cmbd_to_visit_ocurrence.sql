@@ -12,7 +12,8 @@ INSERT INTO cdm5.visit_occurrence (visit_occurrence_id,
                                    admitted_from_concept_id,
                                    admitted_from_source_value,
                                    discharge_to_concept_id,
-                                   discharge_to_source_value)
+                                   discharge_to_source_value,
+                                   care_site_id)
 
 SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_ocurrence_id,
        person.person_id                                      AS person_id,
@@ -77,7 +78,10 @@ SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_ocurrence_
          WHEN '99' THEN 8844 --Other place of service
          ELSE 0 -- Unknown
            END                                               AS discharge_to_concept_id,
-       tb_ante_cmbd.cir_alta                                 AS discharge_source_value
+       tb_ante_cmbd.cir_alta                                 AS discharge_source_value,
+
+       person.care_site_id                                   AS care_site_id
+
 
 FROM public.tb_ante_cmbd
        LEFT JOIN source_intermediate.intermediate_table_visit_ocurrence

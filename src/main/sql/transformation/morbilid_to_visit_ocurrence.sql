@@ -10,7 +10,8 @@ INSERT INTO cdm5.visit_occurrence (visit_occurrence_id,
                                    visit_start_datetime,
                                    visit_end_datetime,
                                    admitted_from_concept_id,
-                                   discharge_to_concept_id)
+                                   discharge_to_concept_id,
+                                   care_site_id)
 
 
 SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_ocurrence_id,
@@ -31,7 +32,10 @@ SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_ocurrence_
 
       --TODO check this assumption:
       0                                                     AS admitted_from_concept_id,
-      0                                                     AS discharge_to_concept_id
+      0                                                     AS discharge_to_concept_id,
+
+       person.care_site_id                                   AS care_site_id
+
 
 FROM public.tb_morbilid
        LEFT JOIN source_intermediate.intermediate_table_visit_ocurrence

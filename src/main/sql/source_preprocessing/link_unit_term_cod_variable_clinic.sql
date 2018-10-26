@@ -1,0 +1,6 @@
+SELECT tb_variables.cod_variable_clinic, tb_variables.cod_ud_medida, tba_tip_variables.des_variable_clinic, COUNT(tba_tip_variables.des_variable_clinic)
+FROM public.tb_variables
+  LEFT JOIN public.tba_tip_variables on tb_variables.cod_variable_clinic=tba_tip_variables.cod_variable_clinic
+GROUP BY tb_variables.cod_variable_clinic, tb_variables.cod_ud_medida, tba_tip_variables.des_variable_clinic
+ORDER BY tb_variables.cod_variable_clinic
+;

@@ -105,8 +105,10 @@ INSERT INTO cdm5.drug_exposure
 		0                                                                 AS route_concept_id
 
 	FROM public.tb_rele
-		JOIN public.tb_prescrip USING (numreceta)
-		JOIN tratamiento_derived USING (id_tratamiento)
+		JOIN public.tb_prescrip
+      ON tb_rele.numreceta = tb_prescrip.numreceta
+		JOIN tratamiento_derived
+      ON tb_prescrip.id_tratamiento = tratamiento_derived.id_tratamiento
 		JOIN cdm5.person
 			ON person.person_source_value = tb_prescrip.numsipcod
 ;

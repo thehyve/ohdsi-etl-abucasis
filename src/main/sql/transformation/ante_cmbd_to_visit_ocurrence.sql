@@ -7,7 +7,9 @@ INSERT INTO cdm5.visit_occurrence (visit_occurrence_id,
                                    visit_source_value,
                                    visit_type_concept_id,
                                    visit_source_concept_id,
+                                   visit_start_date,
                                    visit_start_datetime,
+                                   visit_end_date,
                                    visit_end_datetime,
                                    admitted_from_concept_id,
                                    admitted_from_source_value,
@@ -23,9 +25,18 @@ SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_ocurrence_
            END                                               AS visit_concept_id,
        tb_ante_cmbd.tipo_actividad                           AS visit_source_value,
     -- Visit derived from EHR encounter record
-       32035                                              AS visit_type_concept_id,
+       32035                                                 AS visit_type_concept_id,
        0                                                     AS visit_source_concept_id,
+
+       tb_ante_cmbd.fecha_ingreso   AS visit_start_date,
        (cast(tb_ante_cmbd.fecha_ingreso as text) || ' 00:00:00'):: timestamp   AS visit_start_datetime,
+
+       CASE
+         WHEN tb_ante_cmbd.fecha_alta IS NOT NULL
+                 THEN fecha_alta
+         WHEN tb_ante_cmbd.fecha_alta IS NULL
+                 THEN TO_DATE('2016-12-31', 'YYYY-MM-DD')
+           END                                               AS visit_end_date,
        CASE
          WHEN tb_ante_cmbd.fecha_alta IS NOT NULL
                  THEN (cast(fecha_alta as text) || ' 00:00:00'):: timestamp

@@ -73,3 +73,35 @@ SET numsipcod = to_char(cast(random() * 1000 + 1 AS INT), 'fmA00000')
 UPDATE public.tb_morbilid
 SET numsipcod = to_char(cast(random() * 1000 + 1 AS INT), 'fmA00000')
 ;
+
+UPDATE public.tb_interacc
+SET numsipcod = to_char(cast(random() * 1000 + 1 AS INT), 'fmA00000')
+;
+
+UPDATE public.tb_estancia_uci
+SET numsipcod = to_char(cast(random() * 1000 + 1 AS INT), 'fmA00000')
+;
+
+UPDATE public.tb_contraind
+SET numsipcod = to_char(cast(random() * 1000 + 1 AS INT), 'fmA00000')
+;
+
+UPDATE public.tb_aconadve
+SET numsipcod = to_char(cast(random() * 1000 + 1 AS INT), 'fmA00000')
+;
+
+UPDATE public.tb_alergias
+SET numsipcod = to_char(cast(random() * 1000 + 1 AS INT), 'fmA00000')
+;
+
+UPDATE public.tb_cex
+SET numsipcod = to_char(cast(random() * 1000 + 1 AS INT), 'fmA00000')
+;
+
+UPDATE public.tb_urgencias
+SET numsipcod = to_char(cast(random() * 1000 + 1 AS INT), 'fmA00000')
+;
+
+UPDATE public.tb_duplicid
+SET numsipcod = to_char(cast(random() * 1000 + 1 AS INT), 'fmA00000')
+;

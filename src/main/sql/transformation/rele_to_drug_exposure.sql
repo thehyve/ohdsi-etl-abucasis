@@ -94,8 +94,13 @@ INSERT INTO cdm5.drug_exposure
 
 		treatment_instruction                                             AS sig,
 
-		-- TODO: create follow number by id_tratamiento, sorted on fecha_dispensacion -- 1 - empty (NULL), otherwise follow number minus 1.
-		NULL                                                              AS refills,
+		-- If multiple dispensations for a treatment, give every next dispensation an incremental number
+		-- The first dispensation has an empty refills value (NULL)
+		nullif(row_number()
+					 OVER (
+						 PARTITION BY id_tratamiento
+						 ORDER BY tb_rele.fecha_dispensacion
+						 ) - 1, 0)                                                AS refills,
 
 		0                                                                 AS route_concept_id
 

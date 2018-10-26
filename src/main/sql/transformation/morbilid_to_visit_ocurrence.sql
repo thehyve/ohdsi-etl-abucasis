@@ -7,7 +7,9 @@ INSERT INTO cdm5.visit_occurrence (visit_occurrence_id,
                                    visit_type_concept_id,
                                    visit_source_concept_id,
                                    visit_source_value,
+                                   visit_start_date,
                                    visit_start_datetime,
+                                   visit_end_date,
                                    visit_end_datetime,
                                    admitted_from_concept_id,
                                    discharge_to_concept_id,
@@ -26,8 +28,10 @@ SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_ocurrence_
        'tb_morbilid'                                         AS visit_source_value,
 
     -- Assumption: 1 day visits
-    --TODO visits last 0 minutes? (timestamp format)
+       tb_morbilid.fecha_inicio                              AS visit_start_date,
        (cast(tb_morbilid.fecha_inicio as text) || ' 00:00:00'):: timestamp             AS visit_start_datetime,
+
+       tb_morbilid.fecha_inicio                              AS visit_end_date,
        (cast(tb_morbilid.fecha_inicio as text) || ' 00:00:00'):: timestamp             AS visit_end_datetime,
 
       --TODO check this assumption:

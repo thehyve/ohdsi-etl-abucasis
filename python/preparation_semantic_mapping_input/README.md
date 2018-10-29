@@ -17,7 +17,7 @@ The following tba tables names needed to be renamed (due to the tba file name di
 * tba_departamento --> tba_departamento_asignacion
 * tba_tip_prest --> tba_prestacion
 * tba_tip_variables --> tba_variable_clinic
-* tba_ud_medidas
+* tba_ud_medidas --> tba_ud_medida
 
 ## Notes
 

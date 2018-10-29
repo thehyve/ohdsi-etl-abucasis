@@ -21,8 +21,7 @@ INSERT INTO cdm5.observation
 
     'estancia_uci'                                       AS observation_source_value,
 
-    -- TODO: create custom 2B+ source concept
-    0                                                    AS observation_source_concept_id,
+    coalesce(source_to_concept_map.source_concept_id, 0) AS observation_source_concept_id,
 
     tb_estancia_uci.fecha                                AS observation_date,
 

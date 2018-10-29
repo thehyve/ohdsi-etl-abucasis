@@ -63,8 +63,7 @@ INSERT INTO cdm5.observation
 
     event_counts.source_name                             AS observation_source_value,
 
-    -- TODO: create custom 2B+ source concept
-    0                                                    AS observation_source_concept_id,
+    coalesce(source_to_concept_map.source_concept_id, 0) AS observation_source_concept_id,
 
     event_counts.date                                    AS observation_date,
 

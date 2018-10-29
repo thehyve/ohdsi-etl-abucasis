@@ -20,8 +20,7 @@ INSERT INTO cdm5.observation
 
     tb_sip_spo_resto_2015.cod_modalidad                  AS observation_source_value,
 
-    -- TODO: create custom 2B+ source concepts
-    0                                                    AS observation_source_concept_id,
+    coalesce(source_to_concept_map.source_concept_id, 0) AS observation_source_concept_id,
 
     tb_sip_spo_resto_2015.fecha_corte                    AS observation_date,
 

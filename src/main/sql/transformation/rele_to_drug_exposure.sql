@@ -98,7 +98,7 @@ INSERT INTO cdm5.drug_exposure
 		-- The first dispensation has an empty refills value (NULL)
 		nullif(row_number()
 					 OVER (
-						 PARTITION BY id_tratamiento
+						 PARTITION BY tratamiento_derived.id_tratamiento
 						 ORDER BY tb_rele.fecha_dispensacion
 						 ) - 1, 0)                                                AS refills,
 

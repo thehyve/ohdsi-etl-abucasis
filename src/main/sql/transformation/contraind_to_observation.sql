@@ -25,8 +25,7 @@ INSERT INTO cdm5.observation
 
     'contraind'                                          AS observation_source_value,
 
-    -- TODO: create custom 2B+ source concept
-    0                                                    AS observation_source_concept_id,
+    coalesce(source_to_concept_map.source_concept_id, 0) AS observation_source_concept_id,
 
     cast(tb_contraind.ano_mes || '01' AS DATE)           AS observation_date,
 

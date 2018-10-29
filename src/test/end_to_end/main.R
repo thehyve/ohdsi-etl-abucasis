@@ -37,11 +37,25 @@ expect_person(person_source_value = 'A04')
 # ========================
 # Observation period
 # ========================
-declareTest(9, 'Observation period start and end from all_clinical')
+declareTest('Observation period start and end from all_clinical')
 add_tb_sip_spo(numsipcod='A05', fecha_nac='1991-01-01', fecha_baja_sip = '2015-01-01')
 
 expect_person(person_id=3, person_source_value='A03')
 expect_observation_period(person_id=3, observation_period_start_date='2012-01-01', observation_period_end_date='2015-01-01')
+
+# ========================
+# Procedure occurrence
+# ========================
+declareTest('Procedure occurrence')
+add_tb_proc_cmbd(numsipcod='A01', cie9p = '10.10')
+expect_procedure_occurrence(procedure_source_value = '10.10')
+
+declareTest('Procedure occurrence visit')
+add_tb_ante_cmbd(numsipcod = 'A02', fecha_ingreso = '2018-01-01')
+expect_visit_occurrence(visit_occurrence_id = 1, person_id = 2, visit_start_date = '2018-01-01')
+add_tb_proc_cmbd(numsipcod = 'A02', fecha_ingreso = '2018-01-01', tipo_actividad = 'HOS', cie9p = '20.20')
+expect_procedure_occurrence(procedure_source_value = '20.20', visit_occurrence_id = 1) # NOTE: this id can change
+
 
 # ========================
 # ========================

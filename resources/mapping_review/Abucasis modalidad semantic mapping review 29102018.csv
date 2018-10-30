@@ -1,0 +1,12 @@
+sourceCode,sourceName,sourceFrequency,sourceAutoAssignedConceptIds,ADD_INFO:spanish description,matchScore,targetConceptId,targetConceptName,targetVocabularyId,targetDomainId,targetStandardConcept,targetChildCount,targetParentCount,targetConceptClassId,targetConceptCode,targetValidStartDate,targetValidEndDate,targetInvalidReason
+S-CS-2,Unemployed,292,,DESEMPL. PTE RECONOCER ASEGURAM.,1.0,45877709,Unemployed,LOINC,Meas Value,S,0,0,Answer,LA17956-6,19700101,20991231,
+F-EX-1,European Health insurance card,239,,TARJETA SANITARIA EUROPEA - CPS AC,0.8282840251922607,44810106,Holds European Health Insurance Card,SNOMED,Observation,S,0,1,Clinical Finding,896271000000104,20140401,20991231,
+S-DS-6,Long-term handicap/disability (and receives help from government),21,,ALTA EN SS DISCAPACIDAD INDEFINIDA,0.46948274970054626,4091830,Invalidity benefit,SNOMED,Observation,S,0,1,Qualifier Value,281019004,19700101,20991231,
+F-SS-24,Unemployed and receives unemployment benefits,3128,,PERCEPTOR SUBSIDIO POR DESEMPLEO,0.7610543966293335,4053252,Unemployment benefits,SNOMED,Observation,S,2,1,Qualifier Value,161005005,19700101,20991231,
+F-SS-23,Receives unemployment benefits,3065,,PERCEPTOR PRESTACION POR DESEMPLEO,0.8240512609481812,4053252,Unemployment benefits,SNOMED,Observation,S,2,1,Qualifier Value,161005005,19700101,20991231,
+F-SS-26,Receives other benefits,718,,PERCEPTOR OTRAS PRESTACIONES,0.7800043225288391,4330024,Social security benefits,SNOMED,Observation,S,13,1,Qualifier Value,224774000,19700101,20991231,
+S-N-13,Still not classified in any category. Person need to deliver some documents.,19,,CON DOC. DE DERECHO PENDIENTE DE APORTAR,0.30407726764678955,45877986,Unknown,LOINC,Meas Value,S,0,0,Answer,LA4489-6,19700101,20991231,
+S-N-1,Unknown accreditation,996,,ACREDITACION DESCONOCIDA,0.7449296116828918,45877986,Unknown,LOINC,Meas Value,S,0,0,Answer,LA4489-6,19700101,20991231,
+F-EX-5,Person who has European Health Card,13,,"E-106, E-120, S1 (SELLADOS POR INSS)",0.5124924182891846,44810106,Holds European Health Insurance Card,SNOMED,Observation,S,0,1,Clinical Finding,896271000000104,20140401,20991231,
+S-CS-26,Unemployed,31,,DESEMPL. PTE  ASEGURAM. UE,1.0,45877709,Unemployed,LOINC,Meas Value,S,0,0,Answer,LA17956-6,19700101,20991231,
+F-EX-2,EUROPEAN HEALTH CARD - CPS PN,43,,TARJETA SANITARIA EUROPEA - CPS PN,0.42333588004112244,44810106,Holds European Health Insurance Card,SNOMED,Observation,S,0,1,Clinical Finding,896271000000104,20140401,20991231,

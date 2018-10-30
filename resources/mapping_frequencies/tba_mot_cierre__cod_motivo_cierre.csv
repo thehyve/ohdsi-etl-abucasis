@@ -1,0 +1,9 @@
+cod_motivo_cierre,Frequency.1,codes,spanish description,english description,comment
+4,1,-1,[Vacio],,
+6,1,CIT,Cierre por traslado,,
+5,1,PAN,Parte Baja Anulado,,
+7,1,IPER,Incapacidad Permanente Revisable,,
+1,1,ISIAP,Alta Siapwin,,
+3,1,JUB,Jubilación,,
+2,1,INSS,Alta INSS,,
+8,1,IPE,Alta por concesión Incapacidad Permanente,,

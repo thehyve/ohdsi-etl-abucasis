@@ -1,4 +1,7 @@
--- Generate lookup table
+-- Generate new lookup table
+DROP TABLE source_intermediate.intermediate_table_visit_ocurrence
+;
+
 CREATE TABLE source_intermediate.intermediate_table_visit_ocurrence
 (
   visit_ocurrence_id BIGSERIAL NOT NULL,
@@ -8,25 +11,28 @@ CREATE TABLE source_intermediate.intermediate_table_visit_ocurrence
 );
 
 ALTER TABLE source_intermediate.intermediate_table_visit_ocurrence
-  owner to postgres;
-
-INSERT INTO source_intermediate.intermediate_table_visit_ocurrence (origin, numsipcod, date)
-
-SELECT 'C'                                                            AS origin,
-       unique_table.numsipcod                                         AS numsipcod,
-       TO_DATE(cast(unique_table.fecha_ingreso AS TEXT), 'YYYY-MM-DD')  AS date
-FROM
-     -- Retrieve unique combinations SIP - FECHA_INGRESO present in ABUCASIS
-     (SELECT DISTINCT numsipcod, fecha_ingreso FROM public.tb_ante_cmbd) AS unique_table
+  OWNER TO postgres
 ;
 
+INSERT INTO source_intermediate.intermediate_table_visit_ocurrence (origin, numsipcod, date)
+  SELECT *
+  FROM (
+         -- Retrieve unique combinations SIP - FECHA_INGRESO present in ABUCASIS
+         SELECT DISTINCT
+           'C'                                                AS origin,
+           numsipcod                                          AS numsipcod,
+           TO_DATE(cast(fecha_ingreso AS TEXT), 'YYYY-MM-DD') AS date
+         FROM
+           public.tb_ante_cmbd
 
-INSERT INTO source_intermediate.intermediate_table_visit_ocurrence (origin, numsipcod, date )
+         UNION
 
-SELECT 'M'                                                            AS origin,
-       unique_table.numsipcod                                         AS numsipcod,
-       TO_DATE(cast(unique_table.fecha_inicio AS TEXT), 'YYYY-MM-DD')  AS date
-FROM
-    -- Retrieve unique combinations SIP - FECHA_INICIO present in ABUCASIS
-     (SELECT DISTINCT numsipcod, fecha_inicio FROM public.tb_morbilid) AS unique_table
+         -- Retrieve unique combinations SIP - FECHA_INICIO present in ABUCASIS
+         SELECT DISTINCT
+           'M'                                               AS origin,
+           numsipcod                                         AS numsipcod,
+           TO_DATE(cast(fecha_inicio AS TEXT), 'YYYY-MM-DD') AS date
+         FROM
+           public.tb_morbilid
+   ) t
 ;

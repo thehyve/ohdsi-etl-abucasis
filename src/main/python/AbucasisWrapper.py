@@ -92,9 +92,18 @@ class AbucasisWrapper(EtlWrapper):
         # process visits table
         self.execute_sql_file('transformation/remove_conflictive_visits.sql')
 
+        # Condition
+        # self.execute_sql_file('transformation/diag_juntos_to_condition_occurrence.sql')
+
+        # Procedure
         self.execute_sql_file('transformation/proc_cmbd_to_procedure_occurrence.sql')
 
+        # Drug
         self.execute_sql_file('transformation/rele_to_drug_exposure.sql')
+
+        # Measurement
+        self.execute_sql_file('transformation/prestaci_to_measurement.sql')
+        self.execute_sql_file('transformation/variables_to_measurement.sql')
 
         # Observation
         self.execute_sql_file('transformation/event_counts_to_observation.sql')
@@ -103,7 +112,7 @@ class AbucasisWrapper(EtlWrapper):
         self.execute_sql_file('transformation/contraind_to_observation.sql')
         self.execute_sql_file('transformation/modalidad_to_observation.sql')
         self.execute_sql_file('transformation/nacionalidad_to_observation.sql')
-        self.execute_sql_file('transformation/person__and__visit_ocurrence_to_observation.sql')
+        # self.execute_sql_file('transformation/person__and__visit_ocurrence_to_observation.sql')
 
     def log_source_counts(self):
         self.log_to_file('{:-^100}'.format(' Source Counts '))

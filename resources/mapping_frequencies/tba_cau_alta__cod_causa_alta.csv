@@ -1,0 +1,10 @@
+cod_causa_alta,Frequency.1,codes,spanish description,english description,comment
+4,1,-1,[Vacio],,
+9,1,AGO,Agotamiento plazo,,
+6,1,IME,Mejoría por Inspección,,
+5,1,PIN,Prop. de Incapacidad,,
+7,1,IMAT,Inicio de Maternidad,,
+1,1,FAL,Fallecimiento,,
+3,1,CUR,Curación,,
+2,1,MEJ,Mejoría que permite realizar trab. habitual,,
+8,1,INC,Incomparecencia,,

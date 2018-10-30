@@ -1,0 +1,317 @@
+1	-1	[Vacio]
+2	-2	[Sin referencia]
+3	ABD1ARMA	Abd. 1º Art. Mano
+4	ABD1MUMA	Abd. 1º Musc. Mano
+5	ABD_ARHO	Abd. Art. Hombro
+6	ABDBACA	Abd.BACA
+7	ABDBMCA	Abd.BMCA
+8	ABDHMUHO	Abd. Horiz. Art. Hombro
+9	ABD_MUHO	Abd. Musc. Hombro
+10	ABDOINFE	Abdomen inferior y genitales
+11	ABHOMUHO	Abd. Horiz. Musc. Hombro
+12	ABMCARMA	Abd. Mcf. Art. Mano
+13	ABMCMUMA	Abd. Mcf. Musc. Mano
+14	ABSTTABA	Abstinente
+15	ADD1ARMA	Add. 1º Art. Mano
+16	ADD1MUMA	Add. 1º Musc. Mano
+17	ADD_ARHO	Add. Art. Hombro
+18	ADDBACA	Add.BACA
+19	ADDBMCA	Add.BMCA
+20	ADDHMUHO	Add. Horiz. Art. Hombro
+21	ADD_MUHO	Add. Musc. Hombro
+22	ADHEADEC	¿Presenta el paciente una adherencia adecuada al tratamiento?
+23	ADHOMUHO	Add. Horiz. Musc. Hombro
+24	ADISNEA	Aumento de disnea basal
+25	ADMCARMA	Add. Mcf. Art. Mano
+26	ADMCMUMA	Add. Mcf. Musc. Mano
+27	ALCOAIRE	Alcohol en aire espirado
+28	ALTUTE	Altura Uterina
+29	AMBIGEOG	Ambito geográfico
+30	ASISCONS	Asistencia a consultas
+31	ASISGRUP	Asistencia a grupos
+32	AUTOANAL	Autoanálisis
+33	AYUDDEFI	Ayuda definitiva
+34	AYUDRECO	Ayuda recomendada
+35	CAIULTAN	Caídas en el último año
+36	CALICHOR	Disminución calibre y fuerza del chorro
+37	CAUSAS	Causas
+38	CAVIOJOD	ALTERACION CAMPO VISUAL O.D.
+39	CAVIOJOI	ALTERACION CAMPO VISUAL O.I.
+40	CFH	Nº de cigarrillos fumados hoy
+41	CIF	CIF empresa
+42	CIRPROSP	Cirugía prostática previa
+43	CIR_RESP	Cirujano responsable
+44	CIRUCONO	Cirujano conocido
+45	CITOEXFO	Citología exfoliativa ginecológica
+46	CO	Monóxido de carbono
+47	COLE_LDL	Colesterol LDL Objetivo
+48	COLESP	Color Esputo
+49	COMPCRON	Complicaciones crónicas
+50	CONOINDI	¿Conoce las indicaciones de los mismos?
+51	CONOPOSO	¿Conoce su posología?
+52	CONSDIET	Recomendaciones sobre dieta
+53	CONSEJER	Recomendacienes sobre Ejercicio Físico
+54	CONSTABA	Consejo antitabaco (Atención Terapeútica Minima)
+55	CONTALUC	Control alucinógenos
+56	CP	C.P
+57	CRANEAL	Perímetro craneal
+58	CRITDERI	Cumple criterios derivación
+59	DESLTABA	Desliz
+60	DETE_CO	determinación CO en aire exalado
+61	DIFITOMA	¿Dificultad en toma?
+62	DIREC	Dirección
+63	DIRECENT	Dirección centro
+64	DISMDIU	Disminución de la diuresis
+65	DISURIA	Disuria
+66	DIURESIS	Diuresis
+67	DOSIADEC	El sistema de dosificación seleccionado ¿es adecuado para el paciente?
+68	ECG_RCV	Electrocardiograma/riesgo cardiovascular
+69	EDAD	Edad
+70	EDADMENO	Edad de la Menopausia
+71	EDEMAS	Edemas
+72	ELECTRO	Electrocardiograma
+73	ENDO	Interrogado sobre hemorragia vaginal
+74	ENFOSTEO	Enfermedades osteopenizantes, excluidas hipogonadismo
+75	ENTR_TSO	Entrega TSO en heces
+76	EPOJOD	E/P OJO DERECHO
+77	EPOJOI	E/P O.D.
+78	ESCADOLO	Escala de dolor
+79	ESMEOJOD	ESTRATEGIA MEDICACION O.D.
+80	ESMEOJOI	ESTRATEGIA O.I.
+81	ESOSVAL	Solo para el control de ESOSVAL
+82	ESPEMOTI	Especificar motivo
+83	ESTAPROT	Estado prótesis
+84	ESTMENO	Estado Menopausia
+85	ESTRENI	ESTREÑIMIENTO
+86	EVERMUTO	Eversion Musc. Tobillo
+87	EVERTOBI	Eversion Tobillo
+88	EXIFARMA	Ext. IF. Art. Mano
+89	EXIFMUMA	Ext. IF. Musc. Mano
+90	EXMCARMA	Ext. Mcf. Art. Mano
+91	EXMCMUMA	Ext. Mcf. Musc. Mano
+92	EXT1ARMA	Ext. 1º Art. Mano
+93	EXT1MUMA	Ext. 1º Musc. Mano
+94	EXT_ARHO	Ext. Art. Hombro
+95	EXT_ARRO	Ext. Art. Rodilla
+96	EXTBACA	Ext.BACA
+97	EXTBMCA	Ext.BMCA
+98	EXTEARCO	Ext. Artic. Codo
+99	EXTEBACE	EXTEN. BALANCE CERVICAL
+100	EXTEPANA	Ext. (pared-nariz)
+101	EXT_MUCO	Ext. Musc. Codo
+102	EXT_MUHO	Ext. Musc. Hombro
+103	EXT_MURO	Ext. Musc. Rodilla
+104	FABATABA	Fecha abandono tabaco
+105	FAMIFRAC	Historia familiar de fractura osteoporótica
+106	FARMTABA	Tratamiento farmacológico
+107	FCF	Frecuencia cardiaca fetal
+108	FCN	glucemia capilar nocturna
+109	FECHALTA	Fecha alta
+110	FECHCOMU	Fecha comunicación test positivo
+111	FECHENTR	Fecha entrada
+112	FECHIMPL	Fecha implantación
+113	FECHINVI	Fecha de invitación
+114	FEV1	Espirometría (fev1)
+115	FEV1-Med	Espirometría: fev1-Media
+116	FEV6	Espirometría: fev6
+117	FEV6-Med	Espirometría: fev6- Media
+118	FIRES	Fisioterapia respiratoria
+119	FLARPAMU	Flex. Art. Palmar Muñeca
+120	FLDOARMU	Flex. Dorsal Art. Muñeca
+121	FLDOMUMA	Flex. Dorsal Musc. Muñeca
+122	FLDOMUTO	Flex. Dorsal Musc. Tobillo
+123	FLDOTOBI	Flex. Dorsal Tobillo
+124	FLE1ARMA	Flex 1º Art. Mano
+125	FLE1MUMA	Flex 1º Musc. Mano
+126	FLE_ARHO	Flex. Art. Hombro
+127	FLEXARCO	Flex. Artic. Codo
+128	FLEXBACE	FLEXION BALANCE CERVICAL
+129	FLEXDENA	Flex.(dedos-suelo)
+130	FLEXMUCO	Flex. Musc. Codo
+131	FLEXMUHO	Flex. Musc. Hombro
+132	FLEXMURO	Flex. Musc. Rodilla
+133	FLIFARMA	Flex. IF. Art. Mano
+134	FLIFMUMA	Flex. IF. Musc. Mano
+135	FLMCARMA	Flex. Mcf. art. Mano
+136	FLMCMUMA	Flex. Mcf. Musc. Mano
+137	FLPAMUMA	Flex. Palmar Musc. Muñeca
+138	FLPLMUTO	Flex. Plantar Musc. Tobillo
+139	FLPLTOBI	Flex. Plantar Tobillo
+140	FLXBACA	Flx.BACA
+141	FLXBMCA	Flx.BMCA
+142	FRACCADE	Fractura osteoporótica cadera
+143	FRACESPE	Fractura osteoporótica Sitio especificado
+144	FRACHUME	Fractura osteoporótica proximal de humero
+145	FRACMUNE	Fractura osteoporótica muñeca
+146	FRACNOES	Fractura osteoporótica Sitio no especificado
+147	FRACVERT	Fractura osteoporótica vertebral
+148	FRCR-Med	Frecuencia Cardiaca Media
+149	FRECAR	Frecuencia Cardiaca
+150	FRECCAID	Frecuencia de caídas
+151	FRECRESP	Frecuencia respirtoria
+152	GCB	glucemia capilar basal
+153	GCB-Med	glucemia capilar basal media
+154	GCPOST	glucemia capilar postpandrial
+155	GCPREP	glucemia capilar prepandrial
+156	GDISNEA	Grado de Disnea
+157	GDXOJOD	G.D.X. OJO DERECHO
+158	GDXOJOI	G.D.X. OJO IZQUIERDO
+159	GLEXARRO	Flex. Art. Rodilla
+160	GLUCAP	glucemia capilar
+161	GLUCOORA	Glucocorticoides orales
+162	GOTEPOSM	Goteo posmiccional
+163	HABIVIDA	¿Hábitos de vida correctos?
+164	HGLI	Hemoglobina Glicosilada A1C
+165	HIPOGO	Hipogonadismo no tratado
+166	IMC	Índice de Masa Corporal
+167	INCUARMU	Incl. Cubital Art. Muñeca
+168	INCUMUMA	Incl. Cubit. Musc. Muñeca
+169	INDIEXER	Indicación exéresis
+170	INFOTRCV	Información sobre  factores de riesgo cardiovascular
+171	INGHOSDI	Ingreso Hosp. por diabetes
+172	INRAARMU	Incl. Radial Art. Muñeca
+173	INRAMUMA	Incl. Radial Musc. Muñeca
+174	INSOM	INSOMIO
+175	INTEEDUC	Intervenciones Educativas
+176	INVEMUTO	Inversion Musc. Tobillo
+177	INVETOBI	Inversion Tobillo
+178	IRRI	Irritativos o de llenado
+179	ITBD	Indice tobillo/brazo derecho
+180	ITBI	Indice tobillo/brazo izquierdo
+181	LATDBACE	LAT. DER. BAL. CERVICAL
+182	LATDDOLU	Lateralizacion Derch. Artic. Dorso-Lumbar
+183	LATIBACE	LAT. IZQ. BAL. CERVICAL
+184	LATIDOLU	Lateralizacion Izq. Artic. Dorso-Lumbar
+185	LOCACENT	Localidad centro
+186	MANTOUX	Mantoux
+187	MED1OJOD	MEDICACION ELECCION O.D.
+188	MED1OJOI	MEDICACION ELECCION O.I.
+189	MED2OJOD	MEDICACION ASOCIACION O.D.
+190	MED2OJOI	MEDICACION ASOCIACIACION O.I.
+191	MEDIPOSO	¿Se toma la medicación de acuerdo a la posología?
+192	MENOPAUS	Menopausia
+193	MICRALBU	MICROALBUMINURIA
+194	MOTIALTA	Motivo alta
+195	MOVFET	Movimientos Fetales
+196	NICTURIA	Nicturia
+197	NOM_APE	Nombre y Apellidos
+198	NOM_CENT	Nombre centro
+199	NUMECIGA	Número de cigarrillos
+200	NUMEROND	Número de ronda
+201	OBSE1	Observaciones
+202	OBSE2	Observaciones
+203	OBSTRUC	Obstructivos o de vaciado
+204	OPO1ARMA	Oposicion 1º Art. Mano
+205	OPO1MUMA	Oposicion 1º Musc. Mano
+206	ORTOPNEA	Ortopnea
+207	OXIGE	Oxigenoterapia
+208	PACIREFA	Tipo Paciente REFAR
+209	PAISCENT	País centro
+210	PECOMAMA	Ecografía mamaria previa
+211	PERADB	Perímetro Abdominal
+212	PESO	Peso
+213	PESO-Med	Peso Medio
+214	PIOD	PIO OJO DERECHO
+215	PIOI	PIO OJO IZQUIERDO
+216	PMC	Porcentaje de grasa corporal
+217	POBLA	Población
+218	POLIQUIR	Poliquiuria
+219	POST-Med	glucemia capilar postpandrial media
+220	PRECDERI	PRECISA DERIVACIÓN
+221	PREP-Med	glucemia capilar prepandrial media
+222	PRMUMUNE	Pronacion Musc. Muñeca
+223	PROB_1	Problema detectado
+224	PROB_2	Problema detectado
+225	PROB_3	Problema detectado
+226	PROB_4	Problema detectado
+227	PROB_5	Problema detectado
+228	PROB_6	Problema detectado
+229	PRONARCO	Pronacion Artic. Codo
+230	PRONARMU	Pronacion Art. Muñeca
+231	PRONMUCO	Pronacion Musc. Codo
+232	PROVCENT	Provincia centro
+233	QMAX	Qmax
+234	RCVREGIC	RCV Regicor
+235	RCVSCORE	RCV Score
+236	READTABA	Reacciones Adversas
+237	REAL_ECO	Realizar ecografía
+238	RECOGEHC	¿Recogidos en H.Clinica?
+239	REDU_LDL	Reducción colesterol LDL
+240	REFEADCO	Refiere adicciones conductuales
+241	REFEALUC	Refiere alucinógenos
+242	REFEANFE	Refiere anfetaminas
+243	REFEBENZ	Refiere benzodiacepinas
+244	REFECAFE	Refiere cafeína
+245	REFECANN	Refiere cannabis
+246	REFECOBA	Refiere cocaína base
+247	REFECOCA	Refiere cocaína
+248	REFEHERO	Refiere heroína
+249	REFEMETA	Refiere metadona
+250	REFENICO	Refiere nicotina
+251	REFEOPIO	Refiere otros opiáceos
+252	REFESINT	Refiere drogas de síntesis
+253	REFIALCO	Refiere alcohol
+254	REQENR	Requerimientos energéticos
+255	RESIPOMI	Residuo post-miccional
+256	RESUFINA	Resultado final episodio
+257	RETEORIN	Retención aguda de orina
+258	RETINOGR	Fondo de Ojo o Retinografía
+259	REVIPIES	Revisión de los pies
+260	RIESCARD	Riesgo Cardiovascular
+261	ROEXARHO	Rot. Ext. Art. Hombro
+262	ROEXMUHO	Rot. Ext. Musc. Hombro
+263	ROINARHO	Rot. Int. Art. Hombro
+264	ROINMUHO	Rot. Int. Musc. Hombro
+265	ROTDBACE	ROT. DER. BAL. CERVICAL
+266	ROTEBACA	Rot.Ext.BACA
+267	ROTEBMCA	Rot.Ext.BMCA
+268	ROTIBACA	Rot.Int.BACA
+269	ROTIBACE	ROT. IZQ. BAL. CERVICAL
+270	ROTIBMCA	Rot.Itn.BMCA
+271	SATABA_1	Deseo muy fuerte de fumar o craving
+272	SATABA_2	Ansiedad-Nerviosismo
+273	SATABA_3	Insomnio
+274	SATABA_4	Dificultad de concentración
+275	SATABA_5	Aumento del apetito
+276	SATABA_6	Estreñimiento
+277	SATABA_7	Cansancio
+278	SATABA_8	Cefalea
+279	SATABA_9	Ánimo deprimido
+280	SATABA_T	TOTAL SSAA
+281	SEDIORIN	Sedimento de orina
+282	SEGUJUDI	Seguimiento judicial
+283	SEMGES	Semana Gestación
+284	SE_RECO	Se recomienda
+285	SONDPREV	Sondaje previo
+286	SP02	Saturacion 02 percutanea
+287	SPO2	Saturación de Oxígeno en Sangre
+288	SPO2-Med	Saturación de Oxígeno en Sangre Media
+289	SSAATABA	Síntomas de abstinencia
+290	STUI	Síntomas tracto urinario inferior
+291	SUMUMUNE	Sup. Musc. Muñeca
+292	SUPIARCO	Supinacion Artic. Codo
+293	SUPIARMU	Supinacion Art. Muñeca
+294	SUPIMUCO	Supinacion Musc. Codo
+295	TACTRECT	Tacto rectal
+296	TAD	Tensión arterial diastólica
+297	TAD-Med	Tensión Arterial Diastólica Media
+298	TALLA	Talla
+299	TARECTCO	Tacto rectal (consistencia)
+300	TARECTTA	Tacto rectal (Tamaño)
+301	TAS	Tensión Arterial Sistólica
+302	TAS-Med	Tensión Arterial Sistólica Media
+303	TEMPCORP	Temperatura corporal
+304	TFNO	Teléfono
+305	TFNOCENT	Teléfono centro
+306	TIPOALTA	Tipo alta
+307	TIPOCENT	Tipo de centro
+308	TIPOPROT	Tipo de prótesis
+309	TOMAMEDI	¿Se toma la medicación?
+310	TOS	Tos
+311	TUC	Tiempo desde último cigarrillo
+312	UNIDCIGA	Unidad cigarrillos
+313	USOCTABA	Uso correcto
+314	UUC	Unidad de tiempo del último cigarrillo
+315	VALOADVE	Valoración efectos adversos de los fármacos
+316	VALOCUMP	Valoración del cumplimiento
+317	VOLUPROS	Volumen prostático

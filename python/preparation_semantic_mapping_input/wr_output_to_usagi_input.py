@@ -19,8 +19,8 @@ import os
 from translate import Translator
 
 # Global variables (hard-coded, modify)
-wr_report = '../Documents/ABUCASIS/ScanReport_oct2018.xlsx'
-out_dir = 'resources/mapping_frequencies/'
+wr_report = '../Documents/ABUCASIS/ScanReport_25_10_18.xlsx'
+out_dir = 'resources/mapping_frequencies_v2/'
 mapping_tables_dir = '../Documents/ABUCASIS/tba_tables_csv/'
 
 def import_csv(filename, delim = ',', end_line = '\n'):

@@ -37,8 +37,7 @@ INSERT INTO cdm5.procedure_occurrence
     -- Required field, no modifier in source data
     0                                       AS modifier_concept_id,
 
-    -- TODO: Map tipo_actividad, fecha_ingreso and numsipcod to visit_ocurrence_id
-    NULL                                    AS visit_occurrence_id
+    intermediate_table_visit_ocurrence.visit_ocurrence_id        AS visit_occurrence_id
 
   FROM public.tb_proc_cmbd
     JOIN cdm5.person
@@ -48,4 +47,11 @@ INSERT INTO cdm5.procedure_occurrence
     LEFT JOIN cdm5.concept_relationship AS code_map
       ON code_map.concept_id_1 = icd9proc.concept_id
          AND code_map.relationship_id = 'Maps to'
+    LEFT JOIN source_intermediate.intermediate_table_visit_ocurrence
+      ON tb_proc_cmbd.numsipcod = intermediate_table_visit_ocurrence.numsipcod
+         AND tb_proc_cmbd.fecha_ingreso = intermediate_table_visit_ocurrence.date
+         AND CASE WHEN tb_proc_cmbd.tipo_actividad IS NULL
+                  THEN 'M'
+                  ELSE 'C'
+             END = intermediate_table_visit_ocurrence.origin
 ;

@@ -432,7 +432,17 @@ generateInsertSql <- function()
   insertSql
 }
 
-declareTest <- function(id, description) {
+declareTest <- function(id=NULL, description=NULL) {
+  # If only character string given is as input, assume this is the description and id should be incremented
+  if (is.null(description) && is.character(id)) {
+    description <- id
+    id <- NULL
+  }
+
+  if (is.null(id)) {
+    id <- get0('testId', envir = globalenv(), ifnotfound = 0) + 1
+  }
+
   assign('testId', id, envir = globalenv()) 
   assign('testDescription', description, envir = globalenv()) 
   assign('testNewAdded', TRUE, envir = globalenv()) 

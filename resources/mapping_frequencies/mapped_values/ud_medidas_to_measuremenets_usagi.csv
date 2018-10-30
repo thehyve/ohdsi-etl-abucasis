@@ -1,0 +1,9 @@
+sourceCode,sourceName,sourceFrequency,sourceAutoAssignedConceptIds,ADD_INFO:spanish description,matchScore,targetConceptId,targetConceptName,targetVocabularyId,targetDomainId,targetStandardConcept,targetChildCount,targetParentCount,targetConceptClassId,targetConceptCode,targetValidStartDate,targetValidEndDate,targetInvalidReason
+UI/mL,International / ml units,70,,Unidades internacionales / Mililitro,0.0,8985,international unit per milliliter,UCUM,Unit,S,0,0,Unit,[iU]/mL,19700101,20991231,
+mU/mL,Milli / ml,311,,Miliunidades / Mililitro,0.0,8719,milliunit per milliliter,UCUM,Unit,S,0,0,Unit,10*-3.[U]/mL,19700101,20991231,
+meq/L,Milliequivalents / Liter,48,,Miliequivalentes / Litro,0.0,4117806,mEq/L,SNOMED,Observation,S,0,1,Qualifier Value,258865000,19700101,20991231,
+µg/dL,Microgram / Deciliter,406,,Microgramos / Decilitro,0.0,4121397,ug/dL,SNOMED,Observation,S,0,1,Qualifier Value,258800008,19700101,20991231,
+ng/dL,Nanograms / Deciliter,166,,Nanogramos / Decilitro,0.0,4122417,ng/dL,SNOMED,Observation,S,0,1,Qualifier Value,258805003,19700101,20991231,
+g/24h,Grams / 24 hrs,1,,Gramos / 24 horas,0.0,4120728,g/24h,SNOMED,Observation,S,0,1,Qualifier Value,258830000,19700101,20991231,
+mL/min,Ml / min,322,,Mililitros / minutos,0.0,4302500,ml/ml,SNOMED,Unit,S,0,1,Qualifier Value,419346007,20081101,20991231,
+µg/mL,Microgram / ml,34,,Microgramos / Mililitro,0.0,4167221,MBq/ml,SNOMED,Unit,S,0,1,Qualifier Value,418948007,20081101,20991231,

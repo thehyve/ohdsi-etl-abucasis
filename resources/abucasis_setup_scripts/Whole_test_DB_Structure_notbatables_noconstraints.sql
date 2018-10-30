@@ -21,10 +21,10 @@ SET default_with_oids = false;
 
 --
 -- TOC entry 223 (class 1259 OID 17124)
--- Name: tb_aconadve; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_aconadve; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_aconadve (
+CREATE TABLE abucasis_test.tb_aconadve (
     id integer NOT NULL,
     num_ac_adversos integer,
     numsipcod character varying(25),
@@ -36,7 +36,7 @@ CREATE TABLE public.tb_aconadve (
 
 --
 -- TOC entry 222 (class 1259 OID 17122)
--- Name: tb_aconadve_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_aconadve_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
@@ -44,7 +44,7 @@ CREATE TABLE public.tb_aconadve (
 --
 -- TOC entry 3482 (class 0 OID 0)
 -- Dependencies: 222
--- Name: tb_aconadve_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_aconadve_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
@@ -52,10 +52,10 @@ CREATE TABLE public.tb_aconadve (
 
 --
 -- TOC entry 229 (class 1259 OID 17185)
--- Name: tb_alergias; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_alergias; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_alergias (
+CREATE TABLE abucasis_test.tb_alergias (
     id integer NOT NULL,
     num_alergias integer,
     numsipcod character varying(25),
@@ -67,7 +67,7 @@ CREATE TABLE public.tb_alergias (
 
 --
 -- TOC entry 228 (class 1259 OID 17183)
--- Name: tb_alergias_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_alergias_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
@@ -75,7 +75,7 @@ CREATE TABLE public.tb_alergias (
 --
 -- TOC entry 3483 (class 0 OID 0)
 -- Dependencies: 228
--- Name: tb_alergias_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_alergias_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
@@ -83,10 +83,10 @@ CREATE TABLE public.tb_alergias (
 
 --
 -- TOC entry 239 (class 1259 OID 17276)
--- Name: tb_ante_cmbd; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_ante_cmbd; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_ante_cmbd (
+CREATE TABLE abucasis_test.tb_ante_cmbd (
     id integer NOT NULL,
     tipo_actividad character varying(10),
     numsipcod character varying(25),
@@ -161,14 +161,14 @@ CREATE TABLE public.tb_ante_cmbd (
 
 --
 -- TOC entry 238 (class 1259 OID 17274)
--- Name: tb_ante_cmbd_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_ante_cmbd_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
 --
 -- TOC entry 3484 (class 0 OID 0)
 -- Dependencies: 238
--- Name: tb_ante_cmbd_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_ante_cmbd_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
@@ -176,10 +176,10 @@ CREATE TABLE public.tb_ante_cmbd (
 
 --
 -- TOC entry 235 (class 1259 OID 17246)
--- Name: tb_antepers; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_antepers; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_antepers (
+CREATE TABLE abucasis_test.tb_antepers (
     id integer NOT NULL,
     numsipcod character(25),
     fecha_inicio date,
@@ -191,7 +191,7 @@ CREATE TABLE public.tb_antepers (
 
 --
 -- TOC entry 234 (class 1259 OID 17244)
--- Name: tb_antepers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_antepers_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
@@ -199,7 +199,7 @@ CREATE TABLE public.tb_antepers (
 --
 -- TOC entry 3485 (class 0 OID 0)
 -- Dependencies: 234
--- Name: tb_antepers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_antepers_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
@@ -207,10 +207,10 @@ CREATE TABLE public.tb_antepers (
 
 --
 -- TOC entry 258 (class 1259 OID 17884)
--- Name: tb_cex; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_cex; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_cex (
+CREATE TABLE abucasis_test.tb_cex (
     id integer NOT NULL,
     num_consultas integer,
     numsipcod character varying(25),
@@ -222,7 +222,7 @@ CREATE TABLE public.tb_cex (
 
 --
 -- TOC entry 257 (class 1259 OID 17882)
--- Name: tb_cex_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_cex_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
@@ -230,7 +230,7 @@ CREATE TABLE public.tb_cex (
 --
 -- TOC entry 3486 (class 0 OID 0)
 -- Dependencies: 257
--- Name: tb_cex_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_cex_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
@@ -238,10 +238,10 @@ CREATE TABLE public.tb_cex (
 
 --
 -- TOC entry 231 (class 1259 OID 17203)
--- Name: tb_cie_atc; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_cie_atc; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_cie_atc (
+CREATE TABLE abucasis_test.tb_cie_atc (
     id integer NOT NULL,
     num_cieatc integer,
     numsipcod character varying(25),
@@ -253,14 +253,14 @@ CREATE TABLE public.tb_cie_atc (
 
 --
 -- TOC entry 230 (class 1259 OID 17201)
--- Name: tb_cie_atc_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_cie_atc_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
 --
 -- TOC entry 3487 (class 0 OID 0)
 -- Dependencies: 230
--- Name: tb_cie_atc_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_cie_atc_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
@@ -268,10 +268,10 @@ CREATE TABLE public.tb_cie_atc (
 
 --
 -- TOC entry 264 (class 1259 OID 17925)
--- Name: tb_consultas_atp; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_consultas_atp; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_consultas_atp (
+CREATE TABLE abucasis_test.tb_consultas_atp (
     id integer NOT NULL,
     num_consultas integer,
     numsipcod character varying(25),
@@ -283,24 +283,24 @@ CREATE TABLE public.tb_consultas_atp (
 
 --
 -- TOC entry 263 (class 1259 OID 17923)
--- Name: tb_consultas_atp_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_consultas_atp_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
 --
 -- TOC entry 3488 (class 0 OID 0)
 -- Dependencies: 263
--- Name: tb_consultas_atp_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_consultas_atp_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
 
 --
 -- TOC entry 241 (class 1259 OID 17296)
--- Name: tb_contraind; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_contraind; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_contraind (
+CREATE TABLE abucasis_test.tb_contraind (
     id integer NOT NULL,
     num_contraindicaciones integer,
     numsipcod character varying(25),
@@ -313,7 +313,7 @@ CREATE TABLE public.tb_contraind (
 
 --
 -- TOC entry 240 (class 1259 OID 17294)
--- Name: tb_contraind_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_contraind_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
@@ -322,7 +322,7 @@ CREATE TABLE public.tb_contraind (
 --
 -- TOC entry 3489 (class 0 OID 0)
 -- Dependencies: 240
--- Name: tb_contraind_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_contraind_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
@@ -330,10 +330,10 @@ CREATE TABLE public.tb_contraind (
 
 --
 -- TOC entry 227 (class 1259 OID 17162)
--- Name: tb_ctdh; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_ctdh; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_ctdh (
+CREATE TABLE abucasis_test.tb_ctdh (
     id integer NOT NULL,
     num_ctdh integer,
     numsipcod character varying(25),
@@ -345,14 +345,14 @@ CREATE TABLE public.tb_ctdh (
 
 --
 -- TOC entry 226 (class 1259 OID 17160)
--- Name: tb_ctdh_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_ctdh_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
 --
 -- TOC entry 3490 (class 0 OID 0)
 -- Dependencies: 226
--- Name: tb_ctdh_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_ctdh_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
@@ -360,10 +360,10 @@ CREATE TABLE public.tb_ctdh (
 
 --
 -- TOC entry 270 (class 1259 OID 18115)
--- Name: tb_diag_cmbd; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_diag_cmbd; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_diag_cmbd (
+CREATE TABLE abucasis_test.tb_diag_cmbd (
     id integer NOT NULL,
     tipo_actividad character varying(10),
     numsipcod character varying(25),
@@ -380,7 +380,7 @@ CREATE TABLE public.tb_diag_cmbd (
 
 --
 -- TOC entry 269 (class 1259 OID 18113)
--- Name: tb_diag_cmbd_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_diag_cmbd_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
@@ -388,7 +388,7 @@ CREATE TABLE public.tb_diag_cmbd (
 --
 -- TOC entry 3491 (class 0 OID 0)
 -- Dependencies: 269
--- Name: tb_diag_cmbd_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_diag_cmbd_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
@@ -396,10 +396,10 @@ CREATE TABLE public.tb_diag_cmbd (
 
 --
 -- TOC entry 300 (class 1259 OID 18321)
--- Name: tb_diag_juntos; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_diag_juntos; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_diag_juntos (
+CREATE TABLE abucasis_test.tb_diag_juntos (
     id integer NOT NULL,
     numsipcod character varying(25),
     fecha_inicio date,
@@ -418,7 +418,7 @@ CREATE TABLE public.tb_diag_juntos (
 
 --
 -- TOC entry 299 (class 1259 OID 18319)
--- Name: tb_diag_juntos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_diag_juntos_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
@@ -426,7 +426,7 @@ CREATE TABLE public.tb_diag_juntos (
 --
 -- TOC entry 3492 (class 0 OID 0)
 -- Dependencies: 299
--- Name: tb_diag_juntos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_diag_juntos_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
@@ -434,10 +434,10 @@ CREATE TABLE public.tb_diag_juntos (
 
 --
 -- TOC entry 225 (class 1259 OID 17144)
--- Name: tb_duplicid; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_duplicid; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_duplicid (
+CREATE TABLE abucasis_test.tb_duplicid (
     id integer NOT NULL,
     num_duplicidades integer,
     numsipcod character varying(25),
@@ -449,7 +449,7 @@ CREATE TABLE public.tb_duplicid (
 
 --
 -- TOC entry 224 (class 1259 OID 17142)
--- Name: tb_duplicid_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_duplicid_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
@@ -457,7 +457,7 @@ CREATE TABLE public.tb_duplicid (
 --
 -- TOC entry 3493 (class 0 OID 0)
 -- Dependencies: 224
--- Name: tb_duplicid_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_duplicid_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
@@ -465,10 +465,10 @@ CREATE TABLE public.tb_duplicid (
 
 --
 -- TOC entry 342 (class 1259 OID 19097)
--- Name: tb_estancia_uci; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_estancia_uci; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_estancia_uci (
+CREATE TABLE abucasis_test.tb_estancia_uci (
     id integer NOT NULL,
     numsipcod character varying(25),
     fecha date,
@@ -478,7 +478,7 @@ CREATE TABLE public.tb_estancia_uci (
 
 --
 -- TOC entry 341 (class 1259 OID 19095)
--- Name: tb_estancia_uci_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_estancia_uci_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
@@ -486,7 +486,7 @@ CREATE TABLE public.tb_estancia_uci (
 --
 -- TOC entry 3494 (class 0 OID 0)
 -- Dependencies: 341
--- Name: tb_estancia_uci_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_estancia_uci_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
@@ -494,10 +494,10 @@ CREATE TABLE public.tb_estancia_uci (
 
 --
 -- TOC entry 233 (class 1259 OID 17221)
--- Name: tb_incatemp; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_incatemp; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_incatemp (
+CREATE TABLE abucasis_test.tb_incatemp (
     id integer NOT NULL,
     numsipcod character varying(25),
     fecha_registro date,
@@ -514,7 +514,7 @@ CREATE TABLE public.tb_incatemp (
 
 --
 -- TOC entry 232 (class 1259 OID 17219)
--- Name: tb_incatemp_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_incatemp_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
@@ -522,7 +522,7 @@ CREATE TABLE public.tb_incatemp (
 --
 -- TOC entry 3495 (class 0 OID 0)
 -- Dependencies: 232
--- Name: tb_incatemp_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_incatemp_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
@@ -530,10 +530,10 @@ CREATE TABLE public.tb_incatemp (
 
 --
 -- TOC entry 243 (class 1259 OID 17319)
--- Name: tb_interacc; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_interacc; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_interacc (
+CREATE TABLE abucasis_test.tb_interacc (
     id integer NOT NULL,
     num_interacciones integer,
     numsipcod character varying(25),
@@ -546,14 +546,14 @@ CREATE TABLE public.tb_interacc (
 
 --
 -- TOC entry 242 (class 1259 OID 17317)
--- Name: tb_interacc_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_interacc_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
 --
 -- TOC entry 3496 (class 0 OID 0)
 -- Dependencies: 242
--- Name: tb_interacc_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_interacc_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
@@ -561,10 +561,10 @@ CREATE TABLE public.tb_interacc (
 
 --
 -- TOC entry 249 (class 1259 OID 17500)
--- Name: tb_morbilid; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_morbilid; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_morbilid (
+CREATE TABLE abucasis_test.tb_morbilid (
     id integer NOT NULL,
     numsipcod character varying(25),
     fecha_inicio date,
@@ -576,14 +576,14 @@ CREATE TABLE public.tb_morbilid (
 
 --
 -- TOC entry 248 (class 1259 OID 17498)
--- Name: tb_morbilid_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_morbilid_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
 --
 -- TOC entry 3497 (class 0 OID 0)
 -- Dependencies: 248
--- Name: tb_morbilid_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_morbilid_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
@@ -591,10 +591,10 @@ CREATE TABLE public.tb_morbilid (
 
 --
 -- TOC entry 237 (class 1259 OID 17264)
--- Name: tb_posologia; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_posologia; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_posologia (
+CREATE TABLE abucasis_test.tb_posologia (
     id integer NOT NULL,
     num_posologias integer,
     tipo_posologia character varying(5),
@@ -607,7 +607,7 @@ CREATE TABLE public.tb_posologia (
 
 --
 -- TOC entry 236 (class 1259 OID 17262)
--- Name: tb_posologia_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_posologia_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
@@ -615,7 +615,7 @@ CREATE TABLE public.tb_posologia (
 --
 -- TOC entry 3498 (class 0 OID 0)
 -- Dependencies: 236
--- Name: tb_posologia_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_posologia_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
@@ -623,10 +623,10 @@ CREATE TABLE public.tb_posologia (
 
 --
 -- TOC entry 252 (class 1259 OID 17607)
--- Name: tb_prescrip; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_prescrip; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_prescrip (
+CREATE TABLE abucasis_test.tb_prescrip (
     id integer NOT NULL,
     numsipcod character varying(25),
     numreceta character varying(30),
@@ -641,14 +641,14 @@ CREATE TABLE public.tb_prescrip (
 
 --
 -- TOC entry 251 (class 1259 OID 17605)
--- Name: tb_prescrip_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_prescrip_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
 --
 -- TOC entry 3499 (class 0 OID 0)
 -- Dependencies: 251
--- Name: tb_prescrip_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_prescrip_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
@@ -656,10 +656,10 @@ CREATE TABLE public.tb_prescrip (
 
 --
 -- TOC entry 245 (class 1259 OID 17411)
--- Name: tb_prestaci; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_prestaci; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_prestaci (
+CREATE TABLE abucasis_test.tb_prestaci (
     id integer NOT NULL,
     valor_registrado numeric(16,2),
     numsipcod character varying(25),
@@ -671,7 +671,7 @@ CREATE TABLE public.tb_prestaci (
 
 --
 -- TOC entry 244 (class 1259 OID 17409)
--- Name: tb_prestaci_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_prestaci_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
@@ -679,7 +679,7 @@ CREATE TABLE public.tb_prestaci (
 --
 -- TOC entry 3500 (class 0 OID 0)
 -- Dependencies: 244
--- Name: tb_prestaci_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_prestaci_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
@@ -687,10 +687,10 @@ CREATE TABLE public.tb_prestaci (
 
 --
 -- TOC entry 272 (class 1259 OID 18127)
--- Name: tb_proc_cmbd; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_proc_cmbd; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_proc_cmbd (
+CREATE TABLE abucasis_test.tb_proc_cmbd (
     id integer NOT NULL,
     tipo_actividad character varying(10),
     numsipcod character varying(25),
@@ -707,7 +707,7 @@ CREATE TABLE public.tb_proc_cmbd (
 
 --
 -- TOC entry 271 (class 1259 OID 18125)
--- Name: tb_proc_cmbd_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_proc_cmbd_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
@@ -715,7 +715,7 @@ CREATE TABLE public.tb_proc_cmbd (
 --
 -- TOC entry 3501 (class 0 OID 0)
 -- Dependencies: 271
--- Name: tb_proc_cmbd_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_proc_cmbd_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
@@ -723,10 +723,10 @@ CREATE TABLE public.tb_proc_cmbd (
 
 --
 -- TOC entry 247 (class 1259 OID 17462)
--- Name: tb_rele; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_rele; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_rele (
+CREATE TABLE abucasis_test.tb_rele (
     id integer NOT NULL,
     numsipcod character varying(25),
     numreceta character varying(15),
@@ -741,7 +741,7 @@ CREATE TABLE public.tb_rele (
 
 --
 -- TOC entry 246 (class 1259 OID 17460)
--- Name: tb_rele_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_rele_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
@@ -749,7 +749,7 @@ CREATE TABLE public.tb_rele (
 --
 -- TOC entry 3502 (class 0 OID 0)
 -- Dependencies: 246
--- Name: tb_rele_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_rele_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
@@ -757,10 +757,10 @@ CREATE TABLE public.tb_rele (
 
 --
 -- TOC entry 330 (class 1259 OID 18887)
--- Name: tb_scp_2012; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_scp_2012; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_scp_2012 (
+CREATE TABLE abucasis_test.tb_scp_2012 (
     id integer NOT NULL,
     numsipcod character varying(25),
     ano_mes character varying(6),
@@ -771,13 +771,13 @@ CREATE TABLE public.tb_scp_2012 (
 
 --
 -- TOC entry 329 (class 1259 OID 18885)
--- Name: tb_scp_2012_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_scp_2012_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 --
 -- TOC entry 3503 (class 0 OID 0)
 -- Dependencies: 329
--- Name: tb_scp_2012_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_scp_2012_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
@@ -785,10 +785,10 @@ CREATE TABLE public.tb_scp_2012 (
 
 --
 -- TOC entry 332 (class 1259 OID 18902)
--- Name: tb_scp_2013; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_scp_2013; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_scp_2013 (
+CREATE TABLE abucasis_test.tb_scp_2013 (
     id integer NOT NULL,
     numsipcod character varying(25),
     ano_mes character varying(6),
@@ -799,7 +799,7 @@ CREATE TABLE public.tb_scp_2013 (
 
 --
 -- TOC entry 331 (class 1259 OID 18900)
--- Name: tb_scp_2013_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_scp_2013_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
@@ -807,7 +807,7 @@ CREATE TABLE public.tb_scp_2013 (
 --
 -- TOC entry 3504 (class 0 OID 0)
 -- Dependencies: 331
--- Name: tb_scp_2013_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_scp_2013_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
@@ -815,10 +815,10 @@ CREATE TABLE public.tb_scp_2013 (
 
 --
 -- TOC entry 334 (class 1259 OID 18908)
--- Name: tb_scp_2014; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_scp_2014; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_scp_2014 (
+CREATE TABLE abucasis_test.tb_scp_2014 (
     id integer NOT NULL,
     numsipcod character varying(25),
     ano_mes character varying(6),
@@ -829,14 +829,14 @@ CREATE TABLE public.tb_scp_2014 (
 
 --
 -- TOC entry 333 (class 1259 OID 18906)
--- Name: tb_scp_2014_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_scp_2014_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
 --
 -- TOC entry 3505 (class 0 OID 0)
 -- Dependencies: 333
--- Name: tb_scp_2014_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_scp_2014_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
@@ -844,10 +844,10 @@ CREATE TABLE public.tb_scp_2014 (
 
 --
 -- TOC entry 336 (class 1259 OID 18914)
--- Name: tb_scp_2015; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_scp_2015; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_scp_2015 (
+CREATE TABLE abucasis_test.tb_scp_2015 (
     id integer NOT NULL,
     numsipcod character varying(25),
     ano_mes character varying(6),
@@ -858,7 +858,7 @@ CREATE TABLE public.tb_scp_2015 (
 
 --
 -- TOC entry 335 (class 1259 OID 18912)
--- Name: tb_scp_2015_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_scp_2015_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
@@ -866,7 +866,7 @@ CREATE TABLE public.tb_scp_2015 (
 --
 -- TOC entry 3506 (class 0 OID 0)
 -- Dependencies: 335
--- Name: tb_scp_2015_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_scp_2015_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
@@ -874,10 +874,10 @@ CREATE TABLE public.tb_scp_2015 (
 
 --
 -- TOC entry 260 (class 1259 OID 17900)
--- Name: tb_sip_spo; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_sip_spo; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_sip_spo (
+CREATE TABLE abucasis_test.tb_sip_spo (
     id integer NOT NULL,
     numsipcod character varying(25),
     sexo character(1),
@@ -890,7 +890,7 @@ CREATE TABLE public.tb_sip_spo (
 
 --
 -- TOC entry 259 (class 1259 OID 17898)
--- Name: tb_sip_spo_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_sip_spo_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
@@ -898,7 +898,7 @@ CREATE TABLE public.tb_sip_spo (
 --
 -- TOC entry 3507 (class 0 OID 0)
 -- Dependencies: 259
--- Name: tb_sip_spo_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_sip_spo_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
@@ -906,10 +906,10 @@ CREATE TABLE public.tb_sip_spo (
 
 --
 -- TOC entry 328 (class 1259 OID 18854)
--- Name: tb_sip_spo_resto_2012; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_sip_spo_resto_2012; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_sip_spo_resto_2012 (
+CREATE TABLE abucasis_test.tb_sip_spo_resto_2012 (
     id integer NOT NULL,
     numsipcod character varying(25),
     cod_centro_asignacion character varying(250),
@@ -932,14 +932,14 @@ CREATE TABLE public.tb_sip_spo_resto_2012 (
 
 --
 -- TOC entry 327 (class 1259 OID 18852)
--- Name: tb_sip_spo_resto_2012_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_sip_spo_resto_2012_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
 --
 -- TOC entry 3508 (class 0 OID 0)
 -- Dependencies: 327
--- Name: tb_sip_spo_resto_2012_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_sip_spo_resto_2012_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
@@ -947,10 +947,10 @@ CREATE TABLE public.tb_sip_spo_resto_2012 (
 
 --
 -- TOC entry 310 (class 1259 OID 18754)
--- Name: tb_sip_spo_resto_2015; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_sip_spo_resto_2015; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_sip_spo_resto_2015 (
+CREATE TABLE abucasis_test.tb_sip_spo_resto_2015 (
     id integer NOT NULL,
     numsipcod character varying(25),
     cod_centro_asignacion character varying(250),
@@ -973,14 +973,14 @@ CREATE TABLE public.tb_sip_spo_resto_2015 (
 
 --
 -- TOC entry 309 (class 1259 OID 18752)
--- Name: tb_sip_spo_resto_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_sip_spo_resto_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
 --
 -- TOC entry 3509 (class 0 OID 0)
 -- Dependencies: 309
--- Name: tb_sip_spo_resto_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_sip_spo_resto_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
@@ -988,10 +988,10 @@ CREATE TABLE public.tb_sip_spo_resto_2015 (
 
 --
 -- TOC entry 306 (class 1259 OID 18392)
--- Name: tb_tratamientos; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_tratamientos; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_tratamientos (
+CREATE TABLE abucasis_test.tb_tratamientos (
     id integer NOT NULL,
     unidades numeric(10,2),
     numsipcod character varying(25),
@@ -1011,7 +1011,7 @@ CREATE TABLE public.tb_tratamientos (
 
 --
 -- TOC entry 305 (class 1259 OID 18390)
--- Name: tb_tratamientos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_tratamientos_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
@@ -1019,7 +1019,7 @@ CREATE TABLE public.tb_tratamientos (
 --
 -- TOC entry 3510 (class 0 OID 0)
 -- Dependencies: 305
--- Name: tb_tratamientos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tb_tratamientos_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
 --
 
 
@@ -1027,10 +1027,10 @@ CREATE TABLE public.tb_tratamientos (
 
 --
 -- TOC entry 268 (class 1259 OID 17961)
--- Name: tb_urgencias; Type: TABLE; Schema: public; Owner: -
+-- Name: tb_urgencias; Type: TABLE; Schema: abucasis_test; Owner: -
 --
 
-CREATE TABLE public.tb_urgencias (
+CREATE TABLE abucasis_test.tb_urgencias (
     id integer NOT NULL,
     num_urgencias integer,
     numsipcod character varying(25),
@@ -1041,13 +1041,13 @@ CREATE TABLE public.tb_urgencias (
 
 --
 -- TOC entry 267 (class 1259 OID 17959)
--- Name: tb_urgencias_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_urgencias_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 
 
 
-CREATE TABLE public.tb_variables (
+CREATE TABLE abucasis_test.tb_variables (
     id integer NOT NULL,
     valor_registrado numeric(16,2),
     numsipcod character varying(25),
@@ -1059,12 +1059,12 @@ CREATE TABLE public.tb_variables (
 
 --
 -- TOC entry 337 (class 1259 OID 19006)
--- Name: tb_variables_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tb_variables_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
 --
 -- TOC entry 3280 (class 1259 OID 17130)
--- Name: aconadve_numsipcod; Type: INDEX; Schema: public; Owner: -
+-- Name: aconadve_numsipcod; Type: INDEX; Schema: abucasis_test; Owner: -
 --
 
 

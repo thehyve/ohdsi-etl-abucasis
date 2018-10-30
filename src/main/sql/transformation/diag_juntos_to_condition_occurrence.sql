@@ -16,7 +16,7 @@ INSERT INTO cdm5.condition_occurrence
 	condition_status_concept_id,
 	visit_occurrence_id
 )
-;
+
 SELECT
  	person.person_id AS person_id,
 	tb_diag_juntos.fecha_inicio	AS condition_start_date,
@@ -41,8 +41,7 @@ LEFT JOIN source_intermediate.intermediate_table_visit_ocurrence
 INNER JOIN cdm5.person
       ON tb_diag_juntos.numsipcod = person.person_source_value
 LEFT JOIN cdm5.concept AS icd9cm
-      ON icd9cm.concept_code = tb_diag_juntos.cod_diagnostico AND icd9cm.vocabulary_id in ('ICD9CM', 'ICD10')
-      --TODO: check whether ICD10 or ICD10CM should be referenced
+      ON icd9cm.concept_code = tb_diag_juntos.cod_diagnostico AND icd9cm.vocabulary_id in ('ICD9CM', 'ICD10CM')
     LEFT JOIN cdm5.concept_relationship AS code_map
      ON code_map.concept_id_1 = icd9cm.concept_id AND code_map.relationship_id = 'Maps to'
 WHERE origen in ('C','M')

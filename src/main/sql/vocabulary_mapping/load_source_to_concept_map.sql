@@ -18,4 +18,6 @@ COPY cdm5.source_to_concept_map FROM '@absPath/resources/mapping_tables/abucasis
 ;
 COPY cdm5.source_to_concept_map FROM '@absPath/resources/mapping_tables/abucasis_ud_medidas.csv' WITH CSV HEADER
 ;
+COPY cdm5.source_to_concept_map FROM '@absPath/resources/mapping_tables/abucasis_tip_prest.csv' WITH CSV HEADER
+;
 

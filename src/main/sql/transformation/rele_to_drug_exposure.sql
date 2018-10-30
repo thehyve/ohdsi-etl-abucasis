@@ -65,14 +65,12 @@ INSERT INTO cdm5.drug_exposure
 	SELECT
 		person.person_id                                                  AS person_id,
 
-		-- TODO: map to RxNorm
 		-- for dose form use: tratamiento_derived.unidad_posologia
-		0                                                                 AS drug_concept_id,
+		coalesce(ingredient_map.target_concept_id, 0)                     AS drug_concept_id,
 
 		tratamiento_derived.cod_prinactivo                                AS drug_source_value,
 
-		-- TODO: map to 2B+ concept
-		0                                                                 AS drug_source_concept_id,
+		coalesce(ingredient_map.source_concept_id, 0)                     AS drug_source_concept_id,
 
 		total_quantity / number_of_prescriptions                          AS quantity,
 
@@ -106,9 +104,12 @@ INSERT INTO cdm5.drug_exposure
 
 	FROM public.tb_rele
 		JOIN public.tb_prescrip
-      ON tb_rele.numreceta = tb_prescrip.numreceta
+			ON tb_rele.numreceta = tb_prescrip.numreceta
 		JOIN tratamiento_derived
-      ON tb_prescrip.id_tratamiento = tratamiento_derived.id_tratamiento
+			ON tb_prescrip.id_tratamiento = tratamiento_derived.id_tratamiento
 		JOIN cdm5.person
 			ON person.person_source_value = tb_prescrip.numsipcod
-;
+		LEFT JOIN cdm5.source_to_concept_map AS ingredient_map
+			ON ingredient_map.source_code = tratamiento_derived.cod_prinactivo
+				 AND ingredient_map.source_vocabulary_id = 'ABUCASIS_PRINACTIVO'
+	;

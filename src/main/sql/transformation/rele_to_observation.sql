@@ -30,15 +30,19 @@ INSERT INTO cdm5.observation
     -- Observation recorded from EHR
     38000280                                    AS observation_type_concept_id,
 
-    -- TODO: mapping of prinactivo to Rxnorm concept
-    0                                           AS value_as_concept_id,
+    ingredient_map.target_concept_id            AS value_as_concept_id,
 
     tb_prescrip.cod_prinactivo                  AS value_as_string,
 
     0                                           AS obs_event_field_concept_id
 
   FROM public.tb_prescrip
-    LEFT JOIN public.tb_rele ON tb_rele.numreceta = tb_prescrip.numreceta
-    JOIN cdm5.person ON person.person_source_value = tb_prescrip.numsipcod
+    LEFT JOIN public.tb_rele
+      ON tb_rele.numreceta = tb_prescrip.numreceta
+    JOIN cdm5.person
+      ON person.person_source_value = tb_prescrip.numsipcod
+    LEFT JOIN cdm5.source_to_concept_map AS ingredient_map
+      ON ingredient_map.source_code = tb_prescrip.cod_prinactivo
+         AND ingredient_map.source_vocabulary_id = 'ABUCASIS_PRINACTIVO'
   WHERE tb_rele.numreceta IS NULL
 ;

@@ -15,14 +15,15 @@ WITH icd_source (concept_code, description, frequency, vocabulary_id) AS (
 ), icd_target AS (
     SELECT *
     FROM cdm5.concept
-    WHERE vocabulary_id IN ('ICD9CM', 'ICD9Proc')
+    WHERE vocabulary_id IN ('ICD9CM', 'ICD9Proc', 'ICD10PCS', 'ICD10CM')
 ), source_join_target AS (
     SELECT
-      coalesce(icd_source.vocabulary_id, icd_target.vocabulary_id) AS vocabulary_id,
+      icd_source.vocabulary_id                                     AS vocabulary_id,
       icd_source.concept_code                                      AS source_code,
       icd_source.description                                       AS source_name,
       icd_target.concept_code                                      AS target_code,
       icd_target.concept_name                                      AS target_name,
+      icd_target.vocabulary_id                                     AS target_vocabulary_id,
       icd_source.frequency,
       CASE
       WHEN icd_source.concept_code IS NOT NULL AND icd_target.concept_code IS NULL
@@ -33,7 +34,7 @@ WITH icd_source (concept_code, description, frequency, vocabulary_id) AS (
         THEN 'intersection'
       END                                                          AS set_membership
     FROM icd_source
-      NATURAL FULL OUTER JOIN icd_target -- USING (concept_code, vocabulary_id)
+      FULL OUTER JOIN icd_target USING (concept_code) --, vocabulary_id)
 )
 /** The stat **/
 SELECT
@@ -45,10 +46,25 @@ FROM source_join_target
 GROUP BY vocabulary_id, set_membership
 ORDER BY vocabulary_id, set_membership
 ;
+/** Per target vocabulary */
+-- SELECT
+--   vocabulary_id as source_vocabulary_id,
+--   target_vocabulary_id,
+--   set_membership,
+--   count(*),
+--   sum(frequency)
+-- FROM source_join_target
+-- GROUP BY vocabulary_id, target_vocabulary_id, set_membership
+-- ORDER BY vocabulary_id, target_vocabulary_id, set_membership
+-- ;
 /** Source codes not in target **/
--- SELECT source_code, source_name
+-- SELECT
+--   source_code,
+--   source_name,
+--   frequency
 -- FROM source_join_target
 -- WHERE vocabulary_id = 'ICD9Proc' AND set_membership = 'source_not_target'
+-- ORDER BY coalesce(frequency,0) DESC
 -- ;
 /** Target codes not in source **/
 -- SELECT target_code, target_name
@@ -104,3 +120,13 @@ ORDER BY vocabulary_id, set_membership
 -- GROUP BY source_code, source_join_target.vocabulary_id, source_name, frequency
 -- ORDER BY coalesce(frequency, 0) DESC
 -- ;
+
+select des_diagnostico is null as is_null, count(*), sum(frequency)
+from source_vocab.cie9_with_frequency
+group by des_diagnostico is null
+;
+
+select des_procedimiento is null as is_null, count(*), sum(frequency)
+from source_vocab.cie9p_with_frequency
+group by des_procedimiento is null
+;

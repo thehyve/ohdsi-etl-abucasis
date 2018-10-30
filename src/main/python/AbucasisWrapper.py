@@ -87,9 +87,10 @@ class AbucasisWrapper(EtlWrapper):
         # visit
         self.execute_sql_file('transformation/ante_cmbd_to_visit_ocurrence.sql')
         self.execute_sql_file('transformation/morbilid_to_visit_ocurrence.sql')
-
-
-
+        # process conflict with death dates (remove line for real execution)
+        self.execute_sql_file('synthetic_abucasis_preprocessing/solve_deaths_conflict.sql')
+        # process visits table
+        self.execute_sql_file('transformation/remove_conflictive_visits.sql')
 
         self.execute_sql_file('transformation/proc_cmbd_to_procedure_occurrence.sql')
 

@@ -64,6 +64,9 @@ class AbucasisWrapper(EtlWrapper):
         self.execute_sql_file('cdm_setup/OMOP CDM postgresql ddl__no_vocab.sql', verbose=False)
         self.log("CDMv6.0 tables created")
 
+        self.execute_sql_file('cdm_setup/create_death_table.sql', verbose=False)
+        self.log("CDMv5.0 death table created")
+
     def _load_vocabulary_mappings(self):
         self.log("Loading source_to_concept_map...", leading_newline=True)
         self.execute_sql_file('vocabulary_mapping/load_source_to_concept_map.sql')
@@ -112,6 +115,10 @@ class AbucasisWrapper(EtlWrapper):
         self.execute_sql_file('transformation/contraind_to_observation.sql')
         self.execute_sql_file('transformation/modalidad_to_observation.sql')
         self.execute_sql_file('transformation/nacionalidad_to_observation.sql')
+
+        # Death
+        self.execute_sql_file('transformation/sip_spo_to_death.sql')
+
         self.execute_sql_file('transformation/person__and__visit_ocurrence_to_observation.sql')
 
     def _derive_era(self):

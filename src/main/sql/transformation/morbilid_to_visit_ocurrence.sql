@@ -34,9 +34,9 @@ SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_ocurrence_
        tb_morbilid.fecha_inicio                              AS visit_end_date,
        (cast(tb_morbilid.fecha_inicio as text) || ' 00:00:00'):: timestamp             AS visit_end_datetime,
 
-      --TODO check this assumption:
-      0                                                     AS admitted_from_concept_id,
-      0                                                     AS discharge_to_concept_id,
+      --Admitted and discharged from home
+       8536                                                     AS admitted_from_concept_id,
+       8536                                                     AS discharge_to_concept_id,
 
        person.care_site_id                                   AS care_site_id
 

@@ -3,19 +3,25 @@ WITH icd_source (concept_code, description, frequency, vocabulary_id) AS (
     cod_diagnostico,
     des_diagnostico,
     frequency,
-    'ICD9CM'
+    'CIE9'
   FROM source_vocab.cie9_with_frequency
   UNION
   SELECT
     cod_procedimiento,
     des_procedimiento,
     frequency,
-    'ICD9Proc'
+    'CIE9p'
   FROM source_vocab.cie9p_with_frequency
 ), icd_target AS (
-    SELECT *
+    -- If two concept_codes overlap, choose one concept in reversed alphabetical order: ICD9Proc, ICD9CM, ICD10PCS, ICD10CM
+    -- The array_agg is a trick to select the concept_name and vocab_id belonging together (namely the first if sorting by vocab_id)
+    SELECT
+      concept_code,
+      (array_agg(vocabulary_id order by vocabulary_id desc))[1] as vocabulary_id,
+      (array_agg(concept_name order by vocabulary_id desc))[1] as concept_name
     FROM cdm5.concept
-    WHERE vocabulary_id IN ('ICD9CM', 'ICD9Proc', 'ICD10PCS', 'ICD10CM')
+    WHERE vocabulary_id IN ('ICD9CM', 'ICD9Proc', 'ICD10PCS', 'ICD10CM') AND invalid_reason IS NULL
+    GROUP BY concept_code
 ), source_join_target AS (
     SELECT
       icd_source.vocabulary_id                                     AS vocabulary_id,
@@ -63,13 +69,13 @@ ORDER BY vocabulary_id, set_membership
 --   source_name,
 --   frequency
 -- FROM source_join_target
--- WHERE vocabulary_id = 'ICD9Proc' AND set_membership = 'source_not_target'
+-- WHERE vocabulary_id = 'CIE9p' AND set_membership = 'source_not_target'
 -- ORDER BY coalesce(frequency,0) DESC
 -- ;
 /** Target codes not in source **/
 -- SELECT target_code, target_name
 -- FROM source_join_target
--- WHERE vocabulary_id = 'ICD9CM' AND set_membership = 'target_not_source'
+-- WHERE vocabulary_id = 'CIE9' AND set_membership = 'target_not_source'
 -- ;
 /** No description (not in tba table) **/
 -- SELECT
@@ -86,7 +92,7 @@ ORDER BY vocabulary_id, set_membership
 -- where frequency is not null
 --       and source_name is not null
 --       and set_membership = 'intersection'
---       and vocabulary_id = 'ICD9Proc' -- 'ICD9CM' --
+--       and vocabulary_id = 'CIE9p'
 -- order by frequency desc
 -- limit 100
 /** The codes that have no description and no mapping **/
@@ -119,6 +125,18 @@ ORDER BY vocabulary_id, set_membership
 -- WHERE target_code IS NULL
 -- GROUP BY source_code, source_join_target.vocabulary_id, source_name, frequency
 -- ORDER BY coalesce(frequency, 0) DESC
+-- ;
+/** Codes with two or more mappings in ICD9/10 CM/P **/
+-- SELECT
+--   source_code,
+--   vocabulary_id,
+--   string_agg(target_vocabulary_id, ',' ORDER BY target_vocabulary_id DESC) AS target_vocabs,
+--   count(*)
+-- FROM source_join_target
+-- WHERE source_code IS NOT NULL
+-- GROUP BY source_code, vocabulary_id
+-- HAVING count(*) > 1
+-- ORDER BY count(*) DESC
 -- ;
 
 select des_diagnostico is null as is_null, count(*), sum(frequency)

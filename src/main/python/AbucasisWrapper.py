@@ -87,6 +87,7 @@ class AbucasisWrapper(EtlWrapper):
         # visit
         self.execute_sql_file('transformation/ante_cmbd_to_visit_ocurrence.sql')
         self.execute_sql_file('transformation/morbilid_to_visit_ocurrence.sql')
+        ## TODO add debug flag (or remove line with real abucasis)
         # process conflict with death dates (remove line for real execution)
         self.execute_sql_file('synthetic_abucasis_preprocessing/solve_deaths_conflict.sql')
         # process visits table
@@ -112,7 +113,7 @@ class AbucasisWrapper(EtlWrapper):
         self.execute_sql_file('transformation/contraind_to_observation.sql')
         self.execute_sql_file('transformation/modalidad_to_observation.sql')
         self.execute_sql_file('transformation/nacionalidad_to_observation.sql')
-        # self.execute_sql_file('transformation/person__and__visit_ocurrence_to_observation.sql')
+        self.execute_sql_file('transformation/person__and__visit_ocurrence_to_observation.sql')
 
     def log_source_counts(self):
         self.log_to_file('{:-^100}'.format(' Source Counts '))

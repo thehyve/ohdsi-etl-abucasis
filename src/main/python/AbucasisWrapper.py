@@ -18,8 +18,7 @@ from .model import EtlWrapper
 
 class AbucasisWrapper(EtlWrapper):
 
-    def __init__(self, connection, source_schema, debug, skip_vocab, sql_dir=''):
-        sql_dir = './src/main/sql'
+    def __init__(self, connection, source_schema, debug, skip_vocab, sql_dir):
         super().__init__(connection, source_schema, debug, skip_vocab, sql_dir)
 
     def run(self):
@@ -49,7 +48,7 @@ class AbucasisWrapper(EtlWrapper):
         self.log_runtime()
 
         # Derived era tables
-        # self._derive_era()
+        self._derive_era()
 
         # Constraints and Indices
         # self._apply_constraints()
@@ -94,7 +93,7 @@ class AbucasisWrapper(EtlWrapper):
         self.execute_sql_file('transformation/remove_conflictive_visits.sql')
 
         # Condition
-        # self.execute_sql_file('transformation/diag_juntos_to_condition_occurrence.sql')
+        self.execute_sql_file('transformation/diag_juntos_to_condition_occurrence.sql')
 
         # Procedure
         self.execute_sql_file('transformation/proc_cmbd_to_procedure_occurrence.sql')
@@ -114,6 +113,9 @@ class AbucasisWrapper(EtlWrapper):
         self.execute_sql_file('transformation/modalidad_to_observation.sql')
         self.execute_sql_file('transformation/nacionalidad_to_observation.sql')
         self.execute_sql_file('transformation/person__and__visit_ocurrence_to_observation.sql')
+
+    def _derive_era(self):
+        self.execute_sql_file('post_processing/GenerateDrugEra.sql')
 
     def log_source_counts(self):
         self.log_to_file('{:-^100}'.format(' Source Counts '))

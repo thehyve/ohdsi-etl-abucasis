@@ -54,7 +54,7 @@ def main(database, username, password, hostname, port, source, debug, skipvocab,
     eng = create_engine('postgresql://%s:%s@%s:%s/%s' % (username, password, hostname, port, database))
 
     with eng.connect() as connection, open(logfile, 'w') as f_log:
-        etl = AbucasisWrapper(connection, source, debug, skipvocab)
+        etl = AbucasisWrapper(connection, source, debug, skipvocab, sql_dir='./src/main/sql')
         etl.set_log_file(f_log)
         etl.log("ETL version " + __version__)
         etl.run()

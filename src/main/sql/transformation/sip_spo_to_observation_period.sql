@@ -28,5 +28,5 @@ SELECT person.person_id AS person_id,
     -- Period covering healthcare encounters
        '44814724'       AS period_type_concept_id
 
-FROM public.tb_sip_spo
+FROM  @source_schema.tb_sip_spo
        INNER JOIN cdm5.person ON tb_sip_spo.numsipcod = person.person_source_value;

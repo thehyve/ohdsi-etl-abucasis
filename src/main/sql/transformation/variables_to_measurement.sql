@@ -26,7 +26,7 @@ INSERT INTO cdm5.measurement
     coalesce(unit.target_concept_id, 0) AS unit_concept_id,
     coalesce(unit.source_concept_id, 0) AS unit_source_value,
     44818701                            AS measurement_type_concept_id
-  FROM public.tb_variables
+  FROM  @source_schema.tb_variables
     JOIN cdm5.person ON numsipcod = person.person_source_value
     --only patients also present in person table to be included
     LEFT JOIN cdm5.source_to_concept_map var

@@ -28,7 +28,7 @@ INSERT INTO source_intermediate.intermediate_table_visit_ocurrence (origin, nums
            numsipcod                                          AS numsipcod,
            TO_DATE(cast(fecha_ingreso AS TEXT), 'YYYY-MM-DD') AS date
          FROM
-           public.tb_ante_cmbd
+            @source_schema.tb_ante_cmbd
 
          UNION
 
@@ -38,6 +38,6 @@ INSERT INTO source_intermediate.intermediate_table_visit_ocurrence (origin, nums
            numsipcod                                         AS numsipcod,
            TO_DATE(cast(fecha_inicio AS TEXT), 'YYYY-MM-DD') AS date
          FROM
-           public.tb_morbilid
+            @source_schema.tb_morbilid
    ) t
 ;

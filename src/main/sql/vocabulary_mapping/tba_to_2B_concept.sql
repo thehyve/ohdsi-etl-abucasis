@@ -14,7 +14,7 @@ CREATE TEMP TABLE tba_merged (
     'ud_medidas',
     'Unit',
     'Unit'
-  FROM public.tba_ud_medidas
+  FROM  @source_schema.tba_ud_medidas
   UNION
   SELECT
     cod_variable_clinic,
@@ -22,7 +22,7 @@ CREATE TEMP TABLE tba_merged (
     'tip_variables',
     'Measurement',
     'Clinical Observation'
-  FROM public.tba_tip_variables
+  FROM  @source_schema.tba_tip_variables
   UNION
   SELECT
     cod_prestacion,
@@ -30,7 +30,7 @@ CREATE TEMP TABLE tba_merged (
     'tip_prest',
     'Measurement',
     'Lab Test'
-  FROM public.tba_tip_prest
+  FROM  @source_schema.tba_tip_prest
   UNION
   SELECT
     cod_modalidad,
@@ -38,7 +38,7 @@ CREATE TEMP TABLE tba_merged (
     'modalidad',
     'Observation',
     'Social Context'
-  FROM public.tba_modalidad
+  FROM  @source_schema.tba_modalidad
   UNION
     SELECT
       cod_diagnostico,
@@ -46,7 +46,7 @@ CREATE TEMP TABLE tba_merged (
       'cie9',
       'Condition',
       'Clinical Finding'
-    FROM public.tba_cie9
+    FROM  @source_schema.tba_cie9
     UNION
     SELECT
       cod_procedimiento,
@@ -54,7 +54,7 @@ CREATE TEMP TABLE tba_merged (
       'cie9p',
       'Procedure',
       'Procedure'
-    FROM public.tba_cie9p
+    FROM  @source_schema.tba_cie9p
     UNION
   SELECT
     cod_prinactivo,
@@ -62,7 +62,7 @@ CREATE TEMP TABLE tba_merged (
     'prinactivo',
     'Drug',
     'Substance'
-  FROM public.tba_prinactivo
+  FROM  @source_schema.tba_prinactivo
   UNION
   SELECT
     source_code,

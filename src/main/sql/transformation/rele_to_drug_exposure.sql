@@ -7,8 +7,8 @@ WITH prescrip_per_trat AS (
 		SELECT
 			id_tratamiento,
 			count(*) AS number_of_prescriptions
-		FROM public.tb_tratamientos
-			JOIN public.tb_prescrip USING (id_tratamiento)
+		FROM  @source_schema.tb_tratamientos
+			JOIN  @source_schema.tb_prescrip USING (id_tratamiento)
 		GROUP BY id_tratamiento
 ), tratamiento_derived AS (
 		SELECT
@@ -42,7 +42,7 @@ WITH prescrip_per_trat AS (
 
 		--   ,tipo_posologia, unidades, cadencia, dias_tratamiento,  fecha_inicio_tratamiento, fecha_fin_tratamiento,
 
-		FROM public.tb_tratamientos
+		FROM  @source_schema.tb_tratamientos
 			LEFT JOIN prescrip_per_trat USING (id_tratamiento)
 )
 INSERT INTO cdm5.drug_exposure
@@ -102,8 +102,8 @@ INSERT INTO cdm5.drug_exposure
 
 		0                                                                 AS route_concept_id
 
-	FROM public.tb_rele
-		JOIN public.tb_prescrip
+	FROM  @source_schema.tb_rele
+		JOIN  @source_schema.tb_prescrip
 			ON tb_rele.numreceta = tb_prescrip.numreceta
 		JOIN tratamiento_derived
 			ON tb_prescrip.id_tratamiento = tratamiento_derived.id_tratamiento

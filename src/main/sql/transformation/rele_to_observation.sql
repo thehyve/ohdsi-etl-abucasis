@@ -36,8 +36,8 @@ INSERT INTO cdm5.observation
 
     0                                           AS obs_event_field_concept_id
 
-  FROM public.tb_prescrip
-    LEFT JOIN public.tb_rele
+  FROM  @source_schema.tb_prescrip
+    LEFT JOIN  @source_schema.tb_rele
       ON tb_rele.numreceta = tb_prescrip.numreceta
     JOIN cdm5.person
       ON person.person_source_value = tb_prescrip.numsipcod

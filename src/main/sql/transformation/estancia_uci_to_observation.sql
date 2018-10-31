@@ -39,7 +39,7 @@ INSERT INTO cdm5.observation
     -- No event
     0                                                    AS obs_event_field_concept_id
 
-  FROM public.tb_estancia_uci
+  FROM  @source_schema.tb_estancia_uci
     JOIN cdm5.person
       ON person.person_source_value = tb_estancia_uci.numsipcod
     LEFT JOIN cdm5.source_to_concept_map

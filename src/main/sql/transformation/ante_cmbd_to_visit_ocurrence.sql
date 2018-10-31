@@ -94,7 +94,7 @@ SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_ocurrence_
        person.care_site_id                                   AS care_site_id
 
 
-FROM public.tb_ante_cmbd
+FROM  @source_schema.tb_ante_cmbd
        LEFT JOIN source_intermediate.intermediate_table_visit_ocurrence
          ON (tb_ante_cmbd.numsipcod = intermediate_table_visit_ocurrence.numsipcod
                AND

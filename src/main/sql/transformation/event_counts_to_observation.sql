@@ -10,19 +10,19 @@ Number of events from the following tables:
 These tables contain data in the same format and are thus merged together.
 */
 WITH event_counts_with_ano_mes (numsipcod, ano_mes, num_events, source_name) AS (
-  SELECT numsipcod, ano_mes, num_ac_adversos, 'aconadve' FROM public.tb_aconadve
+  SELECT numsipcod, ano_mes, num_ac_adversos, 'aconadve' FROM  @source_schema.tb_aconadve
 
   UNION ALL
 
-  SELECT numsipcod, ano_mes, num_alergias, 'alergias' FROM public.tb_alergias
+  SELECT numsipcod, ano_mes, num_alergias, 'alergias' FROM  @source_schema.tb_alergias
 
   UNION ALL
 
-  SELECT numsipcod, ano_mes, num_cieatc, 'cie_atc' FROM public.tb_cie_atc
+  SELECT numsipcod, ano_mes, num_cieatc, 'cie_atc' FROM  @source_schema.tb_cie_atc
 
   UNION ALL
 
-  SELECT numsipcod, ano_mes, num_duplicidades, 'duplicid' FROM public.tb_duplicid
+  SELECT numsipcod, ano_mes, num_duplicidades, 'duplicid' FROM  @source_schema.tb_duplicid
 ), event_counts AS (
   SELECT
     numsipcod,
@@ -37,11 +37,11 @@ WITH event_counts_with_ano_mes (numsipcod, ano_mes, num_events, source_name) AS 
 
   UNION ALL
 
-  SELECT numsipcod, fecha_registro, num_consultas, 'consultas_atp' FROM public.tb_consultas_atp
+  SELECT numsipcod, fecha_registro, num_consultas, 'consultas_atp' FROM  @source_schema.tb_consultas_atp
 
   UNION ALL
 
-  SELECT numsipcod, fecha_urgencia, num_urgencias, 'urgencias' FROM public.tb_urgencias
+  SELECT numsipcod, fecha_urgencia, num_urgencias, 'urgencias' FROM  @source_schema.tb_urgencias
 )
 INSERT INTO cdm5.observation
 (

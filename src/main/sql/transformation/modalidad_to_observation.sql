@@ -35,7 +35,7 @@ INSERT INTO cdm5.observation
     -- No event
     0                                                    AS obs_event_field_concept_id
 
-  FROM public.tb_sip_spo_resto_2015
+  FROM  @source_schema.tb_sip_spo_resto_2015
     JOIN cdm5.person
       ON person.person_source_value = tb_sip_spo_resto_2015.numsipcod
     LEFT JOIN cdm5.source_to_concept_map

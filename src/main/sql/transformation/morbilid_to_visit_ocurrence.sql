@@ -41,7 +41,7 @@ SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_ocurrence_
        person.care_site_id                                   AS care_site_id
 
 
-FROM public.tb_morbilid
+FROM  @source_schema.tb_morbilid
        LEFT JOIN source_intermediate.intermediate_table_visit_ocurrence
          ON (tb_morbilid.numsipcod = intermediate_table_visit_ocurrence.numsipcod
                AND

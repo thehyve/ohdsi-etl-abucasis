@@ -25,7 +25,7 @@ INSERT INTO cdm5.measurement
     coalesce(unit.target_concept_id, 0) AS unit_concept_id,
     coalesce(unit.source_concept_id)    AS unit_source_value,
     44818702                            AS measurement_type_concept_id
-  FROM public.tb_prestaci
+  FROM  @source_schema.tb_prestaci
     --only patients also present in person table to be included
     JOIN cdm5.person ON numsipcod = person.person_source_value
     --TODO: add abucasis_prestacion concepts to source_to_concept_map table

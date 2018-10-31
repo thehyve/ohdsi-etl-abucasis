@@ -21,7 +21,7 @@ INSERT INTO cdm5.care_site
 
     0                                 AS place_of_service_concept_id
 
-  FROM public.tba_centros
-    JOIN public.tba_centros_asignacion USING (cod_centro)
+  FROM  @source_schema.tba_centros
+    JOIN  @source_schema.tba_centros_asignacion USING (cod_centro)
     JOIN cdm5.location ON cod_zona = location_source_value
 ;

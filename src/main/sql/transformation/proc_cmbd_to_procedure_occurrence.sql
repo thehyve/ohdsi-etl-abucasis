@@ -39,7 +39,7 @@ INSERT INTO cdm5.procedure_occurrence
 
     intermediate_table_visit_ocurrence.visit_ocurrence_id        AS visit_occurrence_id
 
-  FROM public.tb_proc_cmbd
+  FROM  @source_schema.tb_proc_cmbd
     JOIN cdm5.person
       ON person.person_source_value = tb_proc_cmbd.numsipcod
     LEFT JOIN cdm5.concept AS icd9proc

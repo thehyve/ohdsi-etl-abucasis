@@ -54,7 +54,7 @@ OHDSI-SQL File Instructions
 
  1. Set parameter name of schema that contains CDMv4 instance
 
-    (@SOURCE_CDMV4, @SOURCE_CDMV4_SCHEMA)
+    (  @source_schema.DMV4,   @source_schema.DMV4_SCHEMA)
 
  2. Set parameter name of schema that contains CDMv5 instance
 

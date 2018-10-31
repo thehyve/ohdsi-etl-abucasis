@@ -14,6 +14,11 @@ ALTER TABLE source_intermediate.intermediate_table_visit_ocurrence
   OWNER TO postgres
 ;
 
+-- Explicit unique index to ensure uniqueness and speed up joins
+CREATE UNIQUE INDEX intermediate_table_visit_ocurrence_numsipcod_date_origin_uindex
+  ON source_intermediate.intermediate_table_visit_ocurrence (numsipcod, date, origin)
+;
+
 INSERT INTO source_intermediate.intermediate_table_visit_ocurrence (origin, numsipcod, date)
   SELECT *
   FROM (

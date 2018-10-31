@@ -25,7 +25,7 @@ SET default_with_oids = false;
 --
 
 CREATE TABLE abucasis_test.tb_aconadve (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     num_ac_adversos integer,
     numsipcod character varying(25),
     ano_mes character varying(6),
@@ -56,7 +56,7 @@ CREATE TABLE abucasis_test.tb_aconadve (
 --
 
 CREATE TABLE abucasis_test.tb_alergias (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     num_alergias integer,
     numsipcod character varying(25),
     ano_mes character varying(6),
@@ -87,7 +87,7 @@ CREATE TABLE abucasis_test.tb_alergias (
 --
 
 CREATE TABLE abucasis_test.tb_ante_cmbd (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     tipo_actividad character varying(10),
     numsipcod character varying(25),
     d1 character varying(15),
@@ -180,7 +180,7 @@ CREATE TABLE abucasis_test.tb_ante_cmbd (
 --
 
 CREATE TABLE abucasis_test.tb_antepers (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     numsipcod character(25),
     fecha_inicio date,
     fecha_fin date,
@@ -211,7 +211,7 @@ CREATE TABLE abucasis_test.tb_antepers (
 --
 
 CREATE TABLE abucasis_test.tb_cex (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     num_consultas integer,
     numsipcod character varying(25),
     fecha_consulta date,
@@ -242,7 +242,7 @@ CREATE TABLE abucasis_test.tb_cex (
 --
 
 CREATE TABLE abucasis_test.tb_cie_atc (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     num_cieatc integer,
     numsipcod character varying(25),
     ano_mes character varying(6),
@@ -272,7 +272,7 @@ CREATE TABLE abucasis_test.tb_cie_atc (
 --
 
 CREATE TABLE abucasis_test.tb_consultas_atp (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     num_consultas integer,
     numsipcod character varying(25),
     fecha_registro date,
@@ -301,7 +301,7 @@ CREATE TABLE abucasis_test.tb_consultas_atp (
 --
 
 CREATE TABLE abucasis_test.tb_contraind (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     num_contraindicaciones integer,
     numsipcod character varying(25),
     ano_mes character varying(6),
@@ -334,7 +334,7 @@ CREATE TABLE abucasis_test.tb_contraind (
 --
 
 CREATE TABLE abucasis_test.tb_ctdh (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     num_ctdh integer,
     numsipcod character varying(25),
     ano_mes character varying(6),
@@ -364,7 +364,7 @@ CREATE TABLE abucasis_test.tb_ctdh (
 --
 
 CREATE TABLE abucasis_test.tb_diag_cmbd (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     tipo_actividad character varying(10),
     numsipcod character varying(25),
     cie9 character varying(15),
@@ -400,7 +400,7 @@ CREATE TABLE abucasis_test.tb_diag_cmbd (
 --
 
 CREATE TABLE abucasis_test.tb_diag_juntos (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     numsipcod character varying(25),
     fecha_inicio date,
     fecha_fin date,
@@ -438,7 +438,7 @@ CREATE TABLE abucasis_test.tb_diag_juntos (
 --
 
 CREATE TABLE abucasis_test.tb_duplicid (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     num_duplicidades integer,
     numsipcod character varying(25),
     ano_mes character varying(6),
@@ -469,7 +469,7 @@ CREATE TABLE abucasis_test.tb_duplicid (
 --
 
 CREATE TABLE abucasis_test.tb_estancia_uci (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     numsipcod character varying(25),
     fecha date,
     num_estancia_uci integer
@@ -498,7 +498,7 @@ CREATE TABLE abucasis_test.tb_estancia_uci (
 --
 
 CREATE TABLE abucasis_test.tb_incatemp (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     numsipcod character varying(25),
     fecha_registro date,
     fecha_baja date,
@@ -534,7 +534,7 @@ CREATE TABLE abucasis_test.tb_incatemp (
 --
 
 CREATE TABLE abucasis_test.tb_interacc (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     num_interacciones integer,
     numsipcod character varying(25),
     ano_mes character varying(6),
@@ -565,7 +565,7 @@ CREATE TABLE abucasis_test.tb_interacc (
 --
 
 CREATE TABLE abucasis_test.tb_morbilid (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     numsipcod character varying(25),
     fecha_inicio date,
     fecha_fin date,
@@ -595,7 +595,7 @@ CREATE TABLE abucasis_test.tb_morbilid (
 --
 
 CREATE TABLE abucasis_test.tb_posologia (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     num_posologias integer,
     tipo_posologia character varying(5),
     numsipcod character varying(25),
@@ -627,7 +627,7 @@ CREATE TABLE abucasis_test.tb_posologia (
 --
 
 CREATE TABLE abucasis_test.tb_prescrip (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     numsipcod character varying(25),
     numreceta character varying(30),
     id_tratamiento character varying(60),
@@ -660,7 +660,7 @@ CREATE TABLE abucasis_test.tb_prescrip (
 --
 
 CREATE TABLE abucasis_test.tb_prestaci (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     valor_registrado numeric(16,2),
     numsipcod character varying(25),
     fecha_registro date,
@@ -691,7 +691,7 @@ CREATE TABLE abucasis_test.tb_prestaci (
 --
 
 CREATE TABLE abucasis_test.tb_proc_cmbd (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     tipo_actividad character varying(10),
     numsipcod character varying(25),
     cie9p character(15),
@@ -727,7 +727,7 @@ CREATE TABLE abucasis_test.tb_proc_cmbd (
 --
 
 CREATE TABLE abucasis_test.tb_rele (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     numsipcod character varying(25),
     numreceta character varying(15),
     anomes_facturacion character varying(6),
@@ -761,7 +761,7 @@ CREATE TABLE abucasis_test.tb_rele (
 --
 
 CREATE TABLE abucasis_test.tb_scp_2012 (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     numsipcod character varying(25),
     ano_mes character varying(6),
     cod_crg integer,
@@ -789,7 +789,7 @@ CREATE TABLE abucasis_test.tb_scp_2012 (
 --
 
 CREATE TABLE abucasis_test.tb_scp_2013 (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     numsipcod character varying(25),
     ano_mes character varying(6),
     cod_crg integer,
@@ -819,7 +819,7 @@ CREATE TABLE abucasis_test.tb_scp_2013 (
 --
 
 CREATE TABLE abucasis_test.tb_scp_2014 (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     numsipcod character varying(25),
     ano_mes character varying(6),
     cod_crg integer,
@@ -848,7 +848,7 @@ CREATE TABLE abucasis_test.tb_scp_2014 (
 --
 
 CREATE TABLE abucasis_test.tb_scp_2015 (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     numsipcod character varying(25),
     ano_mes character varying(6),
     cod_crg integer,
@@ -878,7 +878,7 @@ CREATE TABLE abucasis_test.tb_scp_2015 (
 --
 
 CREATE TABLE abucasis_test.tb_sip_spo (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     numsipcod character varying(25),
     sexo character(1),
     fecha_nac date,
@@ -910,7 +910,7 @@ CREATE TABLE abucasis_test.tb_sip_spo (
 --
 
 CREATE TABLE abucasis_test.tb_sip_spo_resto_2012 (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     numsipcod character varying(25),
     cod_centro_asignacion character varying(250),
     cod_departamento_asignacion character varying(250),
@@ -951,7 +951,7 @@ CREATE TABLE abucasis_test.tb_sip_spo_resto_2012 (
 --
 
 CREATE TABLE abucasis_test.tb_sip_spo_resto_2015 (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     numsipcod character varying(25),
     cod_centro_asignacion character varying(250),
     cod_departamento_asignacion character varying(250),
@@ -992,7 +992,7 @@ CREATE TABLE abucasis_test.tb_sip_spo_resto_2015 (
 --
 
 CREATE TABLE abucasis_test.tb_tratamientos (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     unidades numeric(10,2),
     numsipcod character varying(25),
     dias_tratamiento integer,
@@ -1031,7 +1031,7 @@ CREATE TABLE abucasis_test.tb_tratamientos (
 --
 
 CREATE TABLE abucasis_test.tb_urgencias (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     num_urgencias integer,
     numsipcod character varying(25),
     fecha_urgencia date,
@@ -1048,7 +1048,7 @@ CREATE TABLE abucasis_test.tb_urgencias (
 
 
 CREATE TABLE abucasis_test.tb_variables (
-    id integer NOT NULL,
+    id integer,-- NOT NULL,
     valor_registrado numeric(16,2),
     numsipcod character varying(25),
     fecha_registro date,
@@ -1062,10 +1062,939 @@ CREATE TABLE abucasis_test.tb_variables (
 -- Name: tb_variables_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
 --
 
+
 --
--- TOC entry 3280 (class 1259 OID 17130)
--- Name: aconadve_numsipcod; Type: INDEX; Schema: abucasis_test; Owner: -
+-- TOC entry 211 (class 1259 OID 17060)
+-- Name: tba_atc2; Type: TABLE; Schema: abucasis_test; Owner: -
 --
+
+CREATE TABLE abucasis_test.tba_atc2 (
+  id integer NOT NULL,
+  cod_atc2 character varying(3) NOT NULL,
+  des_atc2 character varying(250)
+);
+
+
+--
+-- TOC entry 210 (class 1259 OID 17058)
+-- Name: tba_atc2_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
+--
+
+
+--
+-- TOC entry 3513 (class 0 OID 0)
+-- Dependencies: 210
+-- Name: tba_atc2_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
+--
+
+
+
+--
+-- TOC entry 213 (class 1259 OID 17068)
+-- Name: tba_atc4; Type: TABLE; Schema: abucasis_test; Owner: -
+--
+
+CREATE TABLE abucasis_test.tba_atc4 (
+  id integer NOT NULL,
+  cod_atc4 character varying(5) NOT NULL,
+  des_atc4 character varying(250)
+);
+
+
+--
+-- TOC entry 212 (class 1259 OID 17066)
+-- Name: tba_atc4_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
+--
+--
+-- CREATE SEQUENCE abucasis_test.tba_atc4_id_seq
+--   AS integer
+--   START WITH 1
+--   INCREMENT BY 1
+--   NO MINVALUE
+--   NO MAXVALUE
+--   CACHE 1;
+
+
+--
+-- TOC entry 3514 (class 0 OID 0)
+-- Dependencies: 212
+-- Name: tba_atc4_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
+--
+
+-- ALTER SEQUENCE abucasis_test.tba_atc4_id_seq OWNED BY abucasis_test.tba_atc4.id;
+
+
+--
+-- TOC entry 205 (class 1259 OID 17036)
+-- Name: tba_cau_alta; Type: TABLE; Schema: abucasis_test; Owner: -
+--
+
+CREATE TABLE abucasis_test.tba_cau_alta (
+  id integer NOT NULL,
+  cod_causa_alta character varying(10) NOT NULL,
+  des_causa_alta character varying(250)
+);
+
+
+--
+-- TOC entry 204 (class 1259 OID 17034)
+-- Name: tba_cau_alta_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
+-- --
+--
+-- CREATE SEQUENCE abucasis_test.tba_cau_alta_id_seq
+--   AS integer
+--   START WITH 1
+--   INCREMENT BY 1
+--   NO MINVALUE
+--   NO MAXVALUE
+--   CACHE 1;
+
+
+--
+-- TOC entry 3515 (class 0 OID 0)
+-- Dependencies: 204
+-- Name: tba_cau_alta_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
+--
+--
+-- ALTER SEQUENCE abucasis_test.tba_cau_alta_id_seq OWNED BY abucasis_test.tba_cau_alta.id;
+--
+
+--
+-- TOC entry 262 (class 1259 OID 17908)
+-- Name: tba_cau_baja; Type: TABLE; Schema: abucasis_test; Owner: -
+--
+
+CREATE TABLE abucasis_test.tba_cau_baja (
+  id integer NOT NULL,
+  cod_causa_baja character varying(15) NOT NULL,
+  des_causa_baja character varying(250)
+);
+
+
+--
+-- TOC entry 261 (class 1259 OID 17906)
+-- Name: tba_cau_baja_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
+--
+--
+-- CREATE SEQUENCE abucasis_test.tba_cau_baja_id_seq
+--   AS integer
+--   START WITH 1
+--   INCREMENT BY 1
+--   NO MINVALUE
+--   NO MAXVALUE
+--   CACHE 1;
+--
+--
+-- --
+-- -- TOC entry 3516 (class 0 OID 0)
+-- -- Dependencies: 261
+-- -- Name: tba_cau_baja_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
+-- --
+--
+-- ALTER SEQUENCE abucasis_test.tba_cau_baja_id_seq OWNED BY abucasis_test.tba_cau_baja.id;
+--
+
+--
+-- TOC entry 318 (class 1259 OID 18796)
+-- Name: tba_centros; Type: TABLE; Schema: abucasis_test; Owner: -
+--
+
+CREATE TABLE abucasis_test.tba_centros (
+  id integer NOT NULL,
+  cod_centro character varying(5) NOT NULL,
+  des_centro character varying(250)
+);
+
+
+--
+-- TOC entry 316 (class 1259 OID 18788)
+-- Name: tba_centros_asignacion; Type: TABLE; Schema: abucasis_test; Owner: -
+--
+
+CREATE TABLE abucasis_test.tba_centros_asignacion (
+  id integer NOT NULL,
+  cod_centro character varying(5) NOT NULL,
+  cod_departamento character varying(5),
+  cod_zona character varying(10)
+);
+
+
+--
+-- TOC entry 315 (class 1259 OID 18786)
+-- Name: tba_centros_asignacion_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
+-- --
+--
+-- CREATE SEQUENCE abucasis_test.tba_centros_asignacion_id_seq
+--   AS integer
+--   START WITH 1
+--   INCREMENT BY 1
+--   NO MINVALUE
+--   NO MAXVALUE
+--   CACHE 1;
+--
+--
+-- --
+-- -- TOC entry 3517 (class 0 OID 0)
+-- -- Dependencies: 315
+-- -- Name: tba_centros_asignacion_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
+-- --
+--
+-- ALTER SEQUENCE abucasis_test.tba_centros_asignacion_id_seq OWNED BY abucasis_test.tba_centros_asignacion.id;
+
+
+--
+-- TOC entry 317 (class 1259 OID 18794)
+-- Name: tba_centros_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
+--
+--
+-- CREATE SEQUENCE abucasis_test.tba_centros_id_seq
+--   AS integer
+--   START WITH 1
+--   INCREMENT BY 1
+--   NO MINVALUE
+--   NO MAXVALUE
+--   CACHE 1;
+--
+--
+-- --
+-- -- TOC entry 3518 (class 0 OID 0)
+-- -- Dependencies: 317
+-- -- Name: tba_centros_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
+-- --
+--
+-- ALTER SEQUENCE abucasis_test.tba_centros_id_seq OWNED BY abucasis_test.tba_centros.id;
+--
+
+--
+-- TOC entry 197 (class 1259 OID 17004)
+-- Name: tba_cie9; Type: TABLE; Schema: abucasis_test; Owner: -
+--
+
+CREATE TABLE abucasis_test.tba_cie9 (
+  id integer NOT NULL,
+  cod_diagnostico character varying(10) NOT NULL,
+  des_diagnostico character varying(250)
+);
+
+
+--
+-- TOC entry 196 (class 1259 OID 17002)
+-- Name: tba_cie9_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
+--
+--
+-- CREATE SEQUENCE abucasis_test.tba_cie9_id_seq
+--   AS integer
+--   START WITH 1
+--   INCREMENT BY 1
+--   NO MINVALUE
+--   NO MAXVALUE
+--   CACHE 1;
+--
+--
+-- --
+-- -- TOC entry 3519 (class 0 OID 0)
+-- -- Dependencies: 196
+-- -- Name: tba_cie9_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
+-- --
+--
+-- ALTER SEQUENCE abucasis_test.tba_cie9_id_seq OWNED BY abucasis_test.tba_cie9.id;
+--
+
+--
+-- TOC entry 199 (class 1259 OID 17012)
+-- Name: tba_cie9p; Type: TABLE; Schema: abucasis_test; Owner: -
+--
+
+CREATE TABLE abucasis_test.tba_cie9p (
+  id integer NOT NULL,
+  cod_procedimiento character varying(10) NOT NULL,
+  des_procedimiento character varying(250)
+);
+
+
+--
+-- TOC entry 198 (class 1259 OID 17010)
+-- Name: tba_cie9p_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
+--
+--
+-- CREATE SEQUENCE abucasis_test.tba_cie9p_id_seq
+--   AS integer
+--   START WITH 1
+--   INCREMENT BY 1
+--   NO MINVALUE
+--   NO MAXVALUE
+--   CACHE 1;
+--
+--
+-- --
+-- -- TOC entry 3520 (class 0 OID 0)
+-- -- Dependencies: 198
+-- -- Name: tba_cie9p_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
+-- --
+--
+-- ALTER SEQUENCE abucasis_test.tba_cie9p_id_seq OWNED BY abucasis_test.tba_cie9p.id;
+
+
+--
+-- TOC entry 314 (class 1259 OID 18780)
+-- Name: tba_comunidad_acred; Type: TABLE; Schema: abucasis_test; Owner: -
+--
+
+CREATE TABLE abucasis_test.tba_comunidad_acred (
+  id integer NOT NULL,
+  cod_comunidad character varying(10) NOT NULL,
+  des_comunidad character varying(250)
+);
+
+
+--
+-- TOC entry 313 (class 1259 OID 18778)
+-- Name: tba_comunidad_acred_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
+--
+--
+-- CREATE SEQUENCE abucasis_test.tba_comunidad_acred_id_seq
+--   AS integer
+--   START WITH 1
+--   INCREMENT BY 1
+--   NO MINVALUE
+--   NO MAXVALUE
+--   CACHE 1;
+--
+--
+-- --
+-- -- TOC entry 3521 (class 0 OID 0)
+-- -- Dependencies: 313
+-- -- Name: tba_comunidad_acred_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
+-- --
+--
+-- ALTER SEQUENCE abucasis_test.tba_comunidad_acred_id_seq OWNED BY abucasis_test.tba_comunidad_acred.id;
+
+
+--
+-- TOC entry 201 (class 1259 OID 17020)
+-- Name: tba_crg; Type: TABLE; Schema: abucasis_test; Owner: -
+--
+
+CREATE TABLE abucasis_test.tba_crg (
+  id integer NOT NULL,
+  cod_crg integer NOT NULL,
+  des_crg character varying(250)
+);
+
+
+--
+-- TOC entry 200 (class 1259 OID 17018)
+-- Name: tba_crg_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
+-- --
+--
+-- CREATE SEQUENCE abucasis_test.tba_crg_id_seq
+--   AS integer
+--   START WITH 1
+--   INCREMENT BY 1
+--   NO MINVALUE
+--   NO MAXVALUE
+--   CACHE 1;
+--
+--
+-- --
+-- -- TOC entry 3522 (class 0 OID 0)
+-- -- Dependencies: 200
+-- -- Name: tba_crg_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
+-- --
+--
+-- ALTER SEQUENCE abucasis_test.tba_crg_id_seq OWNED BY abucasis_test.tba_crg.id;
+
+
+--
+-- TOC entry 320 (class 1259 OID 18804)
+-- Name: tba_departamentos; Type: TABLE; Schema: abucasis_test; Owner: -
+--
+
+CREATE TABLE abucasis_test.tba_departamentos (
+  id integer NOT NULL,
+  cod_departamento character varying(5) NOT NULL,
+  des_departamento character varying(250)
+);
+
+
+--
+-- TOC entry 319 (class 1259 OID 18802)
+-- Name: tba_departamentos_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
+--
+--
+-- CREATE SEQUENCE abucasis_test.tba_departamentos_id_seq
+--   AS integer
+--   START WITH 1
+--   INCREMENT BY 1
+--   NO MINVALUE
+--   NO MAXVALUE
+--   CACHE 1;
+--
+--
+-- --
+-- -- TOC entry 3523 (class 0 OID 0)
+-- -- Dependencies: 319
+-- -- Name: tba_departamentos_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
+-- --
+--
+-- ALTER SEQUENCE abucasis_test.tba_departamentos_id_seq OWNED BY abucasis_test.tba_departamentos.id;
+
+
+--
+-- TOC entry 203 (class 1259 OID 17028)
+-- Name: tba_est_salud; Type: TABLE; Schema: abucasis_test; Owner: -
+--
+
+CREATE TABLE abucasis_test.tba_est_salud (
+  id integer NOT NULL,
+  cod_est_salud character varying(10) NOT NULL,
+  des_est_salud character varying(250)
+);
+
+
+--
+-- TOC entry 202 (class 1259 OID 17026)
+-- Name: tba_est_salud_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
+--
+--
+-- CREATE SEQUENCE abucasis_test.tba_est_salud_id_seq
+--   AS integer
+--   START WITH 1
+--   INCREMENT BY 1
+--   NO MINVALUE
+--   NO MAXVALUE
+--   CACHE 1;
+--
+--
+-- --
+-- -- TOC entry 3524 (class 0 OID 0)
+-- -- Dependencies: 202
+-- -- Name: tba_est_salud_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
+-- --
+--
+-- ALTER SEQUENCE abucasis_test.tba_est_salud_id_seq OWNED BY abucasis_test.tba_est_salud.id;
+--
+
+--
+-- TOC entry 304 (class 1259 OID 18356)
+-- Name: tba_farmacia; Type: TABLE; Schema: abucasis_test; Owner: -
+--
+
+CREATE TABLE abucasis_test.tba_farmacia (
+  id integer NOT NULL,
+  cod_presfarma character varying(5) NOT NULL,
+  des_presfarma character varying(250),
+  cod_prinactivo character varying(10),
+  des_prinactivo character varying(250),
+  cod_atc2 character varying(3),
+  des_atc2 character varying(250),
+  cod_atc4 character varying(5),
+  des_atc4 character varying(250)
+);
+
+
+--
+-- TOC entry 303 (class 1259 OID 18354)
+-- Name: tba_farmacia_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
+--
+--
+-- CREATE SEQUENCE abucasis_test.tba_farmacia_id_seq
+--   AS integer
+--   START WITH 1
+--   INCREMENT BY 1
+--   NO MINVALUE
+--   NO MAXVALUE
+--   CACHE 1;
+--
+--
+-- --
+-- -- TOC entry 3525 (class 0 OID 0)
+-- -- Dependencies: 303
+-- -- Name: tba_farmacia_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
+-- --
+--
+-- ALTER SEQUENCE abucasis_test.tba_farmacia_id_seq OWNED BY abucasis_test.tba_farmacia.id;
+
+
+--
+-- TOC entry 324 (class 1259 OID 18824)
+-- Name: tba_modalidad; Type: TABLE; Schema: abucasis_test; Owner: -
+--
+
+CREATE TABLE abucasis_test.tba_modalidad (
+  id integer NOT NULL,
+  cod_modalidad character varying(15) NOT NULL,
+  des_modalidad character varying(250)
+);
+
+
+--
+-- TOC entry 323 (class 1259 OID 18822)
+-- Name: tba_modalidad_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
+--
+--
+-- CREATE SEQUENCE abucasis_test.tba_modalidad_id_seq
+--   AS integer
+--   START WITH 1
+--   INCREMENT BY 1
+--   NO MINVALUE
+--   NO MAXVALUE
+--   CACHE 1;
+--
+--
+-- --
+-- -- TOC entry 3526 (class 0 OID 0)
+-- -- Dependencies: 323
+-- -- Name: tba_modalidad_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
+-- --
+--
+-- ALTER SEQUENCE abucasis_test.tba_modalidad_id_seq OWNED BY abucasis_test.tba_modalidad.id;
+
+
+--
+-- TOC entry 209 (class 1259 OID 17052)
+-- Name: tba_mot_cierre; Type: TABLE; Schema: abucasis_test; Owner: -
+--
+
+CREATE TABLE abucasis_test.tba_mot_cierre (
+  id integer NOT NULL,
+  cod_motivo_cierre character varying(10) NOT NULL,
+  des_motivo_cierre character varying(250)
+);
+
+
+--
+-- TOC entry 208 (class 1259 OID 17050)
+-- Name: tba_mot_cierre_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
+--
+--
+-- CREATE SEQUENCE abucasis_test.tba_mot_cierre_id_seq
+--   AS integer
+--   START WITH 1
+--   INCREMENT BY 1
+--   NO MINVALUE
+--   NO MAXVALUE
+--   CACHE 1;
+--
+--
+-- --
+-- -- TOC entry 3527 (class 0 OID 0)
+-- -- Dependencies: 208
+-- -- Name: tba_mot_cierre_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
+-- --
+--
+-- ALTER SEQUENCE abucasis_test.tba_mot_cierre_id_seq OWNED BY abucasis_test.tba_mot_cierre.id;
+
+
+--
+-- TOC entry 266 (class 1259 OID 17947)
+-- Name: tba_mot_urgencia; Type: TABLE; Schema: abucasis_test; Owner: -
+--
+
+CREATE TABLE abucasis_test.tba_mot_urgencia (
+  id integer NOT NULL,
+  cod_motivo_urg character varying(15) NOT NULL,
+  des_motivo_urg character varying(250)
+);
+
+
+--
+-- TOC entry 265 (class 1259 OID 17945)
+-- Name: tba_mot_urgencia_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
+--
+--
+-- CREATE SEQUENCE abucasis_test.tba_mot_urgencia_id_seq
+--   AS integer
+--   START WITH 1
+--   INCREMENT BY 1
+--   NO MINVALUE
+--   NO MAXVALUE
+--   CACHE 1;
+--
+--
+-- --
+-- -- TOC entry 3528 (class 0 OID 0)
+-- -- Dependencies: 265
+-- -- Name: tba_mot_urgencia_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
+-- --
+--
+-- ALTER SEQUENCE abucasis_test.tba_mot_urgencia_id_seq OWNED BY abucasis_test.tba_mot_urgencia.id;
+
+
+--
+-- TOC entry 312 (class 1259 OID 18771)
+-- Name: tba_pais_acred; Type: TABLE; Schema: abucasis_test; Owner: -
+--
+
+CREATE TABLE abucasis_test.tba_pais_acred (
+  id integer NOT NULL,
+  cod_pais character varying(10) NOT NULL,
+  des_pais character varying(250)
+);
+
+
+--
+-- TOC entry 311 (class 1259 OID 18769)
+-- Name: tba_pais_acred_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
+--
+--
+-- CREATE SEQUENCE abucasis_test.tba_pais_acred_id_seq
+--   AS integer
+--   START WITH 1
+--   INCREMENT BY 1
+--   NO MINVALUE
+--   NO MAXVALUE
+--   CACHE 1;
+--
+--
+-- --
+-- -- TOC entry 3529 (class 0 OID 0)
+-- -- Dependencies: 311
+-- -- Name: tba_pais_acred_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
+-- --
+--
+-- ALTER SEQUENCE abucasis_test.tba_pais_acred_id_seq OWNED BY abucasis_test.tba_pais_acred.id;
+
+
+--
+-- TOC entry 215 (class 1259 OID 17076)
+-- Name: tba_presfarma; Type: TABLE; Schema: abucasis_test; Owner: -
+--
+
+CREATE TABLE abucasis_test.tba_presfarma (
+  id integer NOT NULL,
+  cod_presfarma character varying(5) NOT NULL,
+  des_presfarma character varying(250)
+);
+
+
+--
+-- TOC entry 214 (class 1259 OID 17074)
+-- Name: tba_presfarma_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
+--
+--
+-- CREATE SEQUENCE abucasis_test.tba_presfarma_id_seq
+--   AS integer
+--   START WITH 1
+--   INCREMENT BY 1
+--   NO MINVALUE
+--   NO MAXVALUE
+--   CACHE 1;
+--
+--
+-- --
+-- -- TOC entry 3530 (class 0 OID 0)
+-- -- Dependencies: 214
+-- -- Name: tba_presfarma_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
+-- --
+--
+-- ALTER SEQUENCE abucasis_test.tba_presfarma_id_seq OWNED BY abucasis_test.tba_presfarma.id;
+
+
+--
+-- TOC entry 217 (class 1259 OID 17084)
+-- Name: tba_prinactivo; Type: TABLE; Schema: abucasis_test; Owner: -
+--
+
+CREATE TABLE abucasis_test.tba_prinactivo (
+  id integer NOT NULL,
+  cod_prinactivo character varying(10) NOT NULL,
+  des_prinactivo character varying(250)
+);
+
+
+--
+-- TOC entry 216 (class 1259 OID 17082)
+-- Name: tba_prinactivo_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
+--
+--
+-- CREATE SEQUENCE abucasis_test.tba_prinactivo_id_seq
+--   AS integer
+--   START WITH 1
+--   INCREMENT BY 1
+--   NO MINVALUE
+--   NO MAXVALUE
+--   CACHE 1;
+--
+--
+-- --
+-- -- TOC entry 3531 (class 0 OID 0)
+-- -- Dependencies: 216
+-- -- Name: tba_prinactivo_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
+-- --
+--
+-- ALTER SEQUENCE abucasis_test.tba_prinactivo_id_seq OWNED BY abucasis_test.tba_prinactivo.id;
+
+
+--
+-- TOC entry 326 (class 1259 OID 18832)
+-- Name: tba_raf; Type: TABLE; Schema: abucasis_test; Owner: -
+--
+
+CREATE TABLE abucasis_test.tba_raf (
+  id integer NOT NULL,
+  cod_raf character varying(15) NOT NULL,
+  des_raf character varying(250)
+);
+
+
+--
+-- TOC entry 325 (class 1259 OID 18830)
+-- Name: tba_raf_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
+--
+--
+-- CREATE SEQUENCE abucasis_test.tba_raf_id_seq
+--   AS integer
+--   START WITH 1
+--   INCREMENT BY 1
+--   NO MINVALUE
+--   NO MAXVALUE
+--   CACHE 1;
+--
+--
+-- --
+-- -- TOC entry 3532 (class 0 OID 0)
+-- -- Dependencies: 325
+-- -- Name: tba_raf_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
+-- --
+--
+-- ALTER SEQUENCE abucasis_test.tba_raf_id_seq OWNED BY abucasis_test.tba_raf.id;
+
+
+--
+-- TOC entry 254 (class 1259 OID 17730)
+-- Name: tba_serv_homologado; Type: TABLE; Schema: abucasis_test; Owner: -
+--
+
+CREATE TABLE abucasis_test.tba_serv_homologado (
+  id integer NOT NULL,
+  cod_serv_homologado character varying(15) NOT NULL,
+  des_serv_homologado character varying(250)
+);
+
+
+--
+-- TOC entry 253 (class 1259 OID 17728)
+-- Name: tba_serv_homologado_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
+--
+--
+-- CREATE SEQUENCE abucasis_test.tba_serv_homologado_id_seq
+--   AS integer
+--   START WITH 1
+--   INCREMENT BY 1
+--   NO MINVALUE
+--   NO MAXVALUE
+--   CACHE 1;
+--
+--
+-- --
+-- -- TOC entry 3533 (class 0 OID 0)
+-- -- Dependencies: 253
+-- -- Name: tba_serv_homologado_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
+-- --
+--
+-- ALTER SEQUENCE abucasis_test.tba_serv_homologado_id_seq OWNED BY abucasis_test.tba_serv_homologado.id;
+--
+
+--
+-- TOC entry 256 (class 1259 OID 17738)
+-- Name: tba_serv_propio; Type: TABLE; Schema: abucasis_test; Owner: -
+--
+
+CREATE TABLE abucasis_test.tba_serv_propio (
+  id integer NOT NULL,
+  cod_serv_propio character varying(15) NOT NULL,
+  des_serv_propio character varying(250)
+);
+
+
+--
+-- TOC entry 255 (class 1259 OID 17736)
+-- Name: tba_serv_propio_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
+--
+--
+-- CREATE SEQUENCE abucasis_test.tba_serv_propio_id_seq
+--   AS integer
+--   START WITH 1
+--   INCREMENT BY 1
+--   NO MINVALUE
+--   NO MAXVALUE
+--   CACHE 1;
+--
+--
+-- --
+-- -- TOC entry 3534 (class 0 OID 0)
+-- -- Dependencies: 255
+-- -- Name: tba_serv_propio_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
+-- --
+--
+-- ALTER SEQUENCE abucasis_test.tba_serv_propio_id_seq OWNED BY abucasis_test.tba_serv_propio.id;
+
+
+--
+-- TOC entry 207 (class 1259 OID 17044)
+-- Name: tba_tip_baja; Type: TABLE; Schema: abucasis_test; Owner: -
+--
+
+CREATE TABLE abucasis_test.tba_tip_baja (
+  id integer NOT NULL,
+  cod_tipo_baja character varying(10) NOT NULL,
+  des_tipo_baja character varying(250)
+);
+
+
+--
+-- TOC entry 206 (class 1259 OID 17042)
+-- Name: tba_tip_baja_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
+--
+--
+-- CREATE SEQUENCE abucasis_test.tba_tip_baja_id_seq
+--   AS integer
+--   START WITH 1
+--   INCREMENT BY 1
+--   NO MINVALUE
+--   NO MAXVALUE
+--   CACHE 1;
+--
+--
+-- --
+-- -- TOC entry 3535 (class 0 OID 0)
+-- -- Dependencies: 206
+-- -- Name: tba_tip_baja_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
+-- --
+--
+-- ALTER SEQUENCE abucasis_test.tba_tip_baja_id_seq OWNED BY abucasis_test.tba_tip_baja.id;
+
+
+--
+-- TOC entry 219 (class 1259 OID 17092)
+-- Name: tba_tip_prest; Type: TABLE; Schema: abucasis_test; Owner: -
+--
+
+CREATE TABLE abucasis_test.tba_tip_prest (
+  id integer NOT NULL,
+  cod_prestacion character varying(25) NOT NULL,
+  des_prestacion character varying(250)
+);
+
+
+--
+-- TOC entry 218 (class 1259 OID 17090)
+-- Name: tba_tip_prest_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
+--
+--
+-- CREATE SEQUENCE abucasis_test.tba_tip_prest_id_seq
+--   AS integer
+--   START WITH 1
+--   INCREMENT BY 1
+--   NO MINVALUE
+--   NO MAXVALUE
+--   CACHE 1;
+--
+--
+-- --
+-- -- TOC entry 3536 (class 0 OID 0)
+-- -- Dependencies: 218
+-- -- Name: tba_tip_prest_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
+-- --
+--
+-- ALTER SEQUENCE abucasis_test.tba_tip_prest_id_seq OWNED BY abucasis_test.tba_tip_prest.id;
+
+
+--
+-- TOC entry 340 (class 1259 OID 19024)
+-- Name: tba_tip_variables; Type: TABLE; Schema: abucasis_test; Owner: -
+--
+
+CREATE TABLE abucasis_test.tba_tip_variables (
+  id integer NOT NULL,
+  cod_variable_clinic character varying(25) NOT NULL,
+  des_variable_clinic character varying(250)
+);
+
+
+--
+-- TOC entry 339 (class 1259 OID 19022)
+-- Name: tba_tip_variables_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
+--
+--
+-- CREATE SEQUENCE abucasis_test.tba_tip_variables_id_seq
+--   AS integer
+--   START WITH 1
+--   INCREMENT BY 1
+--   NO MINVALUE
+--   NO MAXVALUE
+--   CACHE 1;
+--
+--
+-- --
+-- -- TOC entry 3537 (class 0 OID 0)
+-- -- Dependencies: 339
+-- -- Name: tba_tip_variables_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
+-- --
+--
+-- ALTER SEQUENCE abucasis_test.tba_tip_variables_id_seq OWNED BY abucasis_test.tba_tip_variables.id;
+
+
+--
+-- TOC entry 221 (class 1259 OID 17100)
+-- Name: tba_ud_medidas; Type: TABLE; Schema: abucasis_test; Owner: -
+--
+
+CREATE TABLE abucasis_test.tba_ud_medidas (
+  id integer NOT NULL,
+  cod_ud_medida character varying(15) NOT NULL,
+  des_ud_medida character varying(250)
+);
+
+
+--
+-- TOC entry 220 (class 1259 OID 17098)
+-- Name: tba_ud_medidas_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
+--
+--
+-- CREATE SEQUENCE abucasis_test.tba_ud_medidas_id_seq
+--   AS integer
+--   START WITH 1
+--   INCREMENT BY 1
+--   NO MINVALUE
+--   NO MAXVALUE
+--   CACHE 1;
+--
+--
+-- --
+-- -- TOC entry 3538 (class 0 OID 0)
+-- -- Dependencies: 220
+-- -- Name: tba_ud_medidas_id_seq; Type: SEQUENCE OWNED BY; Schema: abucasis_test; Owner: -
+-- --
+--
+-- ALTER SEQUENCE abucasis_test.tba_ud_medidas_id_seq OWNED BY abucasis_test.tba_ud_medidas.id;
+
+
+--
+-- TOC entry 322 (class 1259 OID 18812)
+-- Name: tba_zonas; Type: TABLE; Schema: abucasis_test; Owner: -
+--
+
+CREATE TABLE abucasis_test.tba_zonas (
+  id integer NOT NULL,
+  cod_zona character varying(10) NOT NULL,
+  des_zona character varying(250)
+);
+
+
+--
+-- TOC entry 321 (class 1259 OID 18810)
+-- Name: tba_zonas_id_seq; Type: SEQUENCE; Schema: abucasis_test; Owner: -
+--
+--
+-- CREATE SEQUENCE abucasis_test.tba_zonas_id_seq
+--   AS integer
+--   START WITH 1
+--   INCREMENT BY 1
+--   NO MINVALUE
+--   NO MAXVALUE
+--   CACHE 1;
 
 
 

@@ -34,10 +34,13 @@ SELECT
   4309119 AS condition_status_concept_id,
 	intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_occurrence_id
 FROM tb_diag_juntos
+--link to visit occurence id on patient id, start date and origin of data via intermediate table
 LEFT JOIN source_intermediate.intermediate_table_visit_ocurrence
          ON (tb_diag_juntos.numsipcod = intermediate_table_visit_ocurrence.numsipcod
                AND
-             tb_diag_juntos.fecha_inicio = intermediate_table_visit_ocurrence.date)
+             tb_diag_juntos.fecha_inicio = intermediate_table_visit_ocurrence.date
+              AND
+              tb_diag_juntos.origen = intermediate_table_visit_ocurrence.origin)
 INNER JOIN cdm5.person
       ON tb_diag_juntos.numsipcod = person.person_source_value
 LEFT JOIN cdm5.concept AS icd9cm

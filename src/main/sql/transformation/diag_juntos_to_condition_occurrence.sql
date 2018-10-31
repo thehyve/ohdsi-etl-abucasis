@@ -26,15 +26,16 @@ SELECT
   coalesce(icd9cm.concept_id, 0) AS condition_concept_id,
  	tb_diag_juntos.cod_diagnostico AS condition_source_value,
  	coalesce(code_map.concept_id_1, 0) AS condition_source_concept_id,
-	CASE WHEN tb_diag_juntos.orden= 1 OR tb_diag_juntos.orden = NULL
-	    -- primary procedure
+	CASE WHEN tb_diag_juntos.orden= 1 OR tb_diag_juntos.orden IS NULL
+	    -- primary condition
       THEN 44786630
-      -- secondary procedure
+      -- secondary condition
       ELSE 44786631 END AS condition_type_concept_id,
-  4309119 AS condition_status_concept_id,
+  4309119 AS condition_status_concept_id, -- Clinical diagnosis
 	intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_occurrence_id
+
 FROM tb_diag_juntos
---link to visit occurence id on patient id, start date and origin of data via intermediate table
+--link to visit_occurence_id on patient id, start date and origin of data via intermediate table
 LEFT JOIN source_intermediate.intermediate_table_visit_ocurrence
          ON (tb_diag_juntos.numsipcod = intermediate_table_visit_ocurrence.numsipcod
                AND

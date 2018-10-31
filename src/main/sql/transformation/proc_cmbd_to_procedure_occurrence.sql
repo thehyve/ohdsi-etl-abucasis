@@ -50,8 +50,5 @@ INSERT INTO cdm5.procedure_occurrence
     LEFT JOIN source_intermediate.intermediate_table_visit_ocurrence
       ON tb_proc_cmbd.numsipcod = intermediate_table_visit_ocurrence.numsipcod
          AND tb_proc_cmbd.fecha_ingreso = intermediate_table_visit_ocurrence.date
-         AND CASE WHEN tb_proc_cmbd.tipo_actividad IS NULL
-                  THEN 'M'
-                  ELSE 'C'
-             END = intermediate_table_visit_ocurrence.origin
+         AND intermediate_table_visit_ocurrence.origin = 'C'
 ;

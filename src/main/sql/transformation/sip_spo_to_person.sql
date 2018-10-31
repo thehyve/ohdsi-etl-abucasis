@@ -1,7 +1,7 @@
 /*
 Sociodemographic data I
 */
-INSERT INTO cdm5.person (person_source_value,
+INSERT INTO @cdm_schema.person (person_source_value,
                          gender_concept_id,
                          gender_source_value,
                          gender_source_concept_id,
@@ -44,7 +44,7 @@ SELECT tb_sip_spo.numsipcod                     AS person_source_value,
 
 FROM  @source_schema.tb_sip_spo
        LEFT JOIN  @source_schema.tb_sip_spo_resto_2015 ON tb_sip_spo.numsipcod = tb_sip_spo_resto_2015.numsipcod
-       LEFT JOIN cdm5.care_site ON tb_sip_spo_resto_2015.cod_centro_asignacion = care_site.care_site_source_value
+       LEFT JOIN @cdm_schema.care_site ON tb_sip_spo_resto_2015.cod_centro_asignacion = care_site.care_site_source_value
 -- General rule: exclude patients with death or suspension date before2012
   WHERE tb_sip_spo.fecha_def >= TO_DATE('2012-01-01', 'YYYY-MM-DD')
     OR tb_sip_spo.fecha_baja_sip >= TO_DATE('2012-01-01', 'YYYY-MM-DD')

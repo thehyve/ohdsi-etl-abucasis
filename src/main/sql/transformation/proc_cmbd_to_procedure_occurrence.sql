@@ -2,7 +2,7 @@
 Hospitalization table with only procedures
 Derived table from all hospitalizations (tb_ante_cmbd)
 */
-INSERT INTO cdm5.procedure_occurrence
+INSERT INTO @cdm_schema.procedure_occurrence
 (
   person_id,
   procedure_concept_id,
@@ -40,11 +40,11 @@ INSERT INTO cdm5.procedure_occurrence
     intermediate_table_visit_ocurrence.visit_ocurrence_id        AS visit_occurrence_id
 
   FROM  @source_schema.tb_proc_cmbd
-    JOIN cdm5.person
+    JOIN @cdm_schema.person
       ON person.person_source_value = tb_proc_cmbd.numsipcod
-    LEFT JOIN cdm5.concept AS icd9proc
+    LEFT JOIN @cdm_schema.concept AS icd9proc
       ON icd9proc.concept_code = tb_proc_cmbd.cie9p AND icd9proc.vocabulary_id IN ('ICD9Proc', 'ICD10PCS')
-    LEFT JOIN cdm5.concept_relationship AS code_map
+    LEFT JOIN @cdm_schema.concept_relationship AS code_map
       ON code_map.concept_id_1 = icd9proc.concept_id
          AND code_map.relationship_id = 'Maps to'
     LEFT JOIN source_intermediate.intermediate_table_visit_ocurrence

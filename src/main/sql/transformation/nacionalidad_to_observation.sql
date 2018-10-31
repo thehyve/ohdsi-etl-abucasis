@@ -2,7 +2,7 @@
 Spanish nationality status as observation from the 2015 demographics.
 Value is either 'S', 'N' or 'D' (Yes, No, Unknown)
 */
-INSERT INTO cdm5.observation
+INSERT INTO @cdm_schema.observation
 (
   person_id,
   observation_concept_id,
@@ -46,6 +46,6 @@ INSERT INTO cdm5.observation
     0                                              AS obs_event_field_concept_id
 
   FROM  @source_schema.tb_sip_spo_resto_2015
-    JOIN cdm5.person
+    JOIN @cdm_schema.person
       ON person.person_source_value = tb_sip_spo_resto_2015.numsipcod
 ;

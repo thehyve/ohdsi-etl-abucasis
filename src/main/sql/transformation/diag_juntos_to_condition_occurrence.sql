@@ -2,7 +2,7 @@
 Diagnoses (From hospitalization and ambulatory together
 Derived from tb_antepers and tb_ante_cmbd)
 */
-INSERT INTO cdm5.condition_occurrence
+INSERT INTO @cdm_schema.condition_occurrence
 (
 	person_id,
 	condition_start_date,
@@ -42,11 +42,11 @@ LEFT JOIN source_intermediate.intermediate_table_visit_ocurrence
              tb_diag_juntos.fecha_inicio = intermediate_table_visit_ocurrence.date
               AND
               tb_diag_juntos.origen = intermediate_table_visit_ocurrence.origin)
-INNER JOIN cdm5.person
+INNER JOIN @cdm_schema.person
       ON tb_diag_juntos.numsipcod = person.person_source_value
-LEFT JOIN cdm5.concept AS icd9cm
+LEFT JOIN @cdm_schema.concept AS icd9cm
       ON icd9cm.concept_code = tb_diag_juntos.cod_diagnostico AND icd9cm.vocabulary_id in ('ICD9CM', 'ICD10CM')
-    LEFT JOIN cdm5.concept_relationship AS code_map
+    LEFT JOIN @cdm_schema.concept_relationship AS code_map
      ON code_map.concept_id_1 = icd9cm.concept_id AND code_map.relationship_id = 'Maps to'
 WHERE origen in ('C','M')
 ;

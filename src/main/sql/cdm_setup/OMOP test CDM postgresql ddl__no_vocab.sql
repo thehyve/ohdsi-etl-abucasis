@@ -44,7 +44,7 @@ Standardized vocabulary
 
 
 --HINT DISTRIBUTE ON RANDOM
-CREATE TABLE cdm5test.attribute_definition (
+CREATE TABLE @cdm_schematest.attribute_definition (
   attribute_definition_id		  INTEGER			  NOT NULL,
   attribute_name				      VARCHAR(255)	NOT NULL,
   attribute_description			  TEXT	NULL,
@@ -62,7 +62,7 @@ Standardized meta-data
 
 
 --HINT DISTRIBUTE ON RANDOM
-CREATE TABLE cdm5test.cdm_source
+CREATE TABLE @cdm_schematest.cdm_source
 (
   cdm_source_name					VARCHAR(255)	NOT NULL ,
   cdm_source_abbreviation			VARCHAR(25)		NULL ,
@@ -79,7 +79,7 @@ CREATE TABLE cdm5test.cdm_source
 
 
 --HINT DISTRIBUTE ON RANDOM
-CREATE TABLE cdm5test.metadata
+CREATE TABLE @cdm_schematest.metadata
 (
   metadata_concept_id       INTEGER       	NOT NULL ,
   metadata_type_concept_id  INTEGER       	NOT NULL ,
@@ -91,7 +91,7 @@ CREATE TABLE cdm5test.metadata
 )
 ;
 
-INSERT INTO cdm5test.metadata (metadata_concept_id, metadata_type_concept_id, name, value_as_string, value_as_concept_id, metadata_date, metadata_datetime)
+INSERT INTO @cdm_schematest.metadata (metadata_concept_id, metadata_type_concept_id, name, value_as_string, value_as_concept_id, metadata_date, metadata_datetime)
 VALUES (0, 0, 'CDM Version', '6.0', 0, NULL, NULL)
 ;
 
@@ -104,7 +104,7 @@ Standardized clinical data
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE cdm5test.person
+CREATE TABLE @cdm_schematest.person
 (
   person_id						BIGSERIAL	  	NOT NULL ,
   gender_concept_id				INTEGER	  	NOT NULL ,
@@ -130,7 +130,7 @@ CREATE TABLE cdm5test.person
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE cdm5test.observation_period
+CREATE TABLE @cdm_schematest.observation_period
 (
   observation_period_id				BIGSERIAL		NOT NULL ,
   person_id							BIGINT		NOT NULL ,
@@ -142,7 +142,7 @@ CREATE TABLE cdm5test.observation_period
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE cdm5test.specimen
+CREATE TABLE @cdm_schematest.specimen
 (
   specimen_id					BIGSERIAL			NOT NULL ,
   person_id						BIGINT			NOT NULL ,
@@ -164,7 +164,7 @@ CREATE TABLE cdm5test.specimen
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE cdm5test.visit_occurrence
+CREATE TABLE @cdm_schematest.visit_occurrence
 (
   visit_occurrence_id			BIGSERIAL			NOT NULL ,
   person_id						BIGINT			NOT NULL ,
@@ -188,7 +188,7 @@ CREATE TABLE cdm5test.visit_occurrence
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE cdm5test.visit_detail
+CREATE TABLE @cdm_schematest.visit_detail
 (
   visit_detail_id                    BIGSERIAL      NOT NULL ,
   person_id                          BIGINT      NOT NULL ,
@@ -214,7 +214,7 @@ CREATE TABLE cdm5test.visit_detail
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE cdm5test.procedure_occurrence
+CREATE TABLE @cdm_schematest.procedure_occurrence
 (
   procedure_occurrence_id		BIGSERIAL			NOT NULL ,
   person_id						BIGINT			NOT NULL ,
@@ -235,7 +235,7 @@ CREATE TABLE cdm5test.procedure_occurrence
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE cdm5test.drug_exposure
+CREATE TABLE @cdm_schematest.drug_exposure
 (
   drug_exposure_id				BIGSERIAL			 	NOT NULL ,
   person_id						BIGINT			 	NOT NULL ,
@@ -265,7 +265,7 @@ CREATE TABLE cdm5test.drug_exposure
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE cdm5test.device_exposure
+CREATE TABLE @cdm_schematest.device_exposure
 (
   device_exposure_id			    BIGSERIAL		  	NOT NULL ,
   person_id						    BIGINT			NOT NULL ,
@@ -287,7 +287,7 @@ CREATE TABLE cdm5test.device_exposure
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE cdm5test.condition_occurrence
+CREATE TABLE @cdm_schematest.condition_occurrence
 (
   condition_occurrence_id		BIGSERIAL			NOT NULL ,
   person_id						BIGINT			NOT NULL ,
@@ -310,7 +310,7 @@ CREATE TABLE cdm5test.condition_occurrence
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE cdm5test.measurement
+CREATE TABLE @cdm_schematest.measurement
 (
   measurement_id				BIGSERIAL			NOT NULL ,
   person_id						BIGINT			NOT NULL ,
@@ -337,7 +337,7 @@ CREATE TABLE cdm5test.measurement
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE cdm5test.note
+CREATE TABLE @cdm_schematest.note
 (
   note_id						BIGSERIAL			NOT NULL ,
   person_id						BIGINT			NOT NULL ,
@@ -360,7 +360,7 @@ CREATE TABLE cdm5test.note
 
 
 --HINT DISTRIBUTE ON RANDOM
-CREATE TABLE cdm5test.note_nlp
+CREATE TABLE @cdm_schematest.note_nlp
 (
   note_nlp_id					BIGSERIAL			NOT NULL ,
   note_id						BIGINT			NOT NULL ,
@@ -381,7 +381,7 @@ CREATE TABLE cdm5test.note_nlp
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE cdm5test.observation
+CREATE TABLE @cdm_schematest.observation
 (
   observation_id					BIGSERIAL			NOT NULL ,
   person_id						    BIGINT			NOT NULL ,
@@ -409,7 +409,7 @@ CREATE TABLE cdm5test.observation
 
 
 --HINT DISTRIBUTE ON KEY(person_id)
-CREATE TABLE cdm5test.survey_conduct 
+CREATE TABLE @cdm_schematest.survey_conduct
 (
   survey_conduct_id					BIGSERIAL			NOT NULL ,
   person_id						    BIGINT			NOT NULL ,
@@ -441,7 +441,7 @@ CREATE TABLE cdm5test.survey_conduct
 
 
 --HINT DISTRIBUTE ON RANDOM
-CREATE TABLE cdm5test.fact_relationship
+CREATE TABLE @cdm_schematest.fact_relationship
 (
   domain_concept_id_1		INTEGER			NOT NULL ,
   fact_id_1					BIGINT			NOT NULL ,
@@ -461,7 +461,7 @@ Standardized health system data
 
 
 --HINT DISTRIBUTE ON RANDOM
-CREATE TABLE cdm5test.location
+CREATE TABLE @cdm_schematest.location
 (
   location_id			BIGSERIAL			NOT NULL ,
   address_1				VARCHAR(50)		NULL ,
@@ -479,7 +479,7 @@ CREATE TABLE cdm5test.location
 
 
 --HINT DISTRIBUTE ON RANDOM
-CREATE TABLE cdm5test.location_history --Table added
+CREATE TABLE @cdm_schematest.location_history --Table added
 (
   location_history_id           BIGSERIAL      NOT NULL ,
   location_id			        BIGINT		NOT NULL ,
@@ -493,7 +493,7 @@ CREATE TABLE cdm5test.location_history --Table added
 
 
 --HINT DISTRIBUTE ON RANDOM
-CREATE TABLE cdm5test.care_site
+CREATE TABLE @cdm_schematest.care_site
 (
   care_site_id					BIGINT			NOT NULL ,
   care_site_name				VARCHAR(255)	NULL ,
@@ -506,7 +506,7 @@ CREATE TABLE cdm5test.care_site
 
 
 --HINT DISTRIBUTE ON RANDOM
-CREATE TABLE cdm5test.provider
+CREATE TABLE @cdm_schematest.provider
 (
   provider_id					BIGINT			NOT NULL ,
   provider_name					VARCHAR(255)	NULL ,
@@ -533,7 +533,7 @@ Standardized health economics
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE cdm5test.payer_plan_period
+CREATE TABLE @cdm_schematest.payer_plan_period
 (
   payer_plan_period_id			BIGSERIAL			NOT NULL ,
   person_id						BIGINT			NOT NULL ,
@@ -561,7 +561,7 @@ CREATE TABLE cdm5test.payer_plan_period
 
 
 --HINT DISTRIBUTE ON KEY(person_id)
-CREATE TABLE cdm5test.cost
+CREATE TABLE @cdm_schematest.cost
 (
   cost_id						BIGSERIAL		NOT NULL ,
   person_id						BIGINT		NOT NULL,
@@ -593,7 +593,7 @@ Standardized derived elements
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE cdm5test.drug_era
+CREATE TABLE @cdm_schematest.drug_era
 (
   drug_era_id				BIGSERIAL		NOT NULL ,
   person_id					BIGINT		NOT NULL ,
@@ -607,7 +607,7 @@ CREATE TABLE cdm5test.drug_era
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE cdm5test.dose_era
+CREATE TABLE @cdm_schematest.dose_era
 (
   dose_era_id				BIGSERIAL			NOT NULL ,
   person_id					BIGINT			NOT NULL ,
@@ -621,7 +621,7 @@ CREATE TABLE cdm5test.dose_era
 
 
 --HINT DISTRIBUTE_ON_KEY(person_id)
-CREATE TABLE cdm5test.condition_era
+CREATE TABLE @cdm_schematest.condition_era
 (
   condition_era_id					BIGSERIAL			NOT NULL ,
   person_id							BIGINT			NOT NULL ,

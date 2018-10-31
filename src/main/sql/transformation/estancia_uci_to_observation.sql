@@ -1,7 +1,7 @@
 /**
 Number of days of stay in intensive care unit per patient.
  */
-INSERT INTO cdm5.observation
+INSERT INTO @cdm_schema.observation
 (
   person_id,
   observation_concept_id,
@@ -40,9 +40,9 @@ INSERT INTO cdm5.observation
     0                                                    AS obs_event_field_concept_id
 
   FROM  @source_schema.tb_estancia_uci
-    JOIN cdm5.person
+    JOIN @cdm_schema.person
       ON person.person_source_value = tb_estancia_uci.numsipcod
-    LEFT JOIN cdm5.source_to_concept_map
+    LEFT JOIN @cdm_schema.source_to_concept_map
       ON source_to_concept_map.source_code = 'estancia_uci' AND
          source_to_concept_map.source_vocabulary_id = 'ABUCASIS_NUM_EVENTS'
 ;

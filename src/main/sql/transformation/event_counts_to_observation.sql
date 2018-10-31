@@ -43,7 +43,7 @@ WITH event_counts_with_ano_mes (numsipcod, ano_mes, num_events, source_name) AS 
 
   SELECT numsipcod, fecha_urgencia, num_urgencias, 'urgencias' FROM  @source_schema.tb_urgencias
 )
-INSERT INTO cdm5.observation
+INSERT INTO @cdm_schema.observation
 (
   person_id,
   observation_concept_id,
@@ -82,9 +82,9 @@ INSERT INTO cdm5.observation
     0                                                    AS obs_event_field_concept_id
 
   FROM event_counts
-    JOIN cdm5.person
+    JOIN @cdm_schema.person
       ON person.person_source_value = event_counts.numsipcod
-    LEFT JOIN cdm5.source_to_concept_map
+    LEFT JOIN @cdm_schema.source_to_concept_map
       ON source_to_concept_map.source_code = event_counts.source_name AND
          source_to_concept_map.source_vocabulary_id = 'ABUCASIS_NUM_EVENTS'
 ;

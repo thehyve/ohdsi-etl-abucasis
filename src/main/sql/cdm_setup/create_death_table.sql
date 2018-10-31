@@ -1,4 +1,4 @@
-create table cdm5.death
+create table @cdm_schema.death
 (
   person_id               integer not null,
   death_date              date    not null,

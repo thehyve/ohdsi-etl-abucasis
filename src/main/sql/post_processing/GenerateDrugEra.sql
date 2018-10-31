@@ -58,7 +58,7 @@ OHDSI-SQL File Instructions
 
  2. Set parameter name of schema that contains CDMv5 instance
 
-    ([CDM], cdm5)
+    ([CDM], @cdm_schema)
 
  3. Run this script through SqlRender to produce a script that will work in your
 
@@ -119,11 +119,11 @@ CREATE TEMP TABLE ctedrugtarget
 
 
     FROM
-      cdm5.drug_exposure d
+      @cdm_schema.drug_exposure d
 
-      INNER JOIN cdm5.concept_ancestor ca ON ca.descendant_concept_id = d.drug_concept_id
+      INNER JOIN @cdm_schema.concept_ancestor ca ON ca.descendant_concept_id = d.drug_concept_id
 
-      INNER JOIN cdm5.concept c ON ca.ancestor_concept_id = c.concept_id
+      INNER JOIN @cdm_schema.concept c ON ca.ancestor_concept_id = c.concept_id
 
     WHERE c.vocabulary_id = 'RxNorm'
 
@@ -309,7 +309,7 @@ CREATE TEMP TABLE ctedrugexpends
 /* / */
 
 
-INSERT INTO cdm5.drug_era
+INSERT INTO @cdm_schema.drug_era
 
   SELECT
     row_number()

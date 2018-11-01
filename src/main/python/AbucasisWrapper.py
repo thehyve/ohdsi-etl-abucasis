@@ -76,6 +76,7 @@ class AbucasisWrapper(EtlWrapper):
     def _prepare_source(self):
         self.log("Intermediate tables and aggregates...", leading_newline=True)
         self.execute_sql_file('source_preprocessing/ante_cmbd_morbilid__visit_intermediate_table.sql')
+        self.execute_sql_file('source_preprocessing/death_intermediate.sql')
 
     def _transform_and_load(self):
         self.log("Main ETL scripts...", leading_newline=True)
@@ -91,7 +92,6 @@ class AbucasisWrapper(EtlWrapper):
         self.execute_sql_file('transformation/morbilid_to_visit_ocurrence.sql')
         ## TODO add debug flag (or remove line with real abucasis)
         # process conflict with death dates (remove line for real execution)
-        self.execute_sql_file('synthetic_abucasis_preprocessing/solve_deaths_conflict.sql')
         # process visits table
         self.execute_sql_file('transformation/remove_conflictive_visits.sql')
 
@@ -117,9 +117,8 @@ class AbucasisWrapper(EtlWrapper):
         self.execute_sql_file('transformation/nacionalidad_to_observation.sql')
 
         # Death
-        self.execute_sql_file('transformation/sip_spo_to_death.sql')
-
-        self.execute_sql_file('transformation/person__and__visit_ocurrence_to_observation.sql')
+        self.execute_sql_file('transformation/death_intermediate_to_observation.sql')
+        self.execute_sql_file('transformation/death_intermediate_to_death.sql')
 
     def _derive_era(self):
         self.execute_sql_file('post_processing/GenerateDrugEra.sql')

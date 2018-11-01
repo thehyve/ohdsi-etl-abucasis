@@ -25,3 +25,6 @@ DROP TABLE cdm5.cost CASCADE;
 DROP TABLE cdm5.drug_era CASCADE;
 DROP TABLE cdm5.dose_era CASCADE;
 DROP TABLE cdm5.condition_era CASCADE;
+-- To make CDMv6 backwards compatible with CDMv5 death table is also created in the wrapper
+--    thus, we also need to remove it
+DROP TABLE cdm5.death CASCADE;

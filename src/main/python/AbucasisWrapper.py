@@ -76,7 +76,7 @@ class AbucasisWrapper(EtlWrapper):
     def _prepare_source(self):
         self.log("Intermediate tables and aggregates...", leading_newline=True)
         self.execute_sql_file('source_preprocessing/ante_cmbd_morbilid__visit_intermediate_table.sql')
-        self.execute_sql_file('source_preprocessing/death_intermediate.sql')
+        self.execute_sql_file('source_preprocessing/sip_spo_ante_cmbd_to_death_intermediate.sql')
 
     def _transform_and_load(self):
         self.log("Main ETL scripts...", leading_newline=True)

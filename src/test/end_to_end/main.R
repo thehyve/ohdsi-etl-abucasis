@@ -85,6 +85,8 @@ expect_no_measurement(person_id = 4)
 add_tb_variables(numsipcod='A03', cod_ud_medida = "I")
 expect_no_measurement(person_id = 3)
 
+# TODO check visits rule
+
 # ========================
 # ========================
 #
@@ -116,15 +118,16 @@ executeSql(connection, paste(insert_sql, collapse = '\n'))
 #
 # Run etl script with config$sourceSchema as source:
 # python3 main.py -p 6000 -d abucasis_dev -u postgres -w postgres -s abucasis_test -c cdm5test --skipvocab
+setwd('../../../')
+system(sprintf('python3 main.py -p %s -d abucasis_dev -u %s -w %s -s %s --skipvocab', connectionConfig$port, connectionConfig$user, connectionConfig$password, config$sourceSchema, config$cdmSchema))
 
-system(sprintf('python3 ../../../main.py -p %s -d abucasis_dev -u %s -w %s -s %s --skipvocab', connectionConfig$port, connectionConfig$user, connectionConfig$password, config$sourceSchema, config$cdmSchema))
 # ========================
 # ========================
 #
-# test_sql <- testSql
-# executeSql(connection, sprintf('SET search_path TO %s;', config$cdmSchema))
-# test_sql[1] <- 'DROP TABLE IF EXISTS test_results;' # Replace existing SQL server specific table drop
-# executeSql(connection, paste(test_sql, collapse = ';\n'))
-#
-# # View the results
-# querySql(connection, 'SELECT * FROM test_results')
+test_sql <- testSql
+executeSql(connection, sprintf('SET search_path TO %s;', config$cdmSchema))
+test_sql[1] <- 'DROP TABLE IF EXISTS test_results;' # Replace existing SQL server specific table drop
+executeSql(connection, paste(test_sql, collapse = ';\n'))
+
+# View the results
+print(querySql(connection, 'SELECT * FROM test_results'))

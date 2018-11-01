@@ -4,7 +4,7 @@
 -- (the duplicated visit with the shortest discharge to concept id will be removed)
 WITH cte1 AS (
     DELETE
-        FROM @cdm_schema.visit_occurrence
+        FROM cdm5.visit_occurrence
         WHERE discharge_to_concept_id = 8844 AND visit_source_value != 'tb_morbilid'
         returning *
     ), cte2 AS (
@@ -13,7 +13,7 @@ WITH cte1 AS (
            *
     FROM cte1
     )
-INSERT INTO @cdm_schema.visit_occurrence
+INSERT INTO cdm5.visit_occurrence
     SELECT
         visit_occurrence_id		,
         person_id					 ,

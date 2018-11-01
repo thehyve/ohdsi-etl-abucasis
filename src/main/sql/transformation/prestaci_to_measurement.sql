@@ -1,7 +1,7 @@
 /*
 Clinical measurements
 */
-INSERT INTO @cdm_schema.measurement
+INSERT INTO cdm5.measurement
 (
   person_id,
   value_as_number,
@@ -27,11 +27,14 @@ INSERT INTO @cdm_schema.measurement
     44818702                            AS measurement_type_concept_id
   FROM  @source_schema.tb_prestaci
     --only patients also present in person table to be included
-    JOIN @cdm_schema.person ON numsipcod = person.person_source_value
+    JOIN cdm5.person ON numsipcod = person.person_source_value
     --TODO: add abucasis_prestacion concepts to source_to_concept_map table
-    LEFT JOIN @cdm_schema.source_to_concept_map pres
+    LEFT JOIN cdm5.source_to_concept_map pres
       ON cod_prestacion = pres.source_code AND pres.source_vocabulary_id = 'ABUCASIS_TIP_PREST'
-    LEFT JOIN @cdm_schema.source_to_concept_map unit
+    LEFT JOIN cdm5.source_to_concept_map unit
       ON cod_ud_medida = unit.source_code AND unit.source_vocabulary_id = 'ABUCASIS_UD_MEDIDAS'
-  WHERE tb_prestaci.cod_prestacion NOT LIKE '-1'
+  WHERE
+    tb_prestaci.cod_prestacion NOT LIKE '-1'
+    -- exclude measurements whose variable is unknown
+    AND tb_prestaci.cod_ud_medida != '.' AND tb_prestaci.cod_ud_medida != 'I'
 ;

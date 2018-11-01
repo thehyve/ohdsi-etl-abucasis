@@ -1,7 +1,7 @@
 /*
 Sociodemographic data I
 */
-INSERT INTO @cdm_schema.observation_period (person_id,
+INSERT INTO cdm5.observation_period (person_id,
                                      observation_period_start_date,
                                      -- Date of entry into study 01-01-2012 Or date of birth (whichever is last); everyone is older than 18, should not happen.
                                      observation_period_end_date,
@@ -29,4 +29,4 @@ SELECT person.person_id AS person_id,
        '44814724'       AS period_type_concept_id
 
 FROM  @source_schema.tb_sip_spo
-       INNER JOIN @cdm_schema.person ON tb_sip_spo.numsipcod = person.person_source_value;
+       INNER JOIN cdm5.person ON tb_sip_spo.numsipcod = person.person_source_value;

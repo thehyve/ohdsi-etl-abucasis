@@ -1,7 +1,7 @@
 /*
 Visit ocurrence table
 */
-INSERT INTO @cdm_schema.visit_occurrence (visit_occurrence_id,
+INSERT INTO cdm5.visit_occurrence (visit_occurrence_id,
                                    person_id,
                                    visit_concept_id,
                                    visit_source_value,
@@ -99,4 +99,4 @@ FROM  @source_schema.tb_ante_cmbd
          ON (tb_ante_cmbd.numsipcod = intermediate_table_visit_ocurrence.numsipcod
                AND
              tb_ante_cmbd.fecha_ingreso = intermediate_table_visit_ocurrence.date) -- We only want visits from "valid" persons from person table
-       INNER JOIN @cdm_schema.person ON intermediate_table_visit_ocurrence.numsipcod = person.person_source_value;
+       INNER JOIN cdm5.person ON intermediate_table_visit_ocurrence.numsipcod = person.person_source_value;

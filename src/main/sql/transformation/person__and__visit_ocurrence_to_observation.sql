@@ -1,7 +1,7 @@
 /*
 
 */
-INSERT INTO @cdm_schema.observation (person_id,
+INSERT INTO cdm5.observation (person_id,
                               observation_concept_id,
                               observation_source_concept_id,
                               observation_date,
@@ -24,8 +24,8 @@ SELECT visit_occurrence.person_id          AS person_id,
         0                             AS obs_event_field_concept_id
 
 
-FROM @cdm_schema.visit_occurrence
-    JOIN @cdm_schema.person ON visit_occurrence.person_id = person.person_id
+FROM cdm5.visit_occurrence
+    JOIN cdm5.person ON visit_occurrence.person_id = person.person_id
     -- Patient could die during hospitalization or not during hospitalization
     WHERE (visit_occurrence.discharge_to_concept_id = 4216643 OR person.death_datetime IS NOT NULL)
 ;

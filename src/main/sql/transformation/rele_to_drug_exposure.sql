@@ -45,7 +45,7 @@ WITH prescrip_per_trat AS (
 		FROM  @source_schema.tb_tratamientos
 			LEFT JOIN prescrip_per_trat USING (id_tratamiento)
 )
-INSERT INTO @cdm_schema.drug_exposure
+INSERT INTO cdm5.drug_exposure
 (
 	person_id,
   drug_concept_id,
@@ -107,9 +107,9 @@ INSERT INTO @cdm_schema.drug_exposure
 			ON tb_rele.numreceta = tb_prescrip.numreceta
 		JOIN tratamiento_derived
 			ON tb_prescrip.id_tratamiento = tratamiento_derived.id_tratamiento
-		JOIN @cdm_schema.person
+		JOIN cdm5.person
 			ON person.person_source_value = tb_prescrip.numsipcod
-		LEFT JOIN @cdm_schema.source_to_concept_map AS ingredient_map
+		LEFT JOIN cdm5.source_to_concept_map AS ingredient_map
 			ON ingredient_map.source_code = tratamiento_derived.cod_prinactivo
 				 AND ingredient_map.source_vocabulary_id = 'ABUCASIS_PRINACTIVO'
 	;

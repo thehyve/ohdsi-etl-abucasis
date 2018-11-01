@@ -1,7 +1,7 @@
 /*
 This table is NOT part of CDM v6 BUT it has been implemented to make the CDM backwards compatible with CDM v5.
  */
-INSERT INTO @cdm_schema.death
+INSERT INTO cdm5.death
 (
   person_id,
   death_date,
@@ -16,7 +16,7 @@ SELECT
   -- EHR discharge status ‘Expired’ OR Observation recorded from EHR
   observation_type_concept_id AS death_type_concept_id
 
-FROM @cdm_schema.observation
+FROM cdm5.observation
 WHERE observation_concept_id = 4306655
 --select from observation table only the death occurences
 ;

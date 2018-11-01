@@ -3,7 +3,7 @@ Prescribed, but not dispensed drugs. A prescription that is never taken will not
 However, such a prescription can be indicative of a disease that is not captured elsewhere
 (e.g. if someone is prescribed metformin for his/her diabetes).
 */
-INSERT INTO @cdm_schema.observation
+INSERT INTO cdm5.observation
 (
   person_id,
   observation_concept_id,
@@ -39,9 +39,9 @@ INSERT INTO @cdm_schema.observation
   FROM  @source_schema.tb_prescrip
     LEFT JOIN  @source_schema.tb_rele
       ON tb_rele.numreceta = tb_prescrip.numreceta
-    JOIN @cdm_schema.person
+    JOIN cdm5.person
       ON person.person_source_value = tb_prescrip.numsipcod
-    LEFT JOIN @cdm_schema.source_to_concept_map AS ingredient_map
+    LEFT JOIN cdm5.source_to_concept_map AS ingredient_map
       ON ingredient_map.source_code = tb_prescrip.cod_prinactivo
          AND ingredient_map.source_vocabulary_id = 'ABUCASIS_PRINACTIVO'
   WHERE tb_rele.numreceta IS NULL

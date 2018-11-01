@@ -3,7 +3,7 @@ Number of drug-drug interactions per person, per month.
 Three levels of severity of the interactions. These are mapped as a qualifier;
 MODERADA (moderate), LEVE (not severe), GRAVE (very severe)
  */
-INSERT INTO @cdm_schema.observation
+INSERT INTO cdm5.observation
 (
   person_id,
   observation_concept_id,
@@ -57,9 +57,9 @@ INSERT INTO @cdm_schema.observation
     0                                                    AS obs_event_field_concept_id
 
   FROM  @source_schema.tb_interacc
-    JOIN @cdm_schema.person
+    JOIN cdm5.person
       ON person.person_source_value = tb_interacc.numsipcod
-    LEFT JOIN @cdm_schema.source_to_concept_map
+    LEFT JOIN cdm5.source_to_concept_map
       ON source_to_concept_map.source_code = 'interacc' AND
          source_to_concept_map.source_vocabulary_id = 'ABUCASIS_NUM_EVENTS'
 ;

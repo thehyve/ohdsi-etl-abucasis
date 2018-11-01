@@ -85,6 +85,9 @@ expect_no_measurement(person_id = 4)
 add_tb_variables(numsipcod='A03', cod_ud_medida = "I")
 expect_no_measurement(person_id = 3)
 
+# ========================
+# Visits
+# ========================
 # TODO check visits rule
 
 # ========================

@@ -1,4 +1,8 @@
-# ABUCASIS to OMOP CDM
+# Test branch for ABUCASIS to OMOP CDM
+Contains unit tests for CDM conversion. 
+
+
+ETL scripts to convert ABUCASIS (INCLIVA) data to OMOP CDM v6. 
 
 ## Dependencies
 - Postgres (9.5+)

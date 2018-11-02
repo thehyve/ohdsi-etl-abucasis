@@ -13,7 +13,7 @@ WITH death_at_discharge AS (
     SELECT
       numsipcod,
       max(fecha_alta) AS discharge_date
-    FROM public.tb_ante_cmbd
+    FROM @source_schema.tb_ante_cmbd
     WHERE cir_alta = '10'
     GROUP BY numsipcod
 ), death_dates AS (
@@ -25,7 +25,7 @@ WITH death_at_discharge AS (
       least(tb_sip_spo.fecha_def,
             tb_sip_spo.fecha_baja_sip,
             death_at_discharge.discharge_date) AS first_death_date
-    FROM public.tb_sip_spo
+    FROM @source_schema.tb_sip_spo
       LEFT JOIN death_at_discharge
         ON tb_sip_spo.numsipcod = death_at_discharge.numsipcod
 )

@@ -34,8 +34,8 @@ INSERT INTO cdm5.person (
     0                                               AS ethnicity_concept_id,
     intermediate_death.death_date::TIMESTAMP        AS death_datetime,
     care_site.care_site_id                          AS care_site_id
-  FROM public.tb_sip_spo
-    LEFT JOIN public.tb_sip_spo_resto_2015
+  FROM @source_schema.tb_sip_spo
+    LEFT JOIN @source_schema.tb_sip_spo_resto_2015
       ON tb_sip_spo.numsipcod = tb_sip_spo_resto_2015.numsipcod
     LEFT JOIN cdm5.care_site
       ON tb_sip_spo_resto_2015.cod_centro_asignacion = care_site.care_site_source_value

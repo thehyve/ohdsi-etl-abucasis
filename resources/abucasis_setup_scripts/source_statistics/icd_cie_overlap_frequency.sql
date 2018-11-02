@@ -18,7 +18,8 @@ WITH icd_source (concept_code, description, frequency, vocabulary_id) AS (
     SELECT
       concept_code,
       (array_agg(vocabulary_id order by vocabulary_id desc))[1] as vocabulary_id,
-      (array_agg(concept_name order by vocabulary_id desc))[1] as concept_name
+      (array_agg(concept_name order by vocabulary_id desc))[1] as concept_name,
+      (array_agg(concept_id order by vocabulary_id desc))[1] as concept_id
     FROM cdm5.concept
     WHERE vocabulary_id IN ('ICD9CM', 'ICD9Proc', 'ICD10PCS', 'ICD10CM') AND invalid_reason IS NULL
     GROUP BY concept_code
@@ -28,6 +29,7 @@ WITH icd_source (concept_code, description, frequency, vocabulary_id) AS (
       icd_source.concept_code                                      AS source_code,
       icd_source.description                                       AS source_name,
       icd_target.concept_code                                      AS target_code,
+      icd_target.concept_id                                        AS target_concept_id,
       icd_target.concept_name                                      AS target_name,
       icd_target.vocabulary_id                                     AS target_vocabulary_id,
       icd_source.frequency,
@@ -43,15 +45,15 @@ WITH icd_source (concept_code, description, frequency, vocabulary_id) AS (
       FULL OUTER JOIN icd_target USING (concept_code) --, vocabulary_id)
 )
 /** The stat **/
-SELECT
-  vocabulary_id,
-  set_membership,
-  count(*),
-  sum(frequency)
-FROM source_join_target
-GROUP BY vocabulary_id, set_membership
-ORDER BY vocabulary_id, set_membership
-;
+-- SELECT
+--   vocabulary_id,
+--   set_membership,
+--   count(*),
+--   sum(frequency)
+-- FROM source_join_target
+-- GROUP BY vocabulary_id, set_membership
+-- ORDER BY vocabulary_id, set_membership
+-- ;
 /** Per target vocabulary */
 -- SELECT
 --   vocabulary_id as source_vocabulary_id,
@@ -138,6 +140,16 @@ ORDER BY vocabulary_id, set_membership
 -- HAVING count(*) > 1
 -- ORDER BY count(*) DESC
 -- ;
+/** Usagi input **/
+SELECT
+  source_code,
+  source_name,
+  target_concept_id,
+  coalesce(frequency, 0) AS frequency
+FROM source_join_target
+WHERE vocabulary_id = 'CIE9p'
+ORDER BY frequency DESC
+;
 
 select des_diagnostico is null as is_null, count(*), sum(frequency)
 from source_vocab.cie9_with_frequency

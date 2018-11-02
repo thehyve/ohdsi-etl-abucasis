@@ -18,7 +18,7 @@ import sys
 import os
 from translate import Translator
 
-# Global variables (hard-coded, modify)
+# Global variables
 wr_report = '../Documents/ABUCASIS/ScanReport_25_10_18.xlsx'
 out_dir = 'resources/mapping_frequencies_v2/'
 mapping_tables_dir = '../Documents/ABUCASIS/tba_tables_csv/'
@@ -93,7 +93,9 @@ def split_white_rabbit(filename, path = '', n_sheet = 1):
 
 
 def translate_values(values_list, col_name, mapping_tables_dir, col_code = 0, ini_col = 'cod_'):
-
+    """
+    Translates the values from a value list using following the mapping code-> description
+    """
 
     # Generate dictionary
     translator = create_mapping_dictionary(col_name.split(ini_col)[-1], mapping_tables_dir, col_code = col_code)

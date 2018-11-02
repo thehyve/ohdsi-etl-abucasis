@@ -2,28 +2,39 @@ library(Achilles)
 library('yaml')
 library(DatabaseConnector)
 
-config <- yaml.load_file('config.yml')
+# setwd("ohdsi-etl-abucasis/src/test/achilles_run/")
+
+config <- yaml.load_file('./config.yml')
+# connectionDetails <- createConnectionDetails(dbms = "postgresql",
+#                                              user = "postgres",
+#                                              password = "postgres",
+#                                              server = "localhost/abucasis_dev",
+#                                              port = "6000",
+#                                              schema="cdm5")
+
+#
 connectionConfig <- config$connectionDetails
-connectionDetails <- createConnectionDetails(dbms = connectionConfig$user$dbms,
-                                            user = connectionConfig$user,
-                                            password = connectionConfig$password,
-                                            server = connectionConfig$server,
-                                            port = connectionConfig$port)
-connection <- connect(connectionDetails)
+connectionDetails <- createConnectionDetails(dbms = "postgresql",
+                                             user = connectionConfig$user,
+                                             password = connectionConfig$password,
+                                             server = connectionConfig$server,
+                                             port = connectionConfig$port)
+# connection <- connect(connectionDetails)
+#
+#
+achilles(connectionDetails,
+         cdmDatabaseSchema = config$cdmSchema,
+         resultsDatabaseSchema=config$cdmresultsSchema,
+         vocabDatabaseSchema = config$cdmSchema,
+         scratchDatabaseSchema = config$cdmscratchSchema,
+         numThreads = 1,
+         sourceName = config$sourceName,
+         cdmVersion = config$cdmversion,
+         runHeel = TRUE,
+         runCostAnalysis = FALSE,
+         dropScratchTables = TRUE,
+         conceptHierarchy = FALSE)
 
-
-achilles(connection,
-        cdmDatabaseSchema = config$cdmSchema,
-        resultsDatabaseSchema=config$cdmresultsSchema,
-        vocabDatabaseSchema = config$cdmSchema,
-        scratchDatabaseSchema = config$cdmscratchSchema,
-        numThreads = 1,
-        sourceName = "abucasis_results",
-        cdmVersion = "6.0",
-        runHeel = TRUE,
-        runCostAnalysis = FALSE,
-        dropScratchTables = TRUE,
-        conceptHierarchy = FALSE)
 
 exportToJson(connectionDetails,
             cdmDatabaseSchema = config$cdmSchema,

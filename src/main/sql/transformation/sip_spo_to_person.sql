@@ -35,16 +35,22 @@ SELECT tb_sip_spo.numsipcod                     AS person_source_value,
        0                                        AS race_concept_id,
        0                                        AS ethnicity_source_concept_id,
        0                                        AS ethnicity_concept_id,
+       -- TODO implemente earliest of daeth
        CASE
+--          WHEN tb_sip_spo.fecha_def IS NOT NULL AND tb_sip_spo.fecha_baja_sip IS NOT NULL
+--            THEN
+--               CASE WHEN tb_sip_spo.fecha_def <= tb_sip_spo.fecha_baja_sip
+--                       THEN tb_sip_spo.fecha_def
+--                   ELSE tb_sip_spo.fecha_baja_sip END
          WHEN tb_sip_spo.fecha_def IS NULL AND tb_sip_spo.fecha_baja_sip IS NOT NULL
-                 THEN (cast(tb_sip_spo.fecha_def as text) || ' 00:00:00'):: timestamp
+            THEN (cast(tb_sip_spo.fecha_baja_sip as text) || ' 00:00:00'):: timestamp
          WHEN tb_sip_spo.fecha_def IS NOT NULL AND tb_sip_spo.fecha_baja_sip IS NULL
-                 THEN (cast(tb_sip_spo.fecha_baja_sip as text) || ' 00:00:00'):: timestamp
+            THEN (cast(tb_sip_spo.fecha_def as text) || ' 00:00:00'):: timestamp
          ELSE NULL END                          AS death_datetime,
        care_site.care_site_id                   AS care_site_id
 
 
-FROM  @source_schema.tb_sip_spo
+FROM  abucasis_test.tb_sip_spo
        LEFT JOIN  @source_schema.tb_sip_spo_resto_2015 ON tb_sip_spo.numsipcod = tb_sip_spo_resto_2015.numsipcod
        LEFT JOIN cdm5.care_site ON tb_sip_spo_resto_2015.cod_centro_asignacion = care_site.care_site_source_value
 -- General rule: exclude patients with death or suspension date before2012

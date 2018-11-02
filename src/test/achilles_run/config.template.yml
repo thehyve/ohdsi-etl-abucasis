@@ -1,0 +1,11 @@
+connectionDetails:
+  user: john
+  password: secret
+  server: localhost/my_data
+  port: 5432
+  dbms: postgresql
+cdmSchema: cdm5
+cdmresultsSchema: cdm5results
+cdmscratchSchema: cdm5scratch
+sourceName: abucasis_results
+cdmversion: 6.0

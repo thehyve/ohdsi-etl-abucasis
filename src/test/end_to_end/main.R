@@ -22,7 +22,7 @@ expect_person(person_source_value='A01', gender_concept_id=8507)
 
 # Testing on death date because Unit tests are not compatible with CDMv6
 declareTest('Expect no death date for non-suspended and non-dead person')
-expect_death(person_id=1, death_date=NULL)
+expect_no_death(person_id=1)
 
 declareTest('Filter death before study start (=2012-01-01)')
 add_tb_sip_spo(numsipcod='Z01', fecha_def = '2011-01-01')
@@ -57,7 +57,6 @@ expect_death(person_id=5, death_date='2015-01-01')
 # Observation period
 # ========================
 declareTest('Observation period start and end for people with suspension date')
-add_tb_sip_spo(numsipcod='A05', fecha_nac='1991-01-01', fecha_baja_sip = '2015-01-01')
 expect_person(person_id=5, person_source_value='A05')
 expect_observation_period(person_id=5, observation_period_start_date='2012-01-01', observation_period_end_date='2015-01-01')
 
@@ -80,35 +79,36 @@ add_tb_proc_cmbd(numsipcod='A01', cie9p = '10.10')
 expect_procedure_occurrence(procedure_source_value = '10.10')
 
 declareTest('Procedure occurrence visit')
+expect_person(person_id=2, person_source_value='A02')
 add_tb_ante_cmbd(numsipcod = 'A02', fecha_ingreso = '2018-01-01')
-expect_visit_occurrence(visit_occurrence_id = 1, person_id = 2, visit_start_date = '2018-01-01')
+expect_visit_occurrence(person_id = 2, visit_start_date = '2018-01-01')
 add_tb_proc_cmbd(numsipcod = 'A02', fecha_ingreso = '2018-01-01', tipo_actividad = 'HOS', cie9p = '20.20')
-expect_procedure_occurrence(procedure_source_value = '20.20', visit_occurrence_id = 1) # NOTE: this id can change
+expect_procedure_occurrence(procedure_source_value = '20.20', visit_occurrence_id = 2) # NOTE: this id can change
 
 declareTest('Procedure occurrence start and end date')
 expect_person(person_id=1, person_source_value='A01')
 add_tb_proc_cmbd(numsipcod='A01', fecha_ingreso = '2012-01-01')
 expect_procedure_occurrence(person_id=1, procedure_date='2012-01-01')
 
+#TODO test for link to visit_occurrence_id
 
 # ========================
 # Visit Ocurrence
 # ========================
 declareTest('Visit end date')
 expect_person(person_id=1, person_source_value='A01')
-add_tb_ante_cmbd(numsipcod = 'A01', fecha_ingreso = '2013-01-01')
-expect_visit_occurrence(person_id=1, visit_end_date = '2016-12-31')
+add_tb_ante_cmbd(numsipcod = 'A01', fecha_ingreso='2013-01-01',fecha_alta = '2016-12-31')
+expect_visit_occurrence(person_id=1, visit_start_date = '2013-01-01',visit_end_date = '2016-12-31')
 
-declareTest('Unique visit ID for a person/start date hospitalization')
-expect_person(person_id=1, person_source_value='A01')
-add_tb_ante_cmbd(numsipcod = 'A01', fecha_ingreso = '2013-01-01', cir_ingreso = 4)
 
 declareTest('Unique visit for patients that were discharged to another hospital')
-expect_person(person_id=2, person_source_value='A02')
-add_tb_ante_cmbd(numsipcod = 'A02', fecha_ingreso = '2013-01-01', fecha_alta = '2013-02-01', cir_ingreso = 2, cir_alta = 7)
-add_tb_ante_cmbd(numsipcod = 'A02', fecha_ingreso = '2013-01-01', fecha_alta = '2013-05-01', cir_alta = 1)
-expect_visit_occurrence(person_id = 2, visit_end_date = '2013-05-01')
-expect_no_visit_occurrence(person_id = 2, visit_end_date = '2013-02-01')
+expect_person(person_id=3, person_source_value='A03')
+add_tb_ante_cmbd(numsipcod = 'A03', fecha_ingreso = '2013-01-01', fecha_alta = '2013-02-01', cir_ingreso = 2, cir_alta = 7)
+add_tb_ante_cmbd(numsipcod = 'A03', fecha_ingreso = '2013-01-01', fecha_alta = '2013-05-01', cir_alta = 1)
+expect_visit_occurrence(person_id = 3, visit_start_date='2013-01-01', visit_end_date = '2013-05-01')
+expect_no_visit_occurrence(person_id = 3, visit_start_date='2013-01-01', visit_end_date = '2013-02-01')
+
+#TODO Unique visit occurrence ID for a person/start date hospitalization
 
 declareTest('Visit start and end date for ambulatory visits')
 expect_person(person_id=2, person_source_value='A02')
@@ -121,8 +121,9 @@ expect_visit_occurrence(person_id = 2, visit_start_date = '2014-01-01', visit_en
 # ========================
 declareTest('Condition occurrence start and end date')
 expect_person(person_id=2, person_source_value='A02')
+add_tb_ante_cmbd(numsipcod='A02', fecha_ingreso='2013-01-01', fecha_alta='2013-02-01')
 add_tb_diag_juntos(numsipcod='A02', fecha_inicio='2013-01-01', fecha_fin='2013-02-01', origen = 'C')
-expect_condition_occurrence(condition_occurrence_id=1, person_id = 2, condition_start_date = '2015-02-02', condition_end_date = '2015-02-03')
+expect_condition_occurrence(person_id = 2, condition_start_date = '2015-02-02', condition_end_date = '2015-02-03')
 
 # ========================
 # Drug exposure
@@ -133,6 +134,8 @@ add_tb_rele(numsipcod='A02', numreceta = 'RE001', fecha_dispensacion = '2015-05-
 add_tb_rele(numsipcod='A02', numreceta = 'RE002', fecha_dispensacion = '2015-06-05')
 add_tb_rele(numsipcod='A02', numreceta = 'RE003', fecha_dispensacion = '2015-07-05')
 add_tb_prescrip(numsipcod='A02', numreceta = 'RE001', id_tratamiento = 'TR001')
+add_tb_prescrip(numsipcod='A02', numreceta = 'RE002', id_tratamiento = 'TR001')
+add_tb_prescrip(numsipcod='A02', numreceta = 'RE003', id_tratamiento = 'TR001')
 add_tb_tratamientos(numsipcod='A02', id_tratamiento = 'TR001', dias_tratamiento = 90)
 # '2015-05-05' + 90/3 days ='2015-06-04'
 expect_drug_exposure(person_id=2, drug_exposure_id = 1, drug_exposure_start_date = '2015-05-05', drug_exposure_end_date = '2015-06-04')
@@ -144,7 +147,7 @@ add_tb_rele(numsipcod='A01', numreceta = 'RE101', fecha_dispensacion = '2015-05-
 add_tb_prescrip(numsipcod='A01', numreceta = 'RE101', id_tratamiento = 'TR101')
 add_tb_tratamientos(numsipcod='A01', id_tratamiento ='TR101', dias_tratamiento=NULL, fecha_inicio_tratamiento='2015-05-05', fecha_fin_tratamiento = '2015-05-10')
 # Patient bought the drug 1 day after the treatment was prescribed (see tb_rele)
-expect_drug_exposure(person_id=1, drug_exposure_id = 2, drug_exposure_start_date = '2015-05-06', drug_exposure_end_date = '2015-05-11')
+expect_drug_exposure(person_id=1, drug_exposure_start_date = '2015-05-06', drug_exposure_end_date = '2015-05-11')
 
 #TODO additional unit tests?
 
@@ -188,44 +191,44 @@ declareTest('Observation death if patient died during hospitalization')
 expect_person(person_id=6, person_source_value='A06')
 add_tb_sip_spo(numsipcod='A06', fecha_nac='1991-01-01', fecha_def='2012-02-05')
 add_tb_ante_cmbd(numsipcod='A06', cir_alta='10', fecha_ingreso = '2012-01-01', fecha_alta = '2012-02-05')
-expect_observation(person_id = 6, observation_id=1, observation_date='2012-02-05', observation_type_concept_id = 4216643)
+expect_observation(person_id = 6, observation_date='2012-02-05', observation_type_concept_id = 4216643)
 
 declareTest('Observation death if patient died NOT during hospitalization')
 add_tb_sip_spo(numsipcod='A07', fecha_nac='1994-01-01', fecha_def='2016-02-05')
-expect_observation(person_id=7, observation_id=2,observation_date='2016-02-05',observation_type_concept_id = 38000280)
+expect_observation(person_id=7, observation_date='2016-02-05',observation_type_concept_id = 38000280)
 
 declareTest('Observation date from drug adverse effects')
 add_tb_contraind(numsipcod='A06', ano_mes='201505')
-expect_observation(person_id=6,observation_id=3,observation_date='2016-05-01')
+expect_observation(person_id=6,observation_date='2015-05-01')
 
 declareTest('Observation number and severity of drug adverse effects')
 add_tb_contraind(numsipcod='A06', num_contraindicaciones=5, tipo_contraindicacion='R')
-expect_observation(person_id=6,observation_id=4,value_as_number=5,qualifier_concept_id=764184)
+expect_observation(person_id=6,value_as_number=5,qualifier_concept_id=764184)
 add_tb_contraind(numsipcod='A06', num_contraindicaciones=5, tipo_contraindicacion='A')
-expect_observation(person_id=6,observation_id=5,value_as_number=5,qualifier_concept_id=4087703)
+expect_observation(person_id=6,value_as_number=5,qualifier_concept_id=4087703)
 
 declareTest('Observation date drug interaction')
-expect_person(person_id=1, person_source_value='A06')
-add_tb_interacc(numsipcod='A01', ano_mes='201505')
-expect_observation(person_id=1,observation_id=6,observation_date='2016-05-01')
+expect_person(person_id=1, person_source_value='A01')
+add_tb_interacc(numsipcod='A01', ano_mes='201605')
+expect_observation(person_id=1,observation_date='2016-05-01')
 
 declareTest('Observation number and severity of drug interactions')
 expect_person(person_id=1, person_source_value='A01')
 add_tb_interacc(numsipcod='A01', num_interacciones=5, gravedad_interaccion='LEVE')
-expect_observation(person_id=1,observation_id=7,value_as_number=5,qualifier_concept_id=764184)
+expect_observation(person_id=1,value_as_number=5,qualifier_concept_id=764184)
 add_tb_interacc(numsipcod='A01', num_interacciones=5, gravedad_interaccion='MODERADA')
-expect_observation(person_id=1,observation_id=8,value_as_number=5,qualifier_concept_id=4285732)
+expect_observation(person_id=1,value_as_number=5,qualifier_concept_id=4285732)
 add_tb_interacc(numsipcod='A01', num_interacciones=5, gravedad_interaccion='GRAVE')
-expect_observation(person_id=1,observation_id=9,value_as_number=5,qualifier_concept_id=4087703)
+expect_observation(person_id=1,value_as_number=5,qualifier_concept_id=4087703)
 
 declareTest('Observation date from Critical care unit stay')
 expect_person(person_id=1, person_source_value='A01')
 add_tb_estancia_uci(numsipcod='A01', fecha='2013-01-05', num_estancia_uci=5)
-expect_observation(person_id=1,observation_id=10,observation_date='2013-01-05')
+expect_observation(person_id=1,observation_date='2013-01-05')
 
 declareTest('Observation no days from Critical care unit stay')
 expect_person(person_id=1, person_source_value='A01')
-expect_observation(person_id=1,observation_id=10,value_as_number=5, unit_concept_id=8512)
+expect_observation(person_id=1,value_as_number=5, unit_concept_id=8512)
 
 declareTest('Observation date from sociodemographics')
 expect_person(person_id=1, person_source_value='A01')
@@ -234,24 +237,16 @@ expect_observation(person_id=1,observation_id=11,observation_date='2013-02-05')
 
 declareTest('Observation modality and nationality from sociodemographics')
 # Check if from 1 row of tb_sip_spo_resto_2015 2 rows in observation table are created
-expect_person(person_id=1, person_source_value='A01')
-add_tb_sip_spo_resto_2015(numsipcod='A01', cod_modalidad='PUBLIC', nacionalidad_espanola ='S')
-expect_observation(person_id=1,observation_id=12)
-expect_observation(person_id=1,observation_id=13, observation_concept_id = 4135608)
+expect_person(person_id=2, person_source_value='A02')
+add_tb_sip_spo_resto_2015(numsipcod='A02', cod_modalidad='PUBLIC', nacionalidad_espanola ='S')
+#expect_observation(person_id=2,observation_id=12)
+expect_observation(person_id=2, observation_concept_id = 4135608)
 
 
 declareTest('Observation from prescribed but not dispensed drugs')
 expect_person(person_id=1, person_source_value='A01')
 add_tb_prescrip(numsipcod='A01', numreceta = 'RE9999', id_tratamiento = 'TR99999', fecha_prescripcion='2012-10-10')
-expect_observation(person_id=1,observation_id=14, observation_date = '2012-10-10')
-
-
-# ========================
-# Procedure occurrence
-# ========================
-
-
-#TODO test for link to visit_occurrence_id
+expect_observation(person_id=1,observation_concept_id=762823,observation_date = '2012-10-10')
 
 # ========================
 # ========================
@@ -300,7 +295,7 @@ executeSql(connection, paste(test_sql, collapse = ';\n'))
 
 # View the results and write them
 querySql(connection, 'SELECT * FROM test_results')
-write.table(querySql(connection, 'SELECT * FROM test_results'), "unittest_results.csv",sep=",", )
+write.table(querySql(connection, 'SELECT * FROM test_results'), "unittest_results.csv",sep=",",row.names=FALSE )
 
 # Report failed results
 # TODO

@@ -115,6 +115,8 @@ class AbucasisWrapper(EtlWrapper):
         self.execute_sql_file('transformation/contraind_to_observation.sql')
         self.execute_sql_file('transformation/modalidad_to_observation.sql')
         self.execute_sql_file('transformation/nacionalidad_to_observation.sql')
+        self.execute_sql_file('transformation/rele_to_observation.sql')
+
 
         # Death
         self.execute_sql_file('transformation/death_intermediate_to_observation.sql')

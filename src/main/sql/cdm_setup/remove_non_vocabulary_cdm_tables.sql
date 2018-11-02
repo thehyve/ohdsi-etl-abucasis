@@ -11,7 +11,6 @@ DROP TABLE cdm5.drug_exposure CASCADE;
 DROP TABLE cdm5.device_exposure CASCADE;
 DROP TABLE cdm5.condition_occurrence CASCADE;
 DROP TABLE cdm5.measurement CASCADE;
-DROP TABLE cdm5.death CASCADE;
 DROP TABLE cdm5.note CASCADE;
 DROP TABLE cdm5.note_nlp CASCADE;
 DROP TABLE cdm5.observation CASCADE;

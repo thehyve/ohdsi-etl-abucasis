@@ -13,7 +13,6 @@ declareTest('Person birth date')
 add_tb_sip_spo(numsipcod='A01', fecha_nac='1991-01-01', sexo = 'H')
 expect_person(person_source_value='A01', year_of_birth=1991, month_of_birth=1, day_of_birth=1)
 
-
 declareTest('Person female')
 add_tb_sip_spo(numsipcod='A02', sexo = 'M')
 expect_person(person_source_value='A02', gender_concept_id=8532)
@@ -85,6 +84,11 @@ add_tb_ante_cmbd(numsipcod = 'A02', fecha_ingreso = '2018-01-01')
 expect_visit_occurrence(visit_occurrence_id = 1, person_id = 2, visit_start_date = '2018-01-01')
 add_tb_proc_cmbd(numsipcod = 'A02', fecha_ingreso = '2018-01-01', tipo_actividad = 'HOS', cie9p = '20.20')
 expect_procedure_occurrence(procedure_source_value = '20.20', visit_occurrence_id = 1) # NOTE: this id can change
+
+declareTest('Procedure occurrence start and end date')
+expect_person(person_id=1, person_source_value='A01')
+add_tb_proc_cmbd(numsipcod='A01', fecha_ingreso = '2012-01-01')
+expect_procedure_occurrence(person_id=1, procedure_date='2012-01-01')
 
 
 # ========================
@@ -245,10 +249,7 @@ expect_observation(person_id=1,observation_id=14, observation_date = '2012-10-10
 # ========================
 # Procedure occurrence
 # ========================
-declareTest('Procedure occurrence start and end date')
-expect_person(person_id=1, person_source_value='A01')
-add_tb_proc_cmbd(numsipcod='A01', fecha_ingreso = '2012-01-01')
-expect_procedure_occurrence(person_id=1, procedure_occurrence_id=1,procedure_date='2012-01-01')
+
 
 #TODO test for link to visit_occurrence_id
 

@@ -34,5 +34,5 @@ INSERT INTO cdm5.visit_occurrence
         preceding_visit_occurrence_id
 
     FROM cte2
-    WHERE row_number = 1
+    WHERE row_number != 1
 ;

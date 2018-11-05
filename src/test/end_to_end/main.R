@@ -81,16 +81,14 @@ expect_procedure_occurrence(procedure_source_value = '10.10')
 declareTest('Procedure occurrence visit')
 expect_person(person_id=2, person_source_value='A02')
 add_tb_ante_cmbd(numsipcod = 'A02', fecha_ingreso = '2018-01-01')
-expect_visit_occurrence(person_id = 2, visit_start_date = '2018-01-01')
+expect_visit_occurrence(person_id = 2,visit_start_date = '2018-01-01')
 add_tb_proc_cmbd(numsipcod = 'A02', fecha_ingreso = '2018-01-01', tipo_actividad = 'HOS', cie9p = '20.20')
-expect_procedure_occurrence(procedure_source_value = '20.20', visit_occurrence_id = 2) # NOTE: this id can change
+expect_procedure_occurrence(procedure_source_value = '20.20') # NOTE: this id can change
 
 declareTest('Procedure occurrence start and end date')
 expect_person(person_id=1, person_source_value='A01')
 add_tb_proc_cmbd(numsipcod='A01', fecha_ingreso = '2012-01-01')
 expect_procedure_occurrence(person_id=1, procedure_date='2012-01-01')
-
-#TODO test for link to visit_occurrence_id
 
 # ========================
 # Visit Ocurrence
@@ -188,13 +186,14 @@ expect_measurement(person_id=1, measurement_id=2,measurement_date='2012-05-05')
 # Observation
 # ========================
 declareTest('Observation death if patient died during hospitalization')
-expect_person(person_id=6, person_source_value='A06')
 add_tb_sip_spo(numsipcod='A06', fecha_nac='1991-01-01', fecha_def='2012-02-05')
+expect_person(person_id=6, person_source_value='A06')
 add_tb_ante_cmbd(numsipcod='A06', cir_alta='10', fecha_ingreso = '2012-01-01', fecha_alta = '2012-02-05')
-expect_observation(person_id = 6, observation_date='2012-02-05', observation_type_concept_id = 4216643)
+expect_observation(person_id = 6, observation_date='2012-02-05', observation_type_concept_id = 44818516)
 
 declareTest('Observation death if patient died NOT during hospitalization')
 add_tb_sip_spo(numsipcod='A07', fecha_nac='1994-01-01', fecha_def='2016-02-05')
+expect_person(person_id=7, person_source_value='A07')
 expect_observation(person_id=7, observation_date='2016-02-05',observation_type_concept_id = 38000280)
 
 declareTest('Observation date from drug adverse effects')

@@ -4,12 +4,6 @@ ETL scripts to convert ABUCASIS (INCLIVA) data to OMOP CDM v6, and make it backw
 
 ## Dependencies
 - Postgres (9.5+)
-  - Pl/Python
-  ```bash
-    select version();
-    sudo apt-get install postgresql-plpython3-<postgresql version>
-    CREATE EXTENSION plpython3u;
-    ```
   - cdm5 schema
 - Python 3, with pip, click, sqlalchemy and psycopg2
   ```bash

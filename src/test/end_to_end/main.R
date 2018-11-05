@@ -157,30 +157,30 @@ expect_drug_exposure(person_id=1, drug_exposure_start_date = '2015-05-06', drug_
 # ========================
 declareTest('Measurement date for clinical and laboratory measurements')
 expect_person(person_id=1, person_source_value='A01')
-add_tb_prestaci(numsipcod='A01', fecha_registro='2012-05-05')
+add_tb_prestaci(numsipcod='A01', fecha_registro='2012-05-05', cod_prestacion='123', cod_ud_medida='123')
 expect_measurement(person_id=1,measurement_id=1, measurement_date='2012-05-05')
 
 declareTest('NO Measurement if cod_ud_medida has conflictive value')
 expect_person(person_id=5, person_source_value='A05')
-add_tb_prestaci(numsipcod='A05', cod_ud_medida = ".")
+add_tb_prestaci(numsipcod='A05', cod_ud_medida = ".", cod_prestacion='123')
 expect_no_measurement(person_id = 5)
-add_tb_prestaci(numsipcod='A05', cod_ud_medida = "I")
+add_tb_prestaci(numsipcod='A05', cod_ud_medida = "I", cod_prestacion='123')
 expect_no_measurement(person_id = 5)
-add_tb_variables(numsipcod='A05', cod_ud_medida = ".")
+add_tb_variables(numsipcod='A05', cod_ud_medida = ".", cod_prestacion='123')
 expect_no_measurement(person_id = 5)
-add_tb_variables(numsipcod='A05', cod_ud_medida = "I")
+add_tb_variables(numsipcod='A05', cod_ud_medida = "I", cod_prestacion='123')
 expect_no_measurement(person_id = 5)
 
 declareTest('Exclude measurements with faulty cod_prestacion')
 expect_person(person_id=5, person_source_value='A05')
-add_tb_prestaci(numsipcod='A56', cod_prestacion = "-1")
+add_tb_prestaci(numsipcod='A56', cod_prestacion = "-1", cod_ud_medida='123')
 expect_no_measurement(person_id = 5)
-add_tb_variables(numsipcod='A05', cod_variable_clinic="-1")
+add_tb_variables(numsipcod='A05', cod_variable_clinic="-1", cod_ud_medida='123')
 expect_no_measurement(person_id = 5)
 
 declareTest('Measurement date for tb_variables')
 expect_person(person_id=2, person_source_value='A02')
-add_tb_variables(numsipcod='A01', fecha_registro='2012-05-05')
+add_tb_variables(numsipcod='A01', fecha_registro='2012-05-05', cod_variable_clinic='123', cod_ud_medida='123')
 expect_measurement(person_id=1, measurement_id=2,measurement_date='2012-05-05')
 
 

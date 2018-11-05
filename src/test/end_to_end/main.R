@@ -126,20 +126,19 @@ add_tb_diag_juntos(numsipcod='A02', fecha_inicio='2013-01-01', fecha_fin='2013-0
 expect_condition_occurrence(person_id = 2, condition_start_date = '2015-02-02', condition_end_date = '2015-02-03')
 
 # ========================
-# Drug exposure
+# Drug exposure and era
 # ========================
 declareTest('Drug exposure start and end date')
 expect_person(person_id=2, person_source_value='A02')
-add_tb_rele(numsipcod='A02', numreceta = 'RE001', fecha_dispensacion = '2015-05-05')
-add_tb_rele(numsipcod='A02', numreceta = 'RE002', fecha_dispensacion = '2015-06-05')
-add_tb_rele(numsipcod='A02', numreceta = 'RE003', fecha_dispensacion = '2015-07-05')
+add_tb_tratamientos(numsipcod='A02', id_tratamiento = 'TR001', dias_tratamiento = 90)
 add_tb_prescrip(numsipcod='A02', numreceta = 'RE001', id_tratamiento = 'TR001')
 add_tb_prescrip(numsipcod='A02', numreceta = 'RE002', id_tratamiento = 'TR001')
 add_tb_prescrip(numsipcod='A02', numreceta = 'RE003', id_tratamiento = 'TR001')
-add_tb_tratamientos(numsipcod='A02', id_tratamiento = 'TR001', dias_tratamiento = 90)
+add_tb_rele(numsipcod='A02', numreceta = 'RE001', fecha_dispensacion = '2015-05-05')
+add_tb_rele(numsipcod='A02', numreceta = 'RE002', fecha_dispensacion = '2015-06-05')
+add_tb_rele(numsipcod='A02', numreceta = 'RE003', fecha_dispensacion = '2015-07-05')
 # '2015-05-05' + 90/3 days ='2015-06-04'
 expect_drug_exposure(person_id=2, drug_exposure_id = 1, drug_exposure_start_date = '2015-05-05', drug_exposure_end_date = '2015-06-04')
-
 
 declareTest('Drug exposure derivation of total days supply from treatment dates')
 expect_person(person_id=1, person_source_value='A01')
@@ -149,8 +148,51 @@ add_tb_tratamientos(numsipcod='A01', id_tratamiento ='TR101', dias_tratamiento=N
 # Patient bought the drug 1 day after the treatment was prescribed (see tb_rele)
 expect_drug_exposure(person_id=1, drug_exposure_start_date = '2015-05-06', drug_exposure_end_date = '2015-05-11')
 
-#TODO additional unit tests?
+declareTest('Drug exposure quantity calculation per hour')
+expect_person(person_id=1, person_source_value='A01')
+# 30 days, 1 per 24 hours over 1 precription = 30
+add_tb_tratamientos(numsipcod='A01', id_tratamiento = 'TR002', dias_tratamiento = 30, unidades=1, cadencia=24, tipo_posologia='Horaria')
+add_tb_prescrip(numsipcod='A01', numreceta = 'RE021', id_tratamiento = 'TR002')
+add_tb_rele(numsipcod='A01', numreceta = 'RE021', fecha_dispensacion = '2017-01-01')
+expect_drug_exposure(person_id=1, drug_exposure_start_date = '2017-01-01', quantity=30)
 
+declareTest('Drug exposure quantity calculation per day')
+# 180 days, 5 per 2 days over 1 precription = 450
+add_tb_tratamientos(numsipcod='A01', id_tratamiento = 'TR002', dias_tratamiento = 30, unidades=5, cadencia=2, tipo_posologia='Diaria')
+add_tb_prescrip(numsipcod='A01', numreceta = 'RE022', id_tratamiento = 'TR002')
+add_tb_rele(numsipcod='A01', numreceta = 'RE022', fecha_dispensacion = '2017-02-01')
+expect_drug_exposure(person_id=1, drug_exposure_start_date = '2017-02-01', quantity=450)
+
+declareTest('Drug exposure quantity with other posologia')
+add_tb_tratamientos(numsipcod='A01', id_tratamiento = 'TR002', unidades=50, tipo_posologia='Sin Cadencia')
+add_tb_prescrip(numsipcod='A01', numreceta = 'RE024', id_tratamiento = 'TR002')
+add_tb_rele(numsipcod='A01', numreceta = 'RE024', fecha_dispensacion = '2017-04-01')
+expect_drug_exposure(person_id=1, drug_exposure_start_date = '2017-04-01', quantity=50)
+
+declareTest('Drug exposure quantity with zero cadencia')
+add_tb_tratamientos(numsipcod='A01', id_tratamiento = 'TR002', unidades=30, cadencia=0.0)
+add_tb_prescrip(numsipcod='A01', numreceta = 'RE023', id_tratamiento = 'TR002')
+add_tb_rele(numsipcod='A01', numreceta = 'RE023', fecha_dispensacion = '2017-03-01')
+expect_drug_exposure(person_id=1, drug_exposure_start_date = '2017-03-01', quantity=30)
+
+declareTest('Drug exposure quantity and days_supply over multiple prescriptions')
+expect_person(person_id=1, person_source_value='A01')
+# 90 days, 2 per 24 hours over 3 precriptions = 60 per exposure
+add_tb_tratamientos(numsipcod='A01', id_tratamiento = 'TR002', dias_tratamiento = 90, unidades=2, tipo_posologia='Horaria', cadencia=24)
+add_tb_prescrip(numsipcod='A01', numreceta = 'RE011', id_tratamiento = 'TR002')
+add_tb_prescrip(numsipcod='A01', numreceta = 'RE012', id_tratamiento = 'TR002')
+add_tb_prescrip(numsipcod='A01', numreceta = 'RE013', id_tratamiento = 'TR002')
+add_tb_rele(numsipcod='A01', numreceta = 'RE011', fecha_dispensacion = '2016-05-01')
+add_tb_rele(numsipcod='A01', numreceta = 'RE012', fecha_dispensacion = '2016-06-01')
+add_tb_rele(numsipcod='A01', numreceta = 'RE013', fecha_dispensacion = '2016-07-01')
+
+expect_drug_exposure(person_id=1, drug_exposure_start_date = '2016-05-01', quantity=60, days_supply=30)
+declareTest('Drug exposure refill')
+expect_drug_exposure(person_id=1, drug_exposure_start_date = '2016-06-01', refills=1)
+expect_drug_exposure(person_id=1, drug_exposure_start_date = '2016-07-01', refills=2)
+
+declareTest('Drug era')
+expect_drug_era(person_id=1, drug_era_start_date='2016-05-01', durg_era_end_date='2016-07-30', drug_exposure_count=3)
 
 # ========================
 # Measurement

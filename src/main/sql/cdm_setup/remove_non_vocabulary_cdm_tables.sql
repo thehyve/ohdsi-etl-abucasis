@@ -1,3 +1,4 @@
+-- Remove standardized tables
 DROP TABLE cdm5.attribute_definition CASCADE;
 DROP TABLE cdm5.cdm_source CASCADE;
 DROP TABLE cdm5.metadata CASCADE;
@@ -22,9 +23,12 @@ DROP TABLE cdm5.care_site CASCADE;
 DROP TABLE cdm5.provider CASCADE;
 DROP TABLE cdm5.payer_plan_period CASCADE;
 DROP TABLE cdm5.cost CASCADE;
+
+-- Remove derived tables
 DROP TABLE cdm5.drug_era CASCADE;
 DROP TABLE cdm5.dose_era CASCADE;
 DROP TABLE cdm5.condition_era CASCADE;
+
 -- To make CDMv6 backwards compatible with CDMv5 death table is also created in the wrapper
 --    thus, we also need to remove it
 DROP TABLE cdm5.death CASCADE;

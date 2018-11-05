@@ -121,7 +121,7 @@ declareTest('Condition occurrence start and end date')
 expect_person(person_id=2, person_source_value='A02')
 add_tb_ante_cmbd(numsipcod='A02', fecha_ingreso='2013-01-01', fecha_alta='2013-02-01')
 add_tb_diag_juntos(numsipcod='A02', fecha_inicio='2013-01-01', fecha_fin='2013-02-01', origen = 'C')
-expect_condition_occurrence(person_id = 2, condition_start_date = '2015-02-02', condition_end_date = '2015-02-03')
+expect_condition_occurrence(person_id = 2, condition_start_date = '2013-01-01', condition_end_date = '2013-02-01')
 
 # ========================
 # Drug exposure
@@ -164,9 +164,9 @@ add_tb_prestaci(numsipcod='A05', cod_ud_medida = ".", cod_prestacion='123')
 expect_no_measurement(person_id = 5)
 add_tb_prestaci(numsipcod='A05', cod_ud_medida = "I", cod_prestacion='123')
 expect_no_measurement(person_id = 5)
-add_tb_variables(numsipcod='A05', cod_ud_medida = ".", cod_prestacion='123')
+add_tb_variables(numsipcod='A05', cod_ud_medida = ".", cod_variable_clinic='123')
 expect_no_measurement(person_id = 5)
-add_tb_variables(numsipcod='A05', cod_ud_medida = "I", cod_prestacion='123')
+add_tb_variables(numsipcod='A05', cod_ud_medida = "I", cod_variable_clinic='123')
 expect_no_measurement(person_id = 5)
 
 declareTest('Exclude measurements with faulty cod_prestacion')

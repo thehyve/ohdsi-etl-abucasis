@@ -1,0 +1,1 @@
+CREATE SCHEMA source_intermediate;

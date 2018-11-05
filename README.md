@@ -1,12 +1,14 @@
-# Test branch for ABUCASIS to OMOP CDM
-Contains unit tests for CDM conversion. 
-
-
-ETL scripts to convert ABUCASIS (INCLIVA) data to OMOP CDM v6. 
+ETL scripts to convert ABUCASIS (INCLIVA) data to OMOP CDM v6, and make it backwards compatible with CDMv5. 
 
 ## Dependencies
 - Postgres (9.5+)
-  - cdm5 schema with OMOP vocabulary tables created and loaded
+  - Pl/Python
+  ```bash
+    select version();
+    sudo apt-get install postgresql-plpython3-<postgresql version>
+    CREATE EXTENSION plpython3u;
+    ```
+  - cdm5 schema
 - Python 3, with pip, click, sqlalchemy and psycopg2
   ```bash
   apt install python3-pip
@@ -44,4 +46,9 @@ This repository contains a Python framework that executes sql script which do th
 
 ### SQL
 Organised in five subdirectories:
-* 
+* cdm_setup: preparation of CDM environment (setup tables, columns, constraints, ...
+* functions
+* post_processing: generation of derived OMOP tables
+* source_preprocessing: pre-processing of source data and intermediate tables generation
+* transformation: ETL scripts for transforming source data to OMOP CDM data
+* vocabulary_loading

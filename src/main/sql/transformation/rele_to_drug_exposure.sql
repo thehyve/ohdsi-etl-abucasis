@@ -78,6 +78,7 @@ INSERT INTO cdm5.drug_exposure
 		number_of_prescriptions                                           AS days_supply,
 
 		tb_rele.fecha_dispensacion                                        AS drug_exposure_start_date,
+
 		tb_rele.fecha_dispensacion :: TIMESTAMP                           AS drug_exposure_start_datetime,
 
 		tb_rele.fecha_dispensacion + (total_days_supply /

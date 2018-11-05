@@ -20,4 +20,7 @@ COPY cdm5.source_to_concept_map FROM '@absPath/resources/mapping_tables/abucasis
 ;
 COPY cdm5.source_to_concept_map FROM '@absPath/resources/mapping_tables/abucasis_tip_prest.csv' WITH CSV HEADER
 ;
-
+COPY cdm5.source_to_concept_map FROM '@absPath/resources/mapping_tables/abucasis_prinactivo.csv' WITH CSV HEADER
+;
+COPY cdm5.source_to_concept_map FROM '@absPath/resources/mapping_tables/abucasis_cie9.csv' WITH CSV HEADER
+;

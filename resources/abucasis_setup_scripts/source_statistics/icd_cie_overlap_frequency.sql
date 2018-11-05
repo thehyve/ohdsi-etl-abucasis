@@ -144,10 +144,13 @@ WITH icd_source (concept_code, description, frequency, vocabulary_id) AS (
 SELECT
   source_code,
   source_name,
-  target_concept_id,
+  string_agg(concept_id_2::text, ';')           AS standard_concept_id,
   coalesce(frequency, 0) AS frequency
 FROM source_join_target
-WHERE vocabulary_id = 'CIE9p'
+  LEFT JOIN cdm5.concept_relationship
+    ON concept_id_1 = target_concept_id AND relationship_id = 'Maps to'
+WHERE vocabulary_id = 'CIE9'
+  GROUP BY source_code, source_name, source_join_target.frequency
 ORDER BY frequency DESC
 ;
 

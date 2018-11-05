@@ -69,9 +69,9 @@ class AbucasisWrapper(EtlWrapper):
 
     def _load_vocabulary_mappings(self):
         self.log("Loading source_to_concept_map...", leading_newline=True)
-        self.execute_sql_file('vocabulary_mapping/load_source_to_concept_map.sql')
-        self.execute_sql_file('vocabulary_mapping/tba_to_2B_concept.sql')
-        self.execute_sql_file('vocabulary_mapping/update_stcm_source_concept_id.sql')
+        self.execute_sql_file('vocabulary_loading/load_source_to_concept_map.sql')
+        self.execute_sql_file('vocabulary_loading/tba_to_2B_concept.sql')
+        self.execute_sql_file('vocabulary_loading/update_stcm_source_concept_id.sql')
 
     def _prepare_source(self):
         self.log("Intermediate tables and aggregates...", leading_newline=True)

@@ -58,6 +58,9 @@ class AbucasisWrapper(EtlWrapper):
         self.log_timestamp()
 
     def _prepare_cdm(self):
+        self.execute_sql_file('cdm_setup/create_death_table.sql', verbose=False)
+        self.log("CDMv5.0 death table created")
+
         self.execute_sql_file('cdm_setup/remove_non_vocabulary_cdm_tables.sql', verbose=False)
         self.log("CDM tables dropped")
 
@@ -75,6 +78,7 @@ class AbucasisWrapper(EtlWrapper):
 
     def _prepare_source(self):
         self.log("Intermediate tables and aggregates...", leading_newline=True)
+        self.execute_sql_file('source_preprocessing/prepare_environment.sql')
         self.execute_sql_file('source_preprocessing/ante_cmbd_morbilid__visit_intermediate_table.sql')
         self.execute_sql_file('source_preprocessing/sip_spo_ante_cmbd_to_death_intermediate.sql')
 
@@ -120,6 +124,9 @@ class AbucasisWrapper(EtlWrapper):
         # Death
         self.execute_sql_file('transformation/death_intermediate_to_observation.sql')
         self.execute_sql_file('transformation/death_intermediate_to_death.sql')
+
+        # Clean intermediate tables/schemas
+        self.execute_sql_file('transformation/clean_intermediate_environment.sql')
 
     def _derive_era(self):
         self.execute_sql_file('post_processing/GenerateDrugEra.sql')

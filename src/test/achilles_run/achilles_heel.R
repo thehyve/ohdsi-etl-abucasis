@@ -22,6 +22,9 @@ connectionDetails <- createConnectionDetails(dbms = "postgresql",
 # connection <- connect(connectionDetails)
 #
 #
+# TODO runn achilles heel
+# do not check statistical
+# which analysis we want to run, ...
 achilles(connectionDetails,
          cdmDatabaseSchema = config$cdmSchema,
          resultsDatabaseSchema=config$cdmresultsSchema,
@@ -29,7 +32,7 @@ achilles(connectionDetails,
          scratchDatabaseSchema = config$cdmscratchSchema,
          numThreads = 1,
          sourceName = config$sourceName,
-         cdmVersion = config$cdmversion,
+         cdmVersion = 6,
          runHeel = TRUE,
          runCostAnalysis = FALSE,
          dropScratchTables = TRUE,

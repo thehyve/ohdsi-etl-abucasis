@@ -33,9 +33,9 @@ SELECT
   numsipcod,
   first_death_date AS death_date,
   CASE first_death_date
+    WHEN discharge_date THEN 44818516 -- EHR discharge status ‘Expired’
     WHEN fecha_def THEN 38000280 -- Observation recorded from EHR
     WHEN fecha_baja_sip THEN 38000280 -- Observation recorded from EHR
-    WHEN discharge_date THEN 44818516 -- EHR discharge status ‘Expired’
     ELSE -1
   END              AS death_type_concept_id
 INTO source_intermediate.intermediate_death

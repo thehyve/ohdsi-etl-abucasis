@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS cdm5.death
+DROP TABLE IF EXISTS cdm5.death;
 
 CREATE TABLE cdm5.death
 (

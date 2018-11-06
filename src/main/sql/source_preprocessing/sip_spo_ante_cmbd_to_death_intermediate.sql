@@ -6,7 +6,7 @@ but the reason is in practice always death.
 The death type depends on where the death date is recorded. If recorded at multiple sites, the death type will be 38000280
  */
 
-DROP TABLE source_intermediate.intermediate_death
+DROP TABLE IF EXISTS source_intermediate.intermediate_death
 ;
 
 WITH death_at_discharge AS (

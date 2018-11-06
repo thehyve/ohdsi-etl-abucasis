@@ -1,5 +1,5 @@
 -- Generate new lookup table
-DROP TABLE source_intermediate.intermediate_table_visit_ocurrence
+DROP TABLE IF EXISTS source_intermediate.intermediate_table_visit_ocurrence
 ;
 
 CREATE TABLE source_intermediate.intermediate_table_visit_ocurrence

@@ -156,7 +156,7 @@ expect_drug_exposure(person_id=1, drug_exposure_start_date = '2017-01-01', quant
 
 declareTest('Drug exposure quantity calculation per day')
 # 180 days, 5 per 2 days over 1 precription = 450
-add_tb_tratamientos(numsipcod='A01', id_tratamiento = 'TR012', dias_tratamiento = 30, unidades=5, cadencia=2, tipo_posologia='Diaria')
+add_tb_tratamientos(numsipcod='A01', id_tratamiento = 'TR012', dias_tratamiento = 180, unidades=5, cadencia=2, tipo_posologia='Diaria')
 add_tb_prescrip(numsipcod='A01', numreceta = 'RE022', id_tratamiento = 'TR012')
 add_tb_rele(numsipcod='A01', numreceta = 'RE022', fecha_dispensacion = '2017-02-01')
 expect_drug_exposure(person_id=1, drug_exposure_start_date = '2017-02-01', quantity=450)
@@ -191,7 +191,7 @@ expect_drug_exposure(person_id=1, drug_exposure_start_date = '2016-07-01', refil
 
 # TODO: drug era test does not work
 # declareTest('Drug era')
-# expect_drug_era(person_id=1, drug_era_start_date='2016-05-01 00:00:00.000', durg_era_end_date='2016-07-30 00:00:00.000', drug_exposure_count=3)
+# expect_drug_era(person_id=1, drug_era_start_date='2016-05-01 00:00:00.000', durg_era_end_date='2016-07-31 00:00:00.000', drug_exposure_count=3)
 
 # ========================
 # Measurement

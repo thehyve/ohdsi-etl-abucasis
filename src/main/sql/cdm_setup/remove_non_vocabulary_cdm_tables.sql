@@ -31,4 +31,4 @@ DROP TABLE cdm5.condition_era CASCADE;
 
 -- To make CDMv6 backwards compatible with CDMv5 death table is also created in the wrapper
 --    thus, we also need to remove it
-DROP TABLE cdm5.death CASCADE;
+DROP TABLE IF EXISTS cdm5.death CASCADE;

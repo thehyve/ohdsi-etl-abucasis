@@ -1,4 +1,6 @@
-create table cdm5.death
+DROP TABLE IF EXISTS cdm5.death
+
+CREATE TABLE cdm5.death
 (
   person_id               integer not null,
   death_date              date    not null,

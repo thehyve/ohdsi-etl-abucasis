@@ -9,6 +9,8 @@ Note that the OMOP target schema should be called `cdm5`.
 CREATE DATABASE <database_name>;
 CREATE SCHEMA cdm5;
 CREATE SCHEMA <source_schema_name>;
+CREATE SCHEMA source_intermediate;
+
 ```
 Note: the last step can be skipped if the source data will be stored in the `public` schema. 
 

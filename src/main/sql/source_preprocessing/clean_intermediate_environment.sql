@@ -1,1 +1,0 @@
-DROP SCHEMA source_intermediate CASCADE;

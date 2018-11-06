@@ -22,7 +22,12 @@ ETL scripts to convert ABUCASIS (INCLIVA) data to OMOP CDM v6, and make it backw
   - ICD10Proc
   - ICD9CM
   - ICD9PCS
-  
+
+## Setup
+See [this document](https://github.com/thehyve/ohdsi-etl-abucasis/blob/master/database_environment.md)
+ describing the initial setup. 
+In this setup the dependencies are installed and the target 
+`cdm5` schema is initialized with the OMOP vocabulary tables.
 
 ## Run ETL
 ```bash

@@ -8,7 +8,6 @@ F-SS-24,0,ABUCASIS_MODALIDAD,Unemployed and receives unemployment benefits,42511
 F-SS-23,0,ABUCASIS_MODALIDAD,Receives unemployment benefits,4053252,SNOMED,1970-01-01,2099-12-31,
 F-SS-26,0,ABUCASIS_MODALIDAD,Receives other benefits,4330024,SNOMED,1970-01-01,2099-12-31,
 F-SS-26,0,ABUCASIS_MODALIDAD,Receives other benefits,4076204,SNOMED,1970-01-01,2099-12-31,
-F-SS-26,0,ABUCASIS_MODALIDAD,Receives other benefits,4076204,SNOMED,1970-01-01,2099-12-31,
 S-N-13,0,ABUCASIS_MODALIDAD,Still not classified in any category. Person need to deliver some documents.,45877986,LOINC,1970-01-01,2099-12-31,
 F-SS-20,0,ABUCASIS_MODALIDAD,Unemployed and not receives unemployment benefits,45877709,LOINC,1970-01-01,2099-12-31,
 F-EX-5,0,ABUCASIS_MODALIDAD,Person who has European Health Card,44810106,SNOMED,1970-01-01,2099-12-31,

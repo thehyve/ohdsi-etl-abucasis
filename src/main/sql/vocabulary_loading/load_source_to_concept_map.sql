@@ -2,12 +2,19 @@
 TRUNCATE TABLE cdm5.source_to_concept_map
 ;
 
-DELETE FROM cdm5.vocabulary
-WHERE vocabulary_concept_id = 0
-;
+CREATE TEMP TABLE tmp_vocabulary
+  AS
+    SELECT *
+    FROM cdm5.vocabulary
+WITH NO DATA;
 
-COPY cdm5.vocabulary FROM '@absPath/resources/mapping_tables/vocabulary.csv' WITH CSV HEADER
-;
+COPY tmp_vocabulary FROM '@absPath/resources/mapping_tables/vocabulary.csv' WITH CSV HEADER;
+
+INSERT INTO cdm5.vocabulary
+  SELECT DISTINCT ON (vocabulary_id) *
+  FROM tmp_vocabulary
+ON CONFLICT DO NOTHING;
+
 
 -- Mapping of name of table with info on number of events
 COPY cdm5.source_to_concept_map FROM '@absPath/resources/mapping_tables/abucasis_num_events.csv' WITH CSV HEADER

@@ -1,5 +1,8 @@
 ### Install required dependencies  ###
 if (!require("devtools")) install.packages("devtools")
+if (!require("DatabaseConnector")) install.packages("DatabaseConnector")
+if (!require("OHDSI/OhdsiRTools")) install_github("OHDSI/OhdsiRTools")
+
 # Install Achilles latest release
 if (!require("Achilles")) devtools::install_github("OHDSI/Achilles", dependencies = TRUE)
 # # Install Achilles for CDM v6 (current state: does not work)
@@ -42,7 +45,7 @@ achilles(connectionDetails,
          runHeel = TRUE,
          runCostAnalysis = FALSE,
          dropScratchTables = TRUE,
-         conceptHierarchy = FALSE)
+         conceptHierarchy = FALSE) # important to set to False 
 
 ### Run Achilles heel
 # achillesHeel(connectionDetails,

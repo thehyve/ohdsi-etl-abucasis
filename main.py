@@ -20,7 +20,7 @@ from src.main.python.AbucasisWrapper import AbucasisWrapper
 from sqlalchemy import create_engine
 import click
 
-__version__ = '0.1.0'
+__version__ = '0.2.0-SNAPSHOT'
 
 
 @click.command()

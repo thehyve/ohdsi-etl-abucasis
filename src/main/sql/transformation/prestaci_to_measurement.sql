@@ -10,6 +10,7 @@ INSERT INTO cdm5.measurement
   measurement_date,
   measurement_datetime,
   value_as_number,
+  value_source_value,
   unit_concept_id,
   unit_source_value,
   measurement_type_concept_id
@@ -22,6 +23,7 @@ INSERT INTO cdm5.measurement
     fecha_registro                      AS measurement_date,
     fecha_registro :: TIMESTAMP         AS measurement_datetime,
     valor_registrado                    AS value_as_number,
+    valor_registrado                    AS value_source_value,
     coalesce(unit.target_concept_id, 0) AS unit_concept_id,
     coalesce(unit.source_concept_id)    AS unit_source_value,
     -- Lab results

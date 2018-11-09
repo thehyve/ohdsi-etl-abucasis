@@ -12,8 +12,6 @@ library(Achilles)
 library('yaml')
 library(DatabaseConnector)
 
-# TODO set working directories, etc 
-
 # Load database connection details, schema names, CDM version, ...
 config <- yaml.load_file('./config.yml')
 

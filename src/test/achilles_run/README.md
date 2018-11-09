@@ -3,12 +3,11 @@ Achilles can be run via the script `achilles_heel.R`. First, you'll need to init
 the database connection configuration file. Copy the template file `config.template.yml` to `config.yml` and modify it 
 typying your database user, password, server and port (connectionDetails).
 
-Subsequently, create 3 additional schemas in your database. They will be used by Achilles to store the results and the intermediate results. 
+Subsequently, create 2 additional schemas in your database. They will be used by Achilles to store the results and the intermediate results. 
 
 ```sql
 CREATE SCHEMA cdm5results
 CREATE SCHEMA cdm5scratch
-CREATE SCHEMA cdm5results
 ```
 
 # Achilles installation (for Linux machines)

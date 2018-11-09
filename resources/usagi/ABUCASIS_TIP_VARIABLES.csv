@@ -294,10 +294,10 @@ LATDDOLU,Derch lateralization. Artic. Dorsolumbar,1,,Lateralizacion Derch. Artic
 AYUDRECO,Help recommended,44,,Ayuda recomendada,1.1982247829437256,UNCHECKED,4172704,
 PROB_6,problem detected,42,,Problema detectado,1.3427512645721436,APPROVED,46234711,
 SP02,Saturacion 02 Percutaneous,289,,Saturacion 02 percutanea,1.0886017084121704,APPROVED,4310328,
-RESUFINA,Final Result episode,138,,Resultado final episodio,1.2292524576187134,UNCHECKED,4172704,
+RESUFINA,Final Result episode,138,,Resultado final episodio,1.2292524576187134,UNCHECKED,4172704,Incliva not sure about the meaning. Don't map
 POST-Med,average postprandial blood glucose,1,,glucemia capilar postpandrial media,0.9457374215126038,UNCHECKED,4172704,
 TAD,diastolic blood pressure,3740,,Tensión arterial diastólica,1.0,APPROVED,4154790,
-NUMEROND,Round number,138,,Número de ronda,1.374976634979248,UNCHECKED,4172704,
+NUMEROND,Round number,138,,Número de ronda,1.374976634979248,UNCHECKED,4172704,Incliva not sure about the meaning. DON'T MAP
 CONSTABA,anti-smoking advice (Attention Therapeutic Minima),358,,Consejo antitabaco (Atención Terapeútica Minima),0.7360350489616394,APPROVED,4021160,
 PERADB,Abdominal perimeter,237,,Perímetro Abdominal,1.3311350345611572,APPROVED,4245376,
 TOMAMEDI,Does the medication is taken?,42,,¿Se toma la medicación?,0.9305448532104492,UNCHECKED,4172704,

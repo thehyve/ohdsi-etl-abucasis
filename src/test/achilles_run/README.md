@@ -10,6 +10,9 @@ CREATE SCHEMA cdm5results
 CREATE SCHEMA cdm5scratch
 ```
 
+Then, you can run Achilles by running `achilles_heel.R` in Rstudio. Once the analysis is done, a webpage will popup with the report 
+of the AchillesHeel analysis. 
+
 # Achilles installation (for Linux machines)
 
 First, install the required dependencies:

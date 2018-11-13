@@ -58,7 +58,7 @@ Standardized vocabulary
 ************************/
 
 
-
+/*
 ALTER TABLE concept ADD CONSTRAINT xpk_concept PRIMARY KEY (concept_id);
 
 ALTER TABLE vocabulary ADD CONSTRAINT xpk_vocabulary PRIMARY KEY (vocabulary_id);
@@ -76,7 +76,7 @@ ALTER TABLE concept_ancestor ADD CONSTRAINT xpk_concept_ancestor PRIMARY KEY (an
 ALTER TABLE source_to_concept_map ADD CONSTRAINT xpk_source_to_concept_map PRIMARY KEY (source_vocabulary_id,target_concept_id,source_code,valid_end_date);
 
 ALTER TABLE drug_strength ADD CONSTRAINT xpk_drug_strength PRIMARY KEY (drug_concept_id, ingredient_concept_id);
-
+*/ 
 
 /**************************
 
@@ -135,12 +135,15 @@ Standardized health system data
 
 ALTER TABLE location ADD CONSTRAINT xpk_location PRIMARY KEY ( location_id ) ;
 
+/*
 ALTER TABLE location_history ADD CONSTRAINT xpk_location_history PRIMARY KEY ( location_history_id ) ; 
+*/
 
 ALTER TABLE care_site ADD CONSTRAINT xpk_care_site PRIMARY KEY ( care_site_id ) ;
 
+/*
 ALTER TABLE provider ADD CONSTRAINT xpk_provider PRIMARY KEY ( provider_id ) ;
-
+*/
 
 
 /************************
@@ -163,10 +166,11 @@ Standardized derived elements
 
 ALTER TABLE drug_era ADD CONSTRAINT xpk_drug_era PRIMARY KEY ( drug_era_id ) ;
 
+/*
 ALTER TABLE dose_era  ADD CONSTRAINT xpk_dose_era PRIMARY KEY ( dose_era_id ) ;
 
 ALTER TABLE condition_era ADD CONSTRAINT xpk_condition_era PRIMARY KEY ( condition_era_id ) ;
-
+*/
 
 /************************
 *************************
@@ -185,7 +189,7 @@ Indices
 Standardized vocabulary
 
 ************************/
-
+/*
 CREATE UNIQUE INDEX idx_concept_concept_id  ON concept  (concept_id ASC);
 CLUSTER concept  USING idx_concept_concept_id ;
 CREATE INDEX idx_concept_code ON concept (concept_code ASC);
@@ -225,7 +229,7 @@ CREATE INDEX idx_source_to_concept_map_code ON source_to_concept_map (source_cod
 CREATE INDEX idx_drug_strength_id_1  ON drug_strength  (drug_concept_id ASC);
 CLUSTER drug_strength  USING idx_drug_strength_id_1 ;
 CREATE INDEX idx_drug_strength_id_2 ON drug_strength (ingredient_concept_id ASC);
-
+*/
 
 /**************************
 
@@ -327,13 +331,13 @@ Standardized health system data
 Standardized health economics
 
 ************************/
-
+/*
 CREATE INDEX idx_period_person_id  ON payer_plan_period  (person_id ASC);
 CLUSTER payer_plan_period  USING idx_period_person_id ;
 
 CREATE INDEX idx_cost_person_id  ON cost  (person_id ASC);
 CLUSTER cost  USING idx_cost_person_id ;
-
+*/
 
 /************************
 
@@ -346,6 +350,7 @@ CREATE INDEX idx_drug_era_person_id  ON drug_era  (person_id ASC);
 CLUSTER drug_era  USING idx_drug_era_person_id ;
 CREATE INDEX idx_drug_era_concept_id ON drug_era (drug_concept_id ASC);
 
+/*
 CREATE INDEX idx_dose_era_person_id  ON dose_era  (person_id ASC);
 CLUSTER dose_era  USING idx_dose_era_person_id ;
 CREATE INDEX idx_dose_era_concept_id ON dose_era (drug_concept_id ASC);
@@ -353,4 +358,4 @@ CREATE INDEX idx_dose_era_concept_id ON dose_era (drug_concept_id ASC);
 CREATE INDEX idx_condition_era_person_id  ON condition_era  (person_id ASC);
 CLUSTER condition_era  USING idx_condition_era_person_id ;
 CREATE INDEX idx_condition_era_concept_id ON condition_era (condition_concept_id ASC);
-
+*/

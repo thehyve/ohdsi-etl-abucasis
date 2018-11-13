@@ -52,10 +52,24 @@ class AbucasisWrapper(EtlWrapper):
 
         # Constraints and Indices
         # self._apply_constraints()
-        # self._apply_indexes()
+        self._apply_indexes()
 
         # self.log_runtime()
         self.log_timestamp()
+
+    # TODO
+    # def _apply_constraints(self):
+    #     if self.is_constraints_applied:
+    #         return
+    #
+    #     self.log("Applying constraints...")
+    #     self.execute_sql_file('./sql/cdm_prepare/OMOP CDM constraints - PK - NonVocabulary.sql', False)
+    #     self.execute_sql_file('./sql/cdm_prepare/OMOP CDM constraints - FK - NonVocabulary.sql', False)
+    #     self.is_constraints_applied = True
+
+    def _apply_indexes(self):
+        self.log("Applying indexes...")
+        self.execute_sql_file('cdm_setup/OMOP CDM postgresql pk indexes__no_vocab.sql', False)
 
     def _prepare_cdm(self):
         self.execute_sql_file('cdm_setup/create_death_table.sql', verbose=False)

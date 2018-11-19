@@ -1,64 +1,6 @@
 -- Queries to source data
 --
 
-
--- Check:
--- 1) Observation period 2012
--- run independently
--- Rerun with EXPlain
--- Rerun with Explain analyse
--- do small modification at the begging
-
--- -- Count number of Rele --> prescrip --> tratamientos
--- SELECT COUNT(*)
---
---
--- WITH prescrip_per_trat AS (
--- 		SELECT
--- 			id_tratamiento,
--- 			count(*) AS number_of_prescriptions
--- 		FROM  @source_schema.tb_tratamientos
--- 			JOIN  @source_schema.tb_prescrip USING (id_tratamiento)
--- 		GROUP BY id_tratamiento
--- ), tratamiento_derived AS (
--- 		SELECT
--- 			id_tratamiento,
---
--- 			cod_prinactivo,
---
--- 			unidad_posologia,
---
--- 			CASE
--- 			-- cadencia = 0 is equivalent to 1 day rate
--- 			WHEN cadencia = 0
--- 				THEN unidades * 24 * coalesce(dias_tratamiento, fecha_fin_tratamiento - fecha_inicio_tratamiento)
--- 			WHEN tipo_posologia = 'Horaria'
--- 				THEN unidades * (24 / cadencia) * coalesce(dias_tratamiento, fecha_fin_tratamiento - fecha_inicio_tratamiento)
--- 			WHEN tipo_posologia = 'Diaria'
--- 				THEN unidades * (1 / cadencia) * coalesce(dias_tratamiento, fecha_fin_tratamiento - fecha_inicio_tratamiento)
--- 			ELSE unidades
--- 			END                                                                          AS total_quantity,
---
--- 			coalesce(dias_tratamiento, fecha_fin_tratamiento - fecha_inicio_tratamiento) AS total_days_supply,
---
--- 			CASE tipo_posologia
--- 			WHEN 'Horaria'
--- 				THEN unidades :: TEXT || ' per ' || cadencia :: TEXT || ' hours'
--- 			WHEN 'Diaria'
--- 				THEN unidades :: TEXT || ' per ' || cadencia :: TEXT || ' days'
--- 			ELSE tipo_posologia
--- 			END                                                                          AS treatment_instruction,
---
--- 			number_of_prescriptions
---
--- 		--   ,tipo_posologia, unidades, cadencia, dias_tratamiento,  fecha_inicio_tratamiento, fecha_fin_tratamiento,
---
--- 		FROM  @source_schema.tb_tratamientos
--- 			LEFT JOIN prescrip_per_trat USING (id_tratamiento)
--- )
---
---
-
 -- Number of linked drug prescriptions to tratamientos and rele
 DO language plpgsql $$
 BEGIN
@@ -131,6 +73,128 @@ BEGIN
 	RAISE NOTICE 'Explain analyze original query rele_to_observation';
 END
 $$;
+
+
+-- Evaluate how many rows are outside the observation period
+DO language plpgsql $$
+BEGIN
+	RAISE NOTICE 'Evaluate how many rows ante_cmbd are before or after the observation period';
+END
+$$;
+
+SELECT COUNT(*)
+FROM public.tb_ante_cmbd
+WHERE tb_ante_cmbd.fecha_ingreso < TO_DATE('2012-01-01', 'YYYY-MM-DD');
+
+
+SELECT COUNT(*)
+FROM public.tb_ante_cmbd
+WHERE tb_ante_cmbd.fecha_alta > TO_DATE('2016-12-31', 'YYYY-MM-DD');
+
+DO language plpgsql $$
+BEGIN
+	RAISE NOTICE 'Evaluate how many rows morbilid are before or after the observation period';
+END
+$$;
+
+SELECT COUNT(*)
+FROM public.tb_morbilid
+WHERE tb_morbilid.fecha_inicio < TO_DATE('2012-01-01', 'YYYY-MM-DD');
+
+
+SELECT COUNT(*)
+FROM public.tb_morbilid
+WHERE tb_morbilid.fecha_inicio > TO_DATE('2016-12-31', 'YYYY-MM-DD');
+
+DO language plpgsql $$
+BEGIN
+	RAISE NOTICE 'Evaluate how many rows diag_juntos are before or after the observation period';
+END
+$$;
+
+SELECT COUNT(*)
+FROM public.tb_diag_juntos
+WHERE tb_diag_juntos.fecha_inicio < TO_DATE('2012-01-01', 'YYYY-MM-DD')
+	AND origen IN ('C', 'M');
+
+SELECT COUNT(*)
+FROM public.tb_diag_juntos
+WHERE tb_diag_juntos.fecha_fin > TO_DATE('2016-12-31', 'YYYY-MM-DD')
+	AND origen IN ('C', 'M');
+
+DO language plpgsql $$
+BEGIN
+	RAISE NOTICE 'Evaluate how many rows proc_cmbd are before or after the observation period';
+END
+$$;
+
+SELECT COUNT(*)
+FROM public.tb_proc_cmbd
+WHERE tb_proc_cmbd.fecha_ingreso < TO_DATE('2012-01-01', 'YYYY-MM-DD');
+
+SELECT COUNT(*)
+FROM public.tb_proc_cmbd
+WHERE tb_proc_cmbd.fecha_ingreso > TO_DATE('2016-12-31', 'YYYY-MM-DD');
+
+DO language plpgsql $$
+BEGIN
+	RAISE NOTICE 'Evaluate how many rows tb_sip_spo_resto_2015 are before or after the observation period';
+END
+$$;
+
+SELECT COUNT(*)
+FROM public.tb_sip_spo_resto_2015
+WHERE tb_sip_spo_resto_2015.fecha_corte < TO_DATE('2012-01-01', 'YYYY-MM-DD');
+
+SELECT COUNT(*)
+FROM public.tb_sip_spo_resto_2015
+WHERE tb_sip_spo_resto_2015.fecha_corte > TO_DATE('2016-12-31', 'YYYY-MM-DD');
+
+
+DO language plpgsql $$
+BEGIN
+	RAISE NOTICE 'Evaluate how many rows tb_contraind are before or after the observation period';
+END
+$$;
+
+SELECT COUNT(*)
+FROM public.tb_contraind
+WHERE cast(tb_contraind.ano_mes || '01' AS DATE) < TO_DATE('2012-01-01', 'YYYY-MM-DD');
+
+SELECT COUNT(*)
+FROM public.tb_contraind
+WHERE cast(tb_contraind.ano_mes || '01' AS DATE) > TO_DATE('2016-12-31', 'YYYY-MM-DD');
+
+
+DO language plpgsql $$
+BEGIN
+	RAISE NOTICE 'Evaluate how many rows tb_interacc are before or after the observation period';
+END
+$$;
+
+SELECT COUNT(*)
+FROM public.tb_interacc
+WHERE  cast(tb_interacc.ano_mes || '01' AS DATE) < TO_DATE('2012-01-01', 'YYYY-MM-DD');
+
+SELECT COUNT(*)
+FROM public.tb_interacc
+WHERE  cast(tb_interacc.ano_mes || '01' AS DATE) > TO_DATE('2016-12-31', 'YYYY-MM-DD');
+
+
+DO language plpgsql $$
+BEGIN
+	RAISE NOTICE 'Evaluate how many rows tb_prescrip are before or after the observation period';
+END
+$$;
+
+SELECT COUNT(*)
+FROM public.tb_prescrip
+WHERE  fecha_prescripcion < TO_DATE('2012-01-01', 'YYYY-MM-DD');
+
+SELECT COUNT(*)
+FROM public.tb_prescrip
+WHERE  fecha_prescripcion > TO_DATE('2016-12-31', 'YYYY-MM-DD');
+
 
 EXPLAIN ANALYZE
 SELECT
@@ -209,3 +273,4 @@ FROM  public.tb_prescrip
 					ON ingredient_map.source_code = tb_prescrip.cod_prinactivo
 							 AND ingredient_map.source_vocabulary_id = 'ABUCASIS_PRINACTIVO'
 ;
+

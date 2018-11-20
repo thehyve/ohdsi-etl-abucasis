@@ -1,6 +1,7 @@
 # ABUCASIS to OMOP
 
-ETL scripts to convert ABUCASIS (INCLIVA) data to OMOP CDM v6, and make it backwards compatible with CDMv5. 
+ETL scripts to convert ABUCASIS (INCLIVA) data to OMOP CDM v6. 
+The converted dataset is backwards compatible with CDMv5. 
 
 ## Dependencies
 - Postgres (9.5+)

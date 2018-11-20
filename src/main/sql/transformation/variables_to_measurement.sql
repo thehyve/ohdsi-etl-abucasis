@@ -10,6 +10,7 @@ INSERT INTO cdm5.measurement
   measurement_date,
   measurement_datetime,
   value_as_number,
+  value_as_concept_id,
   value_source_value,
   unit_concept_id,
   unit_source_value,
@@ -22,7 +23,23 @@ INSERT INTO cdm5.measurement
     cod_variable_clinic                 AS measurement_source_value,
     fecha_registro                      AS measurement_date,
     fecha_registro :: TIMESTAMP         AS measurement_datetime,
-    valor_registrado                    AS value_as_number,
+
+    CASE
+        WHEN cod_variable_clinic IN ('DIFITOMA','REQENR','CP','CAIULTAN','VALOCUMP','PACIREFA','DIREC','NOM_APE','INFOTRCV',
+                              'CONSTABA','VALOADVE','REVIPIES','ENTR_TSO','CONSEJER','CONSDIET','PROB_1','PROB_2',
+                              'PROB_3','PROB_4','PROB_5','PROB_6','NOM_APE')
+        THEN NULL
+        ELSE valor_registrado
+    END                                 AS value_as_number,
+
+    CASE
+        WHEN cod_variable_clinic IN ('DIFITOMA','REQENR','CP','CAIULTAN','VALOCUMP','PACIREFA','DIREC','NOM_APE','INFOTRCV',
+                              'CONSTABA','VALOADVE','REVIPIES','ENTR_TSO','CONSEJER','CONSDIET','PROB_1','PROB_2',
+                              'PROB_3','PROB_4','PROB_5','PROB_6','NOM_APE')
+        THEN 0
+        ELSE NULL
+    END                                 AS value_as_concept_id,
+
     valor_registrado                    AS value_source_value,
     coalesce(unit.target_concept_id, 0) AS unit_concept_id,
     coalesce(unit.source_concept_id, 0) AS unit_source_value,

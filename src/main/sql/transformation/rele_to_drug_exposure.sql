@@ -21,7 +21,7 @@ WITH prescrip_per_trat AS (
 			CASE
 			-- cadencia = 0 is equivalent to 1 day rate
 			WHEN cadencia = 0
-				THEN unidades * 24 * coalesce(dias_tratamiento, fecha_fin_tratamiento - fecha_inicio_tratamiento)
+				THEN unidades * coalesce(dias_tratamiento, fecha_fin_tratamiento - fecha_inicio_tratamiento)
 			WHEN tipo_posologia = 'Horaria'
 				THEN unidades * (24 / cadencia) * coalesce(dias_tratamiento, fecha_fin_tratamiento - fecha_inicio_tratamiento)
 			WHEN tipo_posologia = 'Diaria'

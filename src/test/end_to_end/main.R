@@ -168,10 +168,11 @@ add_tb_rele(numsipcod='A01', numreceta = 'RE024', fecha_dispensacion = '2017-04-
 expect_drug_exposure(person_id=1, drug_exposure_start_date = '2017-04-01', quantity=50)
 
 declareTest('Drug exposure quantity with zero cadencia')
-add_tb_tratamientos(numsipcod='A01', id_tratamiento = 'TR014', unidades=30, cadencia=0.0)
-add_tb_prescrip(numsipcod='A01', numreceta = 'RE023', id_tratamiento = 'TR014')
-add_tb_rele(numsipcod='A01', numreceta = 'RE023', fecha_dispensacion = '2017-03-01')
-expect_drug_exposure(person_id=1, drug_exposure_start_date = '2017-03-01', quantity=30)
+expect_person(person_id=3, person_source_value='A03')
+add_tb_tratamientos(numsipcod='A03', id_tratamiento = 'TR014',dias_tratamiento=1, unidades=30, cadencia=0.0)
+add_tb_prescrip(numsipcod='A03', numreceta = 'RE023', id_tratamiento = 'TR014')
+add_tb_rele(numsipcod='A03', numreceta = 'RE023', fecha_dispensacion = '2017-03-01')
+expect_drug_exposure(person_id=3, drug_exposure_start_date = '2017-03-01', quantity=30)
 
 declareTest('Drug exposure quantity and days_supply over multiple prescriptions')
 expect_person(person_id=1, person_source_value='A01')
@@ -190,8 +191,9 @@ expect_drug_exposure(person_id=1, drug_exposure_start_date = '2016-06-01', refil
 expect_drug_exposure(person_id=1, drug_exposure_start_date = '2016-07-01', refills=2)
 
 # TODO: drug era test does not work
+# note: this is because the unit test assumes CDMv5 and drug_era_start_date column does not exist anymore in CDMv6
 # declareTest('Drug era')
-# expect_drug_era(person_id=1, drug_era_start_date='2016-05-01 00:00:00.000', durg_era_end_date='2016-07-31 00:00:00.000', drug_exposure_count=3)
+# expect_drug_era(person_id=1, drug_era_start_date='2016-05-01 00:00:00.000', drug_era_end_date='2016-07-31 00:00:00.000', drug_exposure_count=3)
 
 # ========================
 # Measurement
@@ -220,9 +222,19 @@ add_tb_variables(numsipcod='A05', cod_variable_clinic="-1", cod_ud_medida='123')
 expect_no_measurement(person_id = 5)
 
 declareTest('Measurement date for tb_variables')
-expect_person(person_id=2, person_source_value='A02')
+expect_person(person_id=1, person_source_value='A01')
 add_tb_variables(numsipcod='A01', fecha_registro='2012-05-05', cod_variable_clinic='123', cod_ud_medida='123')
 expect_measurement(person_id=1, measurement_id=2,measurement_date='2012-05-05')
+
+declareTest('Measurement for categorical measurement as value_as_concept_id ')
+expect_person(person_id=1, person_source_value='A01')
+add_tb_variables(numsipcod='A01', fecha_registro='2012-05-05', cod_variable_clinic='CP', valor_registrado = '6', cod_ud_medida='123')
+expect_measurement(person_id=1, measurement_id=3,value_as_concept_id = 0)
+
+declareTest('Measurement for numerical measurement as value_as_number')
+expect_person(person_id=1, person_source_value='A01')
+add_tb_variables(numsipcod='A01', fecha_registro='2012-05-05', cod_variable_clinic='PESO', valor_registrado = '6', cod_ud_medida='123')
+expect_measurement(person_id=1, measurement_id=4,value_as_number = 6)
 
 
 # ========================

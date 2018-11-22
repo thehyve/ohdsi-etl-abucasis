@@ -45,6 +45,8 @@ WITH prescrip_per_trat AS (
 
 		FROM  @source_schema.tb_tratamientos
 			LEFT JOIN prescrip_per_trat USING (id_tratamiento)
+			WHERE tb_tratamientos.fecha_fin_tratamiento IS NOT NULL
+			      AND tb_tratamientos.fecha_fin_tratamiento >= tb_tratamientos.fecha_inicio_tratamiento
 )
 INSERT INTO cdm5.drug_exposure
 (

@@ -256,6 +256,10 @@ expect_person(person_id=1, person_source_value='A01')
 add_tb_variables(numsipcod='A01', fecha_registro='2012-05-05', cod_variable_clinic='PESO', valor_registrado = '6', cod_ud_medida='123')
 expect_measurement(person_id=1, measurement_id=4,value_as_number = 6)
 
+# declareTest('Measurement derived from procedure if procedure concept is from measurement domain')
+# add_tb_proc_cmbd(numsipcod='A01', fecha_ingreso='2012-09-09', cie9p='89.43')
+# expect_measurement(person_id=1, measurement_date='2012-09-09')
+
 
 # ========================
 # Observation

@@ -99,4 +99,6 @@ FROM  @source_schema.tb_ante_cmbd
          ON (tb_ante_cmbd.numsipcod = intermediate_table_visit_ocurrence.numsipcod
                AND
              tb_ante_cmbd.fecha_ingreso = intermediate_table_visit_ocurrence.date) -- We only want visits from "valid" persons from person table
-       INNER JOIN cdm5.person ON intermediate_table_visit_ocurrence.numsipcod = person.person_source_value;
+       INNER JOIN cdm5.person ON intermediate_table_visit_ocurrence.numsipcod = person.person_source_value
+      -- Filter out visits occurring before the study entry date
+      WHERE tb_ante_cmbd.fecha_ingreso >= TO_DATE('2012-01-01', 'YYYY-MM-DD');

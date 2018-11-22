@@ -90,6 +90,10 @@ expect_person(person_id=1, person_source_value='A01')
 add_tb_proc_cmbd(numsipcod='A01', fecha_ingreso = '2012-01-01')
 expect_procedure_occurrence(person_id=1, procedure_date='2012-01-01')
 
+declareTest('Procedure occurrence outside valid observation period')
+add_tb_proc_cmbd(numsipcod='A01', fecha_ingreso = '2010-01-01')
+expect_no_procedure_occurrence(person_id=1, procedure_date='2010-01-01')
+
 # ========================
 # Visit Ocurrence
 # ========================
@@ -113,6 +117,11 @@ expect_person(person_id=2, person_source_value='A02')
 add_tb_morbilid(numsipcod='A02', fecha_inicio = '2014-01-01', fecha_fin = '2013-03-01')
 expect_visit_occurrence(person_id = 2, visit_start_date = '2014-01-01', visit_end_date = '2014-01-01')
 
+declareTest('Visit outside valid observation period')
+add_tb_morbilid(numsipcod='A02', fecha_inicio = '2009-01-01', fecha_fin = '2013-03-01')
+expect_no_visit_occurrence(person_id = 2, visit_start_date = '2009-01-01')
+add_tb_ante_cmbd(numsipcod = 'A02', fecha_ingreso = '2009-01-01', fecha_alta = '2013-03-01')
+expect_no_visit_occurrence(person_id = 2, visit_start_date = '2009-01-01')
 
 
 # ========================
@@ -129,6 +138,10 @@ declareTest('Condition occurrence from tb_diag_juntos and not tb_ante_cmbd linke
 add_tb_diag_juntos(numsipcod='A02', fecha_inicio = '2012-08-01', fecha_fin = '2013-03-01')
 expect_condition_occurrence(person_id = 2, visit_occurrence_id = 7)
 
+
+declareTest('Condition occurrence outside valid observation period')
+add_tb_diag_juntos(numsipcod='A02', fecha_inicio = '2010-08-01', fecha_fin = '2013-03-01')
+expect_no_condition_occurrence(person_id = 2, condition_start_date = '2010-08-01')
 
 # ========================
 # Drug exposure and era
@@ -300,9 +313,7 @@ declareTest('Observation modality and nationality from sociodemographics')
 # Check if from 1 row of tb_sip_spo_resto_2015 2 rows in observation table are created
 expect_person(person_id=2, person_source_value='A02')
 add_tb_sip_spo_resto_2015(numsipcod='A02', cod_modalidad='PUBLIC', nacionalidad_espanola ='S')
-#expect_observation(person_id=2,observation_id=12)
 expect_observation(person_id=2, observation_concept_id = 4135608)
-
 
 declareTest('Observation from prescribed but not dispensed drugs')
 expect_person(person_id=1, person_source_value='A01')

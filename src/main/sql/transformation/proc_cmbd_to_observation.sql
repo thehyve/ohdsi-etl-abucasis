@@ -6,34 +6,31 @@ because the data before that date may be incomplete
 INSERT INTO cdm5.observation
 (
   observation_concept_id,
-  observation_source_value,
   observation_source_concept_id,
   person_id,
   observation_date,
   observation_datetime,
   observation_type_concept_id,
   value_as_concept_id,
+  value_as_string,
   obs_event_field_concept_id
 )
 
   SELECT
+    -- Past history of procedure
+    4215685                                           AS observation_concept_id,
+    0                                                 AS observation_source_concept_id,
 
-    coalesce(code_map.concept_id_2, 0)                AS observation_concept_id,
-    tb_proc_cmbd.cie9p                        AS observation_source_value,
-    coalesce(icd9proc.concept_id, 0)                AS observation_source_concept_id,
-
-    person.person_id                        AS person_id,
+    person.person_id                                       AS person_id,
 
     TO_DATE('2012-01-01', 'YYYY-MM-DD')                   AS observation_date,
     TO_DATE('2012-01-01', 'YYYY-MM-DD')::TIMESTAMP        AS observation_datetime,
 
+    -- Observation recorded from EHR
+    38000280                                               AS observation_type_concept_id,
 
-
-    -- Documentation of past medical history
-    763082                                         AS observation_type_concept_id,
-
-    -- Yes
-    4188539                                              AS value_as_concept_id,
+    coalesce(code_map.concept_id_2, 0)                    AS value_as_concept_id,
+    tb_proc_cmbd.cie9p                                    AS value_as_string,
 
     -- No event
     0                                                    AS obs_event_field_concept_id

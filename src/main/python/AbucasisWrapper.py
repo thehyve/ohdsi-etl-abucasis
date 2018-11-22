@@ -94,6 +94,7 @@ class AbucasisWrapper(EtlWrapper):
         self.log("Intermediate tables and aggregates...", leading_newline=True)
         self.execute_sql_file('source_preprocessing/ante_cmbd_morbilid__visit_intermediate_table.sql')
         self.execute_sql_file('source_preprocessing/sip_spo_ante_cmbd_to_death_intermediate.sql')
+        self.execute_sql_file('source_preprocessing/proc_cmbd_intermediate_table.sql')
 
     def _transform_and_load(self):
         self.log("Main ETL scripts...", leading_newline=True)
@@ -115,7 +116,8 @@ class AbucasisWrapper(EtlWrapper):
         self.execute_sql_file('transformation/diag_juntos_to_condition_occurrence.sql')
 
         # Procedure
-        self.execute_sql_file('transformation/proc_cmbd_to_procedure_occurrence.sql')
+        #self.execute_sql_file('transformation/proc_cmbd_to_procedure_occurrence.sql')
+        self.execute_sql_file('transformation/intermediate_proc_cmbd_to_procedure_occurrence.sql')
 
         # Drug
         self.execute_sql_file('transformation/rele_to_drug_exposure.sql')
@@ -123,6 +125,8 @@ class AbucasisWrapper(EtlWrapper):
         # Measurement
         self.execute_sql_file('transformation/prestaci_to_measurement.sql')
         self.execute_sql_file('transformation/variables_to_measurement.sql')
+        self.execute_sql_file('transformation/intermediate_proc_cmbd_to_measurement.sql')
+
 
         # Observation
         self.execute_sql_file('transformation/event_counts_to_observation.sql')
@@ -134,12 +138,15 @@ class AbucasisWrapper(EtlWrapper):
         self.execute_sql_file('transformation/rele_to_observation.sql')
         self.execute_sql_file('transformation/diag_juntos_to_observation.sql')
         self.execute_sql_file('transformation/proc_cmbd_to_observation.sql')
+        self.execute_sql_file('transformation/intermediate_proc_cmbd_to_observation.sql')
+
 
 
 
         # Death
         self.execute_sql_file('transformation/death_intermediate_to_observation.sql')
         self.execute_sql_file('transformation/death_intermediate_to_death.sql')
+
 
     def _derive_era(self):
         self.execute_sql_file('post_processing/GenerateDrugEra.sql')

@@ -20,8 +20,16 @@ INSERT INTO cdm5.condition_occurrence
     person.person_id                                      AS person_id,
     tb_diag_juntos.fecha_inicio                           AS condition_start_date,
     tb_diag_juntos.fecha_inicio :: TIMESTAMP              AS condition_start_datetime,
-    tb_diag_juntos.fecha_fin                              AS condition_end_date,
-    tb_diag_juntos.fecha_fin :: TIMESTAMP                 AS condition_end_datetime,
+    -- Capture the end date
+    -- If end date is null or before starting date, set end date as starting date
+    CASE WHEN tb_diag_juntos.fecha_inicio <= tb_diag_juntos.fecha_fin
+        THEN tb_diag_juntos.fecha_fin
+        ELSE tb_diag_juntos.fecha_inicio
+    END                                                   AS condition_end_date,
+    CASE WHEN tb_diag_juntos.fecha_inicio <= tb_diag_juntos.fecha_fin
+        THEN tb_diag_juntos.fecha_fin :: TIMESTAMP
+        ELSE tb_diag_juntos.fecha_inicio :: TIMESTAMP
+    END                                                   AS condition_end_datetime,
     coalesce(icd_map.target_concept_id, 0)                AS condition_concept_id,
     coalesce(icd_map.source_concept_id, 0)                AS condition_source_concept_id,
     tb_diag_juntos.cod_diagnostico                        AS condition_source_value,

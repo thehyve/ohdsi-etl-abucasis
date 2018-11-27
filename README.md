@@ -41,6 +41,10 @@ Other parameters:
  - `--log <file_name>` to supply a different location and name of the log file. 
  - `--run_inserts` by default tables are written to csv. With this toggle it can be written to database tables instead. 
 
+## OHDSI tools setup
+See  [this document](https://github.com/thehyve/ohdsi-etl-abucasis/blob/master/webapi_setup.md) describing the WebAPI setup.
+
+
 ## Contributing
 This repository contains a Python framework that executes sql script which do the actual transformations.
 

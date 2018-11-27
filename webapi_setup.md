@@ -131,14 +131,12 @@ An example script can be found in `achilles_webapi.R`.
 
 # Configure source and source daimon
 
-0) Connect to the database. In this example, **OHDSI** is the database name, **postgres** the admin username, **postgrespassword** the admin password, **cdm5** schema contains the OMOP tables, **cdm5** schema contains the Vocabulary tables, **webapi** containes the achilles results
+0) Connect to the database. In this example, **OHDSI** is the database name, **postgres** the admin username, **postgrespassword** the admin password, **cdm5** schema contains the OMOP tables, **cdm5** schema contains the Vocabulary tables, **webapi** contains the achilles results
 
 1) Insert the source information into the **webapi** schema. Make sure to properly format the `jdbc:postgresql://<SERVER>:5432/<DATABASE_NAME>?user=<USER_NAME>&password=<USER_PASSWORD>` string.
 
 ```sql
-INSERT INTO webapi.source (source_id, source_name, source_key, source_connection, source_dialect) VALUES (1, 'My Cdm', 'MY_CDM', 'jdbc:postgresql://localhost:5432/OHDSI?user=postgres&password=postgrespassword`','postgresql');
-INSERT INTO webapi.source (source_id, source_name, source_key, source_connection, source_dialect) VALUES (2, 'Default vocabulary', 'vocab','jdbc:postgresql://localhost:5432/OHDSI?user=postgres&password=postgrespassword`', 'postgresql');
-
+INSERT INTO webapi.source (source_id, source_name, source_key, source_connection, source_dialect) VALUES (1, 'Abucasis OMOP CDM', 'OHDSI_abucasis', 'jdbc:postgresql://localhost:5432/OHDSI?user=postgres&password=postgrespassword','postgresql');
 
 -- CDM
 INSERT INTO webapi.source_daimon (source_daimon_id, source_id, daimon_type, table_qualifier, priority) VALUES (1,1,0, 'cdm5', 0);
@@ -149,6 +147,7 @@ INSERT INTO webapi.source_daimon (source_daimon_id, source_id, daimon_type, tabl
 -- vocabulary
 INSERT INTO webapi.source_daimon (source_daimon_id, source_id, daimon_type, table_qualifier, priority) VALUES (4,2,1, 'cdm5', 1);
 ```
+
 2) Startup Tomcat again `sh $CATALINA_HOME/bin/startup.sh`
 3) Check response in your browser: `http://localhost:8080/WebAPI/source/sources`. An output like this should pop up:
 ```

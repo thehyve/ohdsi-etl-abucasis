@@ -136,16 +136,21 @@ An example script can be found in `achilles_webapi.R`.
 1) Insert the source information into the **webapi** schema. Make sure to properly format the `jdbc:postgresql://<SERVER>:5432/<DATABASE_NAME>?user=<USER_NAME>&password=<USER_PASSWORD>` string.
 
 ```sql
-INSERT INTO webapi.source (source_id, source_name, source_key, source_connection, source_dialect) VALUES (1, 'Abucasis OMOP CDM', 'OHDSI_abucasis', 'jdbc:postgresql://localhost:5432/OHDSI?user=postgres&password=postgrespassword','postgresql');
+INSERT INTO webapi.source (source_id, source_name, source_key, source_connection, source_dialect) 
+VALUES (1, 'Abucasis OMOP CDM', 'OHDSI_abucasis', 'jdbc:postgresql://localhost:5432/OHDSI?user=postgres&password=postgrespassword','postgresql');
 
 -- CDM
-INSERT INTO webapi.source_daimon (source_daimon_id, source_id, daimon_type, table_qualifier, priority) VALUES (1,1,0, 'cdm5', 0);
+INSERT INTO webapi.source_daimon (source_daimon_id, source_id, daimon_type, table_qualifier, priority) 
+VALUES (1,1,0, 'cdm5', 0);
 -- Vocabulary
-INSERT INTO webapi.source_daimon (source_daimon_id, source_id, daimon_type, table_qualifier, priority) VALUES (2,1,1, 'cdm5', 0);
+INSERT INTO webapi.source_daimon (source_daimon_id, source_id, daimon_type, table_qualifier, priority) 
+VALUES (2,1,1, 'cdm5', 0);
 -- Results
-INSERT INTO webapi.source_daimon (source_daimon_id, source_id, daimon_type, table_qualifier, priority) VALUES (3,1,2, 'webapi', 0);
+INSERT INTO webapi.source_daimon (source_daimon_id, source_id, daimon_type, table_qualifier, priority) 
+VALUES (3,1,2, 'webapi', 0);
 -- vocabulary
-INSERT INTO webapi.source_daimon (source_daimon_id, source_id, daimon_type, table_qualifier, priority) VALUES (4,2,1, 'cdm5', 1);
+INSERT INTO webapi.source_daimon (source_daimon_id, source_id, daimon_type, table_qualifier, priority) 
+VALUES (4,2,1, 'cdm5', 1);
 ```
 
 2) Startup Tomcat again `sh $CATALINA_HOME/bin/startup.sh`

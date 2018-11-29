@@ -73,9 +73,6 @@ class AbucasisWrapper(EtlWrapper):
         self.execute_sql_file('cdm_setup/OMOP CDM postgresql pk indexes__no_vocab.sql', False)
 
     def _prepare_cdm(self):
-        self.execute_sql_file('cdm_setup/create_death_table.sql', verbose=False)
-        self.log("CDMv5.0 death table created")
-
         self.execute_sql_file('cdm_setup/remove_non_vocabulary_cdm_tables.sql', verbose=False)
         self.log("CDM tables dropped")
 

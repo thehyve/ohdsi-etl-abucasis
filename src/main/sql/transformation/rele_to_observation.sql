@@ -3,6 +3,14 @@ Prescribed, but not dispensed drugs. A prescription that is never taken will not
 However, such a prescription can be indicative of a disease that is not captured elsewhere
 (e.g. if someone is prescribed metformin for his/her diabetes).
 */
+
+WITH non_dispensed_drugs AS (
+  SELECT *
+  FROM @source_schema.tb_rele
+  WHERE numreceta IS NULL
+)
+
+
 INSERT INTO cdm5.observation
 (
   person_id,
@@ -37,12 +45,11 @@ INSERT INTO cdm5.observation
     0                                           AS obs_event_field_concept_id
 
   FROM  @source_schema.tb_prescrip
-    LEFT JOIN  @source_schema.tb_rele
-      ON tb_rele.numreceta = tb_prescrip.numreceta
+    LEFT JOIN  non_dispensed_drugs
+      ON non_dispensed_drugs.numreceta = tb_prescrip.numreceta
     JOIN cdm5.person
       ON person.person_source_value = tb_prescrip.numsipcod
     LEFT JOIN cdm5.source_to_concept_map AS ingredient_map
       ON ingredient_map.source_code = tb_prescrip.cod_prinactivo
          AND ingredient_map.source_vocabulary_id = 'ABUCASIS_PRINACTIVO'
-  WHERE tb_rele.numreceta IS NULL
 ;

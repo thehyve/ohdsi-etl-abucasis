@@ -1,5 +1,9 @@
 vocabulary_id,vocabulary_name,vocabulary_reference,vocabulary_version,vocabulary_concept_id
-ABUCASIS_NUM_EVENTS,Table name to concept mapping for tables with number of events,,,0
-ABUCASIS_MODALIDAD,Socio-economic codes,,,0
-ABUCASIS_TIP_VARIABL,Clinical variables,,,0
-ABUCASIS_UD_MEDIDAS,Unit codes,,,0
+ABUCASIS_NUM_EVENTS,Table name to concept mapping for tables with number of events,,1.0,0
+ABUCASIS_MODALIDAD,Socio-economic codes,,1.0,0
+ABUCASIS_TIP_VARIABL,Clinical variables,,1.0,0
+ABUCASIS_UD_MEDIDAS,Unit codes,,1.0,0
+ABUCASIS_TIP_PREST,Physical measurements,,1.0,0
+ABUCASIS_PRINACTIVO,Drug ingredients,,1.0,0
+ABUCASIS_CIE9P,,,1.0,0
+ABUCASIS_CIE9,,,1.0,0

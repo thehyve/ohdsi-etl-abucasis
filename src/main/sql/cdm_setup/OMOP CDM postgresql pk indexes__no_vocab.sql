@@ -103,7 +103,8 @@ ALTER TABLE cdm5.specimen ADD CONSTRAINT xpk_specimen PRIMARY KEY ( specimen_id 
 
 ALTER TABLE cdm5.death ADD CONSTRAINT xpk_death PRIMARY KEY ( person_id ) ;
 
--- ALTER TABLE cdm5.visit_occurrence ADD CONSTRAINT xpk_visit_occurrence PRIMARY KEY ( visit_occurrence_id ) ;
+-- Ignore this index. It has been applied before the transformation scripts execution
+--ALTER TABLE cdm5.visit_occurrence ADD CONSTRAINT xpk_visit_occurrence PRIMARY KEY ( visit_occurrence_id ) ;
 
 ALTER TABLE cdm5.visit_detail ADD CONSTRAINT xpk_visit_detail PRIMARY KEY ( visit_detail_id ) ;
 

@@ -1,0 +1,1 @@
+ALTER TABLE cdm5.visit_occurrence ADD CONSTRAINT xpk_visit_occurrence PRIMARY KEY ( visit_occurrence_id );

@@ -10,12 +10,27 @@ WITH NO DATA;
 
 COPY tmp_vocabulary FROM '@absPath/resources/mapping_tables/vocabulary.csv' WITH CSV HEADER;
 
-INSERT INTO cdm5.vocabulary
-  SELECT DISTINCT ON (vocabulary_id) *
-  FROM tmp_vocabulary
-ON CONFLICT DO NOTHING;
---
---
+-- Insert vocabularies in vocabulary table
+-- If vocabulary already exists, update with the new information/metadata
+INSERT INTO cdm5.vocabulary (
+    vocabulary_id,
+    vocabulary_name,
+    vocabulary_reference,
+    vocabulary_version,
+    vocabulary_concept_id
+    )
+SELECT DISTINCT ON (vocabulary_id) *
+FROM tmp_vocabulary
+ON CONFLICT (vocabulary_id)
+            DO UPDATE
+              SET vocabulary_id   = excluded.vocabulary_id,
+                vocabulary_name    = excluded.vocabulary_name,
+                vocabulary_reference     = excluded.vocabulary_reference,
+                vocabulary_version = excluded.vocabulary_version,
+                vocabulary_concept_id   = excluded.vocabulary_concept_id
+;
+
+
 -- Mapping of name of table with info on number of events
 
 CREATE TEMP TABLE tmp_source_to_concept_map
@@ -23,7 +38,6 @@ CREATE TEMP TABLE tmp_source_to_concept_map
     SELECT *
     FROM cdm5.source_to_concept_map
 WITH NO DATA;
-
 
 
 COPY tmp_source_to_concept_map FROM '@absPath/resources/mapping_tables/abucasis_num_events.csv' WITH CSV HEADER

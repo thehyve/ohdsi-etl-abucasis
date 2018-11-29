@@ -158,3 +158,28 @@ VALUES (4,2,1, 'cdm5', 1);
 ```
 [{"sourceId":1,"sourceName":"My Cdm","sourceDialect":"postgresql","sourceKey":"MY_CDM","daimons":[{"sourceDaimonId":1,"daimonType":"CDM","tableQualifier":"cdm5","priority":0},{"sourceDaimonId":2,"daimonType":"Vocabulary","tableQualifier":"cdm5","priority":0},{"sourceDaimonId":3,"daimonType":"Results","tableQualifier":"webapi","priority":0}]},{"sourceId":2,"sourceName":"Default vocabulary","sourceDialect":"postgresql","sourceKey":"vocab","daimons":[{"sourceDaimonId":4,"daimonType":"Vocabulary","tableQualifier":"cdm5","priority":1}]}]
 ```
+
+# Atlas setup
+
+With an active response from the WebAPI, Atlas is ready to run. 
+The installation instructions can be found in the OHDSI wiki: http://www.ohdsi.org/web/wiki/doku.php?id=documentation:software:atlas:setup
+
+## Set up config-local.js file 
+Create a file  *config-local.js* file in the `js/` directory. is properly setup. Example (8080 is the default WebAPI port):
+
+```js
+define([], function () {
+    var configLocal = {};
+
+    configLocal.api = {
+        name: 'Local environment',
+        url: 'http://localhost:8080/WebAPI/'
+    };
+
+    return configLocal;
+
+});
+```
+
+## Run Atlas
+Run it via the `index.html` file. Make sure that the WebAPI service is being run in the background.

@@ -88,13 +88,11 @@ S-DS-6,Long-term handicap/disability (and receives help from government),21,,ALT
 S-N-6,ACCREDITATION DENIED BY INSURER,5,,ACREDITACION DENEGADA POR ASEGURADORA,0.42916592955589294,UNCHECKED,45880446,
 S-N-14,Refeered to the Social Security National Institute,30,,DERIVADO AL INSS,0.5117479562759399,UNCHECKED,4162224,
 F-SS-24,Unemployed and receives unemployment benefits,3128,,PERCEPTOR SUBSIDIO POR DESEMPLEO,0.7610543966293335,APPROVED,4053252,
-F-SS-24,Unemployed and receives unemployment benefits,3128,,PERCEPTOR SUBSIDIO POR DESEMPLEO,0.7610543966293335,APPROVED,4251171,
 F-A05-6,government health insurance for army and uses private healthcare,518,,ISFAS PRIVADO,0.5541619658470154,UNCHECKED,45884465,"tha actual insurance is not private, but they use private healthcare"
 F-A05-6,government health insurance for army and uses private healthcare,518,,ISFAS PRIVADO,0.5541619658470154,UNCHECKED,44804216,"tha actual insurance is not private, but they use private healthcare"
 S-DS-16,Government health insurance for army and patient with long-term disability,9,,ISFAS PRIVADO DISCAPACIDAD INDEFINIDA,0.49211549758911133,UNCHECKED,446,
 F-SS-23,Receives unemployment benefits,3065,,PERCEPTOR PRESTACION POR DESEMPLEO,0.8240512609481812,APPROVED,4053252,
 F-A05-4,ISFAS 4 AS PARTIAL (PRIMARY ONLY),1,,ISFAS 4 AS PARCIAL ( SOLO PRIMARIA),0.4956505298614502,UNCHECKED,45878361,
-F-SS-26,Receives other benefits,718,,PERCEPTOR OTRAS PRESTACIONES,0.7800043225288391,APPROVED,4330024,
 F-SS-26,Receives other benefits,718,,PERCEPTOR OTRAS PRESTACIONES,0.7800043225288391,APPROVED,4076204,
 S-N-13,Still not classified in any category. Person need to deliver some documents.,19,,CON DOC. DE DERECHO PENDIENTE DE APORTAR,0.30407726764678955,APPROVED,45877986,
 F-A05-7,WITH PRIVATE ISFAS AP,1,,ISFAS PRIVADO CON AP,0.4230063855648041,UNCHECKED,4121656,
@@ -110,7 +108,7 @@ S-N-15,Foreigner who is not classified in any category,645,,EXTRANJERO A REVISAR
 S-N-15,Foreigner who is not classified in any category,645,,EXTRANJERO A REVISAR,0.45331379771232605,UNCHECKED,36309847,pT is something relating to lesions
 F-SS-19,Unemployed and not receives unemployment benefits,2372,,AGOTADO SUBSIDIO DESEMPLEO,0.727385401725769,APPROVED,45877709,
 F-SS-21,social benefits for disabled people OR pension for old people that did not built enough pension for receiving a “proper pension”?,1217,,PENSION NO CONTRIBUTIVA,0.34229227900505066,UNCHECKED,4330024,not the same
-F-SS-25,Receives benefits for social integration,975,,PERCEPTOR RENTA DE INSERCION SOCIAL,0.672916054725647,APPROVED,4330024,
+F-SS-25,Receives benefits for social integration,975,,PERCEPTOR RENTA DE INSERCION SOCIAL,0.672916054725647,APPROVED,4076204,
 F-SS-2,government health insurance for civilians and active,27,,DOBLE COBERTURA CON MUFACE AC,0.47655969858169556,UNCHECKED,4009361,
 S-CS-26,Unemployed,31,,DESEMPL. PTE  ASEGURAM. UE,1.0,APPROVED,45877709,
 F-SS-5,Pensioner and Government health insurance for civilians ,54,,DOBLE COBERTURA CON MUFACE PN,0.5538431406021118,UNCHECKED,36307985,
@@ -124,5 +122,4 @@ F-SS-10,Registered/admitted in the Social security system through an internation
 F-SS-4,Registered/admitted in the Social security system AND Pensioner,30820,,ALTA EN SS PN,0.37101104855537415,APPROVED,4147258,
 F-SS-4,Registered/admitted in the Social security system AND Pensioner,30820,,ALTA EN SS PN,0.37101104855537415,APPROVED,4022069,
 F-M06-2,Government health insurance for Justice system and uses private healthcare,91,,MUGEJU PRIVADO,0.5250399708747864,UNCHECKED,45884465,
-F-SS-28,Spanish resident,6041,,RESIDENTE EN ESPAÑA,0.6777675151824951,APPROVED,45884724,2 rows in measurements (due to 2 concepts)
 F-SS-28,Spanish resident,6041,,RESIDENTE EN ESPAÑA,0.6777675151824951,APPROVED,45880389,2 rows in measurements (due to 2 concepts)

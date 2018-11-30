@@ -1,3 +1,5 @@
+# Runs achilles heel in the WebAPI schema
+
 ### Install required dependencies  ###
 if (!require("devtools")) install.packages("devtools")
 if (!require("DatabaseConnector")) install.packages("DatabaseConnector")
@@ -34,7 +36,7 @@ executeSql(connection, sqlquery)
 # Run Achilles
 achilles(connectionDetails,
          cdmDatabaseSchema = config$cdmSchema,
-         resultsDatabaseSchema=webapi,
+         resultsDatabaseSchema='webapi',
          vocabDatabaseSchema = config$cdmSchema,
          scratchDatabaseSchema = config$cdmscratchSchema,
          numThreads = 1,
@@ -45,43 +47,8 @@ achilles(connectionDetails,
          dropScratchTables = TRUE,
          conceptHierarchy = TRUE) # important to set to False 
 
-### Run Achilles heel
-# achillesHeel(connectionDetails,
-#             cdmDatabaseSchema = config$cdmSchema,
-#             resultsDatabaseSchema=config$cdmresultsSchema,
-#             vocabDatabaseSchema = config$cdmSchema,
-#             scratchDatabaseSchema = config$cdmscratchSchema,
-#             numThreads = 1,
-#             outputFolder = ".",
-#             cdmVersion = config$cdmversion)
-
-## Export results to Json
-# exportToJson(connectionDetails,
-#             cdmDatabaseSchema = config$cdmSchema,
-#             resultsDatabaseSchema = config$cdmresultsSchema,
-#             outputPath = getwd(),
-#             vocabDatabaseSchema = config$cdmSchema,
-#             compressIntoOneFile = TRUE # creates gzipped file of all JSON files
-#             )
-
 ############ CDM post-processing ############ 
 # Remove drug_era_start_date condition_era_start_date and end_date columns
 sqlquery <- paste(unlist(read.csv("./end_achilles.sql"), use.names=FALSE), collapse='\n')
 executeSql(connection, sqlquery)
-######################## 
-
-# Export AchillesHeel results 
-# fetchAchillesHeelResults(connectionDetails,config$cdmresultsSchema)
-launchHeelResultsViewer(connectionDetails,
-                        resultsDatabaseSchema = config$cdmresultsSchema,
-                        cdmDatabaseSchema = config$cdmSchema,
-                        outputFolder = ".")
-
-# getAnalysisDetails()
-
-# exportToJson(connectionDetails,
-#              cdmDatabaseSchema = config$cdmSchema,
-#              resultsDatabaseSchema = config$cdmresultsSchema,
-#              outputPath = "./",
-#              compressIntoOneFile = TRUE # creates gzipped file of all JSON files
-#              )
+########################

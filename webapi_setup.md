@@ -127,7 +127,7 @@ achilles(connectionDetails,
          dropScratchTables = TRUE,
          conceptHierarchy = TRUE) # important to set to False 
 ```
-An example script can be found in `achilles_webapi.R`. 
+An example script can be found in `achilles_webapi.R` (`/src/test/achilles_run` directory). 
 
 # Configure source and source daimon
 

@@ -3,7 +3,7 @@ if (!require("devtools")) install.packages("devtools")
 if (!require("DatabaseConnector")) install.packages("DatabaseConnector")
 if (!require("OHDSI/OhdsiRTools")) install_github("OHDSI/OhdsiRTools")
 
-# Install Achilles latest release
+# Install latest release of Achilles
 if (!require("Achilles")) devtools::install_github("OHDSI/Achilles", dependencies = TRUE)
 # # Install Achilles for CDM v6 (current state: does not work)
 # devtools::install_github("OHDSI/Achilles", ref="cdm_v6", dependencies = TRUE)
@@ -24,7 +24,6 @@ connectionDetails <- createConnectionDetails(dbms = "postgresql",
                                              port = connectionConfig$port)
 
 ############ CDM pre-processing ############ 
-# Temporary solution to solve version incompatibilities with latest release Achilles
 # Generate drug_era_start_date condition_era_start_date and end_date columns
 connection <- connect(connectionDetails)
 sqlquery <- paste(unlist(read.csv("./init_achilles.sql"), use.names=FALSE), collapse='\n')
@@ -43,17 +42,7 @@ achilles(connectionDetails,
          runHeel = TRUE,
          runCostAnalysis = FALSE,
          dropScratchTables = TRUE,
-         conceptHierarchy = FALSE) # important to set to False 
-
-### Run Achilles heel
-# achillesHeel(connectionDetails,
-#             cdmDatabaseSchema = config$cdmSchema,
-#             resultsDatabaseSchema=config$cdmresultsSchema,
-#             vocabDatabaseSchema = config$cdmSchema,
-#             scratchDatabaseSchema = config$cdmscratchSchema,
-#             numThreads = 1,
-#             outputFolder = ".",
-#             cdmVersion = config$cdmversion)
+         conceptHierarchy = FALSE) # important to set to False
 
 ## Export results to Json
 # exportToJson(connectionDetails,

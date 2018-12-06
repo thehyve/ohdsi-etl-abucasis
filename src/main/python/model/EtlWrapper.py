@@ -230,8 +230,8 @@ class EtlWrapper(object):
             total += self.log_table_rowcount(t)
 
         if len(tables) > 1 and do_log_total:
-            self.log_to_file('+' * (30 + 1 + 10))
-            self.log_to_file(self.ROW_COUNT_FORMAT.format('TOTAL', total))
+            self.log('+' * (30 + 1 + 10))
+            self.log(self.ROW_COUNT_FORMAT.format('TOTAL', total))
 
     def log_table_rowcount(self, table_name):
         """
@@ -245,9 +245,10 @@ class EtlWrapper(object):
                 'SELECT count(*) FROM %s.%s' % (self.source_schema, table_name)
             ).fetchone()[0]
         except Exception:
-            self.log_to_file(self.ROW_COUNT_FORMAT.format(table_name, '-'))
+            self.log(self.ROW_COUNT_FORMAT.format(table_name, '-'))
             return 0
-        self.log_to_file(self.ROW_COUNT_FORMAT.format(table_name, count))
+        self.log(self.ROW_COUNT_FORMAT.format(table_name, count))
+
         return count
 
     def query_to_dictionary(self, query_result):

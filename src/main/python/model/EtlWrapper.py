@@ -249,3 +249,18 @@ class EtlWrapper(object):
             return 0
         self.log_to_file(self.ROW_COUNT_FORMAT.format(table_name, count))
         return count
+
+    def query_to_dictionary(self, query_result):
+        """
+        Converts a SQL query from execute_sql_query to a python dictionary
+        :param query_result: query object (sqlalchemy).
+        :return query_dicts: list of dictionaries from the query. Each row from the query will be appended as a dict
+        with keys = column names and values = column values
+        """
+        d, a = {}, []
+        for rowproxy in query_result:
+            # Iterate through the .items() (format: [(key0, value0), (key1, value1), etc...])
+            for tup in rowproxy.items():
+                d = {**d, **{tup[0]: tup[1]}}
+            a.append(d)
+        return a

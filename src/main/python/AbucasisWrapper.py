@@ -91,16 +91,12 @@ class AbucasisWrapper(EtlWrapper):
         self.execute_sql_file('vocabulary_loading/load_source_to_concept_map.sql')
         self.execute_sql_file('vocabulary_loading/tba_to_2B_concept.sql')
         self.execute_sql_file('vocabulary_loading/update_stcm_source_concept_id.sql')
-        # TODO Implement this in a function & Print vocab version per vocab_id
-        result = self.execute_sql_query("SELECT vocabulary_id, vocabulary_version FROM cdm5.vocabulary WHERE vocabulary_reference = 'ABUCASIS'")
-        d, a = {}, []
-        for rowproxy in result:
-            # rowproxy.items() returns an array like [(key0, value0), (key1, value1)]
-            for tup in rowproxy.items():
-                # build up the dictionary
-                d = {**d, **{tup[0]: tup[1]}}
-            a.append(d)
-        self.log("Vocabulary version %s"%(d['vocabulary_version']), leading_newline=True)
+
+        # Retrieve In-house semantic mappings vocabularies and versions
+        result = self.execute_sql_query("SELECT vocabulary_id, vocabulary_version FROM cdm5.vocabulary WHERE vocabulary_reference = 'ABUCASIS'", verbose=False)
+        query_dict = self.query_to_dictionary(result)
+        self.log("Vocabulary version %s"%(query_dict[0]['vocabulary_version']), leading_newline=True)
+
 
 
     def _prepare_source(self):

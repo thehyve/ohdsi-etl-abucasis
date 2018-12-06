@@ -27,7 +27,7 @@ class AbucasisWrapper(EtlWrapper):
         self.start_timing()
         self.log_timestamp()
 
-        self.log_source_counts()
+        self._log_source_counts()
 
         self.log('{:-^100}'.format(' ETL '))
 
@@ -54,8 +54,8 @@ class AbucasisWrapper(EtlWrapper):
         # Constraints and Indices
         # self._apply_constraints()
         self._apply_indexes()
+        self.log_runtime()
 
-        # self.log_runtime()
         self.log_timestamp()
 
     # TODO
@@ -96,8 +96,6 @@ class AbucasisWrapper(EtlWrapper):
         result = self.execute_sql_query("SELECT vocabulary_id, vocabulary_version FROM cdm5.vocabulary WHERE vocabulary_reference = 'ABUCASIS'", verbose=False)
         query_dict = self.query_to_dictionary(result)
         self.log("Vocabulary version %s"%(query_dict[0]['vocabulary_version']), leading_newline=True)
-
-
 
     def _prepare_source(self):
         self.log("Intermediate tables and aggregates...", leading_newline=True)
@@ -160,8 +158,8 @@ class AbucasisWrapper(EtlWrapper):
     def _derive_era(self):
         self.execute_sql_file('post_processing/GenerateDrugEra.sql')
 
-    def log_source_counts(self):
-        self.log_to_file('{:-^100}'.format(' Source Counts '))
+    def _log_source_counts(self):
+        self.log('{:-^100}'.format(' Source Counts '))
         self.log_tables_rowcounts('tb_sip_spo tb_sip_spo_resto_2015 tb_ante_cmbd tb_morbilid tb_diag_juntos '
                                   'tb_proc_cmbd tb_tratamientos tb_prescrip tb_rele tb_prestaci tb_variables'.split())
 

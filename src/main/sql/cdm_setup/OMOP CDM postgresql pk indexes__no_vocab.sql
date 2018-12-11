@@ -136,9 +136,9 @@ Standardized health system data
 
 ALTER TABLE cdm5.location ADD CONSTRAINT xpk_location PRIMARY KEY ( location_id ) ;
 
-/*
-ALTER TABLE location_history ADD CONSTRAINT xpk_location_history PRIMARY KEY ( location_history_id ) ; 
-*/
+
+ALTER TABLE cdm5.location_history ADD CONSTRAINT xpk_location_history PRIMARY KEY ( location_history_id ) ;
+
 
 ALTER TABLE cdm5.care_site ADD CONSTRAINT xpk_care_site PRIMARY KEY ( care_site_id ) ;
 
@@ -167,11 +167,10 @@ Standardized derived elements
 
 ALTER TABLE cdm5.drug_era ADD CONSTRAINT xpk_drug_era PRIMARY KEY ( drug_era_id ) ;
 
-/*
-ALTER TABLE dose_era  ADD CONSTRAINT xpk_dose_era PRIMARY KEY ( dose_era_id ) ;
+ALTER TABLE cdm5.dose_era  ADD CONSTRAINT xpk_dose_era PRIMARY KEY ( dose_era_id ) ;
 
-ALTER TABLE condition_era ADD CONSTRAINT xpk_condition_era PRIMARY KEY ( condition_era_id ) ;
-*/
+ALTER TABLE cdm5.condition_era ADD CONSTRAINT xpk_condition_era PRIMARY KEY ( condition_era_id ) ;
+
 
 /************************
 *************************
@@ -332,13 +331,13 @@ Standardized health system data
 Standardized health economics
 
 ************************/
-/*
-CREATE INDEX idx_period_person_id  ON payer_plan_period  (person_id ASC);
-CLUSTER payer_plan_period  USING idx_period_person_id ;
 
-CREATE INDEX idx_cost_person_id  ON cost  (person_id ASC);
-CLUSTER cost  USING idx_cost_person_id ;
-*/
+CREATE INDEX idx_period_person_id  ON cdm5.payer_plan_period  (person_id ASC);
+CLUSTER cdm5.payer_plan_period  USING idx_period_person_id ;
+
+CREATE INDEX idx_cost_person_id  ON cdm5.cost  (person_id ASC);
+CLUSTER cdm5.cost  USING idx_cost_person_id ;
+
 
 /************************
 
@@ -351,12 +350,12 @@ CREATE INDEX idx_drug_era_person_id  ON cdm5.drug_era  (person_id ASC);
 CLUSTER cdm5.drug_era  USING idx_drug_era_person_id ;
 CREATE INDEX idx_drug_era_concept_id ON cdm5.drug_era (drug_concept_id ASC);
 
-/*
-CREATE INDEX idx_dose_era_person_id  ON dose_era  (person_id ASC);
-CLUSTER dose_era  USING idx_dose_era_person_id ;
-CREATE INDEX idx_dose_era_concept_id ON dose_era (drug_concept_id ASC);
 
-CREATE INDEX idx_condition_era_person_id  ON condition_era  (person_id ASC);
-CLUSTER condition_era  USING idx_condition_era_person_id ;
-CREATE INDEX idx_condition_era_concept_id ON condition_era (condition_concept_id ASC);
-*/
+CREATE INDEX idx_dose_era_person_id  ON cdm5.dose_era  (person_id ASC);
+CLUSTER cdm5.dose_era  USING idx_dose_era_person_id ;
+CREATE INDEX idx_dose_era_concept_id ON cdm5.dose_era (drug_concept_id ASC);
+
+CREATE INDEX idx_condition_era_person_id  ON cdm5.condition_era  (person_id ASC);
+CLUSTER cdm5.condition_era  USING idx_condition_era_person_id ;
+CREATE INDEX idx_condition_era_concept_id ON cdm5.condition_era (condition_concept_id ASC);
+

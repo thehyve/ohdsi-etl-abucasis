@@ -52,21 +52,19 @@ class AbucasisWrapper(EtlWrapper):
         self._derive_era()
 
         # Constraints and Indices
-        # self._apply_constraints()
         self._apply_indexes()
+        self._apply_constraints()
         self.log_runtime()
 
         self.log_timestamp()
 
-    # TODO
-    # def _apply_constraints(self):
-    #     if self.is_constraints_applied:
-    #         return
-    #
-    #     self.log("Applying constraints...")
-    #     self.execute_sql_file('./sql/cdm_prepare/OMOP CDM constraints - PK - NonVocabulary.sql', False)
-    #     self.execute_sql_file('./sql/cdm_prepare/OMOP CDM constraints - FK - NonVocabulary.sql', False)
-    #     self.is_constraints_applied = True
+    def _apply_constraints(self):
+        if self.is_constraints_applied:
+            return
+
+        self.log("Applying constraints...")
+        self.execute_sql_file('cdm_setup/OMOP CDM postgresql constraints - NonVocabulary.sql', False)
+        self.is_constraints_applied = True
 
     def _apply_indexes(self):
         self.log("Applying indexes...")
@@ -105,17 +103,20 @@ class AbucasisWrapper(EtlWrapper):
 
     def _transform_and_load(self):
         self.log("Main ETL scripts...", leading_newline=True)
+        # location
         self.execute_sql_file('transformation/zonas_to_location.sql')
+        # care site
         self.execute_sql_file('transformation/centros_to_care_site.sql')
 
+        # person
         self.execute_sql_file('transformation/sip_spo_to_person.sql')
-        # death?
+        # observation period
         self.execute_sql_file('transformation/sip_spo_to_observation_period.sql')
 
         # visit
         self.execute_sql_file('transformation/ante_cmbd_to_visit_ocurrence.sql')
         self.execute_sql_file('transformation/morbilid_to_visit_ocurrence.sql')
-
+        self.execute_sql_file('transformation/diag_juntos_to_visit_occurrence.sql')
         # process visits table
         self.execute_sql_file('transformation/remove_conflictive_visits.sql')
 
@@ -123,7 +124,6 @@ class AbucasisWrapper(EtlWrapper):
         self.execute_sql_file('transformation/diag_juntos_to_condition_occurrence.sql')
 
         # Procedure
-        #self.execute_sql_file('transformation/proc_cmbd_to_procedure_occurrence.sql')
         self.execute_sql_file('transformation/intermediate_proc_cmbd_to_procedure_occurrence.sql')
 
         # Drug
@@ -133,7 +133,6 @@ class AbucasisWrapper(EtlWrapper):
         self.execute_sql_file('transformation/prestaci_to_measurement.sql')
         self.execute_sql_file('transformation/variables_to_measurement.sql')
         self.execute_sql_file('transformation/intermediate_proc_cmbd_to_measurement.sql')
-
 
         # Observation
         self.execute_sql_file('transformation/event_counts_to_observation.sql')
@@ -147,13 +146,9 @@ class AbucasisWrapper(EtlWrapper):
         self.execute_sql_file('transformation/proc_cmbd_to_observation.sql')
         self.execute_sql_file('transformation/intermediate_proc_cmbd_to_observation.sql')
 
-
-
-
-        # Death
+        # Death (to make it compatible with CDM v5.3)
         self.execute_sql_file('transformation/death_intermediate_to_observation.sql')
         self.execute_sql_file('transformation/death_intermediate_to_death.sql')
-
 
     def _derive_era(self):
         self.execute_sql_file('post_processing/GenerateDrugEra.sql')
@@ -162,4 +157,3 @@ class AbucasisWrapper(EtlWrapper):
         self.log('{:-^100}'.format(' Source Counts '))
         self.log_tables_rowcounts('tb_sip_spo tb_sip_spo_resto_2015 tb_ante_cmbd tb_morbilid tb_diag_juntos '
                                   'tb_proc_cmbd tb_tratamientos tb_prescrip tb_rele tb_prestaci tb_variables'.split())
-

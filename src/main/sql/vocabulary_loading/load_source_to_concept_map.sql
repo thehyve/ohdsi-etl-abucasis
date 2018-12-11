@@ -55,8 +55,13 @@ COPY tmp_source_to_concept_map FROM '@absPath/resources/mapping_tables/abucasis_
 COPY tmp_source_to_concept_map FROM '@absPath/resources/mapping_tables/abucasis_cie9.csv' WITH CSV HEADER
 ;
 
+-- Assign "ABUCASIS_UNKNOWN" as the target_vocabulary_id for all the mappings that are not assigned to any vocab
+-- (solves a constraint conflict with codes mapped to 0)
+UPDATE tmp_source_to_concept_map
+SET target_vocabulary_id = 'ABUCASIS_UNKNOWN'
+WHERE target_vocabulary_id IS NULL;
+
 INSERT INTO cdm5.source_to_concept_map
   SELECT *
   FROM tmp_source_to_concept_map
-  WHERE target_vocabulary_id IS NOT NULL
 ON CONFLICT DO NOTHING;

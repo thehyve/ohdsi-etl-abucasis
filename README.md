@@ -11,7 +11,7 @@ The converted dataset is backwards compatible with CDMv5.
   apt install python3-pip
   pip3 install click
   pip3 install sqlalchemy
-  pip3 install psycopg2
+  pip3 install psycopg2-binary
   ```
 - OMOP vocabularies (http://athena.ohdsi.org/vocabulary/list)
   - OMOP generated (Gender, Race, Type Concepts, etc)

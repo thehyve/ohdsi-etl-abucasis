@@ -89,7 +89,7 @@ INSERT INTO cdm5.drug_exposure
 		cast(tb_rele.fecha_dispensacion +
 				 (total_days_supply / number_of_prescriptions) :: INTEGER
 				 AS
-				 TIMESTAMP)                                                   AS drug_exposure_end_date,
+				 TIMESTAMP)                                                   AS drug_exposure_end_datetime,
 
 		-- Dispensed in pharmacy
 		38000175                                                          AS drug_type_concept_id,

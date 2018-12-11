@@ -142,9 +142,9 @@ ALTER TABLE location_history ADD CONSTRAINT xpk_location_history PRIMARY KEY ( l
 
 ALTER TABLE cdm5.care_site ADD CONSTRAINT xpk_care_site PRIMARY KEY ( care_site_id ) ;
 
-/*
-ALTER TABLE provider ADD CONSTRAINT xpk_provider PRIMARY KEY ( provider_id ) ;
-*/
+
+ALTER TABLE cdm5.provider ADD CONSTRAINT xpk_provider PRIMARY KEY ( provider_id ) ;
+
 
 
 /************************

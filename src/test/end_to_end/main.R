@@ -1,3 +1,18 @@
+# Copyright 2018 The Hyve
+#
+# Licensed under the GNU General Public License, version 3,
+# or (at your option) any later version (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# https://www.gnu.org/licenses/
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+
 library('yaml')
 source('TestFrameworkAbucasis.R') # Note: this is the pre-factorization (Dec-2017) framework
 
@@ -391,11 +406,12 @@ executeSql(connection, sprintf('SET search_path TO %s;', config$cdmSchema))
 test_sql[1] <- 'DROP TABLE IF EXISTS test_results;' # Replace existing SQL server specific table drop
 executeSql(connection, paste(test_sql, collapse = ';\n'))
 
-# View the results and write them
+# View the results and export them
 querySql(connection, 'SELECT * FROM test_results')
 write.table(querySql(connection, 'SELECT * FROM test_results'), "unittest_results.csv",sep=",",row.names=FALSE )
 
-# Report failed results
-# TODO
-# TODO desired output: X tests failed (Y% of total unit tests)
-# TODO report tests that failed
+# Report in the command line the no. of Failed tests
+df_results <-as.data.frame(querySql(connection, 'SELECT * FROM test_results'))
+print(paste0(paste0("#########  No. of failed unit tests: ",sum(df_results$'STATUS' == 'FAIL')),"#########"))
+print("Printing failed unit tests:")
+print(df_results[df_results$'STATUS' == 'FAIL',])

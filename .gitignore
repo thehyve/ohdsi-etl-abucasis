@@ -8,3 +8,11 @@
 config.yml
 
 logs/
+
+*.json
+errorReport.txt
+heelResults.rds
+log_achillesHeel.txt
+achilles_heel__temp_fix.R
+
+unittest_results.csv*

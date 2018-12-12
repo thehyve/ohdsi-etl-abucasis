@@ -39,4 +39,6 @@ INSERT INTO cdm5.procedure_occurrence
         ON person.person_source_value = intermediate_proc_cmbd.person_source_value
       WHERE intermediate_proc_cmbd._date >= TO_DATE('2012-01-01', 'YYYY-MM-DD')
             AND
-            intermediate_proc_cmbd.target_domain_id = 'Procedure';
+            (intermediate_proc_cmbd.target_domain_id = 'Procedure'
+            OR
+            intermediate_proc_cmbd._concept_id = 0);

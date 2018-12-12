@@ -1,6 +1,11 @@
 /*
-Visit ocurrence table
+Visit occurrence table
 */
+
+-- Drop unique visit_occurrence_id constraint to allow insertion of duplicate visits
+--    (duplicate visits will be dropped by the script remove_conflictive_visits.sql
+ALTER TABLE cdm5.visit_occurrence DROP CONSTRAINT IF EXISTS xpk_visit_occurrence;
+
 INSERT INTO cdm5.visit_occurrence (visit_occurrence_id,
                                    person_id,
                                    visit_concept_id,
@@ -17,7 +22,7 @@ INSERT INTO cdm5.visit_occurrence (visit_occurrence_id,
                                    discharge_to_source_value,
                                    care_site_id)
 
-SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_ocurrence_id,
+SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_occurrence_id,
        person.person_id                                      AS person_id,
        CASE tb_ante_cmbd.tipo_actividad
          WHEN 'HOS' THEN 8717 -- Inpatient hospital

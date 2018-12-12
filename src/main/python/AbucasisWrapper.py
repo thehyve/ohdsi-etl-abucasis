@@ -93,7 +93,7 @@ class AbucasisWrapper(EtlWrapper):
         # Retrieve In-house semantic mappings vocabularies and versions
         result = self.execute_sql_query("SELECT vocabulary_id, vocabulary_version FROM cdm5.vocabulary WHERE vocabulary_reference = 'ABUCASIS'", verbose=False)
         query_dict = self.query_to_dictionary(result)
-        self.log("Vocabulary version %s"%(query_dict[0]['vocabulary_version']), leading_newline=True)
+        self.log("Semantic mappings version %s"%(query_dict[0]['vocabulary_version']), leading_newline=True)
 
     def _prepare_source(self):
         self.log("Intermediate tables and aggregates...", leading_newline=True)

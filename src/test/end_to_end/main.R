@@ -69,21 +69,20 @@ declareTest('Observation period default values start date 01-01-2012 end date 31
 expect_person(person_id=1, person_source_value='A01')
 expect_observation_period(person_id=1, observation_period_start_date='2012-01-01', observation_period_end_date='2016-12-31')
 
-# TODO Observation recorded for death
-
 # ========================
 # Procedure occurrence
 # ========================
 declareTest('Procedure occurrence')
-add_tb_proc_cmbd(numsipcod='A01', cie9p = '10.10')
-expect_procedure_occurrence(procedure_source_value = '10.10')
+add_tb_proc_cmbd(numsipcod='A05', cie9p = '13.41', fecha_ingreso='2017-01-01', fecha_alta='2017-02-01')
+expect_person(person_id=5, person_source_value='A05')
+expect_procedure_occurrence(procedure_source_value = '13.41', procedure_date='2017-01-01')
 
 declareTest('Procedure occurrence visit')
 expect_person(person_id=2, person_source_value='A02')
 add_tb_ante_cmbd(numsipcod = 'A02', fecha_ingreso = '2018-01-01')
 expect_visit_occurrence(person_id = 2,visit_start_date = '2018-01-01')
-add_tb_proc_cmbd(numsipcod = 'A02', fecha_ingreso = '2018-01-01', tipo_actividad = 'HOS', cie9p = '20.20')
-expect_procedure_occurrence(procedure_source_value = '20.20') # NOTE: this id can change
+add_tb_proc_cmbd(numsipcod = 'A02', fecha_ingreso = '2018-01-01',fecha_alta='2018-02-02',tipo_actividad = 'HOS', cie9p = '13.41')
+expect_procedure_occurrence(procedure_source_value = '13.41', person_id=2) # NOTE: this id can change
 
 declareTest('Procedure occurrence start and end date')
 expect_person(person_id=1, person_source_value='A01')
@@ -93,6 +92,10 @@ expect_procedure_occurrence(person_id=1, procedure_date='2012-01-01')
 declareTest('Procedure occurrence outside valid observation period')
 add_tb_proc_cmbd(numsipcod='A01', fecha_ingreso = '2010-01-01')
 expect_no_procedure_occurrence(person_id=1, procedure_date='2010-01-01')
+
+declareTest('Procedure occurrence from procedure mapped to concept_id 0')
+add_tb_proc_cmbd(numsipcod='A05', cie9p = 'DJSHFKJDSGKJD', fecha_ingreso='2017-01-01', fecha_alta='2017-02-01')
+expect_procedure_occurrence(procedure_source_value = 'DJSHFKJDSGKJD', procedure_date='2017-01-01')
 
 # ========================
 # Visit Ocurrence
@@ -109,8 +112,6 @@ add_tb_ante_cmbd(numsipcod = 'A03', fecha_ingreso = '2013-01-01', fecha_alta = '
 add_tb_ante_cmbd(numsipcod = 'A03', fecha_ingreso = '2013-01-01', fecha_alta = '2013-05-01', cir_alta = 1)
 expect_visit_occurrence(person_id = 3, visit_start_date='2013-01-01', visit_end_date = '2013-05-01')
 expect_no_visit_occurrence(person_id = 3, visit_start_date='2013-01-01', visit_end_date = '2013-02-01')
-
-#TODO Unique visit occurrence ID for a person/start date hospitalization
 
 declareTest('Visit start and end date for ambulatory visits')
 expect_person(person_id=2, person_source_value='A02')
@@ -148,10 +149,10 @@ expect_no_condition_occurrence(person_id = 2, condition_start_date = '2010-08-01
 # ========================
 declareTest('Drug exposure start and end date')
 expect_person(person_id=2, person_source_value='A02')
-add_tb_tratamientos(numsipcod='A02', id_tratamiento = 'TR001', dias_tratamiento = 90)
-add_tb_prescrip(numsipcod='A02', numreceta = 'RE001', id_tratamiento = 'TR001')
-add_tb_prescrip(numsipcod='A02', numreceta = 'RE002', id_tratamiento = 'TR001')
-add_tb_prescrip(numsipcod='A02', numreceta = 'RE003', id_tratamiento = 'TR001')
+add_tb_tratamientos(numsipcod='A02', id_tratamiento = 'TR001', dias_tratamiento = 90, fecha_inicio_tratamiento = '2015-05-05', fecha_fin_tratamiento='2015-08-05')
+add_tb_prescrip(numsipcod='A02', numreceta = 'RE001', id_tratamiento = 'TR001',fecha_prescripcion='2015-05-05')
+add_tb_prescrip(numsipcod='A02', numreceta = 'RE002', id_tratamiento = 'TR001',fecha_prescripcion='2015-06-05')
+add_tb_prescrip(numsipcod='A02', numreceta = 'RE003', id_tratamiento = 'TR001',fecha_prescripcion='2015-07-05')
 add_tb_rele(numsipcod='A02', numreceta = 'RE001', fecha_dispensacion = '2015-05-05')
 add_tb_rele(numsipcod='A02', numreceta = 'RE002', fecha_dispensacion = '2015-06-05')
 add_tb_rele(numsipcod='A02', numreceta = 'RE003', fecha_dispensacion = '2015-07-05')
@@ -161,7 +162,7 @@ expect_drug_exposure(person_id=2, drug_exposure_id = 1, drug_exposure_start_date
 declareTest('Drug exposure derivation of total days supply from treatment dates')
 expect_person(person_id=1, person_source_value='A01')
 add_tb_rele(numsipcod='A01', numreceta = 'RE101', fecha_dispensacion = '2015-05-06')
-add_tb_prescrip(numsipcod='A01', numreceta = 'RE101', id_tratamiento = 'TR101')
+add_tb_prescrip(numsipcod='A01', numreceta = 'RE101', id_tratamiento = 'TR101',fecha_prescripcion='2015-05-05')
 add_tb_tratamientos(numsipcod='A01', id_tratamiento ='TR101', dias_tratamiento=NULL, fecha_inicio_tratamiento='2015-05-05', fecha_fin_tratamiento = '2015-05-10')
 # Patient bought the drug 1 day after the treatment was prescribed (see tb_rele)
 expect_drug_exposure(person_id=1, drug_exposure_start_date = '2015-05-06', drug_exposure_end_date = '2015-05-11')
@@ -169,43 +170,43 @@ expect_drug_exposure(person_id=1, drug_exposure_start_date = '2015-05-06', drug_
 declareTest('Drug exposure quantity calculation per hour')
 expect_person(person_id=1, person_source_value='A01')
 # 30 days, 1 per 24 hours over 1 precription = 30
-add_tb_tratamientos(numsipcod='A01', id_tratamiento = 'TR011', dias_tratamiento = 30, unidades=1, cadencia=24, tipo_posologia='Horaria')
+add_tb_tratamientos(numsipcod='A01', id_tratamiento = 'TR011', dias_tratamiento = 30, unidades=1, cadencia=24, tipo_posologia='Horaria',fecha_inicio_tratamiento='2017-01-01', fecha_fin_tratamiento = '2017-01-31')
 add_tb_prescrip(numsipcod='A01', numreceta = 'RE021', id_tratamiento = 'TR011')
 add_tb_rele(numsipcod='A01', numreceta = 'RE021', fecha_dispensacion = '2017-01-01')
 expect_drug_exposure(person_id=1, drug_exposure_start_date = '2017-01-01', quantity=30)
 
 declareTest('Drug exposure quantity calculation per day')
 # 180 days, 5 per 2 days over 1 precription = 450
-add_tb_tratamientos(numsipcod='A01', id_tratamiento = 'TR012', dias_tratamiento = 180, unidades=5, cadencia=2, tipo_posologia='Diaria')
-add_tb_prescrip(numsipcod='A01', numreceta = 'RE022', id_tratamiento = 'TR012')
+add_tb_tratamientos(numsipcod='A01', id_tratamiento = 'TR012', dias_tratamiento = 180, unidades=5, cadencia=2, tipo_posologia='Diaria',fecha_inicio_tratamiento='2017-02-01', fecha_fin_tratamiento = '2017-07-31')
+add_tb_prescrip(numsipcod='A01', numreceta = 'RE022', id_tratamiento = 'TR012',fecha_prescripcion='2017-02-01')
 add_tb_rele(numsipcod='A01', numreceta = 'RE022', fecha_dispensacion = '2017-02-01')
 expect_drug_exposure(person_id=1, drug_exposure_start_date = '2017-02-01', quantity=450)
 
 declareTest('Drug exposure quantity with other posologia')
-add_tb_tratamientos(numsipcod='A01', id_tratamiento = 'TR013', unidades=50, tipo_posologia='Sin Cadencia')
-add_tb_prescrip(numsipcod='A01', numreceta = 'RE024', id_tratamiento = 'TR013')
+add_tb_tratamientos(numsipcod='A01', id_tratamiento = 'TR013', unidades=50, tipo_posologia='Sin Cadencia',fecha_inicio_tratamiento='2017-04-01', fecha_fin_tratamiento = '2017-05-01')
+add_tb_prescrip(numsipcod='A01', numreceta = 'RE024', id_tratamiento = 'TR013',fecha_prescripcion='2017-04-01')
 add_tb_rele(numsipcod='A01', numreceta = 'RE024', fecha_dispensacion = '2017-04-01')
 expect_drug_exposure(person_id=1, drug_exposure_start_date = '2017-04-01', quantity=50)
 
 declareTest('Drug exposure quantity with zero cadencia')
 expect_person(person_id=3, person_source_value='A03')
-add_tb_tratamientos(numsipcod='A03', id_tratamiento = 'TR014',dias_tratamiento=1, unidades=30, cadencia=0.0)
-add_tb_prescrip(numsipcod='A03', numreceta = 'RE023', id_tratamiento = 'TR014')
+add_tb_tratamientos(numsipcod='A03', id_tratamiento = 'TR014',dias_tratamiento=1, unidades=1, cadencia=0.0,fecha_inicio_tratamiento='2017-03-01', fecha_fin_tratamiento = '2017-04-01')
+add_tb_prescrip(numsipcod='A03', numreceta = 'RE023', id_tratamiento = 'TR014',fecha_prescripcion='2017-03-01')
 add_tb_rele(numsipcod='A03', numreceta = 'RE023', fecha_dispensacion = '2017-03-01')
-expect_drug_exposure(person_id=3, drug_exposure_start_date = '2017-03-01', quantity=30)
+expect_drug_exposure(person_id=3, drug_exposure_start_date = '2017-03-01', quantity=31)
 
 declareTest('Drug exposure quantity and days_supply over multiple prescriptions')
 expect_person(person_id=1, person_source_value='A01')
 # 90 days, 2 per 24 hours over 3 precriptions = 60 per exposure
-add_tb_tratamientos(numsipcod='A01', id_tratamiento = 'TR002', dias_tratamiento = 90, unidades=2, tipo_posologia='Horaria', cadencia=24)
-add_tb_prescrip(numsipcod='A01', numreceta = 'RE011', id_tratamiento = 'TR002')
-add_tb_prescrip(numsipcod='A01', numreceta = 'RE012', id_tratamiento = 'TR002')
-add_tb_prescrip(numsipcod='A01', numreceta = 'RE013', id_tratamiento = 'TR002')
+add_tb_tratamientos(numsipcod='A01', id_tratamiento = 'TR002', dias_tratamiento = 90, unidades=2, tipo_posologia='Horaria', cadencia=24,fecha_inicio_tratamiento='2016-05-01', fecha_fin_tratamiento = '2016-07-30')
+add_tb_prescrip(numsipcod='A01', numreceta = 'RE011', id_tratamiento = 'TR002',fecha_prescripcion='2016-05-01')
+add_tb_prescrip(numsipcod='A01', numreceta = 'RE012', id_tratamiento = 'TR002',fecha_prescripcion='2016-06-01')
+add_tb_prescrip(numsipcod='A01', numreceta = 'RE013', id_tratamiento = 'TR002',fecha_prescripcion='2016-07-01')
 add_tb_rele(numsipcod='A01', numreceta = 'RE011', fecha_dispensacion = '2016-05-01')
 add_tb_rele(numsipcod='A01', numreceta = 'RE012', fecha_dispensacion = '2016-06-01')
 add_tb_rele(numsipcod='A01', numreceta = 'RE013', fecha_dispensacion = '2016-07-01')
-
 expect_drug_exposure(person_id=1, drug_exposure_start_date = '2016-05-01', quantity=60, days_supply=30)
+
 declareTest('Drug exposure refill')
 expect_drug_exposure(person_id=1, drug_exposure_start_date = '2016-06-01', refills=1)
 expect_drug_exposure(person_id=1, drug_exposure_start_date = '2016-07-01', refills=2)
@@ -214,6 +215,23 @@ expect_drug_exposure(person_id=1, drug_exposure_start_date = '2016-07-01', refil
 # note: this is because the unit test assumes CDMv5 and drug_era_start_date column does not exist anymore in CDMv6
 # declareTest('Drug era')
 # expect_drug_era(person_id=1, drug_era_start_date='2016-05-01 00:00:00.000', drug_era_end_date='2016-07-31 00:00:00.000', drug_exposure_count=3)
+
+declareTest('Drug exposure from modified treatment')
+expect_person(person_id=4, person_source_value='A04')
+add_tb_tratamientos(numsipcod='A04', id_tratamiento = 'TR300', dias_tratamiento = 365, unidades=1, tipo_posologia='Horaria', cadencia=24, fecha_inicio_tratamiento='2018-01-10', fecha_fin_tratamiento='2018-03-27')
+add_tb_tratamientos(numsipcod='A04', id_tratamiento = 'TR301', dias_tratamiento = 90, unidades=1, tipo_posologia='Horaria', cadencia=24, fecha_inicio_tratamiento='2018-03-27', fecha_fin_tratamiento='2018-06-24')
+add_tb_prescrip(numsipcod='A04', numreceta = 'RE111', id_tratamiento = 'TR300',fecha_prescripcion='2018-01-10')
+add_tb_prescrip(numsipcod='A04', numreceta = 'RE112', id_tratamiento = 'TR300',fecha_prescripcion='2018-02-10')
+add_tb_prescrip(numsipcod='A04', numreceta = 'RE113', id_tratamiento = 'TR300',fecha_prescripcion='2018-03-10')
+add_tb_prescrip(numsipcod='A04', numreceta = 'RE114', id_tratamiento = 'TR301',fecha_prescripcion='2018-04-10')
+add_tb_prescrip(numsipcod='A04', numreceta = 'RE115', id_tratamiento = 'TR301',fecha_prescripcion='2018-05-10')
+add_tb_prescrip(numsipcod='A04', numreceta = 'RE116', id_tratamiento = 'TR301',fecha_prescripcion='2018-06-10')
+add_tb_rele(numsipcod='A04', numreceta = 'RE111', fecha_dispensacion = '2018-01-10')
+add_tb_rele(numsipcod='A04', numreceta = 'RE112', fecha_dispensacion = '2018-02-10')
+add_tb_rele(numsipcod='A04', numreceta = 'RE113', fecha_dispensacion = '2018-03-10')
+add_tb_rele(numsipcod='A04', numreceta = 'RE114', fecha_dispensacion = '2018-04-10')
+add_tb_rele(numsipcod='A04', numreceta = 'RE115', fecha_dispensacion = '2018-05-10')
+add_tb_rele(numsipcod='A04', numreceta = 'RE116', fecha_dispensacion = '2018-06-10')
 
 # ========================
 # Measurement
@@ -256,10 +274,9 @@ expect_person(person_id=1, person_source_value='A01')
 add_tb_variables(numsipcod='A01', fecha_registro='2012-05-05', cod_variable_clinic='PESO', valor_registrado = '6', cod_ud_medida='123')
 expect_measurement(person_id=1, measurement_id=4,value_as_number = 6)
 
-# declareTest('Measurement derived from procedure if procedure concept is from measurement domain')
-# add_tb_proc_cmbd(numsipcod='A01', fecha_ingreso='2012-09-09', cie9p='89.43')
-# expect_measurement(person_id=1, measurement_date='2012-09-09')
-
+declareTest('Measurement derived from procedure if procedure_concept_id is from Measurement domain')
+add_tb_proc_cmbd(numsipcod='A01', fecha_ingreso='2015-09-09', cie9p='89.43')
+expect_measurement(person_id=1, measurement_date='2015-09-09')
 
 # ========================
 # Observation
@@ -324,6 +341,11 @@ expect_person(person_id=1, person_source_value='A01')
 add_tb_prescrip(numsipcod='A01', numreceta = 'RE9999', id_tratamiento = 'TR99999', fecha_prescripcion='2012-10-10')
 expect_observation(person_id=1,observation_concept_id=762823,observation_date = '2012-10-10')
 
+declareTest('Observation derived from procedure if procedure_concept_id is from Observation domain')
+add_tb_proc_cmbd(numsipcod='A01', fecha_ingreso='2015-09-09', cie9p='93.83')
+expect_observation(person_id=1, observation_date='2015-09-09')
+
+
 # ========================
 # ========================
 #
@@ -357,7 +379,7 @@ executeSql(connection, paste(insert_sql, collapse = '\n'))
 # Change working directory
 setwd('../../../')
 # Run etl script with config$sourceSchema as source:
-system(sprintf('python3 main.py -p %s -d abucasis_dev -u %s -w %s -s %s --skipvocab', connectionConfig$port, connectionConfig$user, connectionConfig$password, config$sourceSchema, config$cdmSchema))
+system(sprintf('python3 main.py -p %s -d abucasis_dev -u %s -w %s -s %s', connectionConfig$port, connectionConfig$user, connectionConfig$password, config$sourceSchema, config$cdmSchema))
 
 # ========================
 # ========================
@@ -376,3 +398,4 @@ write.table(querySql(connection, 'SELECT * FROM test_results'), "unittest_result
 # Report failed results
 # TODO
 # TODO desired output: X tests failed (Y% of total unit tests)
+# TODO report tests that failed

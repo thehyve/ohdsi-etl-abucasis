@@ -3,13 +3,21 @@ Captures all drug dispensations from rele.
 First, the medication specifics and quantity information is derived from tratamientos and prescrip.
 This is combined with rele to get the individual exposures.
 */
+
+-- Derive no. of prescriptions per treatment
 WITH prescrip_per_trat AS (
 		SELECT
 			id_tratamiento,
-			count(*) AS number_of_prescriptions
+			count(*)         AS number_of_prescriptions
 		FROM  @source_schema.tb_tratamientos
 			JOIN  @source_schema.tb_prescrip USING (id_tratamiento)
+		-- Filter prescriptions that fall within a valid treatment date
+		--   (solve conflict if treatment end date changed and prescriptions were already recorded in ABUCASIS)
+ 		WHERE tb_prescrip.fecha_prescripcion <= tb_tratamientos.fecha_fin_tratamiento
+		-- Group prescriptions for each treatment
 		GROUP BY id_tratamiento
+
+-- Derive drug dispensations for each treatment via the drug dispensations and drug prescriptions table
 ), tratamiento_derived AS (
 		SELECT
 			id_tratamiento,
@@ -21,15 +29,15 @@ WITH prescrip_per_trat AS (
 			CASE
 			-- cadencia = 0 is equivalent to 1 day rate
 			WHEN cadencia = 0
-				THEN unidades * coalesce(dias_tratamiento, fecha_fin_tratamiento - fecha_inicio_tratamiento)
+				THEN unidades * (fecha_fin_tratamiento - fecha_inicio_tratamiento)
 			WHEN tipo_posologia = 'Horaria'
-				THEN unidades * (24 / cadencia) * coalesce(dias_tratamiento, fecha_fin_tratamiento - fecha_inicio_tratamiento)
+				THEN unidades * (24 / cadencia) * (fecha_fin_tratamiento - fecha_inicio_tratamiento)
 			WHEN tipo_posologia = 'Diaria'
-				THEN unidades * (1 / cadencia) * coalesce(dias_tratamiento, fecha_fin_tratamiento - fecha_inicio_tratamiento)
+				THEN unidades * (1 / cadencia) * (fecha_fin_tratamiento - fecha_inicio_tratamiento)
 			ELSE unidades
 			END                                                                          AS total_quantity,
 
-			coalesce(dias_tratamiento, fecha_fin_tratamiento - fecha_inicio_tratamiento) AS total_days_supply,
+			fecha_fin_tratamiento - fecha_inicio_tratamiento                             AS total_days_supply,
 
 			CASE tipo_posologia
 			WHEN 'Horaria'
@@ -116,4 +124,6 @@ INSERT INTO cdm5.drug_exposure
 		LEFT JOIN cdm5.source_to_concept_map AS ingredient_map
 			ON ingredient_map.source_code = tratamiento_derived.cod_prinactivo
 				 AND ingredient_map.source_vocabulary_id = 'ABUCASIS_PRINACTIVO'
+     -- Filter criteria for treatments that did not have assigned any prescription (data quality filter)
+     WHERE number_of_prescriptions != 0 AND number_of_prescriptions IS NOT NULL AND total_days_supply != 0 AND total_days_supply IS NOT NULL
 	;

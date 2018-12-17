@@ -49,4 +49,4 @@ FROM  @source_schema.tb_morbilid
          -- We only want visits from "valid" persons from person table
        INNER JOIN cdm5.person ON intermediate_table_visit_ocurrence.numsipcod = person.person_source_value
       WHERE tb_morbilid.fecha_inicio >= TO_DATE('2012-01-01', 'YYYY-MM-DD')
-ON CONFLICT DO NOTHING;
+;

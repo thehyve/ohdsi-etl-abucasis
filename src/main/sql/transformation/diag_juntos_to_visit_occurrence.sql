@@ -107,10 +107,9 @@ FROM  source_intermediate.intermediate_table_visit_ocurrence
               tb_diag_juntos.fecha_inicio = intermediate_table_visit_ocurrence.date) -- We only want visits from "valid" persons from person table
         INNER JOIN cdm5.person ON intermediate_table_visit_ocurrence.numsipcod = person.person_source_value
         LEFT JOIN cdm5.visit_occurrence ON  intermediate_table_visit_ocurrence.visit_ocurrence_id = visit_occurrence.visit_occurrence_id
+        -- Filter out visits occurring before the study entry date
         WHERE visit_occurrence.visit_occurrence_id IS NULL AND tb_diag_juntos.fecha_inicio >= TO_DATE('2012-01-01', 'YYYY-MM-DD') AND tb_diag_juntos.origen != 'M'
-    -- Filter out visits occurring before the study entry date
-
-ON CONFLICT DO NOTHING;;
+;
 
 /*
 
@@ -163,7 +162,6 @@ FROM  source_intermediate.intermediate_table_visit_ocurrence
               tb_diag_juntos.fecha_inicio = intermediate_table_visit_ocurrence.date) -- We only want visits from "valid" persons from person table
         INNER JOIN cdm5.person ON intermediate_table_visit_ocurrence.numsipcod = person.person_source_value
         LEFT JOIN cdm5.visit_occurrence ON  intermediate_table_visit_ocurrence.visit_ocurrence_id = visit_occurrence.visit_occurrence_id
+        -- Filter out visits occurring before the study entry date
         WHERE visit_occurrence.visit_occurrence_id IS NULL AND tb_diag_juntos.fecha_inicio >= TO_DATE('2012-01-01', 'YYYY-MM-DD') AND tb_diag_juntos.origen = 'M'
-    -- Filter out visits occurring before the study entry date
-
-ON CONFLICT DO NOTHING;;
+;

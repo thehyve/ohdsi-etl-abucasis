@@ -3,7 +3,6 @@ Visit occurrence table
 */
 
 /*
-
 Derive hospitalizations visits from tb_diag_juntos that were not in tb_ante_cmbd
  */
 INSERT INTO cdm5.visit_occurrence (visit_occurrence_id,
@@ -91,7 +90,7 @@ SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_ocurrence_
            -- Hospitalization
          WHEN '15' THEN 8892 --Other inpatient case
            -- Other
-         WHEN '99' THEN 8844 --Other place of service
+         WHEN '99' THEN 0 --Other place of service
          ELSE 0 -- Unknown
            END                                               AS discharge_to_concept_id,
        tb_diag_juntos.cir_alta                                 AS discharge_source_value,
@@ -104,15 +103,18 @@ FROM  source_intermediate.intermediate_table_visit_ocurrence
         LEFT JOIN @source_schema.tb_diag_juntos
           ON (tb_diag_juntos.numsipcod = intermediate_table_visit_ocurrence.numsipcod
                 AND
-              tb_diag_juntos.fecha_inicio = intermediate_table_visit_ocurrence.date) -- We only want visits from "valid" persons from person table
+              tb_diag_juntos.fecha_inicio = intermediate_table_visit_ocurrence.date
+                             AND
+              tb_diag_juntos.origen = intermediate_table_visit_ocurrence.origin)
+              -- We only want visits from "valid" persons from person table
         INNER JOIN cdm5.person ON intermediate_table_visit_ocurrence.numsipcod = person.person_source_value
         LEFT JOIN cdm5.visit_occurrence ON  intermediate_table_visit_ocurrence.visit_ocurrence_id = visit_occurrence.visit_occurrence_id
         -- Filter out visits occurring before the study entry date
-        WHERE visit_occurrence.visit_occurrence_id IS NULL AND tb_diag_juntos.fecha_inicio >= TO_DATE('2012-01-01', 'YYYY-MM-DD') AND tb_diag_juntos.origen != 'M'
+        WHERE visit_occurrence.visit_occurrence_id IS NULL AND tb_diag_juntos.fecha_inicio >= TO_DATE('2012-01-01', 'YYYY-MM-DD')
+        AND tb_diag_juntos.origen != 'M'
 ;
 
 /*
-
 Derive ambulatory visits from tb_diag_juntos that were not in tb_morbilid
  */
 
@@ -159,9 +161,13 @@ FROM  source_intermediate.intermediate_table_visit_ocurrence
         LEFT JOIN @source_schema.tb_diag_juntos
           ON (tb_diag_juntos.numsipcod = intermediate_table_visit_ocurrence.numsipcod
                 AND
-              tb_diag_juntos.fecha_inicio = intermediate_table_visit_ocurrence.date) -- We only want visits from "valid" persons from person table
+              tb_diag_juntos.fecha_inicio = intermediate_table_visit_ocurrence.date
+                            AND
+              tb_diag_juntos.origen = intermediate_table_visit_ocurrence.origin)
+              -- We only want visits from "valid" persons from person table
         INNER JOIN cdm5.person ON intermediate_table_visit_ocurrence.numsipcod = person.person_source_value
         LEFT JOIN cdm5.visit_occurrence ON  intermediate_table_visit_ocurrence.visit_ocurrence_id = visit_occurrence.visit_occurrence_id
         -- Filter out visits occurring before the study entry date
-        WHERE visit_occurrence.visit_occurrence_id IS NULL AND tb_diag_juntos.fecha_inicio >= TO_DATE('2012-01-01', 'YYYY-MM-DD') AND tb_diag_juntos.origen = 'M'
+        WHERE visit_occurrence.visit_occurrence_id IS NULL AND tb_diag_juntos.fecha_inicio >= TO_DATE('2012-01-01', 'YYYY-MM-DD')
+        AND tb_diag_juntos.origen = 'M'
 ;

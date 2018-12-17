@@ -1,10 +1,10 @@
 vocabulary_id,vocabulary_name,vocabulary_reference,vocabulary_version,vocabulary_concept_id
-ABUCASIS_NUM_EVENTS,Table name to concept mapping for tables with number of events,ABUCASIS,1.0,0
-ABUCASIS_MODALIDAD,Socio-economic codes,ABUCASIS,1.0,0
-ABUCASIS_TIP_VARIABL,Clinical variables,ABUCASIS,1.0,0
-ABUCASIS_UD_MEDIDAS,Unit codes,ABUCASIS,1.0,0
-ABUCASIS_TIP_PREST,Physical measurements,ABUCASIS,1.0,0
-ABUCASIS_PRINACTIVO,Drug ingredients,ABUCASIS,1.0,0
-ABUCASIS_CIE9P,CIE9P,ABUCASIS,1.0,0
-ABUCASIS_CIE9,CIE9,ABUCASIS,1.0,0
-ABUCASIS_UNKNOWN,Unknown,ABUCASIS,1.0,0
+ABUCASIS_NUM_EVENTS,Table name to concept mapping for tables with number of events,ABUCASIS,2.0,0
+ABUCASIS_MODALIDAD,Socio-economic codes,ABUCASIS,2.0,0
+ABUCASIS_TIP_VARIABL,Clinical variables,ABUCASIS,2.0,0
+ABUCASIS_UD_MEDIDAS,Unit codes,ABUCASIS,2.0,0
+ABUCASIS_TIP_PREST,Physical measurements,ABUCASIS,2.0,0
+ABUCASIS_PRINACTIVO,Drug ingredients,ABUCASIS,2.0,0
+ABUCASIS_CIE9P,CIE9P,ABUCASIS,2.0,0
+ABUCASIS_CIE9,CIE9,ABUCASIS,2.0,0
+ABUCASIS_UNKNOWN,Unknown,ABUCASIS,2.0,0

@@ -113,7 +113,8 @@ ALTER TABLE cdm5.visit_occurrence ADD CONSTRAINT fpk_visit_care_site FOREIGN KEY
 
 ALTER TABLE cdm5.visit_occurrence ADD CONSTRAINT fpk_visit_concept_s FOREIGN KEY (visit_source_concept_id)  REFERENCES cdm5.concept (concept_id);
 
--- ALTER TABLE cdm5.visit_occurrence ADD CONSTRAINT fpk_visit_admitting_s FOREIGN KEY (admitting_source_concept_id) REFERENCES cdm5.concept (concept_id);
+-- admitting_source_concept_id does not exist anymore in OMOP CDM v6
+--ALTER TABLE cdm5.visit_occurrence ADD CONSTRAINT fpk_visit_admitting_s FOREIGN KEY (admitting_source_concept_id) REFERENCES cdm5.concept (concept_id);
 
 ALTER TABLE cdm5.visit_occurrence ADD CONSTRAINT fpk_visit_discharge FOREIGN KEY (discharge_to_concept_id) REFERENCES cdm5.concept (concept_id);
 
@@ -132,7 +133,8 @@ ALTER TABLE cdm5.visit_detail ADD CONSTRAINT fpk_v_detail_care_site FOREIGN KEY 
 
 ALTER TABLE cdm5.visit_detail ADD CONSTRAINT fpk_v_detail_discharge FOREIGN KEY (discharge_to_concept_id) REFERENCES cdm5.concept (concept_id);
 
--- ALTER TABLE cdm5.visit_detail ADD CONSTRAINT fpk_v_detail_admitting_s FOREIGN KEY (admitting_source_concept_id) REFERENCES cdm5.concept (concept_id);
+-- admitting_source_concept_id does not exist anymore in OMOP CDM v6
+--ALTER TABLE cdm5.visit_detail ADD CONSTRAINT fpk_v_detail_admitting_s FOREIGN KEY (admitting_source_concept_id) REFERENCES cdm5.concept (concept_id);
 
 ALTER TABLE cdm5.visit_detail ADD CONSTRAINT fpk_v_detail_concept_s FOREIGN KEY (visit_detail_source_concept_id)  REFERENCES cdm5.concept (concept_id);
 
@@ -150,10 +152,9 @@ ALTER TABLE cdm5.procedure_occurrence ADD CONSTRAINT fpk_procedure_concept FOREI
 ALTER TABLE cdm5.procedure_occurrence ADD CONSTRAINT fpk_procedure_type_concept FOREIGN KEY (procedure_type_concept_id)  REFERENCES cdm5.concept (concept_id);
 
 ALTER TABLE cdm5.procedure_occurrence ADD CONSTRAINT fpk_procedure_modifier FOREIGN KEY (modifier_concept_id)  REFERENCES cdm5.concept (concept_id);
--- ERROR:  there is no unique constraint matching given keys for referenced table "provider"
+
 ALTER TABLE cdm5.procedure_occurrence ADD CONSTRAINT fpk_procedure_provider FOREIGN KEY (provider_id)  REFERENCES cdm5.provider (provider_id);
--- TODO ERROR:  insert or update on table "procedure_occurrence" violates foreign key constraint "fpk_procedure_visit"
---DETAIL:  Key (visit_occurrence_id)=(2574) is not present in table "visit_occurrence".
+
 ALTER TABLE cdm5.procedure_occurrence ADD CONSTRAINT fpk_procedure_visit FOREIGN KEY (visit_occurrence_id)  REFERENCES cdm5.visit_occurrence (visit_occurrence_id);
 
 ALTER TABLE cdm5.procedure_occurrence ADD CONSTRAINT fpk_procedure_concept_s FOREIGN KEY (procedure_source_concept_id)  REFERENCES cdm5.concept (concept_id);
@@ -193,8 +194,7 @@ ALTER TABLE cdm5.condition_occurrence ADD CONSTRAINT fpk_condition_concept FOREI
 ALTER TABLE cdm5.condition_occurrence ADD CONSTRAINT fpk_condition_type_concept FOREIGN KEY (condition_type_concept_id)  REFERENCES cdm5.concept (concept_id);
 
 ALTER TABLE cdm5.condition_occurrence ADD CONSTRAINT fpk_condition_provider FOREIGN KEY (provider_id)  REFERENCES cdm5.provider (provider_id);
---TODO ERROR:  insert or update on table "condition_occurrence" violates foreign key constraint "fpk_condition_visit"
--- DETAIL:  Key (visit_occurrence_id)=(7828) is not present in table "visit_occurrence".
+
 ALTER TABLE cdm5.condition_occurrence ADD CONSTRAINT fpk_condition_visit FOREIGN KEY (visit_occurrence_id)  REFERENCES cdm5.visit_occurrence (visit_occurrence_id);
 
 ALTER TABLE cdm5.condition_occurrence ADD CONSTRAINT fpk_condition_concept_s FOREIGN KEY (condition_source_concept_id)  REFERENCES cdm5.concept (concept_id);
@@ -404,7 +404,7 @@ Unique constraints
 *************************
 ************************/
 
-ALTER TABLE cdm5.concept_synonym ADD CONSTRAINT uq_concept_synonym UNIQUE (concept_id, concept_synonym_name, language_concept_id);
+-- ALTER TABLE cdm5.concept_synonym ADD CONSTRAINT uq_concept_synonym UNIQUE (concept_id, concept_synonym_name, language_concept_id);
 
 /************************
 *************************

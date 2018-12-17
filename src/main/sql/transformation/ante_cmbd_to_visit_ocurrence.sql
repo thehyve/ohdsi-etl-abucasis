@@ -2,10 +2,6 @@
 Visit occurrence table
 */
 
--- Drop unique visit_occurrence_id constraint to allow insertion of duplicate visits
---    (duplicate visits will be dropped by the script remove_conflictive_visits.sql
-ALTER TABLE cdm5.visit_occurrence DROP CONSTRAINT IF EXISTS xpk_visit_occurrence;
-
 INSERT INTO cdm5.visit_occurrence (visit_occurrence_id,
                                    person_id,
                                    visit_concept_id,
@@ -107,4 +103,4 @@ FROM  @source_schema.tb_ante_cmbd
        INNER JOIN cdm5.person ON intermediate_table_visit_ocurrence.numsipcod = person.person_source_value
       -- Filter out visits occurring before the study entry date
       WHERE tb_ante_cmbd.fecha_ingreso >= TO_DATE('2012-01-01', 'YYYY-MM-DD')
-ON CONFLICT DO NOTHING;;
+;

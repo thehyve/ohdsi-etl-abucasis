@@ -80,9 +80,6 @@ class AbucasisWrapper(EtlWrapper):
         self.execute_sql_file('cdm_setup/create_death_table.sql', verbose=False)
         self.log("CDMv5.0 death table created")
 
-        self.execute_sql_file('cdm_setup/OMOP CDM postgresql pk indexes__no_vocab__pre_ETL.sql', verbose=False)
-        self.log("Index xpk_visit_occurrence applied in visit_occurrence")
-
     def _load_vocabulary_mappings(self):
         self.log("Loading source_to_concept_map...", leading_newline=True)
 

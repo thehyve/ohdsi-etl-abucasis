@@ -17,6 +17,8 @@ import csv
 import os
 import re
 import time
+import subprocess
+import re
 from sqlalchemy import text
 
 
@@ -41,10 +43,25 @@ class EtlWrapper(object):
         self.log_file = None
         self.t_start = None
         self.cwd = os.getcwd()
+        self.etl_version = self.retrieve_etl_version()
 
     def run(self):
         """Run ETL procedure"""
         raise NotImplementedError('Method is not implemented')
+
+    def retrieve_etl_version(self):
+        """ Infer the ETL version from the git branch using regular expressions"""
+        # Run 'git branch' command
+        branch_str = str(subprocess.check_output(['git', 'branch']))
+
+        # Check if branch is from a git version
+        if re.search('detached', branch_str):
+            # Retrieve git release version
+            etl_ver = 'release ' + re.findall('\*.+?([0-9\.]+).+?\\\\n',str(branch_str))[0]
+        # Else retrieve the git branch name
+        else:
+            etl_ver = 'branch ' + re.findall('\* (.+?)\\\\n',str(branch_str))[0]
+        return etl_ver
 
     def set_log_file(self, f):
         self.log_file = f

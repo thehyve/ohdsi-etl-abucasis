@@ -20,9 +20,6 @@ from src.main.python.AbucasisWrapper import AbucasisWrapper
 from sqlalchemy import create_engine
 import click
 
-__version__ = '0.2.0-SNAPSHOT'
-
-
 @click.command()
 @click.option('--hostname', '-h', default='localhost', metavar='<host>',
               help='Database server host or socket directory (localhost)')
@@ -48,7 +45,7 @@ def main(database, username, password, hostname, port, source, debug, skipvocab,
         os.makedirs('./logs')
 
     if not logfile:
-        logfile = os.path.join('./logs', '{}_{}.txt'.format(__version__, time.strftime('%Y-%m-%dT%H%M%S')))
+        logfile = os.path.join('./logs', '{}_{}.txt'.format('snapshot__', time.strftime('%Y-%m-%dT%H%M%S')))
 
     # Connect to database
     eng = create_engine('postgresql://%s:%s@%s:%s/%s' % (username, password, hostname, port, database))
@@ -56,7 +53,10 @@ def main(database, username, password, hostname, port, source, debug, skipvocab,
     with eng.connect() as connection, open(logfile, 'w') as f_log:
         etl = AbucasisWrapper(connection, source, debug, skipvocab, sql_dir='./src/main/sql')
         etl.set_log_file(f_log)
-        etl.log("ETL version " + __version__)
+        # Infer ETL version
+        version = etl.etl_version
+        etl.log("ETL " + version)
+        # Run ETL
         etl.run()
 
 

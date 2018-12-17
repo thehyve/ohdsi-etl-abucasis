@@ -31,6 +31,8 @@ class AbucasisWrapper(EtlWrapper):
 
         self.log('{:-^100}'.format(' ETL '))
 
+        self._prepare_abucasis()
+
         self._prepare_cdm()
 
         if not self.do_skip_vocabulary:
@@ -69,6 +71,10 @@ class AbucasisWrapper(EtlWrapper):
     def _apply_indexes(self):
         self.log("Applying indexes...")
         self.execute_sql_file('cdm_setup/OMOP CDM postgresql pk indexes__no_vocab.sql', False)
+
+    def _prepare_abucasis(self):
+        self.execute_sql_file('abucasis_setup/additional_indices_abucasis.sql', verbose=False)
+        self.log("Additional Abucasis indices applied")
 
     def _prepare_cdm(self):
         self.execute_sql_file('cdm_setup/remove_non_vocabulary_cdm_tables.sql', verbose=False)

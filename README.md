@@ -1,4 +1,5 @@
 # ABUCASIS to OMOP
+<img src="https://www.bigdata-heart.eu/Portals/1/BD@H/Newsletter/2017-12/BD@H%20new%20logo.png?ver=2017-11-22-160441-013" alt="drawing" width="300" />
 
 ETL scripts to convert ABUCASIS (INCLIVA) data to OMOP CDM v6. 
 The converted dataset is backwards compatible with CDMv5. 

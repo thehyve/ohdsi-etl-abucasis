@@ -55,7 +55,7 @@ class EtlWrapper(object):
         branch_str = str(subprocess.check_output(['git', 'branch']))
 
         # Check if branch is from a git version
-        if re.search('detached', branch_str):
+        if re.search('HEAD', branch_str):
             # Retrieve git release version
             etl_ver = 'release ' + re.findall('\*.+?([0-9\.]+).+?\\\\n',str(branch_str))[0]
         # Else retrieve the git branch name

@@ -125,5 +125,9 @@ INSERT INTO cdm5.drug_exposure
 			ON ingredient_map.source_code = tratamiento_derived.cod_prinactivo
 				 AND ingredient_map.source_vocabulary_id = 'ABUCASIS_PRINACTIVO'
      -- Filter criteria for treatments that did not have assigned any prescription (data quality filter)
-     WHERE number_of_prescriptions != 0 AND number_of_prescriptions IS NOT NULL AND total_days_supply != 0 AND total_days_supply IS NOT NULL
+     WHERE number_of_prescriptions != 0
+            AND number_of_prescriptions IS NOT NULL
+            AND total_days_supply != 0
+            AND total_days_supply IS NOT NULL
+            AND tb_rele.fecha_dispensacion IS NOT NULL
 	;

@@ -58,6 +58,9 @@ class AbucasisWrapper(EtlWrapper):
         self._apply_constraints()
         self.log_runtime()
 
+        # Report OMOP vocabulary versions
+        self._report_vocabulary_versions()
+
         self.log_timestamp()
 
     def _apply_constraints(self):
@@ -160,3 +163,12 @@ class AbucasisWrapper(EtlWrapper):
         self.log('{:-^100}'.format(' Source Counts '))
         self.log_tables_rowcounts('tb_sip_spo tb_sip_spo_resto_2015 tb_ante_cmbd tb_morbilid tb_diag_juntos '
                                   'tb_proc_cmbd tb_tratamientos tb_prescrip tb_rele tb_prestaci tb_variables'.split())
+
+    def _report_vocabulary_versions(self):
+        # Retrieve In-house semantic mappings vocabularies and versions
+        result = self.execute_sql_query("SELECT vocabulary_id, vocabulary_version FROM cdm5.vocabulary WHERE vocabulary_version IS NOT NULL;", verbose=False)
+        query_dict = self.query_to_dictionary(result)
+        self.log("########### OMOP vocabularies version ########### ", leading_newline=True)
+        for row in query_dict:
+            string = row['vocabulary_id'] + ' ' + row['vocabulary_version']
+            self.log(string)

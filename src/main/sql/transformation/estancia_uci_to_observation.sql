@@ -45,4 +45,6 @@ INSERT INTO cdm5.observation
     LEFT JOIN cdm5.source_to_concept_map
       ON source_to_concept_map.source_code = 'estancia_uci' AND
          source_to_concept_map.source_vocabulary_id = 'ABUCASIS_NUM_EVENTS'
+    WHERE tb_estancia_uci.fecha >= TO_DATE('2012-01-01', 'YYYY-MM-DD')
+
 ;

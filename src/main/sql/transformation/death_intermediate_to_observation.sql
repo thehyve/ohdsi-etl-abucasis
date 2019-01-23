@@ -8,7 +8,8 @@ INSERT INTO cdm5.observation (
   observation_date,
   observation_datetime,
   observation_type_concept_id,
-  obs_event_field_concept_id
+  obs_event_field_concept_id,
+  value_as_concept_id
 )
   SELECT
     person.person_id                           AS person_id,

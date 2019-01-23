@@ -52,4 +52,6 @@ INSERT INTO cdm5.observation
     LEFT JOIN cdm5.source_to_concept_map AS ingredient_map
       ON ingredient_map.source_code = tb_prescrip.cod_prinactivo
          AND ingredient_map.source_vocabulary_id = 'ABUCASIS_PRINACTIVO'
+    WHERE tb_prescrip.fecha_prescripcion >= TO_DATE('2012-01-01', 'YYYY-MM-DD')
+
 ;

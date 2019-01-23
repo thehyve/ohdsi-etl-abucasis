@@ -24,7 +24,9 @@ INSERT INTO cdm5.observation (
 
     intermediate_death.death_type_concept_id   AS observation_type_concept_id,
 
-    0                                          AS obs_event_field_concept_id
+    0                                          AS obs_event_field_concept_id,
+
+    4188539                                    AS value_as_concept_id
 
   FROM source_intermediate.intermediate_death
     JOIN cdm5.person

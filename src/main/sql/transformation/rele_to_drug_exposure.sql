@@ -88,16 +88,30 @@ INSERT INTO cdm5.drug_exposure
 		total_days_supply /
 		number_of_prescriptions                                           AS days_supply,
 
-		tb_rele.fecha_dispensacion                                        AS drug_exposure_start_date,
+    -- If fecha_dispensacion is null derive date from anomes_facturacion
+		CASE
+		WHEN tb_rele.fecha_dispensacion IS NOT NULL THEN tb_rele.fecha_dispensacion
+		ELSE CONCAT(SUBSTRING(tb_rele.anomes_facturacion from 1 for 4),'-',SUBSTRING(tb_rele.anomes_facturacion from 5 for 6),'-01')::DATE
+		END                                                               AS drug_exposure_start_date,
 
-		tb_rele.fecha_dispensacion :: TIMESTAMP                           AS drug_exposure_start_datetime,
+		CASE
+		WHEN tb_rele.fecha_dispensacion IS NOT NULL THEN tb_rele.fecha_dispensacion::TIMESTAMP
+		ELSE CONCAT(SUBSTRING(tb_rele.anomes_facturacion from 1 for 4),'-',SUBSTRING(tb_rele.anomes_facturacion from 5 for 6),'-01')::TIMESTAMP
+		END                                                               AS drug_exposure_start_datetime,
 
-		tb_rele.fecha_dispensacion + (total_days_supply /
-																	number_of_prescriptions) :: INTEGER AS drug_exposure_end_date,
-		cast(tb_rele.fecha_dispensacion +
-				 (total_days_supply / number_of_prescriptions) :: INTEGER
-				 AS
-				 TIMESTAMP)                                                   AS drug_exposure_end_datetime,
+		CASE
+		WHEN tb_rele.fecha_dispensacion IS NOT NULL THEN tb_rele.fecha_dispensacion + (total_days_supply / number_of_prescriptions):: INTEGER
+		ELSE CONCAT(SUBSTRING(tb_rele.anomes_facturacion from 1 for 4),'-',SUBSTRING(tb_rele.anomes_facturacion from 5 for 6),'-01')::DATE
+		                    + (total_days_supply / number_of_prescriptions):: INTEGER
+		END                                                               AS drug_exposure_end_date,
+
+		CASE
+		WHEN tb_rele.fecha_dispensacion IS NOT NULL THEN
+		      cast(tb_rele.fecha_dispensacion + (total_days_supply / number_of_prescriptions):: INTEGER AS TIMESTAMP)
+		ELSE
+		    CAST(CONCAT(SUBSTRING(tb_rele.anomes_facturacion from 1 for 4),'-',SUBSTRING(tb_rele.anomes_facturacion from 5 for 6),'-01')::DATE
+                + (5 / 10)::INTEGER AS TIMESTAMP)
+		END                                                               AS drug_exposure_end_datetime,
 
 		-- Dispensed in pharmacy
 		38000175                                                          AS drug_type_concept_id,
@@ -129,5 +143,5 @@ INSERT INTO cdm5.drug_exposure
             AND number_of_prescriptions IS NOT NULL
             AND total_days_supply != 0
             AND total_days_supply IS NOT NULL
-            AND tb_rele.fecha_dispensacion IS NOT NULL
+            AND tb_rele.anomes_facturacion IS NOT NULL
 	;

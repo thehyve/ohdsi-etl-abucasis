@@ -15,5 +15,5 @@ INSERT INTO cdm5.location
     'CV'               AS state, -- Comunidad Valenciana, field is restricted to 2 characters
     'Spain'            AS country,
     tba_zonas.cod_zona AS location_source_value
-  FROM tba_zonas
+  FROM @source_schema.tba_zonas
 ;

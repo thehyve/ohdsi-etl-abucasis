@@ -29,9 +29,10 @@ class EtlWrapper(object):
     """
     ROW_COUNT_FORMAT = '{:<30.30} {:>10}'
 
-    def __init__(self, connection, source_schema, debug, skip_vocab, sql_dir):
+    def __init__(self, connection, source_schema, vocab_schema, debug, skip_vocab, sql_dir):
         self.connection = connection
         self.source_schema = source_schema
+        self.vocab_schema = vocab_schema
         self.debug = debug
         self.do_skip_vocabulary = skip_vocab
         self.sql_dir = sql_dir
@@ -123,6 +124,7 @@ class EtlWrapper(object):
         # Prepare parameterized sql
         query = query.replace('@absPath', self.cwd)
         query = query.replace("@source_schema", self.source_schema)
+        query = query.replace("@vocab_schema", self.vocab_schema)
 
         t1 = time.time()
         try:

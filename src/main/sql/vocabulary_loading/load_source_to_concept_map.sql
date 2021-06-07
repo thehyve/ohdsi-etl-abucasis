@@ -1,18 +1,18 @@
 /* Remove existing source codes */
-TRUNCATE TABLE cdm5.source_to_concept_map
+TRUNCATE TABLE @vocab_schema.source_to_concept_map
 ;
 
 CREATE TEMP TABLE tmp_vocabulary
   AS
     SELECT *
-    FROM cdm5.vocabulary
+    FROM @vocab_schema.vocabulary
 WITH NO DATA;
 
 COPY tmp_vocabulary FROM '@absPath/resources/mapping_tables/vocabulary.csv' WITH CSV HEADER;
 
 -- Insert vocabularies in vocabulary table
 -- If vocabulary already exists, update with the new information/metadata
-INSERT INTO cdm5.vocabulary (
+INSERT INTO @vocab_schema.vocabulary (
     vocabulary_id,
     vocabulary_name,
     vocabulary_reference,
@@ -36,7 +36,7 @@ ON CONFLICT (vocabulary_id)
 CREATE TEMP TABLE tmp_source_to_concept_map
   AS
     SELECT *
-    FROM cdm5.source_to_concept_map
+    FROM @vocab_schema.source_to_concept_map
 WITH NO DATA;
 
 
@@ -61,7 +61,7 @@ UPDATE tmp_source_to_concept_map
 SET target_vocabulary_id = 'ABUCASIS_UNKNOWN'
 WHERE target_vocabulary_id IS NULL;
 
-INSERT INTO cdm5.source_to_concept_map
+INSERT INTO @vocab_schema.source_to_concept_map
   SELECT *
   FROM tmp_source_to_concept_map
 ON CONFLICT DO NOTHING;

@@ -38,9 +38,9 @@ INSERT INTO cdm5.observation
   FROM  @source_schema.tb_proc_cmbd
     INNER JOIN cdm5.person
       ON person.person_source_value = tb_proc_cmbd.numsipcod
-    LEFT JOIN cdm5.concept AS icd9proc
+    LEFT JOIN @vocab_schema.concept AS icd9proc
       ON icd9proc.concept_code = tb_proc_cmbd.cie9p AND icd9proc.vocabulary_id IN ('ICD9Proc', 'ICD10PCS')
-    LEFT JOIN cdm5.concept_relationship AS code_map
+    LEFT JOIN @vocab_schema.concept_relationship AS code_map
       ON code_map.concept_id_1 = icd9proc.concept_id
          AND code_map.relationship_id = 'Maps to'
     WHERE tb_proc_cmbd.fecha_ingreso < TO_DATE('2012-01-01', 'YYYY-MM-DD');

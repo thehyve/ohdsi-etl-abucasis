@@ -33,6 +33,8 @@ import click
               help='User password ()')
 @click.option('--source', '-s', default='native', metavar='<schema_name>',
               help='Source schema containing the source tables (native)')
+@click.option('--vocab', '-v', default='native', metavar='<vocab_name>',
+              help='Vocabulary schema containing the vocabulary tables (similar to source)')
 @click.option('--debug', default=False, metavar='<debug_mode>', is_flag=True,
               help='In debug mode, the table constraints are applied before loading')
 @click.option('--skipvocab', default=False, metavar='<skip_vocab>', is_flag=True,
@@ -40,7 +42,7 @@ import click
                    'of source to target vocabularies is skipped')
 @click.option('--logfile', '-l', default=None, metavar='<file_name>',
               help='Filename of the file where the log will be written (logs/log_<timestamp>.txt)')
-def main(database, username, password, hostname, port, source, debug, skipvocab, logfile):
+def main(database, username, password, hostname, port, source, vocab, debug, skipvocab, logfile):
     if not os.path.exists('./logs'):
         os.makedirs('./logs')
 
@@ -51,7 +53,7 @@ def main(database, username, password, hostname, port, source, debug, skipvocab,
     eng = create_engine('postgresql://%s:%s@%s:%s/%s' % (username, password, hostname, port, database))
 
     with eng.connect() as connection, open(logfile, 'w') as f_log:
-        etl = AbucasisWrapper(connection, source, debug, skipvocab, sql_dir='./src/main/sql')
+        etl = AbucasisWrapper(connection, source, vocab, debug, skipvocab, sql_dir='./src/main/sql')
         etl.set_log_file(f_log)
         # Infer ETL version
         version = etl.etl_version

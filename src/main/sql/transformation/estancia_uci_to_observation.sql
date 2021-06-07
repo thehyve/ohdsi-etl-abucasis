@@ -42,7 +42,7 @@ INSERT INTO cdm5.observation
   FROM  @source_schema.tb_estancia_uci
     JOIN cdm5.person
       ON person.person_source_value = tb_estancia_uci.numsipcod
-    LEFT JOIN cdm5.source_to_concept_map
+    LEFT JOIN @vocab_schema.source_to_concept_map
       ON source_to_concept_map.source_code = 'estancia_uci' AND
          source_to_concept_map.source_vocabulary_id = 'ABUCASIS_NUM_EVENTS'
     WHERE tb_estancia_uci.fecha >= TO_DATE('2012-01-01', 'YYYY-MM-DD')

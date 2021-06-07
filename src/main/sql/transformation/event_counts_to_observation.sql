@@ -33,7 +33,7 @@ WITH event_counts_with_ano_mes (numsipcod, ano_mes, num_events, source_name) AS 
 
   UNION ALL
 
-  SELECT numsipcod, fecha_consulta, num_consultas, 'cex' FROM tb_cex
+  SELECT numsipcod, fecha_consulta, num_consultas, 'cex' FROM @source_schema.tb_cex
 
   UNION ALL
 
@@ -84,7 +84,7 @@ INSERT INTO cdm5.observation
   FROM event_counts
     JOIN cdm5.person
       ON person.person_source_value = event_counts.numsipcod
-    LEFT JOIN cdm5.source_to_concept_map
+    LEFT JOIN @vocab_schema.source_to_concept_map
       ON source_to_concept_map.source_code = event_counts.source_name AND
          source_to_concept_map.source_vocabulary_id = 'ABUCASIS_NUM_EVENTS'
     WHERE event_counts.date >= TO_DATE('2012-01-01', 'YYYY-MM-DD');

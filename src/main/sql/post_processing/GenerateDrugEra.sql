@@ -121,9 +121,9 @@ CREATE TEMP TABLE ctedrugtarget
     FROM
       cdm5.drug_exposure d
 
-      INNER JOIN cdm5.concept_ancestor ca ON ca.descendant_concept_id = d.drug_concept_id
+      INNER JOIN @vocab_schema.concept_ancestor ca ON ca.descendant_concept_id = d.drug_concept_id
 
-      INNER JOIN cdm5.concept c ON ca.ancestor_concept_id = c.concept_id
+      INNER JOIN @vocab_schema.concept c ON ca.ancestor_concept_id = c.concept_id
 
     WHERE c.vocabulary_id = 'RxNorm'
 

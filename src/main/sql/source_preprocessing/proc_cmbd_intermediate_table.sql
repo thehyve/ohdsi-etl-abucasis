@@ -39,12 +39,12 @@ SELECT
 INTO source_intermediate.intermediate_proc_cmbd
 
 FROM  @source_schema.tb_proc_cmbd
-  LEFT JOIN cdm5.concept AS icd9proc
+  LEFT JOIN @vocab_schema.concept AS icd9proc
     ON icd9proc.concept_code = tb_proc_cmbd.cie9p AND icd9proc.vocabulary_id IN ('ICD9Proc', 'ICD10PCS')
-  LEFT JOIN cdm5.concept_relationship AS code_map
+  LEFT JOIN @vocab_schema.concept_relationship AS code_map
     ON code_map.concept_id_1 = icd9proc.concept_id
        AND code_map.relationship_id = 'Maps to'
-  LEFT JOIN cdm5.concept AS snomedcode
+  LEFT JOIN @vocab_schema.concept AS snomedcode
     ON snomedcode.concept_id = code_map.concept_id_2
   LEFT JOIN source_intermediate.intermediate_table_visit_ocurrence
     ON tb_proc_cmbd.numsipcod = intermediate_table_visit_ocurrence.numsipcod

@@ -135,7 +135,7 @@ INSERT INTO cdm5.drug_exposure
 			ON tb_prescrip.id_tratamiento = tratamiento_derived.id_tratamiento
 		JOIN cdm5.person
 			ON person.person_source_value = tb_prescrip.numsipcod
-		LEFT JOIN cdm5.source_to_concept_map AS ingredient_map
+		LEFT JOIN @vocab_schema.source_to_concept_map AS ingredient_map
 			ON ingredient_map.source_code = tratamiento_derived.cod_prinactivo
 				 AND ingredient_map.source_vocabulary_id = 'ABUCASIS_PRINACTIVO'
      -- Filter criteria for treatments that did not have assigned any prescription (data quality filter)

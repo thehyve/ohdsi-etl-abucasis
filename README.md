@@ -33,7 +33,7 @@ In this setup the dependencies are installed and the target
 
 ## Run ETL
 ```bash
-python3 main.py -h <host-name> -d <database-name> -p <port> -u <user> -w <password> -s <source-schema>
+python3 main.py -h <host-name> -d <database-name> -p <port> -u <user> -w <password> -s <source-schema> -v <vocab-schema>
 ```
 By default, a log file will be created in the logs directory
 

@@ -22,7 +22,7 @@ SELECT person.person_id AS person_id,
          WHEN tb_sip_spo.fecha_baja_sip IS NOT NULL AND tb_sip_spo.fecha_def IS NOT NULL AND
               tb_sip_spo.fecha_baja_sip < tb_sip_spo.fecha_def THEN tb_sip_spo.fecha_baja_sip
          WHEN tb_sip_spo.fecha_baja_sip IS NOT NULL AND tb_sip_spo.fecha_def IS NOT NULL AND
-              tb_sip_spo.fecha_baja_sip < tb_sip_spo.fecha_def THEN tb_sip_spo.fecha_def
+              tb_sip_spo.fecha_def < tb_sip_spo.fecha_baja_sip THEN tb_sip_spo.fecha_def
          ELSE TO_DATE('2016-12-31', 'YYYY-MM-DD')
            END          AS observation_period_end_date,
     -- Period covering healthcare encounters

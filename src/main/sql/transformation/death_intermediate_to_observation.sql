@@ -1,7 +1,7 @@
 /*
 
 */
-INSERT INTO cdm5.observation (
+INSERT INTO @cdm_schema.observation (
   person_id,
   observation_concept_id,
   observation_source_concept_id,
@@ -30,6 +30,6 @@ INSERT INTO cdm5.observation (
     4188539                                    AS value_as_concept_id
 
   FROM source_intermediate.intermediate_death
-    JOIN cdm5.person
+    JOIN @cdm_schema.person
       ON person.person_source_value = intermediate_death.numsipcod
 ;

@@ -23,4 +23,5 @@ run_options:
   write_reports: False
 
 sql_parameters:
+  source_schema: 'source_data'
   #placeholder: 'value'

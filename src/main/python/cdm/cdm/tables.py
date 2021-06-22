@@ -93,8 +93,8 @@ class Observation(BaseObservationCdm600, Base):
     pass
 
 
-# class Death(BaseDeathCdm531, Base):
-#     pass
+class Death(BaseDeathCdm531, Base):
+    pass
 
 
 # class Note(BaseNoteCdm531, Base):

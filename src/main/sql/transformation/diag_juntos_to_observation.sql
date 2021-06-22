@@ -3,7 +3,7 @@ Conditions that have been identified before the start of the study date
 This information is stored as an observation with observation_start_date as the study start date
 because the data before that date may be incomplete
 */
-INSERT INTO cdm5.observation
+INSERT INTO @cdm_schema.observation
 (
   observation_concept_id,
   observation_source_concept_id,
@@ -36,9 +36,9 @@ INSERT INTO cdm5.observation
     0                                                    AS obs_event_field_concept_id
 
   FROM @source_schema.tb_diag_juntos
-    INNER JOIN cdm5.person
+    INNER JOIN @cdm_schema.person
       ON tb_diag_juntos.numsipcod = person.person_source_value
-    LEFT JOIN @vocab_schema.source_to_concept_map AS icd_map
+    LEFT JOIN @vocabulary_schema.source_to_concept_map AS icd_map
       ON tb_diag_juntos.cod_diagnostico = icd_map.source_code AND icd_map.source_vocabulary_id = 'ABUCASIS_CIE9'
   WHERE origen IN ('C', 'M')
         AND tb_diag_juntos.fecha_inicio < TO_DATE('2012-01-01', 'YYYY-MM-DD');

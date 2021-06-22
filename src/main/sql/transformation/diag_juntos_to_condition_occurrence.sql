@@ -55,4 +55,4 @@ INSERT INTO @cdm_schema.condition_occurrence
     LEFT JOIN @vocabulary_schema.source_to_concept_map AS icd_map
       ON tb_diag_juntos.cod_diagnostico = icd_map.source_code AND icd_map.source_vocabulary_id = 'ABUCASIS_CIE9'
   WHERE origen IN ('C', 'M')
-        AND tb_diag_juntos.fecha_inicio >= TO_DATE('2012-01-01', 'YYYY-MM-DD');
+        AND tb_diag_juntos.fecha_inicio >= TO_DATE(@first_date, 'YYYY-MM-DD');

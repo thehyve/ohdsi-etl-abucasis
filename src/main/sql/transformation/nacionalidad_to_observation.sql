@@ -48,6 +48,6 @@ INSERT INTO @cdm_schema.observation
   FROM  @source_schema.tb_sip_spo_resto_2015
     JOIN @cdm_schema.person
       ON person.person_source_value = tb_sip_spo_resto_2015.numsipcod
-    WHERE tb_sip_spo_resto_2015.fecha_corte >= TO_DATE('2012-01-01', 'YYYY-MM-DD')
+    WHERE tb_sip_spo_resto_2015.fecha_corte >= TO_DATE(@first_date, 'YYYY-MM-DD')
 
 ;

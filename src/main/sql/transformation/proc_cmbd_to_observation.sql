@@ -23,8 +23,8 @@ INSERT INTO @cdm_schema.observation
 
     person.person_id                                       AS person_id,
 
-    TO_DATE('2012-01-01', 'YYYY-MM-DD')                   AS observation_date,
-    TO_DATE('2012-01-01', 'YYYY-MM-DD')::TIMESTAMP        AS observation_datetime,
+    TO_DATE(@first_date, 'YYYY-MM-DD')                   AS observation_date,
+    TO_DATE(@first_date, 'YYYY-MM-DD')::TIMESTAMP        AS observation_datetime,
 
     -- Observation recorded from EHR
     38000280                                               AS observation_type_concept_id,
@@ -43,4 +43,4 @@ INSERT INTO @cdm_schema.observation
     LEFT JOIN @vocabulary_schema.concept_relationship AS code_map
       ON code_map.concept_id_1 = icd9proc.concept_id
          AND code_map.relationship_id = 'Maps to'
-    WHERE tb_proc_cmbd.fecha_ingreso < TO_DATE('2012-01-01', 'YYYY-MM-DD');
+    WHERE tb_proc_cmbd.fecha_ingreso < TO_DATE(@first_date, 'YYYY-MM-DD');

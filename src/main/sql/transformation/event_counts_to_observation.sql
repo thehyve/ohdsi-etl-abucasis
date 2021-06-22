@@ -87,5 +87,5 @@ INSERT INTO @cdm_schema.observation
     LEFT JOIN @vocabulary_schema.source_to_concept_map
       ON source_to_concept_map.source_code = event_counts.source_name AND
          source_to_concept_map.source_vocabulary_id = 'ABUCASIS_NUM_EVENTS'
-    WHERE event_counts.date >= TO_DATE('2012-01-01', 'YYYY-MM-DD');
+    WHERE event_counts.date >= TO_DATE(@first_date, 'YYYY-MM-DD');
 ;

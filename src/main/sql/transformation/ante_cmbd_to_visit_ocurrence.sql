@@ -36,13 +36,13 @@ SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_occurrence
          WHEN tb_ante_cmbd.fecha_alta IS NOT NULL
                  THEN fecha_alta
          WHEN tb_ante_cmbd.fecha_alta IS NULL
-                 THEN TO_DATE(@last_date, 'YYYY-MM-DD')
+                 THEN TO_DATE((@last_date)::text, 'YYYY-MM-DD')
            END                                               AS visit_end_date,
        CASE
          WHEN tb_ante_cmbd.fecha_alta IS NOT NULL
                  THEN (cast(fecha_alta as text) || ' 00:00:00'):: timestamp
          WHEN tb_ante_cmbd.fecha_alta IS NULL
-                 THEN (cast(TO_DATE(@last_date, 'YYYY-MM-DD') as text) || ' 00:00:00'):: timestamp
+                 THEN (cast(TO_DATE((@last_date)::text, 'YYYY-MM-DD') as text) || ' 00:00:00'):: timestamp
            END                                               AS visit_end_datetime,
 
     -- Circumstance of admission
@@ -102,5 +102,5 @@ FROM  @source_schema.tb_ante_cmbd
              tb_ante_cmbd.fecha_ingreso = intermediate_table_visit_ocurrence.date) -- We only want visits from "valid" persons from person table
        INNER JOIN @cdm_schema.person ON intermediate_table_visit_ocurrence.numsipcod = person.person_source_value
       -- Filter out visits occurring before the study entry date
-      WHERE tb_ante_cmbd.fecha_ingreso >= TO_DATE(@first_date, 'YYYY-MM-DD')
+      WHERE tb_ante_cmbd.fecha_ingreso >= TO_DATE((@first_date)::text, 'YYYY-MM-DD')
 ;

@@ -60,5 +60,5 @@ INSERT INTO @cdm_schema.observation
     LEFT JOIN @vocabulary_schema.source_to_concept_map
       ON source_to_concept_map.source_code = 'contraind' AND
          source_to_concept_map.source_vocabulary_id = 'ABUCASIS_NUM_EVENTS'
-    WHERE cast(tb_contraind.ano_mes || '01' AS DATE) >= TO_DATE(@first_date, 'YYYY-MM-DD')
+    WHERE cast(tb_contraind.ano_mes || '01' AS DATE) >= TO_DATE((@first_date)::text, 'YYYY-MM-DD')
 ;

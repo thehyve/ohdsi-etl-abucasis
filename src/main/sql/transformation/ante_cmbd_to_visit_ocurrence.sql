@@ -36,13 +36,13 @@ SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_occurrence
          WHEN tb_ante_cmbd.fecha_alta IS NOT NULL
                  THEN fecha_alta
          WHEN tb_ante_cmbd.fecha_alta IS NULL
-                 THEN TO_DATE('2016-12-31', 'YYYY-MM-DD')
+                 THEN TO_DATE(@last_date, 'YYYY-MM-DD')
            END                                               AS visit_end_date,
        CASE
          WHEN tb_ante_cmbd.fecha_alta IS NOT NULL
                  THEN (cast(fecha_alta as text) || ' 00:00:00'):: timestamp
          WHEN tb_ante_cmbd.fecha_alta IS NULL
-                 THEN (cast(TO_DATE('2016-12-31', 'YYYY-MM-DD') as text) || ' 00:00:00'):: timestamp
+                 THEN (cast(TO_DATE(@last_date, 'YYYY-MM-DD') as text) || ' 00:00:00'):: timestamp
            END                                               AS visit_end_datetime,
 
     -- Circumstance of admission

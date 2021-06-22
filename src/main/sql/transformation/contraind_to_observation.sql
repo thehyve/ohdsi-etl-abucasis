@@ -3,7 +3,7 @@ Number of contra-indications per person, per month.
 Two levels of severity of the contra-indications. These mapped as a qualifier;
 Relative (not severe) and Absolute (Severe)
  */
-INSERT INTO cdm5.observation
+INSERT INTO @cdm_schema.observation
 (
   person_id,
   observation_concept_id,
@@ -55,9 +55,9 @@ INSERT INTO cdm5.observation
     0                                                    AS obs_event_field_concept_id
 
   FROM  @source_schema.tb_contraind
-    JOIN cdm5.person
+    JOIN @cdm_schema.person
       ON person.person_source_value = tb_contraind.numsipcod
-    LEFT JOIN @vocab_schema.source_to_concept_map
+    LEFT JOIN @vocabulary_schema.source_to_concept_map
       ON source_to_concept_map.source_code = 'contraind' AND
          source_to_concept_map.source_vocabulary_id = 'ABUCASIS_NUM_EVENTS'
     WHERE cast(tb_contraind.ano_mes || '01' AS DATE) >= TO_DATE('2012-01-01', 'YYYY-MM-DD')

@@ -11,7 +11,7 @@ WITH non_dispensed_drugs AS (
 )
 
 
-INSERT INTO cdm5.observation
+INSERT INTO @cdm_schema.observation
 (
   person_id,
   observation_concept_id,
@@ -47,9 +47,9 @@ INSERT INTO cdm5.observation
   FROM  @source_schema.tb_prescrip
     LEFT JOIN  non_dispensed_drugs
       ON non_dispensed_drugs.numreceta = tb_prescrip.numreceta
-    JOIN cdm5.person
+    JOIN @cdm_schema.person
       ON person.person_source_value = tb_prescrip.numsipcod
-    LEFT JOIN @vocab_schema.source_to_concept_map AS ingredient_map
+    LEFT JOIN @vocabulary_schema.source_to_concept_map AS ingredient_map
       ON ingredient_map.source_code = tb_prescrip.cod_prinactivo
          AND ingredient_map.source_vocabulary_id = 'ABUCASIS_PRINACTIVO'
     WHERE tb_prescrip.fecha_prescripcion >= TO_DATE('2012-01-01', 'YYYY-MM-DD')

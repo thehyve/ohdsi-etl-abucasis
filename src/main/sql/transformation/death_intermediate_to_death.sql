@@ -1,7 +1,7 @@
 /*
 This table is NOT part of CDM v6 BUT it has been implemented to make the CDM backwards compatible with CDM v5.
  */
-INSERT INTO cdm5.death
+INSERT INTO @cdm_schema.death
 (
   person_id,
   death_date,
@@ -14,7 +14,7 @@ INSERT INTO cdm5.death
     intermediate_death.death_date :: TIMESTAMP AS death_datetime,
     intermediate_death.death_type_concept_id   AS death_type_concept_id
   FROM source_intermediate.intermediate_death
-    JOIN cdm5.person
+    JOIN @cdm_schema.person
       ON person.person_source_value = intermediate_death.numsipcod
 ;
 

@@ -56,7 +56,7 @@ WITH prescrip_per_trat AS (
 			WHERE tb_tratamientos.fecha_fin_tratamiento IS NOT NULL
 			      AND tb_tratamientos.fecha_fin_tratamiento >= tb_tratamientos.fecha_inicio_tratamiento
 )
-INSERT INTO cdm5.drug_exposure
+INSERT INTO @cdm_schema.drug_exposure
 (
 	person_id,
   drug_concept_id,
@@ -133,9 +133,9 @@ INSERT INTO cdm5.drug_exposure
 			ON tb_rele.numreceta = tb_prescrip.numreceta
 		JOIN tratamiento_derived
 			ON tb_prescrip.id_tratamiento = tratamiento_derived.id_tratamiento
-		JOIN cdm5.person
+		JOIN @cdm_schema.person
 			ON person.person_source_value = tb_prescrip.numsipcod
-		LEFT JOIN @vocab_schema.source_to_concept_map AS ingredient_map
+		LEFT JOIN @vocabulary_schema.source_to_concept_map AS ingredient_map
 			ON ingredient_map.source_code = tratamiento_derived.cod_prinactivo
 				 AND ingredient_map.source_vocabulary_id = 'ABUCASIS_PRINACTIVO'
      -- Filter criteria for treatments that did not have assigned any prescription (data quality filter)

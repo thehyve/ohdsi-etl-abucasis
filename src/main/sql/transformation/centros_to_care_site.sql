@@ -1,7 +1,7 @@
 /**
 Care site name and location (zona). The place of service is not known.
  */
-INSERT INTO cdm5.care_site
+INSERT INTO @cdm_schema.care_site
 (
   care_site_id,
   care_site_name,
@@ -23,5 +23,5 @@ INSERT INTO cdm5.care_site
 
   FROM  @source_schema.tba_centros
     JOIN  @source_schema.tba_centros_asignacion USING (cod_centro)
-    JOIN cdm5.location ON cod_zona = location_source_value
+    JOIN @cdm_schema.location ON cod_zona = location_source_value
 ;

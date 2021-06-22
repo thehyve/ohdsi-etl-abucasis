@@ -2,7 +2,7 @@
 Diagnoses (From hospitalization and ambulatory together
 Derived from tb_antepers and tb_ante_cmbd)
 */
-INSERT INTO cdm5.condition_occurrence
+INSERT INTO @cdm_schema.condition_occurrence
 (
   person_id,
   condition_start_date,
@@ -50,9 +50,9 @@ INSERT INTO cdm5.condition_occurrence
           tb_diag_juntos.fecha_inicio = intermediate_table_visit_ocurrence.date
           AND
           tb_diag_juntos.origen = intermediate_table_visit_ocurrence.origin)
-    INNER JOIN cdm5.person
+    INNER JOIN @cdm_schema.person
       ON tb_diag_juntos.numsipcod = person.person_source_value
-    LEFT JOIN @vocab_schema.source_to_concept_map AS icd_map
+    LEFT JOIN @vocabulary_schema.source_to_concept_map AS icd_map
       ON tb_diag_juntos.cod_diagnostico = icd_map.source_code AND icd_map.source_vocabulary_id = 'ABUCASIS_CIE9'
   WHERE origen IN ('C', 'M')
         AND tb_diag_juntos.fecha_inicio >= TO_DATE('2012-01-01', 'YYYY-MM-DD');

@@ -4,8 +4,6 @@ from delphyne import Wrapper as BaseWrapper
 from delphyne.config.models import MainConfig
 
 from src.main.python import cdm
-from src.main.python.transformation import *
-
 
 logger = logging.getLogger(__name__)
 
@@ -15,19 +13,6 @@ class Wrapper(BaseWrapper):
 
     def __init__(self, config: MainConfig):
         super().__init__(config, cdm)
-
-    def transform(self):
-        # Replace the following with project-specific transformations
-        # from python/transformations/ or sql/ folder!
-        self.execute_transformation(sample_source_table_to_person)
-        self.execute_transformation(sample_source_table_to_condition_occurrence)
-
-        # given a generator function, the batch transformation will insert 3 records at a time
-        self.execute_batch_transformation(sample_batch_source_table_to_condition_occurrence,
-                                          batch_size=3)
-
-        self.execute_sql_transformation(observation_period_query)
-        self.execute_sql_file('sample_script.sql')
 
     def run(self):
         # Prepare target database

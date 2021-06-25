@@ -19,9 +19,6 @@ from delphyne.cdm.cdm600.derived_elements import *
 from delphyne.cdm.vocabularies import *
 from delphyne.cdm.metadata import *
 
-from delphyne.cdm.cdm_extensions.oncology import *
-from delphyne.cdm.legacy import *
-
 from delphyne.database import NAMING_CONVENTION
 
 

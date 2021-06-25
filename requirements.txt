@@ -1,4 +1,4 @@
-delphyne == 0.1.0a3
+delphyne == 0.1.0
 SQLAlchemy == 1.3.12
 # SQLAlchemy-Utils == 0.36.1
 click == 7.1.1

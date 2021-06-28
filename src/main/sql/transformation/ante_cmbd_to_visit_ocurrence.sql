@@ -96,7 +96,7 @@ SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_occurrence
 
 
 FROM  @source_schema.tb_ante_cmbd
-       LEFT JOIN source_intermediate.intermediate_table_visit_ocurrence
+       LEFT JOIN @temp_schema.intermediate_table_visit_ocurrence
          ON (tb_ante_cmbd.numsipcod = intermediate_table_visit_ocurrence.numsipcod
                AND
              tb_ante_cmbd.fecha_ingreso = intermediate_table_visit_ocurrence.date) -- We only want visits from "valid" persons from person table

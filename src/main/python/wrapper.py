@@ -4,6 +4,7 @@ from delphyne import Wrapper as BaseWrapper
 from delphyne.config.models import MainConfig
 
 from src.main.python import cdm
+from src.main.python.transformation import *
 
 logger = logging.getLogger(__name__)
 
@@ -15,6 +16,12 @@ class Wrapper(BaseWrapper):
         super().__init__(config, cdm)
 
     def run(self):
+
+        self._prepare_abucasis()
+
+        # if not self.do_skip_vocabulary:
+        #     self._load_vocabulary_mappings()
+
         # Prepare target database
         self.create_schemas()
         self.drop_cdm()
@@ -24,14 +31,34 @@ class Wrapper(BaseWrapper):
         self.vocab_manager.standard_vocabularies.load()
         self.vocab_manager.load_custom_vocab_and_stcm_tables()
 
+        # Remove constraints and indexes to improve performance
+        self.db.constraint_manager.drop_cdm_constraints()
+
         # Transform source data to the OMOP CDM
         self.transform_sql()
+
+        # Constraints and Indices
+        self.db.constraint_manager.add_cdm_constraints(errors='ignore')
+
+        # self._report_vocabulary_versions()
 
         # Log/write overview of transformations and sources
         self.summarize()
 
+    def _prepare_abucasis(self):
+        self.execute_sql_file('abucasis_setup/additional_indices_abucasis.sql')
+        # self.log("Additional Abucasis indices applied")
+
     def transform_sql(self):
         """Execute SQL transformations."""
+        # Intermediate tables and aggregates
+        logger.info('Creating intermediate tables and aggregates......')
+        self.execute_sql_file('source_preprocessing/ante_cmbd_morbilid__visit_intermediate_table.sql')
+        self.execute_sql_file('source_preprocessing/sip_spo_ante_cmbd_to_death_intermediate.sql')
+        self.execute_sql_file('source_preprocessing/proc_cmbd_intermediate_table.sql')
+
+        # Transformations
+        logger.info('Creating transformations......')
         # location
         self.execute_sql_file('transformation/zonas_to_location.sql')
         # care site
@@ -78,3 +105,10 @@ class Wrapper(BaseWrapper):
         # Death (to make it compatible with CDM v5.3)
         self.execute_sql_file('transformation/death_intermediate_to_observation.sql')
         self.execute_sql_file('transformation/death_intermediate_to_death.sql')
+
+        # CDM Source
+        self.execute_transformation(cdm_source, bulk=True)
+
+        # Post process
+        logger.info('Creating drug eras...')
+        self.execute_sql_file('post_processing/GenerateDrugEra.sql')

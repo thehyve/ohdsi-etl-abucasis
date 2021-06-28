@@ -99,7 +99,7 @@ SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_ocurrence_
 
 
 
-FROM  source_intermediate.intermediate_table_visit_ocurrence
+FROM  @temp_schema.intermediate_table_visit_ocurrence
         LEFT JOIN @source_schema.tb_diag_juntos
           ON (tb_diag_juntos.numsipcod = intermediate_table_visit_ocurrence.numsipcod
                 AND
@@ -157,7 +157,7 @@ SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_ocurrence_
        person.care_site_id                                   AS care_site_id
 
 
-FROM  source_intermediate.intermediate_table_visit_ocurrence
+FROM  @temp_schema.intermediate_table_visit_ocurrence
         LEFT JOIN @source_schema.tb_diag_juntos
           ON (tb_diag_juntos.numsipcod = intermediate_table_visit_ocurrence.numsipcod
                 AND

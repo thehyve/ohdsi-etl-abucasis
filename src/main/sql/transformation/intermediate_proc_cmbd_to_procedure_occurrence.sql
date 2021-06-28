@@ -34,7 +34,7 @@ INSERT INTO @cdm_schema.procedure_occurrence
 
     intermediate_proc_cmbd.visit_occurrence_id        AS visit_occurrence_id
 
-  FROM source_intermediate.intermediate_proc_cmbd
+  FROM @temp_schema.intermediate_proc_cmbd
       JOIN @cdm_schema.person
         ON person.person_source_value = intermediate_proc_cmbd.person_source_value
       WHERE intermediate_proc_cmbd._date >= TO_DATE((@first_date)::text, 'YYYY-MM-DD')

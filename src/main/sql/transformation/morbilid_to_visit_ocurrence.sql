@@ -42,7 +42,7 @@ SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_ocurrence_
 
 
 FROM  @source_schema.tb_morbilid
-       LEFT JOIN source_intermediate.intermediate_table_visit_ocurrence
+       LEFT JOIN @temp_schema.intermediate_table_visit_ocurrence
          ON (tb_morbilid.numsipcod = intermediate_table_visit_ocurrence.numsipcod
                AND
              tb_morbilid.fecha_inicio = intermediate_table_visit_ocurrence.date)

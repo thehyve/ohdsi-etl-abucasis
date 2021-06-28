@@ -39,7 +39,7 @@ INSERT INTO @cdm_schema.person (
       ON tb_sip_spo.numsipcod = tb_sip_spo_resto_2015.numsipcod
     LEFT JOIN @cdm_schema.care_site
       ON tb_sip_spo_resto_2015.cod_centro_asignacion = care_site.care_site_source_value
-    LEFT JOIN source_intermediate.intermediate_death
+    LEFT JOIN @temp_schema.intermediate_death
       ON tb_sip_spo.numsipcod = intermediate_death.numsipcod
   -- General rule: exclude patients with death or suspension date before 2012
   WHERE intermediate_death.death_date >= TO_DATE((@first_date)::text, 'YYYY-MM-DD')

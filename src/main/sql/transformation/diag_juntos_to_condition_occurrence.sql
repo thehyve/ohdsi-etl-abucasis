@@ -44,7 +44,7 @@ INSERT INTO @cdm_schema.condition_occurrence
 
   FROM @source_schema.tb_diag_juntos
     --link to visit_occurence_id on patient id, start date and origin of data via intermediate table
-    LEFT JOIN source_intermediate.intermediate_table_visit_ocurrence
+    LEFT JOIN @temp_schema.intermediate_table_visit_ocurrence
       ON (tb_diag_juntos.numsipcod = intermediate_table_visit_ocurrence.numsipcod
           AND
           tb_diag_juntos.fecha_inicio = intermediate_table_visit_ocurrence.date

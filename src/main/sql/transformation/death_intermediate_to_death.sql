@@ -13,7 +13,7 @@ INSERT INTO @cdm_schema.death
     intermediate_death.death_date              AS death_date,
     intermediate_death.death_date :: TIMESTAMP AS death_datetime,
     intermediate_death.death_type_concept_id   AS death_type_concept_id
-  FROM source_intermediate.intermediate_death
+  FROM @temp_schema.intermediate_death
     JOIN @cdm_schema.person
       ON person.person_source_value = intermediate_death.numsipcod
 ;

@@ -38,6 +38,6 @@ INSERT INTO cdm5.measurement
       ON cod_ud_medida = unit.source_code AND unit.source_vocabulary_id = 'ABUCASIS_UD_MEDIDAS'
   WHERE
     tb_prestaci.cod_prestacion NOT LIKE '-1'
-    -- exclude measurements whose variable is unknown
-    AND tb_prestaci.cod_ud_medida != '.' AND tb_prestaci.cod_ud_medida != 'I'
+    -- (optional) exclude measurements whose variable is unknown
+    -- AND tb_prestaci.cod_ud_medida != '.' AND tb_prestaci.cod_ud_medida != 'I' --
 ;

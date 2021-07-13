@@ -54,6 +54,6 @@ INSERT INTO cdm5.measurement
       ON cod_ud_medida = unit.source_code AND unit.source_vocabulary_id = 'ABUCASIS_UD_MEDIDAS'
   WHERE
     cod_variable_clinic NOT LIKE '-1'
-    -- exclude measurements whose variable is unknown
-    AND tb_variables.cod_ud_medida != '.' AND tb_variables.cod_ud_medida != 'I'
+    -- (optional) exclude measurements whose variable is unknown
+    -- AND tb_variables.cod_ud_medida != '.' AND tb_variables.cod_ud_medida != 'I' --
 ;

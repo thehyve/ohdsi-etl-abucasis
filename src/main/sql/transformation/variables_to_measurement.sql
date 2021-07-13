@@ -42,7 +42,7 @@ INSERT INTO @cdm_schema.measurement
 
     valor_registrado                    AS value_source_value,
     coalesce(unit.target_concept_id, 0) AS unit_concept_id,
-    coalesce(unit.source_code, '0')     AS unit_source_value,
+    cod_ud_medida                       AS unit_source_value,
     -- From physical examination
     44818701                            AS measurement_type_concept_id
   FROM @source_schema.tb_variables

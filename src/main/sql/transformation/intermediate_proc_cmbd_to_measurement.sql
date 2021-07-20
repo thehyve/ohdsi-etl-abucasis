@@ -29,6 +29,6 @@ INSERT INTO @cdm_schema.measurement
   FROM @temp_schema.intermediate_proc_cmbd
       JOIN @cdm_schema.person
         ON person.person_source_value = intermediate_proc_cmbd.person_source_value
-      WHERE intermediate_proc_cmbd._date >= TO_DATE((@first_date)::text, 'YYYY-MM-DD')
+      WHERE intermediate_proc_cmbd._date >= TO_DATE((@first_date)::text, 'YYYYMMDD')
             AND
             intermediate_proc_cmbd.target_domain_id = 'Measurement';

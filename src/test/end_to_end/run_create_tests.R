@@ -17,7 +17,7 @@ library('yaml')
 config <- yaml.load_file('config.yml')
 
 # Initialize
-source('TestFramework_new.R')
+source('TestFramework_Abucasis_new.R')
 initFramework()
 
 # Add tests
@@ -48,3 +48,4 @@ print(getUntestedTargetFields())
 
 # List all test cases ----------------------------------------------------------
 exportTestsOverviewToFile('all_test_cases.csv')
+

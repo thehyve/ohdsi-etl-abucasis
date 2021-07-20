@@ -5,7 +5,7 @@ Visit occurrence table
 /*
 Derive hospitalizations visits from tb_diag_juntos that were not in tb_ante_cmbd
  */
-INSERT INTO cdm5.visit_occurrence (visit_occurrence_id,
+INSERT INTO @cdm_schema.visit_occurrence (visit_occurrence_id,
                                    person_id,
                                    visit_concept_id,
                                    visit_source_value,
@@ -39,13 +39,13 @@ SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_ocurrence_
          WHEN tb_diag_juntos.fecha_fin IS NOT NULL
                  THEN fecha_fin
          WHEN tb_diag_juntos.fecha_fin IS NULL
-                 THEN TO_DATE('2016-12-31', 'YYYY-MM-DD')
+                 THEN TO_DATE((@last_date)::text, 'YYYY-MM-DD')
            END                                               AS visit_end_date,
        CASE
          WHEN tb_diag_juntos.fecha_fin IS NOT NULL
                  THEN (cast(fecha_fin as text) || ' 00:00:00'):: timestamp
          WHEN tb_diag_juntos.fecha_fin IS NULL
-                 THEN (cast(TO_DATE('2016-12-31', 'YYYY-MM-DD') as text) || ' 00:00:00'):: timestamp
+                 THEN (cast(TO_DATE((@last_date)::text, 'YYYY-MM-DD') as text) || ' 00:00:00'):: timestamp
            END                                               AS visit_end_datetime,
 
     -- Circumstance of admission
@@ -99,7 +99,7 @@ SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_ocurrence_
 
 
 
-FROM  source_intermediate.intermediate_table_visit_ocurrence
+FROM  @temp_schema.intermediate_table_visit_ocurrence
         LEFT JOIN @source_schema.tb_diag_juntos
           ON (tb_diag_juntos.numsipcod = intermediate_table_visit_ocurrence.numsipcod
                 AND
@@ -107,10 +107,10 @@ FROM  source_intermediate.intermediate_table_visit_ocurrence
                              AND
               tb_diag_juntos.origen = intermediate_table_visit_ocurrence.origin)
               -- We only want visits from "valid" persons from person table
-        INNER JOIN cdm5.person ON intermediate_table_visit_ocurrence.numsipcod = person.person_source_value
-        LEFT JOIN cdm5.visit_occurrence ON  intermediate_table_visit_ocurrence.visit_ocurrence_id = visit_occurrence.visit_occurrence_id
+        INNER JOIN @cdm_schema.person ON intermediate_table_visit_ocurrence.numsipcod = person.person_source_value
+        LEFT JOIN @cdm_schema.visit_occurrence ON  intermediate_table_visit_ocurrence.visit_ocurrence_id = visit_occurrence.visit_occurrence_id
         -- Filter out visits occurring before the study entry date
-        WHERE visit_occurrence.visit_occurrence_id IS NULL AND tb_diag_juntos.fecha_inicio >= TO_DATE('2012-01-01', 'YYYY-MM-DD')
+        WHERE visit_occurrence.visit_occurrence_id IS NULL AND tb_diag_juntos.fecha_inicio >= TO_DATE((@first_date)::text, 'YYYY-MM-DD')
         AND tb_diag_juntos.origen != 'M'
 ;
 
@@ -118,7 +118,7 @@ FROM  source_intermediate.intermediate_table_visit_ocurrence
 Derive ambulatory visits from tb_diag_juntos that were not in tb_morbilid
  */
 
-INSERT INTO cdm5.visit_occurrence (visit_occurrence_id,
+INSERT INTO @cdm_schema.visit_occurrence (visit_occurrence_id,
                                    person_id,
                                    visit_concept_id,
                                    visit_type_concept_id,
@@ -157,7 +157,7 @@ SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_ocurrence_
        person.care_site_id                                   AS care_site_id
 
 
-FROM  source_intermediate.intermediate_table_visit_ocurrence
+FROM  @temp_schema.intermediate_table_visit_ocurrence
         LEFT JOIN @source_schema.tb_diag_juntos
           ON (tb_diag_juntos.numsipcod = intermediate_table_visit_ocurrence.numsipcod
                 AND
@@ -165,9 +165,9 @@ FROM  source_intermediate.intermediate_table_visit_ocurrence
                             AND
               tb_diag_juntos.origen = intermediate_table_visit_ocurrence.origin)
               -- We only want visits from "valid" persons from person table
-        INNER JOIN cdm5.person ON intermediate_table_visit_ocurrence.numsipcod = person.person_source_value
-        LEFT JOIN cdm5.visit_occurrence ON  intermediate_table_visit_ocurrence.visit_ocurrence_id = visit_occurrence.visit_occurrence_id
+        INNER JOIN @cdm_schema.person ON intermediate_table_visit_ocurrence.numsipcod = person.person_source_value
+        LEFT JOIN @cdm_schema.visit_occurrence ON  intermediate_table_visit_ocurrence.visit_ocurrence_id = visit_occurrence.visit_occurrence_id
         -- Filter out visits occurring before the study entry date
-        WHERE visit_occurrence.visit_occurrence_id IS NULL AND tb_diag_juntos.fecha_inicio >= TO_DATE('2012-01-01', 'YYYY-MM-DD')
+        WHERE visit_occurrence.visit_occurrence_id IS NULL AND tb_diag_juntos.fecha_inicio >= TO_DATE((@first_date)::text, 'YYYY-MM-DD')
         AND tb_diag_juntos.origen = 'M'
 ;

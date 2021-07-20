@@ -7,12 +7,10 @@ The converted dataset is backwards compatible with CDMv5.
 ## Dependencies
 - Postgres (9.5+)
   - cdm5 schema
-- Python 3, with pip, click, sqlalchemy and psycopg2
+- Python 3, with pip, delphyne, click, sqlalchemy and psycopg2
   ```bash
   apt install python3-pip
-  pip3 install click
-  pip3 install sqlalchemy
-  pip3 install psycopg2-binary
+  pip3 install -r requirements.txt
   ```
 - OMOP vocabularies (http://athena.ohdsi.org/vocabulary/list)
   - OMOP generated (Gender, Race, Type Concepts, etc)
@@ -33,7 +31,7 @@ In this setup the dependencies are installed and the target
 
 ## Run ETL
 ```bash
-python3 main.py -h <host-name> -d <database-name> -p <port> -u <user> -w <password> -s <source-schema> -v <vocab-schema>
+python3 main.py -c config/config.yml
 ```
 By default, a log file will be created in the logs directory
 

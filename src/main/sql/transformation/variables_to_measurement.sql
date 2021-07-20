@@ -1,7 +1,7 @@
 /*
 Patient variables (BMI, Abdominal perimeter, etc)
 */
-INSERT INTO cdm5.measurement
+INSERT INTO @cdm_schema.measurement
 (
   person_id,
   measurement_concept_id,
@@ -42,15 +42,15 @@ INSERT INTO cdm5.measurement
 
     valor_registrado                    AS value_source_value,
     coalesce(unit.target_concept_id, 0) AS unit_concept_id,
-    coalesce(unit.source_concept_id, 0) AS unit_source_value,
+    cod_ud_medida                       AS unit_source_value,
     -- From physical examination
     44818701                            AS measurement_type_concept_id
   FROM @source_schema.tb_variables
-    JOIN cdm5.person
+    JOIN @cdm_schema.person
       ON numsipcod = person.person_source_value
-    LEFT JOIN @vocab_schema.source_to_concept_map var
+    LEFT JOIN @vocabulary_schema.source_to_concept_map var
       ON cod_variable_clinic = var.source_code AND var.source_vocabulary_id = 'ABUCASIS_TIP_VARIABL'
-    LEFT JOIN @vocab_schema.source_to_concept_map unit
+    LEFT JOIN @vocabulary_schema.source_to_concept_map unit
       ON cod_ud_medida = unit.source_code AND unit.source_vocabulary_id = 'ABUCASIS_UD_MEDIDAS'
   WHERE
     cod_variable_clinic NOT LIKE '-1'

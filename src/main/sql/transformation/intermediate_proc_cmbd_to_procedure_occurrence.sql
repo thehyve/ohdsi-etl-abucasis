@@ -2,7 +2,7 @@
 Hospitalization table with only procedures
 Derived table from all hospitalizations (tb_ante_cmbd)
 */
-INSERT INTO cdm5.procedure_occurrence
+INSERT INTO @cdm_schema.procedure_occurrence
 (
   person_id,
   procedure_concept_id,
@@ -34,10 +34,10 @@ INSERT INTO cdm5.procedure_occurrence
 
     intermediate_proc_cmbd.visit_occurrence_id        AS visit_occurrence_id
 
-  FROM source_intermediate.intermediate_proc_cmbd
-      JOIN cdm5.person
+  FROM @temp_schema.intermediate_proc_cmbd
+      JOIN @cdm_schema.person
         ON person.person_source_value = intermediate_proc_cmbd.person_source_value
-      WHERE intermediate_proc_cmbd._date >= TO_DATE('2012-01-01', 'YYYY-MM-DD')
+      WHERE intermediate_proc_cmbd._date >= TO_DATE((@first_date)::text, 'YYYY-MM-DD')
             AND
             (intermediate_proc_cmbd.target_domain_id = 'Procedure'
             OR

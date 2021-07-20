@@ -1,8 +1,8 @@
 -- Generate new lookup table
-DROP TABLE IF EXISTS source_intermediate.intermediate_table_visit_ocurrence
+DROP TABLE IF EXISTS @temp_schema.intermediate_table_visit_ocurrence
 ;
 
-CREATE TABLE source_intermediate.intermediate_table_visit_ocurrence
+CREATE TABLE @temp_schema.intermediate_table_visit_ocurrence
 (
   visit_ocurrence_id BIGSERIAL NOT NULL,
   numsipcod          varchar(25),
@@ -10,20 +10,20 @@ CREATE TABLE source_intermediate.intermediate_table_visit_ocurrence
   origin             varchar(1)
 );
 
-ALTER TABLE source_intermediate.intermediate_table_visit_ocurrence
+ALTER TABLE @temp_schema.intermediate_table_visit_ocurrence
   OWNER TO postgres
 ;
 
 -- Explicit unique index to ensure uniqueness and speed up joins
 CREATE UNIQUE INDEX intermediate_table_visit_ocurrence_numsipcod_date_origin_uindex
-  ON source_intermediate.intermediate_table_visit_ocurrence (numsipcod, date, origin)
+  ON @temp_schema.intermediate_table_visit_ocurrence (numsipcod, date, origin)
 ;
 
 /*
 Retrieve all unique combinations numsip-date-origin and create a visit
 from source table ante_cmbd, morbilid, diag_juntos
 */
-INSERT INTO source_intermediate.intermediate_table_visit_ocurrence (origin, numsipcod, date)
+INSERT INTO @temp_schema.intermediate_table_visit_ocurrence (origin, numsipcod, date)
   SELECT *
   FROM (
        WITH hospitalizations_info AS (

@@ -1,7 +1,7 @@
 /*
 Sociodemographic data I
 */
-INSERT INTO cdm5.person (
+INSERT INTO @cdm_schema.person (
   person_source_value,
   gender_concept_id,
   gender_source_value,
@@ -37,12 +37,12 @@ INSERT INTO cdm5.person (
   FROM @source_schema.tb_sip_spo
     LEFT JOIN @source_schema.tb_sip_spo_resto_2015
       ON tb_sip_spo.numsipcod = tb_sip_spo_resto_2015.numsipcod
-    LEFT JOIN cdm5.care_site
+    LEFT JOIN @cdm_schema.care_site
       ON tb_sip_spo_resto_2015.cod_centro_asignacion = care_site.care_site_source_value
-    LEFT JOIN source_intermediate.intermediate_death
+    LEFT JOIN @temp_schema.intermediate_death
       ON tb_sip_spo.numsipcod = intermediate_death.numsipcod
   -- General rule: exclude patients with death or suspension date before 2012
-  WHERE intermediate_death.death_date >= TO_DATE('2012-01-01', 'YYYY-MM-DD')
+  WHERE intermediate_death.death_date >= TO_DATE((@first_date)::text, 'YYYY-MM-DD')
         OR intermediate_death.death_date IS NULL
 -- Added for proper sorting in unit tests
 ORDER BY tb_sip_spo.numsipcod

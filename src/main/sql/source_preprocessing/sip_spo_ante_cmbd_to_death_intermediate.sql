@@ -6,7 +6,7 @@ but the reason is in practice always death.
 The death type depends on where the death date is recorded. If recorded at multiple sites, the death type will be 38000280
  */
 
-DROP TABLE IF EXISTS source_intermediate.intermediate_death
+DROP TABLE IF EXISTS @temp_schema.intermediate_death
 ;
 
 WITH death_at_discharge AS (
@@ -38,7 +38,7 @@ SELECT
     WHEN fecha_baja_sip THEN 38000280 -- Observation recorded from EHR
     ELSE -1
   END              AS death_type_concept_id
-INTO source_intermediate.intermediate_death
+INTO @temp_schema.intermediate_death
 FROM death_dates
 WHERE first_death_date IS NOT NULL
 ;

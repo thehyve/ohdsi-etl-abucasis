@@ -7,7 +7,7 @@ the mapped concepts, and the target domain
 Mapped concepts can be from Procedure, Observation and Measurement domain
 */
 
-DROP TABLE IF EXISTS source_intermediate.intermediate_proc_cmbd
+DROP TABLE IF EXISTS @temp_schema.intermediate_proc_cmbd
 ;
 
 SELECT
@@ -36,17 +36,17 @@ SELECT
 
       snomedcode.domain_id                      AS target_domain_id
 
-INTO source_intermediate.intermediate_proc_cmbd
+INTO @temp_schema.intermediate_proc_cmbd
 
 FROM  @source_schema.tb_proc_cmbd
-  LEFT JOIN @vocab_schema.concept AS icd9proc
+  LEFT JOIN @vocabulary_schema.concept AS icd9proc
     ON icd9proc.concept_code = tb_proc_cmbd.cie9p AND icd9proc.vocabulary_id IN ('ICD9Proc', 'ICD10PCS')
-  LEFT JOIN @vocab_schema.concept_relationship AS code_map
+  LEFT JOIN @vocabulary_schema.concept_relationship AS code_map
     ON code_map.concept_id_1 = icd9proc.concept_id
        AND code_map.relationship_id = 'Maps to'
-  LEFT JOIN @vocab_schema.concept AS snomedcode
+  LEFT JOIN @vocabulary_schema.concept AS snomedcode
     ON snomedcode.concept_id = code_map.concept_id_2
-  LEFT JOIN source_intermediate.intermediate_table_visit_ocurrence
+  LEFT JOIN @temp_schema.intermediate_table_visit_ocurrence
     ON tb_proc_cmbd.numsipcod = intermediate_table_visit_ocurrence.numsipcod
        AND tb_proc_cmbd.fecha_ingreso = intermediate_table_visit_ocurrence.date
        AND intermediate_table_visit_ocurrence.origin = 'C'

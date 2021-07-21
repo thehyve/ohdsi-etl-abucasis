@@ -23,6 +23,12 @@ def upload_tables():
         print(f"Running:\n{cmd_line_create}")
         os.system(cmd_line_create)
     
+    cmd_line_create = f"sudo -u postgres psql -d ETL_UKBiobank -c \"ALTER TABLE {schema}.tb_morbilid DROP COLUMN id; \" "
+    print(f"Running:\n{cmd_line_create}")
+    os.system(cmd_line_create)
+    
+    
+    
     # upload
     for t in tables:
         t_name = t[(len(tables_dir)):-4]

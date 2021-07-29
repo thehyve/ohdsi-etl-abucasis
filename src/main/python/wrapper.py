@@ -112,5 +112,7 @@ class Wrapper(BaseWrapper):
         self.execute_transformation(cdm_source, bulk=True)
 
         # Post process
+        logger.info('Creating condition eras...')
+        self.execute_sql_file('post_processing/GenerateConditionEra.sql')
         logger.info('Creating drug eras...')
         self.execute_sql_file('post_processing/GenerateDrugEra.sql')

@@ -31,7 +31,6 @@ source("test_cases/observation.R")              # test IDs  700-799
 
 # Upload tests to db ----------------------------------------------------------
 library(DatabaseConnector)
-config <- yaml.load_file('config.yml')
 connectionConfig <- config$connectionDetails
 pathToDriver <- config$pathToDriver
 connectionDetails <- createConnectionDetails(dbms = connectionConfig$dbms,

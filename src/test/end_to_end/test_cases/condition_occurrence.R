@@ -16,7 +16,7 @@ add_tb_ante_cmbd(id=201, numsipcod='A201', fecha_ingreso='2013-01-01', fecha_alt
 add_tb_diag_juntos(id=201, numsipcod='A201', fecha_inicio = '2012-08-01', fecha_fin = '2013-03-01',
                    peso_grd=NULL, orden=NULL) 
 expect_condition_occurrence(person_id = lookup_person('person_id', person_source_value = 'A201'),
-                            visit_occurrence_id = lookup_visit_occurrence('visit_occurrence_id', person_id=lookup_person('person_id', person_source_value = 'A201')),
+                            condition_occurrence_id = lookup_visit_occurrence('condition_occurrence_id', person_id=lookup_person('person_id', person_source_value = 'A201')),
                             condition_start_date = '2012-08-01')
 
 declareTest(id=202,'Condition occurrence outside valid observation period')

@@ -53,4 +53,5 @@ declareTest(id=606,'Measurement derived from procedure if procedure_concept_id i
 add_tb_sip_spo(id=606, numsipcod='A606', fecha_nac='1991-01-01', sexo='H', fecha_def=NULL, fecha_baja_sip = NULL) 
 add_tb_proc_cmbd(id=606,numsipcod='A606', fecha_ingreso='2015-09-09', cie9p='89.43')
 expect_measurement(person_id = lookup_person('person_id', person_source_value = 'A606'),
-                   measurement_id=5,measurement_date='2015-09-09')
+                   measurement_id=lookup_measurement('measurement_id', person_id = lookup_person('person_id', person_source_value = 'A606')),
+                   measurement_date='2015-09-09')

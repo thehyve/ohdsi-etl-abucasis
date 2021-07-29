@@ -17,11 +17,12 @@ library(yaml)
 config <- yaml.load_file('config.yml')
 options(width=150)  # Preventing wrapping when printing dataframe
 
-source('TestFramework_Abucasis_new.R')
+source('TestFrameworkAbucasis.R')
 
 # Run and output test queries ---------------------------------------------
 connectionConfig <- config$connectionDetails
 pathToDriver <- config$pathToDriver
+
 connectionDetails <- createConnectionDetails(dbms = connectionConfig$dbms,
                                              user = connectionConfig$user,
                                              password = connectionConfig$password,

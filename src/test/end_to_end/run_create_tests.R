@@ -12,12 +12,11 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 
-
 library('yaml')
 config <- yaml.load_file('config.yml')
 
 # Initialize
-source('TestFramework_Abucasis_new.R')
+source('TestFrameworkAbucasis.R')
 initFramework()
 
 # Add tests
@@ -30,22 +29,25 @@ source("test_cases/drug_exposure_and_era.R")    # test IDs  500-599
 source("test_cases/measurement.R")              # test IDs  600-699
 source("test_cases/observation.R")              # test IDs  700-799
 
-# Generate source csv files -----------------------------------------------------
-dir.create(config$sourceDataDir, recursive=T, showWarnings = F)
-writeSourceCsv(config$sourceDataDir)
-print(paste0('Test source tables written to ', config$sourceDataDir))
+# Upload tests to db ----------------------------------------------------------
+library(DatabaseConnector)
+config <- yaml.load_file('config.yml')
+connectionConfig <- config$connectionDetails
+pathToDriver <- config$pathToDriver
+connectionDetails <- createConnectionDetails(dbms = connectionConfig$dbms,
+                                             user = connectionConfig$user,
+                                             password = connectionConfig$password,
+                                             server = connectionConfig$server,
+                                             port = connectionConfig$port,
+                                             pathToDriver = pathToDriver)
+connection <- connect(connectionDetails)
 
-# Create test query -------------------------------------------------------
-testSql <- generateTestSql(config$cdmSchema)
-dir.create(dirname(config$testQueryFileName), recursive=T, showWarnings = F)
-write(testSql, config$testQueryFileName)
-print(paste0('Test queries written to ', config$testQueryFileName))
+insert_sql <- generateInsertSql()
+executeSql(connection, sprintf('SET search_path TO %s;', config$sourceSchema))
+executeSql(connection, paste(insert_sql, collapse = '\n'))
 
 # Test coverages -----------------------------------------------------------
 print(summaryTestFramework())
 print(getUntestedSourceFields())
 print(getUntestedTargetFields())
-
-# List all test cases ----------------------------------------------------------
-exportTestsOverviewToFile('all_test_cases.csv')
 

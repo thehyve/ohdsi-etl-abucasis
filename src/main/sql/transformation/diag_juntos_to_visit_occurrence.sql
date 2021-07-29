@@ -139,9 +139,9 @@ SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_ocurrence_
        9202                                                  AS visit_concept_id,
 
     -- Visit derived from EHR encounter record
-       44818518                                              AS visit_type_concept_id,
+       32035                                                 AS visit_type_concept_id,
        0                                                     AS visit_source_concept_id,
-       'tb_diag_juntos'                                         AS visit_source_value,
+       'tb_diag_juntos'                                      AS visit_source_value,
 
     -- Assumption: 1 day visits
        tb_diag_juntos.fecha_inicio                              AS visit_start_date,

@@ -7,13 +7,13 @@ INSERT INTO @cdm_schema.location
 (
   address_1,
   state,
-  country,
+  county,
   location_source_value
 )
   SELECT
     tba_zonas.des_zona AS address_1,
     'CV'               AS state, -- Comunidad Valenciana, field is restricted to 2 characters
-    'Spain'            AS country,
+    'Spain'            AS county,
     tba_zonas.cod_zona AS location_source_value
   FROM @source_schema.tba_zonas
 ;

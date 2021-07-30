@@ -12,8 +12,8 @@ INSERT INTO @cdm_schema.visit_occurrence (visit_occurrence_id,
                                    visit_start_datetime,
                                    visit_end_date,
                                    visit_end_datetime,
-                                   admitted_from_concept_id,
-                                   admitted_from_source_value,
+                                   admitting_source_concept_id,
+                                   admitting_source_value,
                                    discharge_to_concept_id,
                                    discharge_to_source_value,
                                    care_site_id)
@@ -54,8 +54,8 @@ SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_occurrence
            -- surgery
          WHEN '3' THEN 8863 -- Ambulatory surgical center
          ELSE 0 -- Unknown
-           END                                               AS admitted_from_concept_id,
-       tb_ante_cmbd.cir_ingreso                              AS admitted_from_source_value,
+           END                                               AS admitting_source_concept_id,
+       tb_ante_cmbd.cir_ingreso                              AS admitting_source_value,
     -- Circumstance of discharge
        CASE tb_ante_cmbd.cir_alta
            -- Home

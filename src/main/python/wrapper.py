@@ -102,7 +102,7 @@ class Wrapper(BaseWrapper):
         self.execute_sql_file('transformation/proc_cmbd_to_observation.sql')
         self.execute_sql_file('transformation/intermediate_proc_cmbd_to_observation.sql')
 
-        # Death (to make it compatible with CDM v5.3)
+        # Death
         self.execute_sql_file('transformation/death_intermediate_to_observation.sql')
         self.execute_sql_file('transformation/death_intermediate_to_death.sql')
 

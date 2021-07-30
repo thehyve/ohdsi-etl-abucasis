@@ -15,8 +15,7 @@ INSERT INTO @cdm_schema.observation
   value_as_number,
   qualifier_concept_id,
   qualifier_source_value,
-  unit_concept_id,
-  obs_event_field_concept_id
+  unit_concept_id
 )
   SELECT
     person.person_id                                     AS person_id,
@@ -51,10 +50,7 @@ INSERT INTO @cdm_schema.observation
     tb_interacc.gravedad_interaccion                     AS qualifier_source_value,
 
     -- times
-    8524                                                 AS unit_concept_id,
-
-    -- No event
-    0                                                    AS obs_event_field_concept_id
+    8524                                                 AS unit_concept_id
 
   FROM  @source_schema.tb_interacc
     JOIN @cdm_schema.person

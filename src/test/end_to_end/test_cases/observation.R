@@ -61,7 +61,7 @@ declareTest(id=708,'Observation date from sociodemographics')
 add_tb_sip_spo(id=708, numsipcod='A708', fecha_nac='1991-01-01', sexo='H', fecha_def='2012-03-03', fecha_baja_sip='2012-03-03') 
 add_tb_sip_spo_resto_2015(id=708,numsipcod='A708', fecha_corte='2013-02-05')
 expect_observation(person_id = lookup_person('person_id', person_source_value = 'A708'),
-                   observation_id=lookup_measurement('observation_id', person_id = lookup_person('person_id', person_source_value = 'A708')),
+                   observation_id=lookup_observation('observation_id', person_id = lookup_person('person_id', person_source_value = 'A708')),
                    observation_date='2013-02-05')
 
 declareTest(id=709,'Observation modality and nationality from sociodemographics')

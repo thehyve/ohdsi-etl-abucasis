@@ -29,7 +29,6 @@ source("test_cases/drug_exposure_and_era.R")    # test IDs  500-599
 source("test_cases/measurement.R")              # test IDs  600-699
 source("test_cases/observation.R")              # test IDs  700-799
 
-# Upload tests to db ----------------------------------------------------------
 library(DatabaseConnector)
 connectionConfig <- config$connectionDetails
 pathToDriver <- config$pathToDriver
@@ -41,6 +40,7 @@ connectionDetails <- createConnectionDetails(dbms = connectionConfig$dbms,
                                              pathToDriver = pathToDriver)
 connection <- connect(connectionDetails)
 
+# Upload tests to db ----------------------------------------------------------
 insert_sql <- generateInsertSql()
 executeSql(connection, sprintf('SET search_path TO %s;', config$sourceSchema))
 executeSql(connection, paste(insert_sql, collapse = '\n'))
@@ -49,4 +49,13 @@ executeSql(connection, paste(insert_sql, collapse = '\n'))
 print(summaryTestFramework())
 print(getUntestedSourceFields())
 print(getUntestedTargetFields())
+
+# Create test query -------------------------------------------------------
+testSql <- generateTestSql(config$cdmSchema)
+dir.create(dirname(config$testQueryFileName), recursive=T, showWarnings = F)
+write(testSql, config$testQueryFileName)
+print(paste0('Test queries written to ', config$testQueryFileName))
+
+# List all test cases ----------------------------------------------------------
+exportTestsOverviewToFile('all_test_cases.csv')
 

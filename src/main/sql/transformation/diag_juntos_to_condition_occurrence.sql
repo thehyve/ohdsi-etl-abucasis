@@ -35,8 +35,8 @@ INSERT INTO @cdm_schema.condition_occurrence
     tb_diag_juntos.cod_diagnostico                        AS condition_source_value,
     CASE WHEN tb_diag_juntos.orden = 1
               OR tb_diag_juntos.orden IS NULL
-      THEN 44786630 -- primary condition
-      ELSE 44786631 -- secondary condition
+      THEN 32902 -- primary condition
+      ELSE 32908 -- secondary condition
     END                                                   AS condition_type_concept_id,
     -- Clinical diagnosis
     4309119                                               AS condition_status_concept_id,

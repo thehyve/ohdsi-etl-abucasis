@@ -26,7 +26,7 @@ SELECT person.person_id AS person_id,
          ELSE TO_DATE((@last_date)::text, 'YYYY-MM-DD')
            END          AS observation_period_end_date,
     -- Period covering healthcare encounters
-       '44814724'       AS period_type_concept_id
+       '32827'       AS period_type_concept_id
 
 FROM  @source_schema.tb_sip_spo
        INNER JOIN @cdm_schema.person ON tb_sip_spo.numsipcod = person.person_source_value;

@@ -114,7 +114,7 @@ INSERT INTO @cdm_schema.drug_exposure
 		END                                                               AS drug_exposure_end_datetime,
 
 		-- Dispensed in pharmacy
-		38000175                                                          AS drug_type_concept_id,
+        32825                                                          AS drug_type_concept_id,
 
 		treatment_instruction                                             AS sig,
 

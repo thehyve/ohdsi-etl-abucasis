@@ -26,9 +26,9 @@ SELECT
 
       CASE WHEN tb_proc_cmbd.orden = 1
         -- primary procedure
-        THEN 4161019
+        THEN 32817
         -- secondary procedure
-        ELSE 4119184
+        ELSE 32817
       END                                     AS _type_concept_id,
 
 

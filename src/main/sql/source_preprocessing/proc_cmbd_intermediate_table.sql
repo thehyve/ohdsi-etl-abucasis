@@ -26,9 +26,9 @@ SELECT
 
       CASE WHEN tb_proc_cmbd.orden = 1
         -- primary procedure
-        THEN 44786630
+        THEN 32817
         -- secondary procedure
-        ELSE 44786631
+        ELSE 32817
       END                                     AS _type_concept_id,
 
 
@@ -50,5 +50,5 @@ FROM  @source_schema.tb_proc_cmbd
     ON tb_proc_cmbd.numsipcod = intermediate_table_visit_ocurrence.numsipcod
        AND tb_proc_cmbd.fecha_ingreso = intermediate_table_visit_ocurrence.date
        AND intermediate_table_visit_ocurrence.origin = 'C'
-   WHERE tb_proc_cmbd.fecha_ingreso >= TO_DATE('2012-01-01', 'YYYY-MM-DD');
+   WHERE tb_proc_cmbd.fecha_ingreso >= TO_DATE(cast(@first_date as text), 'YYYYMMDD');
 ;

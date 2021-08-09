@@ -23,11 +23,11 @@ INSERT INTO @cdm_schema.observation
 
     person.person_id                                      AS person_id,
 
-    TO_DATE((@first_date)::text, 'YYYY-MM-DD')                   AS observation_date,
-    TO_DATE((@first_date)::text, 'YYYY-MM-DD')::TIMESTAMP        AS observation_datetime,
+    TO_DATE((@first_date)::text, 'YYYYMMDD')                   AS observation_date,
+    TO_DATE((@first_date)::text, 'YYYYMMDD')::TIMESTAMP        AS observation_datetime,
 
-    -- Observation recorded from EHR
-    38000280                                               AS observation_type_concept_id,
+    -- [Observation recorded from] EHR
+    32817                                               AS observation_type_concept_id,
 
     coalesce(icd_map.target_concept_id, 0)                AS value_as_concept_id,
     tb_diag_juntos.cod_diagnostico                        AS value_as_string,
@@ -41,4 +41,4 @@ INSERT INTO @cdm_schema.observation
     LEFT JOIN @vocabulary_schema.source_to_concept_map AS icd_map
       ON tb_diag_juntos.cod_diagnostico = icd_map.source_code AND icd_map.source_vocabulary_id = 'ABUCASIS_CIE9'
   WHERE origen IN ('C', 'M')
-        AND tb_diag_juntos.fecha_inicio < TO_DATE((@first_date)::text, 'YYYY-MM-DD');
+        AND tb_diag_juntos.fecha_inicio < TO_DATE((@first_date)::text, 'YYYYMMDD');

@@ -27,7 +27,7 @@ INSERT INTO @cdm_schema.measurement
     coalesce(unit.target_concept_id, 0) AS unit_concept_id,
     coalesce(unit.source_concept_id)    AS unit_source_value,
     -- Lab results
-    44818702                            AS measurement_type_concept_id
+    32856                               AS measurement_type_concept_id
   FROM @source_schema.tb_prestaci
     --only patients also present in person table to be included
     JOIN @cdm_schema.person

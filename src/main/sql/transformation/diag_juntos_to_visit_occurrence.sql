@@ -39,13 +39,13 @@ SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_ocurrence_
          WHEN tb_diag_juntos.fecha_fin IS NOT NULL
                  THEN fecha_fin
          WHEN tb_diag_juntos.fecha_fin IS NULL
-                 THEN TO_DATE((@last_date)::text, 'YYYY-MM-DD')
+                 THEN TO_DATE((@last_date)::text, 'YYYYMMDD')
            END                                               AS visit_end_date,
        CASE
          WHEN tb_diag_juntos.fecha_fin IS NOT NULL
                  THEN (cast(fecha_fin as text) || ' 00:00:00'):: timestamp
          WHEN tb_diag_juntos.fecha_fin IS NULL
-                 THEN (cast(TO_DATE((@last_date)::text, 'YYYY-MM-DD') as text) || ' 00:00:00'):: timestamp
+                 THEN (cast(TO_DATE((@last_date)::text, 'YYYYMMDD') as text) || ' 00:00:00'):: timestamp
            END                                               AS visit_end_datetime,
 
     -- Circumstance of admission
@@ -110,7 +110,7 @@ FROM  @temp_schema.intermediate_table_visit_ocurrence
         INNER JOIN @cdm_schema.person ON intermediate_table_visit_ocurrence.numsipcod = person.person_source_value
         LEFT JOIN @cdm_schema.visit_occurrence ON  intermediate_table_visit_ocurrence.visit_ocurrence_id = visit_occurrence.visit_occurrence_id
         -- Filter out visits occurring before the study entry date
-        WHERE visit_occurrence.visit_occurrence_id IS NULL AND tb_diag_juntos.fecha_inicio >= TO_DATE((@first_date)::text, 'YYYY-MM-DD')
+        WHERE visit_occurrence.visit_occurrence_id IS NULL AND tb_diag_juntos.fecha_inicio >= TO_DATE((@first_date)::text, 'YYYYMMDD')
         AND tb_diag_juntos.origen != 'M'
 ;
 
@@ -139,9 +139,9 @@ SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_ocurrence_
        9202                                                  AS visit_concept_id,
 
     -- Visit derived from EHR encounter record
-       44818518                                              AS visit_type_concept_id,
+       32035                                                 AS visit_type_concept_id,
        0                                                     AS visit_source_concept_id,
-       'tb_diag_juntos'                                         AS visit_source_value,
+       'tb_diag_juntos'                                      AS visit_source_value,
 
     -- Assumption: 1 day visits
        tb_diag_juntos.fecha_inicio                              AS visit_start_date,
@@ -168,6 +168,6 @@ FROM  @temp_schema.intermediate_table_visit_ocurrence
         INNER JOIN @cdm_schema.person ON intermediate_table_visit_ocurrence.numsipcod = person.person_source_value
         LEFT JOIN @cdm_schema.visit_occurrence ON  intermediate_table_visit_ocurrence.visit_ocurrence_id = visit_occurrence.visit_occurrence_id
         -- Filter out visits occurring before the study entry date
-        WHERE visit_occurrence.visit_occurrence_id IS NULL AND tb_diag_juntos.fecha_inicio >= TO_DATE((@first_date)::text, 'YYYY-MM-DD')
+        WHERE visit_occurrence.visit_occurrence_id IS NULL AND tb_diag_juntos.fecha_inicio >= TO_DATE((@first_date)::text, 'YYYYMMDD')
         AND tb_diag_juntos.origen = 'M'
 ;

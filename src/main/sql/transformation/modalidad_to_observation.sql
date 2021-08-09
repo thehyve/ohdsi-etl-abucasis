@@ -26,8 +26,8 @@ INSERT INTO @cdm_schema.observation
 
     tb_sip_spo_resto_2015.fecha_corte :: TIMESTAMP       AS observation_datetime,
 
-    -- Observation recorded from EHR
-    38000280                                             AS observation_type_concept_id,
+    -- [Observation recorded from] EHR
+    32817                                             AS observation_type_concept_id,
 
     -- Yes
     4188539                                              AS value_as_concept_id,
@@ -40,6 +40,6 @@ INSERT INTO @cdm_schema.observation
       ON person.person_source_value = tb_sip_spo_resto_2015.numsipcod
     LEFT JOIN @vocabulary_schema.source_to_concept_map
       ON source_code = cod_modalidad AND source_vocabulary_id = 'ABUCASIS_MODALIDAD'
-    WHERE tb_sip_spo_resto_2015.fecha_corte >= TO_DATE((@first_date)::text, 'YYYY-MM-DD')
+    WHERE tb_sip_spo_resto_2015.fecha_corte >= TO_DATE((@first_date)::text, 'YYYYMMDD')
 
 ;

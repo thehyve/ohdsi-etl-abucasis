@@ -31,8 +31,8 @@ INSERT INTO @cdm_schema.observation
 
     cast(tb_interacc.ano_mes || '01' AS TIMESTAMP)       AS observation_datetime,
 
-    -- Observation recorded from EHR
-    38000280                                             AS observation_type_concept_id,
+    -- [Observation recorded from] EHR
+    32817                                             AS observation_type_concept_id,
 
     -- Number of adverse events
     tb_interacc.num_interacciones                        AS value_as_number,
@@ -62,6 +62,6 @@ INSERT INTO @cdm_schema.observation
     LEFT JOIN @vocabulary_schema.source_to_concept_map
       ON source_to_concept_map.source_code = 'interacc' AND
          source_to_concept_map.source_vocabulary_id = 'ABUCASIS_NUM_EVENTS'
-    WHERE cast(tb_interacc.ano_mes || '01' AS DATE) >= TO_DATE((@first_date)::text, 'YYYY-MM-DD')
+    WHERE cast(tb_interacc.ano_mes || '01' AS DATE) >= TO_DATE((@first_date)::text, 'YYYYMMDD')
 
 ;

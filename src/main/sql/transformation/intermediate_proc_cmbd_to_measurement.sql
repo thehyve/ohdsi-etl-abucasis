@@ -22,13 +22,13 @@ INSERT INTO @cdm_schema.measurement
     _source_value                      AS measurement_source_value,
     _date                              AS measurement_date,
     _datetime                          AS measurement_datetime,
-    -- From physical examination
-    44818702                            AS measurement_type_concept_id,
+    -- From EHR physical examination
+    32836                            AS measurement_type_concept_id,
     visit_occurrence_id                 AS visit_occurrence_id
 
   FROM @temp_schema.intermediate_proc_cmbd
       JOIN @cdm_schema.person
         ON person.person_source_value = intermediate_proc_cmbd.person_source_value
-      WHERE intermediate_proc_cmbd._date >= TO_DATE((@first_date)::text, 'YYYY-MM-DD')
+      WHERE intermediate_proc_cmbd._date >= TO_DATE((@first_date)::text, 'YYYYMMDD')
             AND
             intermediate_proc_cmbd.target_domain_id = 'Measurement';

@@ -69,8 +69,8 @@ INSERT INTO @cdm_schema.observation
 
     event_counts.date :: TIMESTAMP                       AS observation_datetime,
 
-    -- Observation recorded from EHR
-    38000280                                             AS observation_type_concept_id,
+    -- [Observation recorded from] EHR
+    32817                                             AS observation_type_concept_id,
 
     -- Number of adverse events
     event_counts.num_events                              AS value_as_number,
@@ -87,5 +87,5 @@ INSERT INTO @cdm_schema.observation
     LEFT JOIN @vocabulary_schema.source_to_concept_map
       ON source_to_concept_map.source_code = event_counts.source_name AND
          source_to_concept_map.source_vocabulary_id = 'ABUCASIS_NUM_EVENTS'
-    WHERE event_counts.date >= TO_DATE((@first_date)::text, 'YYYY-MM-DD');
+    WHERE event_counts.date >= TO_DATE((@first_date)::text, 'YYYYMMDD');
 ;

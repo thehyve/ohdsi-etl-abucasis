@@ -35,8 +35,8 @@ INSERT INTO @cdm_schema.observation
 
     tb_prescrip.fecha_prescripcion :: TIMESTAMP AS observation_datetime,
 
-    -- Observation recorded from EHR
-    38000280                                    AS observation_type_concept_id,
+    -- [Observation recorded from] EHR
+    32817                                    AS observation_type_concept_id,
 
     ingredient_map.target_concept_id            AS value_as_concept_id,
 
@@ -52,6 +52,6 @@ INSERT INTO @cdm_schema.observation
     LEFT JOIN @vocabulary_schema.source_to_concept_map AS ingredient_map
       ON ingredient_map.source_code = tb_prescrip.cod_prinactivo
          AND ingredient_map.source_vocabulary_id = 'ABUCASIS_PRINACTIVO'
-    WHERE tb_prescrip.fecha_prescripcion >= TO_DATE((@first_date)::text, 'YYYY-MM-DD')
+    WHERE tb_prescrip.fecha_prescripcion >= TO_DATE((@first_date)::text, 'YYYYMMDD')
 
 ;

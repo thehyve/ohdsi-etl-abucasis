@@ -27,8 +27,8 @@ INSERT INTO @cdm_schema.observation
 
     _datetime                                            AS observation_datetime,
 
-    -- Observation recorded from EHR
-    38000280                                             AS observation_type_concept_id,
+    -- [Observation recorded from] EHR
+    32817                                             AS observation_type_concept_id,
 
     -- Yes
     4188539                                              AS value_as_concept_id,
@@ -39,6 +39,6 @@ INSERT INTO @cdm_schema.observation
   FROM @temp_schema.intermediate_proc_cmbd
       JOIN @cdm_schema.person
         ON person.person_source_value = intermediate_proc_cmbd.person_source_value
-      WHERE intermediate_proc_cmbd._date >= TO_DATE((@first_date)::text, 'YYYY-MM-DD')
+      WHERE intermediate_proc_cmbd._date >= TO_DATE((@first_date)::text, 'YYYYMMDD')
             AND
             intermediate_proc_cmbd.target_domain_id = 'Observation';

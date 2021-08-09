@@ -69,8 +69,8 @@ INSERT INTO @cdm_schema.observation
 
     event_counts.date :: TIMESTAMP                       AS observation_datetime,
 
-    -- Observation recorded from EHR
-    38000280                                             AS observation_type_concept_id,
+    -- [Observation recorded from] EHR
+    32817                                             AS observation_type_concept_id,
 
     -- Number of adverse events
     event_counts.num_events                              AS value_as_number,

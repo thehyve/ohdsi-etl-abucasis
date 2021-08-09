@@ -70,13 +70,13 @@ CREATE TEMP TABLE tba_merged (
     'num_events',
     'Observation',
     'Admin Concept'
-  FROM @vocab_schema.source_to_concept_map
+  FROM @vocabulary_schema.source_to_concept_map
   WHERE source_vocabulary_id = 'ABUCASIS_NUM_EVENTS'
 )
 ;
 
 -- If vocabulary already exists, do not update
-INSERT INTO @vocab_schema.vocabulary (
+INSERT INTO @vocabulary_schema.vocabulary (
   vocabulary_id,
   vocabulary_name,
   vocabulary_concept_id
@@ -92,7 +92,7 @@ ON CONFLICT (vocabulary_id)
 ;
 
 -- If concept exists, update
-INSERT INTO @vocab_schema.concept (
+INSERT INTO @vocabulary_schema.concept (
   concept_id,
   concept_code,
   vocabulary_id,

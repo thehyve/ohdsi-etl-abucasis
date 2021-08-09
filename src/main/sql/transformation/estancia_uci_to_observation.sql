@@ -45,6 +45,6 @@ INSERT INTO @cdm_schema.observation
     LEFT JOIN @vocabulary_schema.source_to_concept_map
       ON source_to_concept_map.source_code = 'estancia_uci' AND
          source_to_concept_map.source_vocabulary_id = 'ABUCASIS_NUM_EVENTS'
-    WHERE tb_estancia_uci.fecha >= TO_DATE((@first_date)::text, 'YYYY-MM-DD')
+    WHERE tb_estancia_uci.fecha >= TO_DATE((@first_date)::text, 'YYYYMMDD')
 
 ;

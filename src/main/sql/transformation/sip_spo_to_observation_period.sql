@@ -9,10 +9,10 @@ INSERT INTO @cdm_schema.observation_period (person_id,
 SELECT person.person_id AS person_id,
     -- Date of entry into study OR birthday (whichever is last)
        CASE
-         WHEN tb_sip_spo.fecha_nac > TO_DATE((@first_date)::text, 'YYYY-MM-DD')
+         WHEN tb_sip_spo.fecha_nac > TO_DATE((@first_date)::text, 'YYYYMMDD')
                  THEN tb_sip_spo.fecha_nac -- Not Severe
-         WHEN tb_sip_spo.fecha_nac < TO_DATE((@first_date)::text, 'YYYY-MM-DD')
-                 THEN TO_DATE((@first_date)::text, 'YYYY-MM-DD')
+         WHEN tb_sip_spo.fecha_nac < TO_DATE((@first_date)::text, 'YYYYMMDD')
+                 THEN TO_DATE((@first_date)::text, 'YYYYMMDD')
            END          AS observation_period_start_date,
     -- Earliest of fecha_def and fecha_baja_sip
     -- If both dates are empty default value is end date study (given as parameter in config.yml)
@@ -23,7 +23,7 @@ SELECT person.person_id AS person_id,
               tb_sip_spo.fecha_baja_sip < tb_sip_spo.fecha_def THEN tb_sip_spo.fecha_baja_sip
          WHEN tb_sip_spo.fecha_baja_sip IS NOT NULL AND tb_sip_spo.fecha_def IS NOT NULL AND
               tb_sip_spo.fecha_def < tb_sip_spo.fecha_baja_sip THEN tb_sip_spo.fecha_def
-         ELSE TO_DATE((@last_date)::text, 'YYYY-MM-DD')
+         ELSE TO_DATE((@last_date)::text, 'YYYYMMDD')
            END          AS observation_period_end_date,
     -- Period covering healthcare encounters
        32827       AS period_type_concept_id

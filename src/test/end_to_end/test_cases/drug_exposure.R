@@ -1,5 +1,5 @@
 # ========================
-# Drug exposure and era
+# Drug exposure
 # ========================
 declareTest(id=500,'Drug exposure start and end date')
 add_tb_sip_spo(id=500, numsipcod='A500', sexo = 'M', fecha_def=NULL, fecha_baja_sip = NULL)

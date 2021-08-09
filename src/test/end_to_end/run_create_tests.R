@@ -25,9 +25,11 @@ source("test_cases/observation_period.R")       # test IDs  100-199
 source("test_cases/condition_occurrence.R")     # test IDs  200-299
 source("test_cases/procedure_occurrence.R")     # test IDs  300-399
 source("test_cases/visit_occurrence.R")         # test IDs  400-499
-source("test_cases/drug_exposure_and_era.R")    # test IDs  500-599
+source("test_cases/drug_exposure.R")            # test IDs  500-599
 source("test_cases/measurement.R")              # test IDs  600-699
 source("test_cases/observation.R")              # test IDs  700-799
+source("test_cases/condition_era.R")            # test IDs  800-899
+source("test_cases/drug_era.R")                 # test IDs  900-999
 
 library(DatabaseConnector)
 connectionConfig <- config$connectionDetails

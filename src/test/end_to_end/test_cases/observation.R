@@ -19,7 +19,7 @@ expect_observation(person_id = lookup_person('person_id', person_source_value = 
                    observation_date='2015-05-01')
 
 declareTest(id=703,'Observation number and severity of drug adverse effects')
-add_tb_sip_spo(id=703,numsipcod='A703', fecha_nac='1991-01-01', fecha_def='2012-02-05', , fecha_baja_sip='2012-02-05') 
+add_tb_sip_spo(id=703,numsipcod='A703', fecha_nac='1991-01-01', fecha_def='2012-02-05', fecha_baja_sip='2012-02-05') 
 add_tb_contraind(id=703,numsipcod='A703', num_contraindicaciones=5, tipo_contraindicacion='R')
 expect_observation(person_id = lookup_person('person_id', person_source_value = 'A703'),
                    value_as_number=5,qualifier_concept_id=764184)
@@ -58,10 +58,10 @@ expect_observation(person_id = lookup_person('person_id', person_source_value = 
                    value_as_number=5, unit_concept_id=8512)
 
 declareTest(id=708,'Observation date from sociodemographics')
-add_tb_sip_spo(id=708, numsipcod='A708', fecha_nac='1991-01-01', sexo='H', fecha_def='2012-03-03', fecha_baja_sip='2012-03-03') 
+add_tb_sip_spo(id=708, numsipcod='A708', fecha_nac='1991-01-01', sexo='H', fecha_def='2012-03-03', fecha_baja_sip='2012-03-03')
 add_tb_sip_spo_resto_2015(id=708,numsipcod='A708', fecha_corte='2013-02-05')
 expect_observation(person_id = lookup_person('person_id', person_source_value = 'A708'),
-                   observation_id=lookup_observation('observation_id', observation_concept_id=0, 
+                   observation_id=lookup_observation('observation_id', observation_concept_id=0,
                                                      person_id = lookup_person('person_id', person_source_value = 'A708')),
                    observation_date='2013-02-05')
 

@@ -56,5 +56,11 @@ print(summaryTestFramework())
 print(getUntestedSourceFields())
 print(getUntestedTargetFields())
 
+# Create test query -------------------------------------------------------
+testSql <- generateTestSql(config$cdmSchema)
+dir.create(dirname(config$testQueryFileName), recursive=T, showWarnings = F)
+write(testSql, config$testQueryFileName)
+print(paste0('Test queries written to ', config$testQueryFileName))
+
 # List all test cases ----------------------------------------------------------
 exportTestsOverviewToFile('all_test_cases.csv')

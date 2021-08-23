@@ -104,8 +104,8 @@ WITH cteCondTarget(person_id, condition_concept_id, condition_start_date, condit
 INSERT INTO @cdm_schema.condition_era (condition_era_id
                                                ,person_id
                                                ,condition_concept_id
-                                               ,condition_era_start_datetime
-                                               ,condition_era_end_datetime
+                                               ,condition_era_start_date
+                                               ,condition_era_end_date
                                                ,condition_occurrence_count
 )
 SELECT row_number() OVER (
@@ -113,8 +113,8 @@ SELECT row_number() OVER (
     ) AS condition_era_id
      ,person_id
      ,CONDITION_CONCEPT_ID
-     ,min(CONDITION_START_DATE) AS condition_era_start_datetime
-     ,ERA_END_DATE AS condition_era_end_datetime
+     ,min(CONDITION_START_DATE) AS condition_era_start_date
+     ,ERA_END_DATE AS condition_era_end_date
      ,COUNT(*) AS CONDITION_OCCURRENCE_COUNT
 FROM cteConditionEnds
 GROUP BY person_id

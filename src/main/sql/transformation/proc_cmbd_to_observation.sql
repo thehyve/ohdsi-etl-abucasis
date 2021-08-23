@@ -3,7 +3,7 @@ Procedures that have been identified before the start of the study date
 This information is stored as an observation with observation_start_date as the study start date
 because the data before that date may be incomplete
 */
-INSERT INTO cdm5.observation
+INSERT INTO @cdm_schema.observation
 (
   observation_concept_id,
   observation_source_concept_id,
@@ -12,8 +12,7 @@ INSERT INTO cdm5.observation
   observation_datetime,
   observation_type_concept_id,
   value_as_concept_id,
-  value_as_string,
-  obs_event_field_concept_id
+  value_as_string
 )
 
   SELECT
@@ -23,24 +22,21 @@ INSERT INTO cdm5.observation
 
     person.person_id                                       AS person_id,
 
-    TO_DATE('2012-01-01', 'YYYY-MM-DD')                   AS observation_date,
-    TO_DATE('2012-01-01', 'YYYY-MM-DD')::TIMESTAMP        AS observation_datetime,
+    TO_DATE((@first_date)::text, 'YYYYMMDD')                   AS observation_date,
+    TO_DATE((@first_date)::text, 'YYYYMMDD')::TIMESTAMP        AS observation_datetime,
 
-    -- Observation recorded from EHR
-    38000280                                               AS observation_type_concept_id,
+    -- [Observation recorded from] EHR
+    32817                                               AS observation_type_concept_id,
 
     coalesce(code_map.concept_id_2, 0)                    AS value_as_concept_id,
-    tb_proc_cmbd.cie9p                                    AS value_as_string,
-
-    -- No event
-    0                                                    AS obs_event_field_concept_id
+    tb_proc_cmbd.cie9p                                    AS value_as_string
 
   FROM  @source_schema.tb_proc_cmbd
-    INNER JOIN cdm5.person
+    INNER JOIN @cdm_schema.person
       ON person.person_source_value = tb_proc_cmbd.numsipcod
-    LEFT JOIN cdm5.concept AS icd9proc
+    LEFT JOIN @vocabulary_schema.concept AS icd9proc
       ON icd9proc.concept_code = tb_proc_cmbd.cie9p AND icd9proc.vocabulary_id IN ('ICD9Proc', 'ICD10PCS')
-    LEFT JOIN cdm5.concept_relationship AS code_map
+    LEFT JOIN @vocabulary_schema.concept_relationship AS code_map
       ON code_map.concept_id_1 = icd9proc.concept_id
          AND code_map.relationship_id = 'Maps to'
-    WHERE tb_proc_cmbd.fecha_ingreso < TO_DATE('2012-01-01', 'YYYY-MM-DD');
+    WHERE tb_proc_cmbd.fecha_ingreso < TO_DATE((@first_date)::text, 'YYYYMMDD');

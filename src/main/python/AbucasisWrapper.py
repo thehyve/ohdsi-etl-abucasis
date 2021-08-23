@@ -19,8 +19,8 @@ from sqlalchemy.dialects import postgresql
 
 class AbucasisWrapper(EtlWrapper):
 
-    def __init__(self, connection, source_schema, debug, skip_vocab, sql_dir):
-        super().__init__(connection, source_schema, debug, skip_vocab, sql_dir)
+    def __init__(self, connection, source_schema, vocab_schema, debug, skip_vocab, sql_dir):
+        super().__init__(connection, source_schema, vocab_schema, debug, skip_vocab, sql_dir)
 
     def run(self):
         """ Run Abucasis to OMOP ETL procedure"""
@@ -97,7 +97,7 @@ class AbucasisWrapper(EtlWrapper):
         self.execute_sql_file('vocabulary_loading/update_stcm_source_concept_id.sql')
 
         # Retrieve In-house semantic mappings vocabularies and versions
-        result = self.execute_sql_query("SELECT vocabulary_id, vocabulary_version FROM cdm5.vocabulary WHERE vocabulary_reference = 'ABUCASIS'", verbose=False)
+        result = self.execute_sql_query("SELECT vocabulary_id, vocabulary_version FROM @vocab_schema.vocabulary WHERE vocabulary_reference = 'ABUCASIS'", verbose=False)
         query_dict = self.query_to_dictionary(result)
         self.log("Semantic mappings version %s"%(query_dict[0]['vocabulary_version']), leading_newline=True)
 
@@ -166,7 +166,7 @@ class AbucasisWrapper(EtlWrapper):
 
     def _report_vocabulary_versions(self):
         # Retrieve In-house semantic mappings vocabularies and versions
-        result = self.execute_sql_query("SELECT vocabulary_id, vocabulary_version FROM cdm5.vocabulary WHERE vocabulary_version IS NOT NULL;", verbose=False)
+        result = self.execute_sql_query("SELECT vocabulary_id, vocabulary_version FROM @vocab_schema.vocabulary WHERE vocabulary_version IS NOT NULL;", verbose=False)
         query_dict = self.query_to_dictionary(result)
         self.log("########### OMOP vocabularies version ########### ", leading_newline=True)
         for row in query_dict:

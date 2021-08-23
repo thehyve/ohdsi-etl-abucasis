@@ -3,7 +3,7 @@ Number of drug-drug interactions per person, per month.
 Three levels of severity of the interactions. These are mapped as a qualifier;
 MODERADA (moderate), LEVE (not severe), GRAVE (very severe)
  */
-INSERT INTO cdm5.observation
+INSERT INTO @cdm_schema.observation
 (
   person_id,
   observation_concept_id,
@@ -15,8 +15,7 @@ INSERT INTO cdm5.observation
   value_as_number,
   qualifier_concept_id,
   qualifier_source_value,
-  unit_concept_id,
-  obs_event_field_concept_id
+  unit_concept_id
 )
   SELECT
     person.person_id                                     AS person_id,
@@ -31,8 +30,8 @@ INSERT INTO cdm5.observation
 
     cast(tb_interacc.ano_mes || '01' AS TIMESTAMP)       AS observation_datetime,
 
-    -- Observation recorded from EHR
-    38000280                                             AS observation_type_concept_id,
+    -- [Observation recorded from] EHR
+    32817                                             AS observation_type_concept_id,
 
     -- Number of adverse events
     tb_interacc.num_interacciones                        AS value_as_number,
@@ -51,17 +50,14 @@ INSERT INTO cdm5.observation
     tb_interacc.gravedad_interaccion                     AS qualifier_source_value,
 
     -- times
-    8524                                                 AS unit_concept_id,
-
-    -- No event
-    0                                                    AS obs_event_field_concept_id
+    8524                                                 AS unit_concept_id
 
   FROM  @source_schema.tb_interacc
-    JOIN cdm5.person
+    JOIN @cdm_schema.person
       ON person.person_source_value = tb_interacc.numsipcod
-    LEFT JOIN cdm5.source_to_concept_map
+    LEFT JOIN @vocabulary_schema.source_to_concept_map
       ON source_to_concept_map.source_code = 'interacc' AND
          source_to_concept_map.source_vocabulary_id = 'ABUCASIS_NUM_EVENTS'
-    WHERE cast(tb_interacc.ano_mes || '01' AS DATE) >= TO_DATE('2012-01-01', 'YYYY-MM-DD')
+    WHERE cast(tb_interacc.ano_mes || '01' AS DATE) >= TO_DATE((@first_date)::text, 'YYYYMMDD')
 
 ;

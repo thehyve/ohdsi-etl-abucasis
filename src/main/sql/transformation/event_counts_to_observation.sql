@@ -33,7 +33,7 @@ WITH event_counts_with_ano_mes (numsipcod, ano_mes, num_events, source_name) AS 
 
   UNION ALL
 
-  SELECT numsipcod, fecha_consulta, num_consultas, 'cex' FROM tb_cex
+  SELECT numsipcod, fecha_consulta, num_consultas, 'cex' FROM @source_schema.tb_cex
 
   UNION ALL
 
@@ -43,7 +43,7 @@ WITH event_counts_with_ano_mes (numsipcod, ano_mes, num_events, source_name) AS 
 
   SELECT numsipcod, fecha_urgencia, num_urgencias, 'urgencias' FROM  @source_schema.tb_urgencias
 )
-INSERT INTO cdm5.observation
+INSERT INTO @cdm_schema.observation
 (
   person_id,
   observation_concept_id,
@@ -53,8 +53,7 @@ INSERT INTO cdm5.observation
   observation_datetime,
   observation_type_concept_id,
   value_as_number,
-  unit_concept_id,
-  obs_event_field_concept_id
+  unit_concept_id
 )
   SELECT
     person.person_id                                     AS person_id,
@@ -69,23 +68,20 @@ INSERT INTO cdm5.observation
 
     event_counts.date :: TIMESTAMP                       AS observation_datetime,
 
-    -- Observation recorded from EHR
-    38000280                                             AS observation_type_concept_id,
+    -- [Observation recorded from] EHR
+    32817                                             AS observation_type_concept_id,
 
     -- Number of adverse events
     event_counts.num_events                              AS value_as_number,
 
     -- times
-    8524                                                 AS unit_concept_id,
-
-    -- No event
-    0                                                    AS obs_event_field_concept_id
+    8524                                                 AS unit_concept_id
 
   FROM event_counts
-    JOIN cdm5.person
+    JOIN @cdm_schema.person
       ON person.person_source_value = event_counts.numsipcod
-    LEFT JOIN cdm5.source_to_concept_map
+    LEFT JOIN @vocabulary_schema.source_to_concept_map
       ON source_to_concept_map.source_code = event_counts.source_name AND
          source_to_concept_map.source_vocabulary_id = 'ABUCASIS_NUM_EVENTS'
-    WHERE event_counts.date >= TO_DATE('2012-01-01', 'YYYY-MM-DD');
+    WHERE event_counts.date >= TO_DATE((@first_date)::text, 'YYYYMMDD');
 ;

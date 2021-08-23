@@ -1,0 +1,20 @@
+# For an explanation of the options, see:
+# https://delphyne.readthedocs.io/en/latest/config.html#source-configuration
+
+count_source_rows: False
+
+file_defaults:
+  delimiter: "\t"
+  encoding: 'utf-8'
+  quotechar: '"'
+  binary: False
+
+source_files:
+  'sample_source_table.csv':
+    delimiter: ','
+  'source_file2.tsv':
+    dtypes:
+      column_a: object
+      column_b: Int64
+      column_c: datetime64[ns]
+      column_d: float64

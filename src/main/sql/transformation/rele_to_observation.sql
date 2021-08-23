@@ -11,7 +11,7 @@ WITH non_dispensed_drugs AS (
 )
 
 
-INSERT INTO cdm5.observation
+INSERT INTO @cdm_schema.observation
 (
   person_id,
   observation_concept_id,
@@ -20,8 +20,7 @@ INSERT INTO cdm5.observation
   observation_datetime,
   observation_type_concept_id,
   value_as_concept_id,
-  value_as_string,
-  obs_event_field_concept_id
+  value_as_string
 )
   SELECT
     person.person_id                            AS person_id,
@@ -35,23 +34,21 @@ INSERT INTO cdm5.observation
 
     tb_prescrip.fecha_prescripcion :: TIMESTAMP AS observation_datetime,
 
-    -- Observation recorded from EHR
-    38000280                                    AS observation_type_concept_id,
+    -- [Observation recorded from] EHR
+    32817                                    AS observation_type_concept_id,
 
     ingredient_map.target_concept_id            AS value_as_concept_id,
 
-    tb_prescrip.cod_prinactivo                  AS value_as_string,
-
-    0                                           AS obs_event_field_concept_id
+    tb_prescrip.cod_prinactivo                  AS value_as_string
 
   FROM  @source_schema.tb_prescrip
     LEFT JOIN  non_dispensed_drugs
       ON non_dispensed_drugs.numreceta = tb_prescrip.numreceta
-    JOIN cdm5.person
+    JOIN @cdm_schema.person
       ON person.person_source_value = tb_prescrip.numsipcod
-    LEFT JOIN cdm5.source_to_concept_map AS ingredient_map
+    LEFT JOIN @vocabulary_schema.source_to_concept_map AS ingredient_map
       ON ingredient_map.source_code = tb_prescrip.cod_prinactivo
          AND ingredient_map.source_vocabulary_id = 'ABUCASIS_PRINACTIVO'
-    WHERE tb_prescrip.fecha_prescripcion >= TO_DATE('2012-01-01', 'YYYY-MM-DD')
+    WHERE tb_prescrip.fecha_prescripcion >= TO_DATE((@first_date)::text, 'YYYYMMDD')
 
 ;

@@ -1,0 +1,30 @@
+# For an explanation of the options, see:
+# https://delphyne.readthedocs.io/en/latest/config.html#main-configuration
+
+database:
+  drivername: 'postgresql'
+  host: '127.0.0.1'  # (localhost)
+  port: 5432
+  database_name: 'ohdsi'
+  username: 'postgres'
+  password: 'postgres'
+  query:
+
+source_data_folder: './resources/synthetic_data'
+
+schema_translate_map:
+  cdm_schema: 'cdm'
+  vocabulary_schema: 'vocab'
+
+run_options:
+  load_vocabulary: False
+  load_custom_vocabulary: False
+  load_source_to_concept_map: False
+  write_reports: False
+
+sql_parameters:
+  source_schema: 'source_data'
+  temp_schema: 'source_intermediate'
+  first_date: '20120101' # 'YYYYMMDD' format; date of entry to study
+  last_date: '20191231'  # 'YYYYMMDD' format!
+  #placeholder: 'value'

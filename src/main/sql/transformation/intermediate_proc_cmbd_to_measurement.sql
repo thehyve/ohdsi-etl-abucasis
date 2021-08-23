@@ -3,7 +3,7 @@ Measurements derived from Procedures
 (procedure concepts that are from the measurement domain)
  */
 
-INSERT INTO cdm5.measurement
+INSERT INTO @cdm_schema.measurement
 (
   person_id,
   measurement_concept_id,
@@ -22,13 +22,13 @@ INSERT INTO cdm5.measurement
     _source_value                      AS measurement_source_value,
     _date                              AS measurement_date,
     _datetime                          AS measurement_datetime,
-    -- From physical examination
-    44818702                            AS measurement_type_concept_id,
+    -- From EHR physical examination
+    32836                            AS measurement_type_concept_id,
     visit_occurrence_id                 AS visit_occurrence_id
 
-  FROM source_intermediate.intermediate_proc_cmbd
-      JOIN cdm5.person
+  FROM @temp_schema.intermediate_proc_cmbd
+      JOIN @cdm_schema.person
         ON person.person_source_value = intermediate_proc_cmbd.person_source_value
-      WHERE intermediate_proc_cmbd._date >= TO_DATE('2012-01-01', 'YYYY-MM-DD')
+      WHERE intermediate_proc_cmbd._date >= TO_DATE((@first_date)::text, 'YYYYMMDD')
             AND
             intermediate_proc_cmbd.target_domain_id = 'Measurement';

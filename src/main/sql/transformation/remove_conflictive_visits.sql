@@ -9,13 +9,13 @@ WITH cte0 AS (
     -- Generate table with count of visit_occurrence_id
     -- will be used to identify duplicated visit_occurrence_id in visit_occurrence_table
     SELECT visit_occurrence_id AS visitid, COUNT(*)
-    FROM cdm5.visit_occurrence
+    FROM @cdm_schema.visit_occurrence
     GROUP BY visit_occurrence_id
     ),
      cte1 AS (
      -- Identify patients that were transfered to another hospital
     DELETE
-        FROM cdm5.visit_occurrence
+        FROM @cdm_schema.visit_occurrence
         WHERE discharge_to_concept_id = 8844 AND visit_source_value != 'tb_morbilid'
      returning *
     ),
@@ -27,7 +27,7 @@ WITH cte0 AS (
            *
     FROM cte1
     )
-INSERT INTO cdm5.visit_occurrence
+INSERT INTO @cdm_schema.visit_occurrence
 SELECT
        visit_occurrence_id		,
        person_id					 ,
@@ -41,10 +41,10 @@ SELECT
        care_site_id					,
        visit_source_value			,
        visit_source_concept_id		 ,
-       admitted_from_concept_id       ,
-       admitted_from_source_value     ,
-       discharge_to_source_value	 ,
-       discharge_to_concept_id		,
+       admitting_source_concept_id       ,
+       admitting_source_value     ,
+       cast(discharge_to_source_value as integer)	 ,
+       cast(discharge_to_concept_id as integer)		,
        preceding_visit_occurrence_id
 
 FROM cte2
@@ -64,7 +64,7 @@ WHERE row_number != 1 OR (row_number=1 AND cte0.count = 1)
 
 WITH cte1 AS (
     DELETE
-        FROM cdm5.visit_occurrence
+        FROM @cdm_schema.visit_occurrence
         returning *
     ), cte2 AS (
     SELECT
@@ -72,7 +72,7 @@ WITH cte1 AS (
            *
     FROM cte1
     )
-INSERT INTO cdm5.visit_occurrence
+INSERT INTO @cdm_schema.visit_occurrence
     SELECT
         visit_occurrence_id		,
         person_id					 ,
@@ -86,10 +86,10 @@ INSERT INTO cdm5.visit_occurrence
         care_site_id					,
         visit_source_value			,
         visit_source_concept_id		 ,
-        admitted_from_concept_id       ,
-        admitted_from_source_value     ,
-        discharge_to_source_value	 ,
-        discharge_to_concept_id		,
+        admitting_source_concept_id       ,
+        admitting_source_value     ,
+        cast(discharge_to_source_value as integer)	 ,
+        cast(discharge_to_concept_id as integer)		,
         preceding_visit_occurrence_id
     FROM cte2
     WHERE row_number = 1

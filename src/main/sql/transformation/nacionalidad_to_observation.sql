@@ -2,7 +2,7 @@
 Spanish nationality status as observation from the 2015 demographics.
 Value is either 'S', 'N' or 'D' (Yes, No, Unknown)
 */
-INSERT INTO cdm5.observation
+INSERT INTO @cdm_schema.observation
 (
   person_id,
   observation_concept_id,
@@ -11,8 +11,7 @@ INSERT INTO cdm5.observation
   observation_date,
   observation_datetime,
   observation_type_concept_id,
-  value_as_concept_id,
-  obs_event_field_concept_id
+  value_as_concept_id
 )
   SELECT
     person.person_id                               AS person_id,
@@ -36,18 +35,15 @@ INSERT INTO cdm5.observation
 
     tb_sip_spo_resto_2015.fecha_corte :: TIMESTAMP AS observation_datetime,
 
-    -- Observation recorded from EHR
-    38000280                                       AS observation_type_concept_id,
+    -- [Observation recorded from] EHR
+    32817                                       AS observation_type_concept_id,
 
     -- Yes
-    4188539                                        AS value_as_concept_id,
-
-    -- No event
-    0                                              AS obs_event_field_concept_id
+    4188539                                        AS value_as_concept_id
 
   FROM  @source_schema.tb_sip_spo_resto_2015
-    JOIN cdm5.person
+    JOIN @cdm_schema.person
       ON person.person_source_value = tb_sip_spo_resto_2015.numsipcod
-    WHERE tb_sip_spo_resto_2015.fecha_corte >= TO_DATE('2012-01-01', 'YYYY-MM-DD')
+    WHERE tb_sip_spo_resto_2015.fecha_corte >= TO_DATE((@first_date)::text, 'YYYYMMDD')
 
 ;

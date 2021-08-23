@@ -3,7 +3,7 @@ Number of contra-indications per person, per month.
 Two levels of severity of the contra-indications. These mapped as a qualifier;
 Relative (not severe) and Absolute (Severe)
  */
-INSERT INTO cdm5.observation
+INSERT INTO @cdm_schema.observation
 (
   person_id,
   observation_concept_id,
@@ -15,8 +15,7 @@ INSERT INTO cdm5.observation
   value_as_number,
   qualifier_concept_id,
   qualifier_source_value,
-  unit_concept_id,
-  obs_event_field_concept_id
+  unit_concept_id
 )
   SELECT
     person.person_id                                     AS person_id,
@@ -31,8 +30,8 @@ INSERT INTO cdm5.observation
 
     cast(tb_contraind.ano_mes || '01' AS TIMESTAMP)      AS observation_datetime,
 
-    -- Observation recorded from EHR
-    38000280                                             AS observation_type_concept_id,
+    -- [Observation recorded from] EHR
+    32817                                                AS observation_type_concept_id,
 
     -- Number of adverse events
     tb_contraind.num_contraindicaciones                  AS value_as_number,
@@ -49,16 +48,13 @@ INSERT INTO cdm5.observation
     tb_contraind.tipo_contraindicacion                   AS qualifier_source_value,
 
     -- times
-    8524                                                 AS unit_concept_id,
-
-    -- No event
-    0                                                    AS obs_event_field_concept_id
+    8524                                                 AS unit_concept_id
 
   FROM  @source_schema.tb_contraind
-    JOIN cdm5.person
+    JOIN @cdm_schema.person
       ON person.person_source_value = tb_contraind.numsipcod
-    LEFT JOIN cdm5.source_to_concept_map
+    LEFT JOIN @vocabulary_schema.source_to_concept_map
       ON source_to_concept_map.source_code = 'contraind' AND
          source_to_concept_map.source_vocabulary_id = 'ABUCASIS_NUM_EVENTS'
-    WHERE cast(tb_contraind.ano_mes || '01' AS DATE) >= TO_DATE('2012-01-01', 'YYYY-MM-DD')
+    WHERE cast(tb_contraind.ano_mes || '01' AS DATE) >= TO_DATE((@first_date)::text, 'YYYYMMDD')
 ;

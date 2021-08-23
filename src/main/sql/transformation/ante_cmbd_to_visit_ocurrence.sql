@@ -2,7 +2,7 @@
 Visit occurrence table
 */
 
-INSERT INTO cdm5.visit_occurrence (visit_occurrence_id,
+INSERT INTO @cdm_schema.visit_occurrence (visit_occurrence_id,
                                    person_id,
                                    visit_concept_id,
                                    visit_source_value,
@@ -12,8 +12,8 @@ INSERT INTO cdm5.visit_occurrence (visit_occurrence_id,
                                    visit_start_datetime,
                                    visit_end_date,
                                    visit_end_datetime,
-                                   admitted_from_concept_id,
-                                   admitted_from_source_value,
+                                   admitting_source_concept_id,
+                                   admitting_source_value,
                                    discharge_to_concept_id,
                                    discharge_to_source_value,
                                    care_site_id)
@@ -36,13 +36,13 @@ SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_occurrence
          WHEN tb_ante_cmbd.fecha_alta IS NOT NULL
                  THEN fecha_alta
          WHEN tb_ante_cmbd.fecha_alta IS NULL
-                 THEN TO_DATE('2016-12-31', 'YYYY-MM-DD')
+                 THEN TO_DATE((@last_date)::text, 'YYYY-MM-DD')
            END                                               AS visit_end_date,
        CASE
          WHEN tb_ante_cmbd.fecha_alta IS NOT NULL
                  THEN (cast(fecha_alta as text) || ' 00:00:00'):: timestamp
          WHEN tb_ante_cmbd.fecha_alta IS NULL
-                 THEN (cast(TO_DATE('2016-12-31', 'YYYY-MM-DD') as text) || ' 00:00:00'):: timestamp
+                 THEN (cast(TO_DATE((@last_date)::text, 'YYYY-MM-DD') as text) || ' 00:00:00'):: timestamp
            END                                               AS visit_end_datetime,
 
     -- Circumstance of admission
@@ -54,8 +54,8 @@ SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_occurrence
            -- surgery
          WHEN '3' THEN 8863 -- Ambulatory surgical center
          ELSE 0 -- Unknown
-           END                                               AS admitted_from_concept_id,
-       tb_ante_cmbd.cir_ingreso                              AS admitted_from_source_value,
+           END                                               AS admitting_source_concept_id,
+       tb_ante_cmbd.cir_ingreso                              AS admitting_source_value,
     -- Circumstance of discharge
        CASE tb_ante_cmbd.cir_alta
            -- Home
@@ -96,11 +96,11 @@ SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_occurrence
 
 
 FROM  @source_schema.tb_ante_cmbd
-       LEFT JOIN source_intermediate.intermediate_table_visit_ocurrence
+       LEFT JOIN @temp_schema.intermediate_table_visit_ocurrence
          ON (tb_ante_cmbd.numsipcod = intermediate_table_visit_ocurrence.numsipcod
                AND
              tb_ante_cmbd.fecha_ingreso = intermediate_table_visit_ocurrence.date) -- We only want visits from "valid" persons from person table
-       INNER JOIN cdm5.person ON intermediate_table_visit_ocurrence.numsipcod = person.person_source_value
+       INNER JOIN @cdm_schema.person ON intermediate_table_visit_ocurrence.numsipcod = person.person_source_value
       -- Filter out visits occurring before the study entry date
-      WHERE tb_ante_cmbd.fecha_ingreso >= TO_DATE('2012-01-01', 'YYYY-MM-DD')
+      WHERE tb_ante_cmbd.fecha_ingreso >= TO_DATE((@first_date)::text, 'YYYYMMDD')
 ;

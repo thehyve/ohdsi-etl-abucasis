@@ -1,32 +1,32 @@
 /*
 Sociodemographic data I
 */
-INSERT INTO cdm5.observation_period (person_id,
+INSERT INTO @cdm_schema.observation_period (person_id,
                                      observation_period_start_date,
-                                     -- Date of entry into study 01-01-2012 Or date of birth (whichever is last); everyone is older than 18, should not happen.
+                                     -- Date of entry into study @first_date Or date of birth (whichever is last); everyone is older than 18, should not happen.
                                      observation_period_end_date,
                                      period_type_concept_id)
 SELECT person.person_id AS person_id,
     -- Date of entry into study OR birthday (whichever is last)
        CASE
-         WHEN tb_sip_spo.fecha_nac > TO_DATE('2012-01-01', 'YYYY-MM-DD')
+         WHEN tb_sip_spo.fecha_nac > TO_DATE((@first_date)::text, 'YYYYMMDD')
                  THEN tb_sip_spo.fecha_nac -- Not Severe
-         WHEN tb_sip_spo.fecha_nac < TO_DATE('2012-01-01', 'YYYY-MM-DD')
-                 THEN TO_DATE('2012-01-01', 'YYYY-MM-DD')
+         WHEN tb_sip_spo.fecha_nac < TO_DATE((@first_date)::text, 'YYYYMMDD')
+                 THEN TO_DATE((@first_date)::text, 'YYYYMMDD')
            END          AS observation_period_start_date,
     -- Earliest of fecha_def and fecha_baja_sip
-    -- If both dates are empty default value is 31-12-2016 (end date study)
+    -- If both dates are empty default value is end date study (given as parameter in config.yml)
        CASE
          WHEN tb_sip_spo.fecha_baja_sip IS NULL AND tb_sip_spo.fecha_def IS NOT NULL THEN tb_sip_spo.fecha_def
          WHEN tb_sip_spo.fecha_baja_sip IS NOT NULL AND tb_sip_spo.fecha_def IS NULL THEN tb_sip_spo.fecha_baja_sip
          WHEN tb_sip_spo.fecha_baja_sip IS NOT NULL AND tb_sip_spo.fecha_def IS NOT NULL AND
               tb_sip_spo.fecha_baja_sip < tb_sip_spo.fecha_def THEN tb_sip_spo.fecha_baja_sip
          WHEN tb_sip_spo.fecha_baja_sip IS NOT NULL AND tb_sip_spo.fecha_def IS NOT NULL AND
-              tb_sip_spo.fecha_baja_sip < tb_sip_spo.fecha_def THEN tb_sip_spo.fecha_def
-         ELSE TO_DATE('2016-12-31', 'YYYY-MM-DD')
+              tb_sip_spo.fecha_def < tb_sip_spo.fecha_baja_sip THEN tb_sip_spo.fecha_def
+         ELSE TO_DATE((@last_date)::text, 'YYYYMMDD')
            END          AS observation_period_end_date,
     -- Period covering healthcare encounters
-       '44814724'       AS period_type_concept_id
+       32827       AS period_type_concept_id
 
 FROM  @source_schema.tb_sip_spo
-       INNER JOIN cdm5.person ON tb_sip_spo.numsipcod = person.person_source_value;
+       INNER JOIN @cdm_schema.person ON tb_sip_spo.numsipcod = person.person_source_value;

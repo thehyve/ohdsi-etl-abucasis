@@ -8,7 +8,6 @@ INSERT INTO @cdm_schema.observation (
   observation_date,
   observation_datetime,
   observation_type_concept_id,
-  obs_event_field_concept_id,
   value_as_concept_id
 )
   SELECT
@@ -24,8 +23,6 @@ INSERT INTO @cdm_schema.observation (
     intermediate_death.death_date :: TIMESTAMP AS observation_datetime,
 
     intermediate_death.death_type_concept_id   AS observation_type_concept_id,
-
-    0                                          AS obs_event_field_concept_id,
 
     4188539                                    AS value_as_concept_id
 

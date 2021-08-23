@@ -11,8 +11,7 @@ INSERT INTO @cdm_schema.observation
   observation_date,
   observation_datetime,
   observation_type_concept_id,
-  value_as_concept_id,
-  obs_event_field_concept_id
+  value_as_concept_id
 )
   SELECT
     person.person_id                                     AS person_id,
@@ -31,10 +30,7 @@ INSERT INTO @cdm_schema.observation
     32817                                             AS observation_type_concept_id,
 
     -- Yes
-    4188539                                              AS value_as_concept_id,
-
-    -- No event
-    0                                                    AS obs_event_field_concept_id
+    4188539                                              AS value_as_concept_id
 
   FROM @temp_schema.intermediate_proc_cmbd
       JOIN @cdm_schema.person

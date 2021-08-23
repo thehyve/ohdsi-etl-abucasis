@@ -3903,7 +3903,7 @@ add_tb_morbilid <- function(id, numsipcod, fecha_inicio, fecha_fin, cod_diagnost
   defaults <- get('tb_morbilid', envir = frameworkContext$defaultValues)
   fields <- c()
   values <- c()
-  
+
   if (missing(id)) {
     id <- defaults$id
   } else {
@@ -8409,43 +8409,43 @@ expect_death <- function(person_id, death_date, death_datetime, death_type_conce
     values <- c(values, if (is.null(person_id)) " IS NULL" else if (is(person_id, "subQuery")) paste0(" = (", as.character(person_id), ")") else paste0(" = '", as.character(person_id), "'"))
     frameworkContext$targetFieldsTested <- c(frameworkContext$targetFieldsTested, 'death.person_id')
   }
-  
+
   if (!missing(death_date)) {
     fields <- c(fields, "death_date")
     values <- c(values, if (is.null(death_date)) " IS NULL" else if (is(death_date, "subQuery")) paste0(" = (", as.character(death_date), ")") else paste0(" = '", as.character(death_date), "'"))
     frameworkContext$targetFieldsTested <- c(frameworkContext$targetFieldsTested, 'death.death_date')
   }
-  
+
   if (!missing(death_datetime)) {
     fields <- c(fields, "death_datetime")
     values <- c(values, if (is.null(death_datetime)) " IS NULL" else if (is(death_datetime, "subQuery")) paste0(" = (", as.character(death_datetime), ")") else paste0(" = '", as.character(death_datetime), "'"))
     frameworkContext$targetFieldsTested <- c(frameworkContext$targetFieldsTested, 'death.death_datetime')
   }
-  
+
   if (!missing(death_type_concept_id)) {
     fields <- c(fields, "death_type_concept_id")
     values <- c(values, if (is.null(death_type_concept_id)) " IS NULL" else if (is(death_type_concept_id, "subQuery")) paste0(" = (", as.character(death_type_concept_id), ")") else paste0(" = '", as.character(death_type_concept_id), "'"))
     frameworkContext$targetFieldsTested <- c(frameworkContext$targetFieldsTested, 'death.death_type_concept_id')
   }
-  
+
   if (!missing(cause_concept_id)) {
     fields <- c(fields, "cause_concept_id")
     values <- c(values, if (is.null(cause_concept_id)) " IS NULL" else if (is(cause_concept_id, "subQuery")) paste0(" = (", as.character(cause_concept_id), ")") else paste0(" = '", as.character(cause_concept_id), "'"))
     frameworkContext$targetFieldsTested <- c(frameworkContext$targetFieldsTested, 'death.cause_concept_id')
   }
-  
+
   if (!missing(cause_source_value)) {
     fields <- c(fields, "cause_source_value")
     values <- c(values, if (is.null(cause_source_value)) " IS NULL" else if (is(cause_source_value, "subQuery")) paste0(" = (", as.character(cause_source_value), ")") else paste0(" = '", as.character(cause_source_value), "'"))
     frameworkContext$targetFieldsTested <- c(frameworkContext$targetFieldsTested, 'death.cause_source_value')
   }
-  
+
   if (!missing(cause_source_concept_id)) {
     fields <- c(fields, "cause_source_concept_id")
     values <- c(values, if (is.null(cause_source_concept_id)) " IS NULL" else if (is(cause_source_concept_id, "subQuery")) paste0(" = (", as.character(cause_source_concept_id), ")") else paste0(" = '", as.character(cause_source_concept_id), "'"))
     frameworkContext$targetFieldsTested <- c(frameworkContext$targetFieldsTested, 'death.cause_source_concept_id')
   }
-  
+
   expects <- list(testId = frameworkContext$testId, testDescription = frameworkContext$testDescription, type = 0, table = "death", fields = fields, values = values)
   frameworkContext$expects[[length(frameworkContext$expects) + 1]] <- expects
   invisible(NULL)
@@ -10440,37 +10440,37 @@ expect_no_death <- function(person_id, death_date, death_datetime, death_type_co
     fields <- c(fields, "person_id")
     values <- c(values, if (is.null(person_id)) " IS NULL" else if (is(person_id, "subQuery")) paste0(" = (", as.character(person_id), ")") else paste0(" = '", as.character(person_id), "'"))
   }
-  
+
   if (!missing(death_date)) {
     fields <- c(fields, "death_date")
     values <- c(values, if (is.null(death_date)) " IS NULL" else if (is(death_date, "subQuery")) paste0(" = (", as.character(death_date), ")") else paste0(" = '", as.character(death_date), "'"))
   }
-  
+
   if (!missing(death_datetime)) {
     fields <- c(fields, "death_datetime")
     values <- c(values, if (is.null(death_datetime)) " IS NULL" else if (is(death_datetime, "subQuery")) paste0(" = (", as.character(death_datetime), ")") else paste0(" = '", as.character(death_datetime), "'"))
   }
-  
+
   if (!missing(death_type_concept_id)) {
     fields <- c(fields, "death_type_concept_id")
     values <- c(values, if (is.null(death_type_concept_id)) " IS NULL" else if (is(death_type_concept_id, "subQuery")) paste0(" = (", as.character(death_type_concept_id), ")") else paste0(" = '", as.character(death_type_concept_id), "'"))
   }
-  
+
   if (!missing(cause_concept_id)) {
     fields <- c(fields, "cause_concept_id")
     values <- c(values, if (is.null(cause_concept_id)) " IS NULL" else if (is(cause_concept_id, "subQuery")) paste0(" = (", as.character(cause_concept_id), ")") else paste0(" = '", as.character(cause_concept_id), "'"))
   }
-  
+
   if (!missing(cause_source_value)) {
     fields <- c(fields, "cause_source_value")
     values <- c(values, if (is.null(cause_source_value)) " IS NULL" else if (is(cause_source_value, "subQuery")) paste0(" = (", as.character(cause_source_value), ")") else paste0(" = '", as.character(cause_source_value), "'"))
   }
-  
+
   if (!missing(cause_source_concept_id)) {
     fields <- c(fields, "cause_source_concept_id")
     values <- c(values, if (is.null(cause_source_concept_id)) " IS NULL" else if (is(cause_source_concept_id, "subQuery")) paste0(" = (", as.character(cause_source_concept_id), ")") else paste0(" = '", as.character(cause_source_concept_id), "'"))
   }
-  
+
   expects <- list(testId = frameworkContext$testId, testDescription = frameworkContext$testDescription, type = 1, table = "death", fields = fields, values = values)
   frameworkContext$expects[[length(frameworkContext$expects) + 1]] <- expects
   invisible(NULL)
@@ -12848,43 +12848,43 @@ expect_count_death <- function(rowCount, person_id, death_date, death_datetime, 
     values <- c(values, if (is.null(person_id)) " IS NULL" else if (is(person_id, "subQuery")) paste0(" = (", as.character(person_id), ")") else paste0(" = '", as.character(person_id), "'"))
     frameworkContext$targetFieldsTested <- c(frameworkContext$targetFieldsTested, 'death.person_id')
   }
-  
+
   if (!missing(death_date)) {
     fields <- c(fields, "death_date")
     values <- c(values, if (is.null(death_date)) " IS NULL" else if (is(death_date, "subQuery")) paste0(" = (", as.character(death_date), ")") else paste0(" = '", as.character(death_date), "'"))
     frameworkContext$targetFieldsTested <- c(frameworkContext$targetFieldsTested, 'death.death_date')
   }
-  
+
   if (!missing(death_datetime)) {
     fields <- c(fields, "death_datetime")
     values <- c(values, if (is.null(death_datetime)) " IS NULL" else if (is(death_datetime, "subQuery")) paste0(" = (", as.character(death_datetime), ")") else paste0(" = '", as.character(death_datetime), "'"))
     frameworkContext$targetFieldsTested <- c(frameworkContext$targetFieldsTested, 'death.death_datetime')
   }
-  
+
   if (!missing(death_type_concept_id)) {
     fields <- c(fields, "death_type_concept_id")
     values <- c(values, if (is.null(death_type_concept_id)) " IS NULL" else if (is(death_type_concept_id, "subQuery")) paste0(" = (", as.character(death_type_concept_id), ")") else paste0(" = '", as.character(death_type_concept_id), "'"))
     frameworkContext$targetFieldsTested <- c(frameworkContext$targetFieldsTested, 'death.death_type_concept_id')
   }
-  
+
   if (!missing(cause_concept_id)) {
     fields <- c(fields, "cause_concept_id")
     values <- c(values, if (is.null(cause_concept_id)) " IS NULL" else if (is(cause_concept_id, "subQuery")) paste0(" = (", as.character(cause_concept_id), ")") else paste0(" = '", as.character(cause_concept_id), "'"))
     frameworkContext$targetFieldsTested <- c(frameworkContext$targetFieldsTested, 'death.cause_concept_id')
   }
-  
+
   if (!missing(cause_source_value)) {
     fields <- c(fields, "cause_source_value")
     values <- c(values, if (is.null(cause_source_value)) " IS NULL" else if (is(cause_source_value, "subQuery")) paste0(" = (", as.character(cause_source_value), ")") else paste0(" = '", as.character(cause_source_value), "'"))
     frameworkContext$targetFieldsTested <- c(frameworkContext$targetFieldsTested, 'death.cause_source_value')
   }
-  
+
   if (!missing(cause_source_concept_id)) {
     fields <- c(fields, "cause_source_concept_id")
     values <- c(values, if (is.null(cause_source_concept_id)) " IS NULL" else if (is(cause_source_concept_id, "subQuery")) paste0(" = (", as.character(cause_source_concept_id), ")") else paste0(" = '", as.character(cause_source_concept_id), "'"))
     frameworkContext$targetFieldsTested <- c(frameworkContext$targetFieldsTested, 'death.cause_source_concept_id')
   }
-  
+
   expects <- list(testId = frameworkContext$testId, testDescription = frameworkContext$testDescription, type = 2, table = "death", fields = fields, values = values)
   expects$rowCount = rowCount
   frameworkContext$expects[[length(frameworkContext$expects) + 1]] <- expects
@@ -16279,7 +16279,7 @@ lookup_death <- function(fetchField, person_id, death_date, death_datetime, deat
     }
     statement <- paste0(statement, " person_id",if (is.null(person_id)) " IS NULL" else if (is(person_id, "subQuery")) paste0(" = (", as.character(person_id), ")") else paste0(" = '", as.character(person_id), "'"))
   }
-  
+
   if (!missing(death_date)) {
     if (first) {
       first <- FALSE
@@ -16288,7 +16288,7 @@ lookup_death <- function(fetchField, person_id, death_date, death_datetime, deat
     }
     statement <- paste0(statement, " death_date",if (is.null(death_date)) " IS NULL" else if (is(death_date, "subQuery")) paste0(" = (", as.character(death_date), ")") else paste0(" = '", as.character(death_date), "'"))
   }
-  
+
   if (!missing(death_datetime)) {
     if (first) {
       first <- FALSE
@@ -16297,7 +16297,7 @@ lookup_death <- function(fetchField, person_id, death_date, death_datetime, deat
     }
     statement <- paste0(statement, " death_datetime",if (is.null(death_datetime)) " IS NULL" else if (is(death_datetime, "subQuery")) paste0(" = (", as.character(death_datetime), ")") else paste0(" = '", as.character(death_datetime), "'"))
   }
-  
+
   if (!missing(death_type_concept_id)) {
     if (first) {
       first <- FALSE
@@ -16306,7 +16306,7 @@ lookup_death <- function(fetchField, person_id, death_date, death_datetime, deat
     }
     statement <- paste0(statement, " death_type_concept_id",if (is.null(death_type_concept_id)) " IS NULL" else if (is(death_type_concept_id, "subQuery")) paste0(" = (", as.character(death_type_concept_id), ")") else paste0(" = '", as.character(death_type_concept_id), "'"))
   }
-  
+
   if (!missing(cause_concept_id)) {
     if (first) {
       first <- FALSE
@@ -16315,7 +16315,7 @@ lookup_death <- function(fetchField, person_id, death_date, death_datetime, deat
     }
     statement <- paste0(statement, " cause_concept_id",if (is.null(cause_concept_id)) " IS NULL" else if (is(cause_concept_id, "subQuery")) paste0(" = (", as.character(cause_concept_id), ")") else paste0(" = '", as.character(cause_concept_id), "'"))
   }
-  
+
   if (!missing(cause_source_value)) {
     if (first) {
       first <- FALSE
@@ -16324,7 +16324,7 @@ lookup_death <- function(fetchField, person_id, death_date, death_datetime, deat
     }
     statement <- paste0(statement, " cause_source_value",if (is.null(cause_source_value)) " IS NULL" else if (is(cause_source_value, "subQuery")) paste0(" = (", as.character(cause_source_value), ")") else paste0(" = '", as.character(cause_source_value), "'"))
   }
-  
+
   if (!missing(cause_source_concept_id)) {
     if (first) {
       first <- FALSE
@@ -16333,7 +16333,7 @@ lookup_death <- function(fetchField, person_id, death_date, death_datetime, deat
     }
     statement <- paste0(statement, " cause_source_concept_id",if (is.null(cause_source_concept_id)) " IS NULL" else if (is(cause_source_concept_id, "subQuery")) paste0(" = (", as.character(cause_source_concept_id), ")") else paste0(" = '", as.character(cause_source_concept_id), "'"))
   }
-  
+
   class(statement) <- 'subQuery'
   return(statement)
 }
@@ -16410,7 +16410,7 @@ generateInsertSql <- function(databaseSchema = NULL) {
                      "(",
                      paste(insert$fields, collapse = ", "),
                      ") VALUES (",
-                     paste(insert$values, collapse = ", "), 
+                     paste(insert$values, collapse = ", "),
                      ");"))
     return(s)
   }
@@ -16445,7 +16445,7 @@ writeSourceCsv <- function(directory = NULL, separator = ',') {
     return(x)
   }
   dir.create(directory, showWarnings = F)
-  
+
   seen_tables <- c()
   for (insert in frameworkContext$inserts) {
     filename <- file.path(directory, paste0(insert$table, '.csv'))
@@ -16455,7 +16455,7 @@ writeSourceCsv <- function(directory = NULL, separator = ',') {
     }
     write(paste(sapply(insert$values, clean_value), collapse = separator), filename, append=T)
   }
-  
+
   for (table_name in names(frameworkContext$defaultValues)) {
     if (!(table_name %in% seen_tables)) {
       filename <- file.path(directory, paste0(table_name, '.csv'))

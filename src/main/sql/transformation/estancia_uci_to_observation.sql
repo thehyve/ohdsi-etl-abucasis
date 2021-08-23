@@ -11,8 +11,7 @@ INSERT INTO @cdm_schema.observation
   observation_datetime,
   observation_type_concept_id,
   value_as_number,
-  unit_concept_id,
-  obs_event_field_concept_id
+  unit_concept_id
 )
   SELECT
     person.person_id                                     AS person_id,
@@ -34,10 +33,7 @@ INSERT INTO @cdm_schema.observation
     tb_estancia_uci.num_estancia_uci                     AS value_as_number,
 
     -- day
-    8512                                                 AS unit_concept_id,
-
-    -- No event
-    0                                                    AS obs_event_field_concept_id
+    8512                                                 AS unit_concept_id
 
   FROM  @source_schema.tb_estancia_uci
     JOIN @cdm_schema.person

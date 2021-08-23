@@ -12,8 +12,7 @@ INSERT INTO @cdm_schema.observation
   observation_datetime,
   observation_type_concept_id,
   value_as_concept_id,
-  value_as_string,
-  obs_event_field_concept_id
+  value_as_string
 )
 
   SELECT
@@ -30,10 +29,7 @@ INSERT INTO @cdm_schema.observation
     32817                                               AS observation_type_concept_id,
 
     coalesce(code_map.concept_id_2, 0)                    AS value_as_concept_id,
-    tb_proc_cmbd.cie9p                                    AS value_as_string,
-
-    -- No event
-    0                                                    AS obs_event_field_concept_id
+    tb_proc_cmbd.cie9p                                    AS value_as_string
 
   FROM  @source_schema.tb_proc_cmbd
     INNER JOIN @cdm_schema.person

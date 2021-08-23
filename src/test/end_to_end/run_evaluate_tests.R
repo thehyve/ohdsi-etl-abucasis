@@ -14,7 +14,7 @@
 
 library(DatabaseConnector)
 library(yaml)
-config <- yaml.load_file('config.yml')
+config <- yaml.load_file('config-v5.yml')
 options(width=150)  # Preventing wrapping when printing dataframe
 
 source('TestFrameworkAbucasis.R')
@@ -39,6 +39,6 @@ executeSql(connection, paste(testSql, collapse='\n'))
 outputTestResultsSummary(connection, config$cdmSchema)
 
 # Write full test results to file ---------------------------------------
-df_results <- DatabaseConnector::querySql(connection, gsub('@cdmSchema', config$cdmSchema, 'SELECT * FROM @cdmSchema.test_results;'))
+df_results <- DatabaseConnector::querySql(connection, gsub('@cdm_database_schema', config$cdmSchema, 'SELECT * FROM @cdm_database_schema.test_results;'))
 write.csv(df_results, "unittest_results.csv", row.names = FALSE, quote = c(1))
 disconnect(connection)

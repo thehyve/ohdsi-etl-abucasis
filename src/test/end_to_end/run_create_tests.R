@@ -13,7 +13,7 @@
 # GNU General Public License for more details.
 
 library('yaml')
-config <- yaml.load_file('config.yml')
+config <- yaml.load_file('config-v5.yml')
 
 # Initialize
 source('TestFrameworkAbucasis.R')
@@ -47,6 +47,12 @@ insert_sql <- generateInsertSql()
 executeSql(connection, sprintf('SET search_path TO %s;', config$sourceSchema))
 executeSql(connection, paste(insert_sql, collapse = '\n'))
 
+# Create test query -------------------------------------------------------
+testSql <- generateTestSql(config$cdmSchema)
+dir.create(dirname(config$testQueryFileName), recursive=T, showWarnings = F)
+write(testSql, config$testQueryFileName)
+print(paste0('Test queries written to ', config$testQueryFileName))
+
 # Test coverages -----------------------------------------------------------
 print(summaryTestFramework())
 print(getUntestedSourceFields())
@@ -60,4 +66,3 @@ print(paste0('Test queries written to ', config$testQueryFileName))
 
 # List all test cases ----------------------------------------------------------
 exportTestsOverviewToFile('all_test_cases.csv')
-

@@ -27,7 +27,7 @@ INSERT INTO @cdm_schema.measurement
     coalesce(unit.target_concept_id, 0) AS unit_concept_id,
     coalesce(unit.source_concept_id)    AS unit_source_value,
     -- Lab results
-    44818702                            AS measurement_type_concept_id
+    32856                               AS measurement_type_concept_id
   FROM @source_schema.tb_prestaci
     --only patients also present in person table to be included
     JOIN @cdm_schema.person
@@ -38,6 +38,6 @@ INSERT INTO @cdm_schema.measurement
       ON cod_ud_medida = unit.source_code AND unit.source_vocabulary_id = 'ABUCASIS_UD_MEDIDAS'
   WHERE
     tb_prestaci.cod_prestacion NOT LIKE '-1'
-    -- exclude measurements whose variable is unknown
-    AND tb_prestaci.cod_ud_medida != '.' AND tb_prestaci.cod_ud_medida != 'I'
+    -- (optional) exclude measurements whose variable is unknown
+    -- AND tb_prestaci.cod_ud_medida != '.' AND tb_prestaci.cod_ud_medida != 'I' --
 ;

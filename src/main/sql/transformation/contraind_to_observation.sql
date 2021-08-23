@@ -30,8 +30,8 @@ INSERT INTO @cdm_schema.observation
 
     cast(tb_contraind.ano_mes || '01' AS TIMESTAMP)      AS observation_datetime,
 
-    -- Observation recorded from EHR
-    38000280                                             AS observation_type_concept_id,
+    -- [Observation recorded from] EHR
+    32817                                                AS observation_type_concept_id,
 
     -- Number of adverse events
     tb_contraind.num_contraindicaciones                  AS value_as_number,

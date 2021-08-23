@@ -25,8 +25,8 @@ INSERT INTO @cdm_schema.observation
     TO_DATE((@first_date)::text, 'YYYYMMDD')                   AS observation_date,
     TO_DATE((@first_date)::text, 'YYYYMMDD')::TIMESTAMP        AS observation_datetime,
 
-    -- Observation recorded from EHR
-    38000280                                               AS observation_type_concept_id,
+    -- [Observation recorded from] EHR
+    32817                                               AS observation_type_concept_id,
 
     coalesce(icd_map.target_concept_id, 0)                AS value_as_concept_id,
     tb_diag_juntos.cod_diagnostico                        AS value_as_string

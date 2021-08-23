@@ -30,6 +30,7 @@ class Wrapper(BaseWrapper):
         # Load (custom) vocabularies and source_to_concept_map tables
         self.vocab_manager.standard_vocabularies.load()
         self.vocab_manager.load_custom_vocab_and_stcm_tables()
+        self._load_vocabulary_mappings_abucasis()
 
         # Remove constraints and indexes to improve performance
         self.db.constraint_manager.drop_cdm_constraints()
@@ -40,14 +41,15 @@ class Wrapper(BaseWrapper):
         # Constraints and Indices
         self.db.constraint_manager.add_cdm_constraints(errors='ignore')
 
-        # self._report_vocabulary_versions()
-
         # Log/write overview of transformations and sources
         self.summarize()
 
     def _prepare_abucasis(self):
         self.execute_sql_file('abucasis_setup/additional_indices_abucasis.sql')
-        # self.log("Additional Abucasis indices applied")
+
+    def _load_vocabulary_mappings_abucasis(self):
+        self.execute_sql_file('vocabulary_loading/tba_to_2B_concept.sql')
+        self.execute_sql_file('vocabulary_loading/update_stcm_source_concept_id.sql')
 
     def transform_sql(self):
         """Execute SQL transformations."""

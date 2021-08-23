@@ -34,8 +34,8 @@ INSERT INTO @cdm_schema.observation
 
     tb_prescrip.fecha_prescripcion :: TIMESTAMP AS observation_datetime,
 
-    -- Observation recorded from EHR
-    38000280                                    AS observation_type_concept_id,
+    -- [Observation recorded from] EHR
+    32817                                    AS observation_type_concept_id,
 
     ingredient_map.target_concept_id            AS value_as_concept_id,
 

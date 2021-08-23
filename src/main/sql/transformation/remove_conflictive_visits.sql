@@ -41,10 +41,10 @@ SELECT
        care_site_id					,
        visit_source_value			,
        visit_source_concept_id		 ,
-       admitted_from_concept_id       ,
-       admitted_from_source_value     ,
-       discharge_to_source_value	 ,
-       discharge_to_concept_id		,
+       admitting_source_concept_id       ,
+       admitting_source_value     ,
+       cast(discharge_to_source_value as integer)	 ,
+       cast(discharge_to_concept_id as integer)		,
        preceding_visit_occurrence_id
 
 FROM cte2
@@ -86,10 +86,10 @@ INSERT INTO @cdm_schema.visit_occurrence
         care_site_id					,
         visit_source_value			,
         visit_source_concept_id		 ,
-        admitted_from_concept_id       ,
-        admitted_from_source_value     ,
-        discharge_to_source_value	 ,
-        discharge_to_concept_id		,
+        admitting_source_concept_id       ,
+        admitting_source_value     ,
+        cast(discharge_to_source_value as integer)	 ,
+        cast(discharge_to_concept_id as integer)		,
         preceding_visit_occurrence_id
     FROM cte2
     WHERE row_number = 1

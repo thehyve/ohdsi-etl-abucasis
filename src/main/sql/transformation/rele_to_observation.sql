@@ -20,8 +20,7 @@ INSERT INTO @cdm_schema.observation
   observation_datetime,
   observation_type_concept_id,
   value_as_concept_id,
-  value_as_string,
-  obs_event_field_concept_id
+  value_as_string
 )
   SELECT
     person.person_id                            AS person_id,
@@ -40,9 +39,7 @@ INSERT INTO @cdm_schema.observation
 
     ingredient_map.target_concept_id            AS value_as_concept_id,
 
-    tb_prescrip.cod_prinactivo                  AS value_as_string,
-
-    0                                           AS obs_event_field_concept_id
+    tb_prescrip.cod_prinactivo                  AS value_as_string
 
   FROM  @source_schema.tb_prescrip
     LEFT JOIN  non_dispensed_drugs

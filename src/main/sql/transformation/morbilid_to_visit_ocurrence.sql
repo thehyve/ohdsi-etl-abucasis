@@ -11,7 +11,7 @@ INSERT INTO @cdm_schema.visit_occurrence (visit_occurrence_id,
                                    visit_start_datetime,
                                    visit_end_date,
                                    visit_end_datetime,
-                                   admitted_from_concept_id,
+                                   admitting_source_concept_id,
                                    discharge_to_concept_id,
                                    care_site_id)
 
@@ -35,7 +35,7 @@ SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_ocurrence_
        (cast(tb_morbilid.fecha_inicio as text) || ' 00:00:00'):: timestamp             AS visit_end_datetime,
 
       --Admitted and discharged from home
-       8536                                                     AS admitted_from_concept_id,
+       8536                                                     AS admitting_source_concept_id,
        8536                                                     AS discharge_to_concept_id,
 
        person.care_site_id                                   AS care_site_id

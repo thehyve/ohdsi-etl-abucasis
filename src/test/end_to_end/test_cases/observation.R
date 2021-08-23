@@ -5,12 +5,12 @@ declareTest(id=700,'Observation death if patient died during hospitalization')
 add_tb_sip_spo(id=700,numsipcod='A700', fecha_nac='1991-01-01', fecha_def='2012-02-05', fecha_baja_sip='2012-02-05') 
 add_tb_ante_cmbd(id=700,numsipcod='A700', cir_alta='10', fecha_ingreso = '2012-01-01', fecha_alta = '2012-02-05')
 expect_observation(person_id = lookup_person('person_id', person_source_value = 'A700'),
-                   observation_date='2012-02-05', observation_type_concept_id = 44818516)
+                   observation_date='2012-02-05', observation_type_concept_id = 32823)
 
 declareTest(id=701,'Observation death if patient died NOT during hospitalization')
 add_tb_sip_spo(id=701,numsipcod='A701', fecha_nac='1994-01-01', fecha_def='2016-02-05', fecha_baja_sip='2016-02-05') 
 expect_observation(person_id = lookup_person('person_id', person_source_value = 'A701'),
-                   observation_date='2016-02-05',observation_type_concept_id = 38000280)
+                   observation_date='2016-02-05',observation_type_concept_id = 32817)
 
 declareTest(id=702,'Observation date from drug adverse effects')
 add_tb_sip_spo(id=702,numsipcod='A702', fecha_nac='1991-01-01', fecha_def='2012-02-05', fecha_baja_sip='2012-02-05') 

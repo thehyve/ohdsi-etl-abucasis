@@ -8,16 +8,16 @@ add_tb_prestaci(id=600,numsipcod='A600', fecha_registro='2012-05-05', cod_presta
 expect_measurement(person_id = lookup_person('person_id', person_source_value = 'A600'),
                    measurement_id=1, measurement_date='2012-05-05')
 
-declareTest(id=601,'NO Measurement if cod_ud_medida has conflictive value')
+declareTest(id=601,'Measurement when cod_ud_medida has conflictive value')
 add_tb_sip_spo(id=601, numsipcod='A601', fecha_nac='1991-01-01', fecha_baja_sip = '2015-01-01', fecha_def = '2015-02-01')
 add_tb_prestaci(id=601,numsipcod='A601', cod_ud_medida = ".", cod_prestacion='123', valor_registrado=NULL)
-expect_no_measurement(person_id = lookup_person('person_id', person_source_value = 'A601'))
+expect_measurement(person_id = lookup_person('person_id', person_source_value = 'A601'))
 add_tb_prestaci(id=601,numsipcod='A601', cod_ud_medida = "I", cod_prestacion='123', valor_registrado=NULL)
-expect_no_measurement(person_id = lookup_person('person_id', person_source_value = 'A601'))
+expect_measurement(person_id = lookup_person('person_id', person_source_value = 'A601'))
 add_tb_variables(id=601,numsipcod='A601', cod_ud_medida = ".", cod_variable_clinic='123', valor_registrado=NULL)
-expect_no_measurement(person_id = lookup_person('person_id', person_source_value = 'A601'))
+expect_measurement(person_id = lookup_person('person_id', person_source_value = 'A601'))
 add_tb_variables(id=601,numsipcod='A601', cod_ud_medida = "I", cod_variable_clinic='123', valor_registrado=NULL)
-expect_no_measurement(person_id = lookup_person('person_id', person_source_value = 'A601'))
+expect_measurement(person_id = lookup_person('person_id', person_source_value = 'A601'))
 
 declareTest(id=602,'Exclude measurements with faulty cod_prestacion')
 add_tb_sip_spo(id=602, numsipcod='A602', fecha_nac='1991-01-01', fecha_baja_sip = '2015-01-01', fecha_def = '2015-02-01')

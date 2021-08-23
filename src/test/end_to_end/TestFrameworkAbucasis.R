@@ -16418,9 +16418,9 @@ generateInsertSql <- function(databaseSchema = NULL) {
   env$testId <- -1
   insertSql <- c(insertSql, do.call(c, lapply(frameworkContext$inserts, createInsertStatement, env)))
   if (is.null(databaseSchema)) {
-    insertSql <- gsub('@cdm_database_schema.', '', insertSql)
+  	insertSql <- gsub('@cdm_database_schema.', '', insertSql)
   } else {
-    insertSql <- gsub('@cdm_database_schema', databaseSchema, insertSql)
+  	insertSql <- gsub('@cdm_database_schema', databaseSchema, insertSql)
   }
   return(insertSql)
 }
@@ -16505,9 +16505,9 @@ generateTestSql <- function(databaseSchema = NULL) {
   env$testId <- -1
   testSql <- c(testSql, do.call(c, lapply(frameworkContext$expects, createExpectStatement, env)))
   if (is.null(databaseSchema)) {
-    testSql <- gsub('@cdm_database_schema.', '', testSql)
+  	testSql <- gsub('@cdm_database_schema.', '', testSql)
   } else {
-    testSql <- gsub('@cdm_database_schema', databaseSchema, testSql)
+  	testSql <- gsub('@cdm_database_schema', databaseSchema, testSql)
   }
   return(testSql)
 }
@@ -16576,3 +16576,4 @@ outputTestResultsSummary <- function(connection, databaseSchema = NULL) {
     write(sprintf('All %d tests PASSED', n_tests), file='')
   }
 }
+

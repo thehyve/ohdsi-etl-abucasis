@@ -118,8 +118,8 @@ class FactRelationship(BaseFactRelationshipCdm531, Base):
 #     pass
 
 
-# class SurveyConduct(BaseSurveyConductCdm600, Base):
-#     pass
+class SurveyConduct(BaseSurveyConductCdm600, Base):
+    pass
 
 
 class StemTable(BaseStemTableCdm531, Base):
@@ -139,8 +139,8 @@ class Location(BaseLocationCdm531, Base):
 #     pass
 
 
-# class LocationHistory(BaseLocationHistoryCdm600, Base):
-#     pass
+class LocationHistory(BaseLocationHistoryCdm600, Base):
+    pass
 
 
 class CareSite(BaseCareSiteCdm531, Base):

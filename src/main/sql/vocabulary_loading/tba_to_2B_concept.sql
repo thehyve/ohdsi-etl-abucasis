@@ -78,12 +78,14 @@ CREATE TEMP TABLE tba_merged (
 -- If vocabulary already exists, do not update
 INSERT INTO @vocabulary_schema.vocabulary (
   vocabulary_id,
+  vocabulary_reference,
   vocabulary_name,
   vocabulary_concept_id
 )
   SELECT
     DISTINCT
     left(upper('abucasis_' || table_name), 20) AS vocabulary_id,
+    ''                                         AS vocabulary_reference,
     ''                                         AS vocabulary_name,
     0                                          AS vocabulary_concept_id
   FROM tba_merged

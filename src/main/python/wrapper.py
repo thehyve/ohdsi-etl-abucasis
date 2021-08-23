@@ -5,6 +5,7 @@ from delphyne.config.models import MainConfig
 
 from src.main.python import cdm
 from src.main.python.transformation import *
+from src.main.sql.vocabulary_loading import load_source_to_concept_map_copy_tables
 
 logger = logging.getLogger(__name__)
 
@@ -14,13 +15,11 @@ class Wrapper(BaseWrapper):
 
     def __init__(self, config: MainConfig):
         super().__init__(config, cdm)
+        self.load_custom_vocabulary = config.run_options.load_vocabulary
 
     def run(self):
 
         self._prepare_abucasis()
-
-        # if not self.do_skip_vocabulary:
-        #     self._load_vocabulary_mappings()
 
         # Prepare target database
         self.create_schemas()
@@ -28,9 +27,10 @@ class Wrapper(BaseWrapper):
         self.create_cdm()
 
         # Load (custom) vocabularies and source_to_concept_map tables
-        self.vocab_manager.standard_vocabularies.load()
-        self.vocab_manager.load_custom_vocab_and_stcm_tables()
-        self._load_vocabulary_mappings_abucasis()
+        if self.load_custom_vocabulary:
+            self.vocab_manager.standard_vocabularies.load()
+            self.vocab_manager.load_custom_vocab_and_stcm_tables()
+            self._load_vocabulary_mappings_abucasis()
 
         # Remove constraints and indexes to improve performance
         self.db.constraint_manager.drop_cdm_constraints()
@@ -48,6 +48,9 @@ class Wrapper(BaseWrapper):
         self.execute_sql_file('abucasis_setup/additional_indices_abucasis.sql')
 
     def _load_vocabulary_mappings_abucasis(self):
+        self.execute_sql_file('vocabulary_loading/load_source_to_concept_map.sql')  # custom STCM load (1/3)
+        load_source_to_concept_map_copy_tables.copy_to_sql()  # custom STCM load (2/3)
+        self.execute_sql_file('vocabulary_loading/load_source_to_concept_map_finish.sql')  # custom STCM load (3/3)
         self.execute_sql_file('vocabulary_loading/tba_to_2B_concept.sql')
         self.execute_sql_file('vocabulary_loading/update_stcm_source_concept_id.sql')
 

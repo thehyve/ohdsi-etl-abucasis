@@ -20,7 +20,7 @@ source('TestFrameworkAbucasis.R')
 initFramework()
 
 # Add tests
-source("test_cases/person.R")                   # test IDs    1- 99 
+source("test_cases/person.R")                   # test IDs    1- 99
 source("test_cases/observation_period.R")       # test IDs  100-199
 source("test_cases/condition_occurrence.R")     # test IDs  200-299
 source("test_cases/procedure_occurrence.R")     # test IDs  300-399

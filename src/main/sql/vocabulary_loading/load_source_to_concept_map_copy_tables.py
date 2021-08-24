@@ -29,3 +29,6 @@ def copy_to_sql():
         cmd_line = f"psql -U postgres -d {database} -c \"\copy {schema}.{name} FROM '{tables_dir}{t_name}' delimiter ',' csv header  \" "
         print(f"Running:\n{cmd_line}")
         os.system(cmd_line)
+
+if __name__ == "__main__":
+    copy_to_sql()

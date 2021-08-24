@@ -1,13 +1,12 @@
 # ABUCASIS to OMOP
 <img src="https://www.bigdata-heart.eu/Portals/1/BD@H/Newsletter/2017-12/BD@H%20new%20logo.png?ver=2017-11-22-160441-013" alt="drawing" width="300" />
 
-ETL scripts to convert ABUCASIS (INCLIVA) data to OMOP CDM v6. 
-The converted dataset is backwards compatible with CDMv5. 
+ETL scripts to convert ABUCASIS (INCLIVA) data to OMOP CDM v5.
 
 ## Dependencies
 - Postgres (9.5+)
   - cdm5 schema
-- Python 3, with pip, delphyne, click, sqlalchemy and psycopg2
+- Python 3.7+, with pip, delphyne, click, sqlalchemy and psycopg2
   ```bash
   apt install python3-pip
   pip3 install -r requirements.txt
@@ -24,16 +23,22 @@ The converted dataset is backwards compatible with CDMv5.
   - ICD9PCS
 
 ## Setup
-See [this document](https://github.com/thehyve/ohdsi-etl-abucasis/blob/master/database_environment.md)
- describing the initial setup. 
-In this setup the dependencies are installed and the target 
-`cdm5` schema is initialized with the OMOP vocabulary tables.
+
+#### Prepare the target database
+- Create an empty database, e.g. `vocab`.
+- Upload the standard vocabularies.
+
+#### Customize configuration
+In `config/`:
+- Copy and rename `config-sample.yml`, and edit the options to enable a successful connection to your target database.
+  You can create multiple configurations, for example one for a local test database and one for a remote database, without name restrictions.
+  
 
 ## Run ETL
 ```bash
 python3 main.py -c config/config.yml
 ```
-By default, a log file will be created in the logs directory
+By default, a log file will be created in the logs directory, with default `logs/<timestamp><version>.log`.
 
 Other parameters:
  - `--debug` to apply constraints before loading. This gives direct feedback if any constraints fail, but is less optimal for loading speed.

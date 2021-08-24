@@ -45,9 +45,7 @@ class Wrapper(BaseWrapper):
         self.execute_sql_file('abucasis_setup/additional_indices_abucasis.sql')
 
     def _load_vocabulary_mappings_abucasis(self):
-        # self.execute_sql_file('vocabulary_loading/load_source_to_concept_map.sql')  # custom STCM load (1/3)
-        # load_source_to_concept_map_copy_tables.copy_to_sql()  # custom STCM load (2/3)
-        self.execute_sql_file('vocabulary_loading/load_source_to_concept_map_finish.sql')  # custom STCM load (3/3)
+        self.execute_sql_file('vocabulary_loading/load_source_to_concept_map_finish.sql')
         self.execute_sql_file('vocabulary_loading/tba_to_2B_concept.sql')
         self.execute_sql_file('vocabulary_loading/update_stcm_source_concept_id.sql')
 

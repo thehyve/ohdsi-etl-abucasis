@@ -26,7 +26,7 @@ ETL scripts to convert ABUCASIS (INCLIVA) data to OMOP CDM v5.
 
 #### Prepare the target database
 - Create an empty database, e.g. `vocab`.
-- Add standard vocabularies, unzipped, to `resources/vocabularies/standard`.
+- Upload the standard vocabularies.
 
 #### Customize configuration
 In `config/`:

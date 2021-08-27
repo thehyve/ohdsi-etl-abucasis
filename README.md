@@ -1,7 +1,8 @@
 # ABUCASIS to OMOP
 <img src="https://www.bigdata-heart.eu/Portals/1/BD@H/Newsletter/2017-12/BD@H%20new%20logo.png?ver=2017-11-22-160441-013" alt="drawing" width="300" />
 
-ETL scripts to convert ABUCASIS (INCLIVA) data to OMOP CDM v5.
+ETL scripts to convert ABUCASIS (INCLIVA) data to OMOP CDM v5 as part of the IMI BigData@Heart consortium.
+This uses the delphyne framework, which has to be added as a local depency.
 
 ## Dependencies
 - Postgres (9.5+)
@@ -22,6 +23,7 @@ ETL scripts to convert ABUCASIS (INCLIVA) data to OMOP CDM v5.
   - ICD9CM
   - ICD9PCS
 
+
 ## Setup
 
 #### Prepare the target database
@@ -40,10 +42,6 @@ python3 main.py -c config/config.yml
 ```
 By default, a log file will be created in the logs directory, with default `logs/<timestamp><version>.log`.
 
-Other parameters:
- - `--debug` to apply constraints before loading. This gives direct feedback if any constraints fail, but is less optimal for loading speed.
- - `--log <file_name>` to supply a different location and name of the log file. 
- - `--run_inserts` by default tables are written to csv. With this toggle it can be written to database tables instead. 
 
 ## OHDSI tools setup
 See  [this document](https://github.com/thehyve/ohdsi-etl-abucasis/blob/master/webapi_setup.md) describing the WebAPI setup.

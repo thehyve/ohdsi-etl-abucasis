@@ -25,6 +25,10 @@ class Wrapper(BaseWrapper):
         self.drop_cdm()
         self.create_cdm()
 
+        # Load vocabularies       
+        if self.load_vocabulary:
+            self.vocab_manager.standard_vocabularies.load()
+            
         # Load custom vocabularies and source_to_concept_map tables
         if self.load_custom_vocabulary:
             self._load_vocabulary_mappings_abucasis()

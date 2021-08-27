@@ -26,9 +26,11 @@ class Wrapper(BaseWrapper):
         self.create_cdm()
 
         # Load vocabularies       
-        if self.load_vocabulary:
+        try:
             self.vocab_manager.standard_vocabularies.load()
-            
+        except ValueError as e:
+            logger.warning(f'Standard vocabulary loading failed: {e}')
+
         # Load custom vocabularies and source_to_concept_map tables
         if self.load_custom_vocabulary:
             self._load_vocabulary_mappings_abucasis()

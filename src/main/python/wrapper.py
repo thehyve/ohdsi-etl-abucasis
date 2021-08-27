@@ -22,6 +22,8 @@ class Wrapper(BaseWrapper):
 
         # Prepare target database
         self.create_schemas()
+        self.execute_sql_query('DROP SCHEMA IF EXISTS @temp_schema; CREATE SCHEMA @temp_schema;',
+                               'create_intermediate_schema')
         self.drop_cdm()
         self.create_cdm()
 

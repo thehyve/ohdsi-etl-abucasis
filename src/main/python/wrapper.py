@@ -22,8 +22,16 @@ class Wrapper(BaseWrapper):
 
         # Prepare target database
         self.create_schemas()
+        self.execute_sql_query('DROP SCHEMA IF EXISTS @temp_schema CASCADE; CREATE SCHEMA @temp_schema;',
+                               'create_intermediate_schema')
         self.drop_cdm()
         self.create_cdm()
+
+        # Load vocabularies       
+        try:
+            self.vocab_manager.standard_vocabularies.load()
+        except ValueError as e:
+            logger.warning(f'Standard vocabulary loading failed: {e}')
 
         # Load custom vocabularies and source_to_concept_map tables
         if self.load_custom_vocabulary:

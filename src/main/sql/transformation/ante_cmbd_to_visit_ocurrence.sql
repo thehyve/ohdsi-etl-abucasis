@@ -24,6 +24,7 @@ SELECT intermediate_table_visit_ocurrence.visit_ocurrence_id AS visit_occurrence
          WHEN 'HOS' THEN 8717 -- Inpatient hospital
          WHEN 'HOSP' THEN 8717 -- Inpatient hospital
          WHEN 'CMA' THEN 8756 -- Outpatient hospital
+         ELSE 0
            END                                               AS visit_concept_id,
        tb_ante_cmbd.tipo_actividad                           AS visit_source_value,
     -- Visit derived from EHR encounter record

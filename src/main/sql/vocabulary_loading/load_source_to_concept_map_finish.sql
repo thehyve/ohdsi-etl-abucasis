@@ -1,5 +1,13 @@
 -- Insert vocabularies in vocabulary table
 -- If vocabulary already exists, update with the new information/metadata
+
+DROP TABLE IF EXISTS @temp_schema.tmp_vocabulary;
+CREATE TABLE @temp_schema.tmp_vocabulary
+  AS
+    SELECT *
+    FROM @vocabulary_schema.vocabulary
+WITH NO DATA;
+
 UPDATE @temp_schema.tmp_vocabulary
 SET vocabulary_reference = 'no_reference'
 WHERE vocabulary_reference IS NULL;
@@ -25,6 +33,13 @@ SET vocabulary_id   = excluded.vocabulary_id,
 
 -- Assign "ABUCASIS_UNKNOWN" as the target_vocabulary_id for all the mappings that are not assigned to any vocab
 -- (solves a constraint conflict with codes mapped to 0)
+DROP TABLE IF EXISTS @temp_schema.tmp_source_to_concept_map;
+CREATE TABLE @temp_schema.tmp_source_to_concept_map
+  AS
+    SELECT *
+    FROM @vocabulary_schema.source_to_concept_map
+WITH NO DATA;
+
 UPDATE @temp_schema.tmp_source_to_concept_map
 SET target_vocabulary_id = 'ABUCASIS_UNKNOWN'
 WHERE target_vocabulary_id IS NULL;

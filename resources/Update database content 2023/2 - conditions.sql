@@ -15,6 +15,21 @@ update cdm5.condition_occurrence set condition_source_concept_id='45546824' wher
 update cdm5.condition_occurrence set condition_source_concept_id='45561952' where condition_source_value = 'E11.9';  --> Type 2 diabetes mellitus, without complications
 update cdm5.condition_occurrence set condition_source_concept_id='40302863' where condition_source_value = '366';    --> SYNOVITIS
 update cdm5.condition_occurrence set condition_source_concept_id='4306934' where condition_source_value = '00085';   --> Impaired mobility
+--Updating the values of condition_concept_id too (03/03/2023)
+update cdm5.condition_occurrence set condition_concept_id='4137230' where condition_source_value = '0008N';          --> Ready for enhanced immunization status
+update cdm5.condition_occurrence set condition_concept_id='4176550' where condition_source_value = '00044';          --> Impaired tissue integrity
+update cdm5.condition_occurrence set condition_concept_id='4267413' where condition_source_value = 'V07.39D';        --> Prevention of NSAID gastropathy
+update cdm5.condition_occurrence set condition_concept_id='4321837' where condition_source_value = '00047';          --> At risk for impaired skin integrity
+update cdm5.condition_occurrence set condition_concept_id='45591453' where condition_source_value = 'I10';           --> Essential (primary) hypertension
+update cdm5.condition_occurrence set condition_concept_id='44824634' where condition_source_value = '790.2';         --> Abnormal glucose
+update cdm5.condition_occurrence set condition_concept_id='44829305' where condition_source_value = '790.29';        --> Other abnormal glucose
+update cdm5.condition_occurrence set condition_concept_id='44837786' where condition_source_value = 'V22.2';         --> Pregnant state, incidental
+update cdm5.condition_occurrence set condition_concept_id='45537986' where condition_source_value = 'E78.5';         --> Hyperlipidaemia, unspecified
+update cdm5.condition_occurrence set condition_concept_id='45546824' where condition_source_value = 'V27.0';         --> Motorcycle rider injured in collision with fixed or stationary object, driver injured in nontraffic accident
+update cdm5.condition_occurrence set condition_concept_id='45561952' where condition_source_value = 'E11.9';         --> Type 2 diabetes mellitus, without complications
+update cdm5.condition_occurrence set condition_concept_id='40302863' where condition_source_value = '366';           --> SYNOVITIS
+update cdm5.condition_occurrence set condition_concept_id='4306934' where condition_source_value = '00085';          --> Impaired mobility
+
 
 --=====================================================================================================================
 
